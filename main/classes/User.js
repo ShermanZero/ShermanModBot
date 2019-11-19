@@ -3,7 +3,10 @@ const fs = require("fs");
 class User {
 
   static getUserFromMessage(message) {
-    return message.member.displayName.replace(/[^\w\s]/gi, '').toLowerCase();
+    let username = message.member.user.tag.replace("#", "_");
+    username = username.replace(/[^\w\s]/gi, '').toLowerCase();
+
+    return username;
   }
 
   static getUserFromName(name) {
@@ -38,6 +41,8 @@ class User {
     fs.mkdirSync(dir);
     fs.writeFileSync(`${dir}/${name}.json`, JSON.stringify(content, null, "\t"));
     fs.mkdirSync(`${dir}/logs`);
+
+    console.log(`*Created [${name}] for session`);
   }
 
   static writeUserContentToFile(client, name, content) {

@@ -23,11 +23,11 @@ exports.run = (client, message, args) => {
       .catch((err) => {console.log(err)});
   }
 
-  message.channel.send(exports.getEmbed(content)).catch((err) => {console.log(err)});
+  message.channel.send(exports.getEmbed(client, content)).catch((err) => {console.log(err)});
   message.delete().catch((err) => {console.log(err)});
 }
 
-exports.getEmbed = (content) => {
+exports.getEmbed = (client, content) => {
   const embed = new Discord.RichEmbed();
   embed.setTitle(content.name);
   embed.setColor(0x40b7e6);
@@ -42,4 +42,8 @@ exports.getEmbed = (content) => {
   embed.addField("**MARBLE RACE STATS**", `${wins}`);
 
   return embed;
+}
+
+function calculatePosition(client) {
+  
 }

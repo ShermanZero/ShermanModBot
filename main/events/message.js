@@ -145,7 +145,7 @@ function awardExperience(client, message) {
 
 function levelUp(client, message, content) {
   var stats = client.commands.get("stats");
-  let embed = stats.getEmbed(content);
+  let embed = stats.getEmbed(client, content);
 
   message.channel.send(`Congratulations ${message.author}!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!`);
   message.channel.send(embed);

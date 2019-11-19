@@ -17,5 +17,16 @@
     "diamond": "https://i.ibb.co/hRnvbWh/05-diamond.png",
     "masters": "https://i.ibb.co/zfHh6Fh/06-masters.png",
     "grandmaster": "https://i.ibb.co/8g04NTS/07-grandmaster.png"
+  },
+
+
+  "_info": {
+    "bronze": 180,
+    "silver": 2420,
+    "gold": 11520,
+    "plat": 35280,
+    "diamond": 84500,
+    "masters": 172980,
+    "grandmaster": 317520
   }
 }

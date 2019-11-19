@@ -3,11 +3,14 @@
 	"rank": {
 		"name": "platinum",
 		"level": 20,
-		"xp": 33,
-		"levelup": 6400
+		"xp": 33110,
+		"levelup": 35280
 	},
 	"race": {
 		"wins": 0
 	},
-	"log": []
+	"userLog": [
+		"[11/19 4:34:10] (#shermanbot): !help\n",
+		"[11/19 4:34:13] (#shermanbot): !stats\n"
+	]
 }

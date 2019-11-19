@@ -7,7 +7,7 @@ exports.props = {
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.modID);
+  const modRole = message.member.roles.has(client.config.roles.mod);
 
   var helpMessage = "here are the commands for the server:\n";
 
@@ -29,5 +29,12 @@ exports.run = (client, message, args) => {
     }
   });
 
-  message.reply(embed).catch((err) => {console.log(err)});
+  if(modRole) {
+    let modChannel = client.channels.get(client.config.channels.mod.commands);
+
+    modChannel.send(`${message.author}`).catch((err) => {console.log(err)});
+    modChannel.send(embed).catch((err) => {console.log(err)});
+  } else {
+    message.channel.send(embed).catch((err) => {console.log(err)});
+  }
 }

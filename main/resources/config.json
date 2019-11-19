@@ -1,0 +1,31 @@
+{
+  "token": "NjM2NjE4NjI4ODQ2MDU5NTMw.XdItDg.lj4bgzJ5-GYW_-OywI9HKLgEZgg",
+  "status": "dead | !help",
+  "prefix": "!",
+
+  "roles": {
+    "owner": "349728538439450625",
+    "mod": "471445047041327135"
+  },
+
+  "channels": {
+    "mod": {
+      "hangout": "471447463807549451",
+      "commands": "609505875568361472",
+      "logs": "604912256865665024"
+    },
+    "general": {
+      "marble-race": "637020873873948703"
+    }
+  },
+
+  "preferences": {
+    "xp_threshold": 10,
+    "log_threshold_user": 10,
+    "log_threshold_master": 25
+  },
+
+  "files": {
+    "log_all": "allmessages.txt"
+  }
+}

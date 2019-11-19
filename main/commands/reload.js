@@ -6,7 +6,7 @@ exports.props = {
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.modID);
+  const modRole = message.member.roles.has(client.config.roles.mod);
 
   if (!modRole)
     return;

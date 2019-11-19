@@ -1,12 +1,12 @@
 
 exports.props = {
-  "requiresElevation": false,
+  "requiresElevation": true,
   "description": "changes the nickname of a member",
   "usage": "{user} {nickname}"
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.modID);
+  const modRole = message.member.roles.has(client.config.roles.mod);
 
   if(!modRole)
     return;

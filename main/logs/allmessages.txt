@@ -715,3 +715,611 @@ bankickprivatepurgereloadsayhelp
 [Tue Nov 19 2019 02:03:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test two three
 [Tue Nov 19 2019 02:03:18 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
 [Tue Nov 19 2019 02:04:10 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[Tue Nov 19 2019 02:22:56 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Smite is slightly weird that you have to go into the game files to change the fps cap
+[Tue Nov 19 2019 02:23:17 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: That is pretty weird
+[Tue Nov 19 2019 02:23:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: This is a test
+[Tue Nov 19 2019 02:24:04 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Yeah and even weirder is they set the fps cap originally to 150?
+[Tue Nov 19 2019 02:24:46 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Starting to get real icey and cold
+[Tue Nov 19 2019 02:24:46 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@259385419706138624>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 02:24:46 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 02:25:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: It's been real icy and cold her for a long time 😦
+[Tue Nov 19 2019 02:25:50 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I can feel my fingers going numb while typing
+[Tue Nov 19 2019 02:25:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Just need a space heater
+[Tue Nov 19 2019 02:26:15 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Jesus look at this
+[Tue Nov 19 2019 02:26:24 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: 
+[Tue Nov 19 2019 02:27:01 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Making my b*lls shrivel haha
+[Tue Nov 19 2019 02:27:26 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: That is absolutely nothing compared to here Jesus
+[Tue Nov 19 2019 02:27:52 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Haha
+[Tue Nov 19 2019 02:28:00 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: It's not been like this in years tho
+[Tue Nov 19 2019 02:28:06 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Usually it just rains
+[Tue Nov 19 2019 02:29:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Yeah we get snowstorms which drop upwards of two feet of snow (.6m)
+[Tue Nov 19 2019 02:30:22 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[Tue Nov 19 2019 02:31:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: That's what everyone says until they have to go and shovel it
+[Tue Nov 19 2019 02:31:37 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[Tue Nov 19 2019 02:32:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:32:36 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 2:32:34] (#shermanbot): test
+[11/19 2:32:36] (#shermanbot): !shutdown
+[Tue Nov 19 2019 02:32:57 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:33:01 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Hahaha I suppose so
+[Tue Nov 19 2019 02:34:24 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 2:32:57] (#shermanbot): test
+[11/19 2:33:1] (#media): Hahaha I suppose so
+[11/19 2:34:24] (#shermanbot): !shutdown
+[Tue Nov 19 2019 02:34:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:34:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 02:34:34 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 02:36:08 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:37:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:37:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:37:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:37:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:37:56 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 2:37:48] (#shermanbot): test
+[11/19 2:37:49] (#shermanbot): test
+[11/19 2:37:49] (#shermanbot): test
+[11/19 2:37:55] (#shermanbot): test
+[11/19 2:37:56] (#shermanbot): !shutdown
+[Tue Nov 19 2019 02:40:26 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:40:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:40:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:40:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:41:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:41:08 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Oh wow I thought you had to pay
+[Tue Nov 19 2019 02:41:17 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: For what?
+[Tue Nov 19 2019 02:41:21 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Does it use some of your PC power or
+[Tue Nov 19 2019 02:41:26 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Like to host it...
+[Tue Nov 19 2019 02:41:48 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I'm very smol brain
+[Tue Nov 19 2019 02:41:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: It's a program that runs locally on my machine.  When I feel like it's in a good place to run constantly without me worrying about it, I will put it on a spare PC I have and have it run all the time
+[Tue Nov 19 2019 02:42:27 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Ahhh so I was somewhat right
+[Tue Nov 19 2019 02:42:36 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Its neat anyway
+[Tue Nov 19 2019 02:42:36 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@259385419706138624>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 02:42:37 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 02:42:46 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Is there a whole new level system
+[Tue Nov 19 2019 02:43:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Sort of.  I will be updating everyone's previous levels into my bot when I am finished with it
+[Tue Nov 19 2019 02:43:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !rank
+[Tue Nov 19 2019 02:43:10 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Ahhh good
+[Tue Nov 19 2019 02:43:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: wait not that command
+[Tue Nov 19 2019 02:43:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 02:43:12 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 02:43:15 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: That command
+[Tue Nov 19 2019 02:43:17 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: pog
+[Tue Nov 19 2019 02:43:20 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !rank
+[Tue Nov 19 2019 02:43:24 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: it's !stats
+[Tue Nov 19 2019 02:43:29 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !stats
+[Tue Nov 19 2019 02:43:29 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 02:43:34 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Lol
+[Tue Nov 19 2019 02:43:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: You gain 1XP per message sent
+[11/19 2:40:55] (#shermanbot): test
+[11/19 2:40:58] (#shermanbot): test
+[11/19 2:40:59] (#shermanbot): test
+[11/19 2:41:1] (#shermanbot): test
+[11/19 2:41:8] (#filtered-hangout): Oh wow I thought you had to pay
+[11/19 2:41:17] (#filtered-hangout): For what?
+[11/19 2:41:21] (#filtered-hangout): Does it use some of your PC power or
+[11/19 2:41:26] (#filtered-hangout): Like to host it...
+[11/19 2:41:48] (#filtered-hangout): I'm very smol brain
+[11/19 2:41:59] (#filtered-hangout): It's a program that runs locally on my machine.  When I feel like it's in a good place to run constantly without me worrying about it, I will put it on a spare PC I have and have it run all the time
+[11/19 2:42:27] (#filtered-hangout): Ahhh so I was somewhat right
+[11/19 2:42:36] (#filtered-hangout): Its neat anyway
+[11/19 2:42:46] (#filtered-hangout): Is there a whole new level system
+[11/19 2:43:1] (#filtered-hangout): Sort of.  I will be updating everyone's previous levels into my bot when I am finished with it
+[11/19 2:43:6] (#filtered-hangout): !rank
+[11/19 2:43:10] (#filtered-hangout): Ahhh good
+[11/19 2:43:11] (#filtered-hangout): wait not that command
+[11/19 2:43:12] (#filtered-hangout): !stats
+[11/19 2:43:15] (#filtered-hangout): That command
+[11/19 2:43:17] (#filtered-hangout): pog
+[11/19 2:43:20] (#filtered-hangout): !rank
+[11/19 2:43:24] (#filtered-hangout): it's !stats
+[11/19 2:43:29] (#filtered-hangout): !stats
+[11/19 2:43:34] (#filtered-hangout): Lol
+[11/19 2:43:42] (#filtered-hangout): You gain 1XP per message sent
+[Tue Nov 19 2019 02:43:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: basically
+[Tue Nov 19 2019 02:43:53 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Woah is that more than before or less
+[Tue Nov 19 2019 02:43:59 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Wasnt it like per minute before
+[Tue Nov 19 2019 02:44:21 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Previously, you were awarded a random number between 15-25XP per minute if you were active
+[Tue Nov 19 2019 02:45:07 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Now, you just get 1xp per message, and I'm using a popular algorithm to determine leveling up.  It goes up to 35, at which point you hit GM
+[Tue Nov 19 2019 02:45:20 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I was going to check the other day but mee6 is gone 😂 😂
+[Tue Nov 19 2019 02:45:20 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 02:45:21 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 02:45:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: As you can see, I am level 20, and need 6,400 messages to hit 21
+[Tue Nov 19 2019 02:45:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I calculated that if you send 50 messages per day, it would take you around 2 years to reach the max level
+[Tue Nov 19 2019 02:45:58 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Woah
+[Tue Nov 19 2019 02:46:02 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: What is the max
+[Tue Nov 19 2019 02:46:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: 35
+[Tue Nov 19 2019 02:46:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: 
+[Tue Nov 19 2019 02:46:54 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: This is the math I am using behind the algorithm
+[Tue Nov 19 2019 02:47:00 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Ah god no
+[Tue Nov 19 2019 02:47:02 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I'm out
+[Tue Nov 19 2019 02:47:09 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Haha
+[Tue Nov 19 2019 02:48:08 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: It's not too hard to understand.  It's a summation, and every entry separated by a + symbol is what you will need at that level to rank up.  For example, level 5 will need 100xp, level 10 will need 800, level 15 will need 2700, etc.
+[Tue Nov 19 2019 02:48:55 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Math stuff ahhh ._.
+[Tue Nov 19 2019 02:49:20 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I'm glad I learned calc because using summations has proven itself actually useful in real life scenarios, like this one
+[Tue Nov 19 2019 02:50:33 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Yeah I failed maths, resisting next year.
+[Tue Nov 19 2019 02:51:00 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Math is very handy to be good at
+[Tue Nov 19 2019 02:51:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: 
+[Tue Nov 19 2019 02:51:13 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: This is what you noobs look like on my console when you send messages lol
+[Tue Nov 19 2019 02:51:52 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Oh damn you see all! Nothing gets passed you then
+[11/19 2:43:44] (#filtered-hangout): basically
+[11/19 2:43:53] (#filtered-hangout): Woah is that more than before or less
+[11/19 2:43:59] (#filtered-hangout): Wasnt it like per minute before
+[11/19 2:44:21] (#filtered-hangout): Previously, you were awarded a random number between 15-25XP per minute if you were active
+[11/19 2:45:7] (#filtered-hangout): Now, you just get 1xp per message, and I'm using a popular algorithm to determine leveling up.  It goes up to 35, at which point you hit GM
+[11/19 2:45:20] (#filtered-hangout): I was going to check the other day but mee6 is gone 😂 😂
+[11/19 2:45:20] (#filtered-hangout): !stats
+[11/19 2:45:31] (#filtered-hangout): As you can see, I am level 20, and need 6,400 messages to hit 21
+[11/19 2:45:48] (#filtered-hangout): I calculated that if you send 50 messages per day, it would take you around 2 years to reach the max level
+[11/19 2:45:58] (#filtered-hangout): Woah
+[11/19 2:46:2] (#filtered-hangout): What is the max
+[11/19 2:46:42] (#filtered-hangout): 35
+[11/19 2:46:44] (#filtered-hangout): 
+[11/19 2:46:54] (#filtered-hangout): This is the math I am using behind the algorithm
+[11/19 2:47:0] (#filtered-hangout): Ah god no
+[11/19 2:47:2] (#filtered-hangout): I'm out
+[11/19 2:47:9] (#filtered-hangout): Haha
+[11/19 2:48:8] (#filtered-hangout): It's not too hard to understand.  It's a summation, and every entry separated by a + symbol is what you will need at that level to rank up.  For example, level 5 will need 100xp, level 10 will need 800, level 15 will need 2700, etc.
+[11/19 2:48:55] (#filtered-hangout): Math stuff ahhh ._.
+[11/19 2:49:20] (#filtered-hangout): I'm glad I learned calc because using summations has proven itself actually useful in real life scenarios, like this one
+[11/19 2:50:33] (#filtered-hangout): Yeah I failed maths, resisting next year.
+[11/19 2:51:0] (#filtered-hangout): Math is very handy to be good at
+[11/19 2:51:1] (#filtered-hangout): 
+[11/19 2:51:13] (#filtered-hangout): This is what you noobs look like on my console when you send messages lol
+[11/19 2:51:52] (#filtered-hangout): Oh damn you see all! Nothing gets passed you then
+[Tue Nov 19 2019 02:52:08 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I have logs of absolutely everyone >:)
+[Tue Nov 19 2019 02:52:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: So you had all better behave
+[Tue Nov 19 2019 02:52:26 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: ._. Oh sh*t son
+[Tue Nov 19 2019 02:52:37 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Even if the message is deleted
+[Tue Nov 19 2019 02:52:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Yessir
+[Tue Nov 19 2019 02:52:49 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: That is hacks
+[Tue Nov 19 2019 02:52:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Gets sent directly to my log as soon as it's posted
+[Tue Nov 19 2019 02:53:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: 
+[Tue Nov 19 2019 02:53:15 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: All stored in nice little files 🙂
+[Tue Nov 19 2019 02:53:22 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Woah woah woah
+[Tue Nov 19 2019 02:53:39 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: To be fair I think I am pretty well behaved 😇
+[Tue Nov 19 2019 02:53:42 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: 😂
+[Tue Nov 19 2019 02:53:42 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@259385419706138624>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 02:53:42 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 02:53:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I would agree
+[Tue Nov 19 2019 02:54:00 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 2:52:8] (#filtered-hangout): I have logs of absolutely everyone >:)
+[11/19 2:52:14] (#filtered-hangout): So you had all better behave
+[11/19 2:52:26] (#filtered-hangout): ._. Oh sh*t son
+[11/19 2:52:37] (#filtered-hangout): Even if the message is deleted
+[11/19 2:52:42] (#filtered-hangout): Yessir
+[11/19 2:52:49] (#filtered-hangout): That is hacks
+[11/19 2:52:51] (#filtered-hangout): Gets sent directly to my log as soon as it's posted
+[11/19 2:53:9] (#filtered-hangout): 
+[11/19 2:53:15] (#filtered-hangout): All stored in nice little files 🙂
+[11/19 2:53:22] (#filtered-hangout): Woah woah woah
+[11/19 2:53:39] (#filtered-hangout): To be fair I think I am pretty well behaved 😇
+[11/19 2:53:42] (#filtered-hangout): 😂
+[11/19 2:53:46] (#filtered-hangout): I would agree
+[11/19 2:54:0] (#filtered-hangout): !shutdown
+[Tue Nov 19 2019 02:59:57 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Ladies and gentleman welcome back our lovely bot
+[Tue Nov 19 2019 03:00:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Now with updated ranks
+[Tue Nov 19 2019 03:00:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 03:00:05 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 03:00:48 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !stats
+[Tue Nov 19 2019 03:00:48 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 03:00:52 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Ohhhhh
+[Tue Nov 19 2019 03:01:05 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Hard stuck in gold
+[Tue Nov 19 2019 03:01:24 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Haha
+[Tue Nov 19 2019 03:01:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Feels bad
+[Tue Nov 19 2019 03:01:37 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I'll climb
+[Tue Nov 19 2019 03:01:45 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Easier to climb here than overwatch 😂 😂
+[Tue Nov 19 2019 03:01:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Very true
+[Tue Nov 19 2019 03:02:25 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: 10 more levels and then I'm hard stuck in plat
+[Tue Nov 19 2019 03:03:11 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I like this new level system though it's interesting.
+[Tue Nov 19 2019 03:03:29 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: And the bot is very sexy
+[Tue Nov 19 2019 03:03:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I like making things look pretty
+[Tue Nov 19 2019 03:04:11 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I can tell 😏 hahaha
+[Tue Nov 19 2019 03:04:23 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: #nohomo
+[Tue Nov 19 2019 03:09:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 2:59:57] (#filtered-hangout): Ladies and gentleman welcome back our lovely bot
+[11/19 3:0:3] (#filtered-hangout): Now with updated ranks
+[11/19 3:0:5] (#filtered-hangout): !stats
+[11/19 3:0:48] (#filtered-hangout): !stats
+[11/19 3:0:52] (#filtered-hangout): Ohhhhh
+[11/19 3:1:5] (#filtered-hangout): Hard stuck in gold
+[11/19 3:1:24] (#filtered-hangout): Haha
+[11/19 3:1:28] (#filtered-hangout): Feels bad
+[11/19 3:1:37] (#filtered-hangout): I'll climb
+[11/19 3:1:45] (#filtered-hangout): Easier to climb here than overwatch 😂 😂
+[11/19 3:1:51] (#filtered-hangout): Very true
+[11/19 3:2:25] (#filtered-hangout): 10 more levels and then I'm hard stuck in plat
+[11/19 3:3:11] (#filtered-hangout): I like this new level system though it's interesting.
+[11/19 3:3:29] (#filtered-hangout): And the bot is very sexy
+[11/19 3:3:50] (#filtered-hangout): I like making things look pretty
+[11/19 3:4:11] (#filtered-hangout): I can tell 😏 hahaha
+[11/19 3:4:23] (#filtered-hangout): #nohomo
+[11/19 3:9:39] (#filtered-hangout): !shutdown
+[Tue Nov 19 2019 03:10:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats <@!259385419706138624>
+[Tue Nov 19 2019 03:10:29 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 03:10:36 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: sick, now you can look at someone else's stats
+[Tue Nov 19 2019 03:10:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 03:10:43 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 03:10:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: coolio
+[Tue Nov 19 2019 03:11:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 3:10:28] (#filtered-hangout): !stats <@!259385419706138624>
+[11/19 3:10:36] (#filtered-hangout): sick, now you can look at someone else's stats
+[11/19 3:10:43] (#filtered-hangout): !stats
+[11/19 3:10:49] (#filtered-hangout): coolio
+[11/19 3:11:3] (#filtered-hangout): !shutdown
+[Tue Nov 19 2019 03:15:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: aight if this son of a gun dont work im bmad
+[Tue Nov 19 2019 03:15:27 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 3:15:25] (#filtered-hangout): aight if this son of a gun dont work im bmad
+[11/19 3:15:27] (#filtered-hangout): !shutdown
+[Tue Nov 19 2019 03:15:56 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I don't know what will happen if you try to get stats for someone who hasn't been registered by the bot yet
+[Tue Nov 19 2019 03:16:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats <@!287376771500998656>
+[Tue Nov 19 2019 03:20:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: It's a lot of fun
+[Tue Nov 19 2019 03:20:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I haven't gone to bed yet because I've been programming since my stream ended
+[Tue Nov 19 2019 03:20:54 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Also, it should be fixed now
+[Tue Nov 19 2019 03:20:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Let's see
+[Tue Nov 19 2019 03:20:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats <@!287376771500998656>
+[Tue Nov 19 2019 03:20:59 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, ⚔Trixie does not yet have any stats :( they need to post a message in the server to be registered by the bot.
+[Tue Nov 19 2019 03:21:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: yessir
+[Tue Nov 19 2019 03:21:23 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload stats
+[Tue Nov 19 2019 03:21:24 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "stats" has been reloaded
+[Tue Nov 19 2019 03:21:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats <@!287376771500998656>
+[Tue Nov 19 2019 03:21:30 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, ⚔Trixie does not yet have any stats :( they need to post a message in the server to be registered by me.
+[Tue Nov 19 2019 03:21:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: 
+[Tue Nov 19 2019 03:22:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: This is just one command (the stats command) and I have a lot of commands 🙂
+[Tue Nov 19 2019 03:22:37 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Yeah have you programmed like literally anything
+[Tue Nov 19 2019 03:22:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Yep
+[Tue Nov 19 2019 03:22:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Tue Nov 19 2019 03:23:00 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Tue Nov 19 2019 03:23:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: POG
+[Tue Nov 19 2019 03:23:12 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !ban <@267698685041836035>
+[Tue Nov 19 2019 03:23:16 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Haha
+[Tue Nov 19 2019 03:23:18 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Sorry 🙂 mods only
+[Tue Nov 19 2019 03:23:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !say <@!259385419706138624> let's not try and be rude now
+[Tue Nov 19 2019 03:23:29 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@!259385419706138624> let's not try and be rude now
+[Tue Nov 19 2019 03:23:36 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Imagine if it worked though
+[Tue Nov 19 2019 03:23:40 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: ._.
+[Tue Nov 19 2019 03:23:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: It wasn't going to.  Something I had already tested
+[Tue Nov 19 2019 03:24:00 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Ahhh got it full proof haha
+[Tue Nov 19 2019 03:24:24 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !Say Hello World
+[Tue Nov 19 2019 03:24:24 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Hello World
+[Tue Nov 19 2019 03:24:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I mean, that's stuff you really have to take into consideration when you program.  I don't want all the commands accessible to everyone, so I have to program that in
+[Tue Nov 19 2019 03:24:37 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Yeah I imagine
+[11/19 3:20:42] (#filtered-hangout): It's a lot of fun
+[11/19 3:20:51] (#filtered-hangout): I haven't gone to bed yet because I've been programming since my stream ended
+[11/19 3:20:54] (#filtered-hangout): Also, it should be fixed now
+[11/19 3:20:55] (#filtered-hangout): Let's see
+[11/19 3:20:59] (#filtered-hangout): !stats <@!287376771500998656>
+[11/19 3:21:5] (#filtered-hangout): yessir
+[11/19 3:21:23] (#filtered-hangout): !reload stats
+[11/19 3:21:29] (#filtered-hangout): !stats <@!287376771500998656>
+[11/19 3:21:55] (#filtered-hangout): 
+[11/19 3:22:6] (#filtered-hangout): This is just one command (the stats command) and I have a lot of commands 🙂
+[11/19 3:22:37] (#filtered-hangout): Yeah have you programmed like literally anything
+[11/19 3:22:58] (#filtered-hangout): Yep
+[11/19 3:22:59] (#filtered-hangout): !help
+[11/19 3:23:2] (#filtered-hangout): POG
+[11/19 3:23:12] (#filtered-hangout): !ban <@267698685041836035>
+[11/19 3:23:16] (#filtered-hangout): Haha
+[11/19 3:23:18] (#filtered-hangout): Sorry 🙂 mods only
+[11/19 3:23:29] (#filtered-hangout): !say <@!259385419706138624> let's not try and be rude now
+[11/19 3:23:36] (#filtered-hangout): Imagine if it worked though
+[11/19 3:23:40] (#filtered-hangout): ._.
+[11/19 3:23:49] (#filtered-hangout): It wasn't going to.  Something I had already tested
+[11/19 3:24:0] (#filtered-hangout): Ahhh got it full proof haha
+[11/19 3:24:24] (#filtered-hangout): !Say Hello World
+[11/19 3:24:25] (#filtered-hangout): I mean, that's stuff you really have to take into consideration when you program.  I don't want all the commands accessible to everyone, so I have to program that in
+[11/19 3:24:37] (#filtered-hangout): Yeah I imagine
+[Tue Nov 19 2019 03:24:45 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: If you type !help you will see a smaller list of commands
+[Tue Nov 19 2019 03:24:51 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !help
+[Tue Nov 19 2019 03:24:51 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@!259385419706138624>
+[Tue Nov 19 2019 03:24:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Those are the commands you can use
+[Tue Nov 19 2019 03:24:56 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Ahhh
+[Tue Nov 19 2019 03:25:09 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !nick <@267698685041836035> eric
+[Tue Nov 19 2019 03:25:16 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Nope
+[Tue Nov 19 2019 03:25:17 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Haha
+[Tue Nov 19 2019 03:25:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload nick
+[Tue Nov 19 2019 03:25:29 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "nick" has been reloaded
+[Tue Nov 19 2019 03:25:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Now try help
+[Tue Nov 19 2019 03:25:37 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !help
+[Tue Nov 19 2019 03:25:37 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@!259385419706138624>
+[Tue Nov 19 2019 03:25:42 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Ah neat
+[Tue Nov 19 2019 03:25:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Yep, that's a mod only command
+[Tue Nov 19 2019 03:25:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@!259385419706138624> sean
+[Tue Nov 19 2019 03:25:47 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, <@!259385419706138624>'s nickname has been changed!
+[Tue Nov 19 2019 03:25:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@!259385419706138624> Sean_Godlike
+[Tue Nov 19 2019 03:25:58 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, <@!259385419706138624>'s nickname has been changed!
+[Tue Nov 19 2019 03:26:02 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Now that is pretty epic
+[Tue Nov 19 2019 03:26:20 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !say Sherman isn't cool
+[Tue Nov 19 2019 03:26:21 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Sherman isn't cool
+[Tue Nov 19 2019 03:26:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: <:dcolon:612008875834474506>
+[Tue Nov 19 2019 03:26:25 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Wow that is rude
+[Tue Nov 19 2019 03:26:39 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Shame on you bot!
+[Tue Nov 19 2019 03:26:42 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Haha
+[Tue Nov 19 2019 03:26:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !say Sherman isn't cool, he's hot
+[Tue Nov 19 2019 03:26:52 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Sherman isn't cool, he's hot
+[Tue Nov 19 2019 03:27:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: aw ty bot
+[Tue Nov 19 2019 03:27:08 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !say jk he's poop
+[Tue Nov 19 2019 03:27:08 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: jk he's poop
+[Tue Nov 19 2019 03:27:30 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Your bot is rude haha
+[Tue Nov 19 2019 03:27:36 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: He sure is
+[11/19 3:24:45] (#filtered-hangout): If you type !help you will see a smaller list of commands
+[11/19 3:24:51] (#filtered-hangout): !help
+[11/19 3:24:55] (#filtered-hangout): Those are the commands you can use
+[11/19 3:24:56] (#filtered-hangout): Ahhh
+[11/19 3:25:9] (#filtered-hangout): !nick <@267698685041836035> eric
+[11/19 3:25:16] (#filtered-hangout): Nope
+[11/19 3:25:17] (#filtered-hangout): Haha
+[11/19 3:25:29] (#filtered-hangout): !reload nick
+[11/19 3:25:32] (#filtered-hangout): Now try help
+[11/19 3:25:37] (#filtered-hangout): !help
+[11/19 3:25:42] (#filtered-hangout): Ah neat
+[11/19 3:25:43] (#filtered-hangout): Yep, that's a mod only command
+[11/19 3:25:47] (#filtered-hangout): !nick <@!259385419706138624> sean
+[11/19 3:25:58] (#filtered-hangout): !nick <@!259385419706138624> Sean_Godlike
+[11/19 3:26:2] (#filtered-hangout): Now that is pretty epic
+[11/19 3:26:20] (#filtered-hangout): !say Sherman isn't cool
+[11/19 3:26:25] (#filtered-hangout): <:dcolon:612008875834474506>
+[11/19 3:26:25] (#filtered-hangout): Wow that is rude
+[11/19 3:26:39] (#filtered-hangout): Shame on you bot!
+[11/19 3:26:42] (#filtered-hangout): Haha
+[11/19 3:26:52] (#filtered-hangout): !say Sherman isn't cool, he's hot
+[11/19 3:27:1] (#filtered-hangout): aw ty bot
+[11/19 3:27:8] (#filtered-hangout): !say jk he's poop
+[11/19 3:27:30] (#filtered-hangout): Your bot is rude haha
+[11/19 3:27:36] (#filtered-hangout): He sure is
+[Tue Nov 19 2019 03:27:37 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: oh well
+[Tue Nov 19 2019 03:27:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Good thing I have logs of what people say in case somebody decides to be extreme >:)
+[Tue Nov 19 2019 03:27:54 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !say Sean is superior godlike being
+[Tue Nov 19 2019 03:27:54 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Sean is superior godlike being
+[Tue Nov 19 2019 03:27:58 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Woah
+[Tue Nov 19 2019 03:28:01 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Why thank you
+[Tue Nov 19 2019 03:28:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: 
+[Tue Nov 19 2019 03:28:20 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I totally didnt command anythinggggg
+[Tue Nov 19 2019 03:28:22 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Huh I wonder who made that bot say that I wasn't cool
+[Tue Nov 19 2019 03:28:23 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Weird
+[Tue Nov 19 2019 03:28:40 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Nah not me, visual bug <:mccree:610663860596244490> 😂
+[Tue Nov 19 2019 03:28:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Nah computers don't lie 🙂
+[Tue Nov 19 2019 03:29:16 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: !say Sherman is 4ft tall
+[Tue Nov 19 2019 03:29:16 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Sherman is 4ft tall
+[Tue Nov 19 2019 03:29:20 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: He lied
+[Tue Nov 19 2019 03:29:40 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: No he's telling the truth I don't have legs
+[Tue Nov 19 2019 03:30:18 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Oh damn.. touché
+[Tue Nov 19 2019 03:30:45 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Hold up though right
+[Tue Nov 19 2019 03:31:02 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Can the bot swear within the filtered channel
+[Tue Nov 19 2019 03:31:08 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Or does it filter itself
+[Tue Nov 19 2019 03:31:17 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I currently have no protection against language
+[Tue Nov 19 2019 03:31:41 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Yikes that may become an issue by someone at somepoint or other
+[Tue Nov 19 2019 03:31:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Or I could do what I've been thinking and get rid of filtered from the server
+[Tue Nov 19 2019 03:32:34 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: That would be poggers I suppose but would you want no filter not even for like n*gger
+[Tue Nov 19 2019 03:33:00 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: My stream is unfiltered constantly because I just swear to much naturally now
+[Tue Nov 19 2019 03:33:36 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Like kind of became a part of my vocabulary
+[Tue Nov 19 2019 03:33:37 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Pretty sure if someone said that the server integrated explicit content filter would catch it
+[11/19 3:27:37] (#filtered-hangout): oh well
+[11/19 3:27:51] (#filtered-hangout): Good thing I have logs of what people say in case somebody decides to be extreme >:)
+[11/19 3:27:54] (#filtered-hangout): !say Sean is superior godlike being
+[11/19 3:27:58] (#filtered-hangout): Woah
+[11/19 3:28:1] (#filtered-hangout): Why thank you
+[11/19 3:28:12] (#filtered-hangout): 
+[11/19 3:28:20] (#filtered-hangout): I totally didnt command anythinggggg
+[11/19 3:28:22] (#filtered-hangout): Huh I wonder who made that bot say that I wasn't cool
+[11/19 3:28:23] (#filtered-hangout): Weird
+[11/19 3:28:40] (#filtered-hangout): Nah not me, visual bug <:mccree:610663860596244490> 😂
+[11/19 3:28:48] (#filtered-hangout): Nah computers don't lie 🙂
+[11/19 3:29:16] (#filtered-hangout): !say Sherman is 4ft tall
+[11/19 3:29:20] (#filtered-hangout): He lied
+[11/19 3:29:40] (#filtered-hangout): No he's telling the truth I don't have legs
+[11/19 3:30:18] (#filtered-hangout): Oh damn.. touché
+[11/19 3:30:45] (#filtered-hangout): Hold up though right
+[11/19 3:31:2] (#filtered-hangout): Can the bot swear within the filtered channel
+[11/19 3:31:8] (#filtered-hangout): Or does it filter itself
+[11/19 3:31:17] (#filtered-hangout): I currently have no protection against language
+[11/19 3:31:41] (#filtered-hangout): Yikes that may become an issue by someone at somepoint or other
+[11/19 3:31:59] (#filtered-hangout): Or I could do what I've been thinking and get rid of filtered from the server
+[11/19 3:32:34] (#filtered-hangout): That would be poggers I suppose but would you want no filter not even for like n*gger
+[11/19 3:33:0] (#filtered-hangout): My stream is unfiltered constantly because I just swear to much naturally now
+[11/19 3:33:36] (#filtered-hangout): Like kind of became a part of my vocabulary
+[11/19 3:33:37] (#filtered-hangout): Pretty sure if someone said that the server integrated explicit content filter would catch it
+[Tue Nov 19 2019 03:33:46 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Yeah true
+[Tue Nov 19 2019 03:33:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !private <@259385419706138624>
+[Tue Nov 19 2019 03:33:47 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@259385419706138624>, welcome to the private channel!  All the messages will be deleted after you have left.
+[Tue Nov 19 2019 03:33:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Test it
+[Tue Nov 19 2019 03:33:55 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Nigget
+[Tue Nov 19 2019 03:33:58 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Nigger
+[Tue Nov 19 2019 03:34:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: guess not oh well
+[Tue Nov 19 2019 03:34:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I'll have to program that
+[Tue Nov 19 2019 03:34:10 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Yeah
+[Tue Nov 19 2019 03:34:13 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: EOD
+[Tue Nov 19 2019 03:34:13 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: The private discussion has concluded, use !purge to clear the channel.
+[Tue Nov 19 2019 03:34:17 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 03:35:00 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: 
+[Tue Nov 19 2019 03:35:00 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: IT LIES
+[Tue Nov 19 2019 03:35:07 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: It doesn't know what explicit content is apparently
+[Tue Nov 19 2019 03:35:16 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Probably my knob
+[Tue Nov 19 2019 03:35:31 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Maybe it can scan the image and make out a very long shape
+[Tue Nov 19 2019 03:35:37 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Who knows
+[Tue Nov 19 2019 03:35:47 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: 😂
+[Tue Nov 19 2019 03:38:10 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Well I just looked it up and it apparently scans links and images for content it thinks is explicit but doesn't do anything along the lines of language control
+[Tue Nov 19 2019 03:38:26 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Ah well that is a fat r.i.p
+[Tue Nov 19 2019 03:38:52 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Does it scan links though even
+[Tue Nov 19 2019 03:38:55 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Want to test it
+[Tue Nov 19 2019 03:39:05 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I have a link in mind haha
+[Tue Nov 19 2019 03:39:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !private <@259385419706138624>
+[Tue Nov 19 2019 03:39:14 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@259385419706138624>, welcome to the private channel!  All the messages will be deleted after you have left.
+[Tue Nov 19 2019 03:39:29 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Pornhub.com
+[Tue Nov 19 2019 03:39:38 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Dang I got put the whole thing
+[11/19 3:33:46] (#filtered-hangout): Yeah true
+[11/19 3:33:47] (#filtered-hangout): !private <@259385419706138624>
+[11/19 3:33:52] (#private-hangout): Test it
+[11/19 3:33:55] (#private-hangout): Nigget
+[11/19 3:33:58] (#private-hangout): Nigger
+[11/19 3:34:2] (#private-hangout): guess not oh well
+[11/19 3:34:6] (#private-hangout): I'll have to program that
+[11/19 3:34:10] (#private-hangout): Yeah
+[11/19 3:34:13] (#private-hangout): EOD
+[11/19 3:34:17] (#private-hangout): !purge
+[11/19 3:35:0] (#filtered-hangout): 
+[11/19 3:35:0] (#filtered-hangout): IT LIES
+[11/19 3:35:7] (#filtered-hangout): It doesn't know what explicit content is apparently
+[11/19 3:35:16] (#filtered-hangout): Probably my knob
+[11/19 3:35:31] (#filtered-hangout): Maybe it can scan the image and make out a very long shape
+[11/19 3:35:37] (#filtered-hangout): Who knows
+[11/19 3:35:47] (#filtered-hangout): 😂
+[11/19 3:38:10] (#filtered-hangout): Well I just looked it up and it apparently scans links and images for content it thinks is explicit but doesn't do anything along the lines of language control
+[11/19 3:38:26] (#filtered-hangout): Ah well that is a fat r.i.p
+[11/19 3:38:52] (#filtered-hangout): Does it scan links though even
+[11/19 3:38:55] (#filtered-hangout): Want to test it
+[11/19 3:39:5] (#filtered-hangout): I have a link in mind haha
+[11/19 3:39:14] (#filtered-hangout): !private <@259385419706138624>
+[11/19 3:39:29] (#private-hangout): Pornhub.com
+[11/19 3:39:38] (#private-hangout): Dang I got put the whole thing
+[Tue Nov 19 2019 03:39:40 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: probably need the https
+[Tue Nov 19 2019 03:39:45 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: https://pornhub.com
+[Tue Nov 19 2019 03:39:48 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Https://pornhub.com
+[Tue Nov 19 2019 03:39:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Nah that's fine lol
+[Tue Nov 19 2019 03:39:52 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: What
+[Tue Nov 19 2019 03:39:59 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Haha
+[Tue Nov 19 2019 03:40:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Maybe because I'm the owner
+[Tue Nov 19 2019 03:40:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: you try just don't capitalize the h
+[Tue Nov 19 2019 03:40:17 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: https://instantfap.com
+[Tue Nov 19 2019 03:40:22 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: That's fine too
+[Tue Nov 19 2019 03:40:26 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: weirdchamp
+[Tue Nov 19 2019 03:40:35 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Wait https://lolicon.com
+[Tue Nov 19 2019 03:40:40 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: o.O
+[Tue Nov 19 2019 03:40:55 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Nevermind I forgot that site url anyway
+[Tue Nov 19 2019 03:41:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Aight well I'm not gonna program thousands of NSFW sites into the bot, and will leave that up to me and mods to deal with
+[Tue Nov 19 2019 03:41:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Thanks for the test though
+[Tue Nov 19 2019 03:41:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: EOD
+[Tue Nov 19 2019 03:41:11 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: The private discussion has concluded, use !purge to clear the channel.
+[Tue Nov 19 2019 03:41:13 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 03:41:18 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Interesting
+[Tue Nov 19 2019 03:46:13 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 3:39:40] (#private-hangout): probably need the https
+[11/19 3:39:45] (#private-hangout): https://pornhub.com
+[11/19 3:39:48] (#private-hangout): Https://pornhub.com
+[11/19 3:39:48] (#private-hangout): Nah that's fine lol
+[11/19 3:39:52] (#private-hangout): What
+[11/19 3:39:59] (#private-hangout): Haha
+[11/19 3:40:3] (#private-hangout): Maybe because I'm the owner
+[11/19 3:40:12] (#private-hangout): you try just don't capitalize the h
+[11/19 3:40:17] (#private-hangout): https://instantfap.com
+[11/19 3:40:22] (#private-hangout): That's fine too
+[11/19 3:40:26] (#private-hangout): weirdchamp
+[11/19 3:40:35] (#private-hangout): Wait https://lolicon.com
+[11/19 3:40:40] (#private-hangout): o.O
+[11/19 3:40:55] (#private-hangout): Nevermind I forgot that site url anyway
+[11/19 3:41:2] (#private-hangout): Aight well I'm not gonna program thousands of NSFW sites into the bot, and will leave that up to me and mods to deal with
+[11/19 3:41:6] (#private-hangout): Thanks for the test though
+[11/19 3:41:11] (#private-hangout): EOD
+[11/19 3:41:13] (#private-hangout): !purge
+[11/19 3:41:18] (#filtered-hangout): Interesting
+[11/19 3:46:13] (#filtered-hangout): !shutdown
+[Tue Nov 19 2019 03:46:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: nigger
+[Tue Nov 19 2019 03:46:25 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[Tue Nov 19 2019 03:46:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: niggerio
+[Tue Nov 19 2019 03:46:35 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[Tue Nov 19 2019 03:46:57 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 03:46:57 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[Tue Nov 19 2019 03:47:00 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[Tue Nov 19 2019 03:47:01 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[11/19 3:46:25] (#shermanbot): nigger
+[11/19 3:46:34] (#shermanbot): niggerio
+[11/19 3:46:57] (#shermanbot): !purge
+[11/19 3:47:0] (#shermanbot): !shutdown
+[Tue Nov 19 2019 03:47:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: There, I have one word in a blacklist filter
+[Tue Nov 19 2019 03:47:47 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[Tue Nov 19 2019 03:47:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: WHAT
+[Tue Nov 19 2019 03:47:50 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[Tue Nov 19 2019 03:47:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[Tue Nov 19 2019 03:47:58 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[11/19 3:47:47] (#filtered-hangout): There, I have one word in a blacklist filter
+[11/19 3:47:49] (#filtered-hangout): WHAT
+[11/19 3:47:58] (#filtered-hangout): !shutdown
+[Tue Nov 19 2019 03:48:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 03:48:58 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[Tue Nov 19 2019 03:50:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 03:50:14 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[Tue Nov 19 2019 03:52:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 03:52:35 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Yes it is
+[Tue Nov 19 2019 03:52:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: nigger
+[Tue Nov 19 2019 03:52:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: fucking hell
+[Tue Nov 19 2019 03:52:55 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Best expression ever
+[Tue Nov 19 2019 03:53:37 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: 
+[Tue Nov 19 2019 03:53:55 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I didn't send this here yet but this is what I'm doing for finger training
+[Tue Nov 19 2019 03:54:07 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: It's painful ._.
+[Tue Nov 19 2019 03:54:53 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 3:52:33] (#filtered-hangout): test
+[11/19 3:52:35] (#filtered-hangout): Yes it is
+[11/19 3:52:41] (#shermanbot): nigger
+[11/19 3:52:44] (#shermanbot): fucking hell
+[11/19 3:52:55] (#filtered-hangout): Best expression ever
+[11/19 3:53:37] (#media): 
+[11/19 3:53:55] (#media): I didn't send this here yet but this is what I'm doing for finger training
+[11/19 3:54:7] (#media): It's painful ._.
+[11/19 3:54:53] (#filtered-hangout): !shutdown
+[Tue Nov 19 2019 03:54:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: nigger
+[Tue Nov 19 2019 03:55:00 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 03:55:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: jesus this sucks dick
+[Tue Nov 19 2019 03:56:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: nigger
+[Tue Nov 19 2019 03:56:33 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[Tue Nov 19 2019 03:56:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 03:56:38 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I like niggers
+[Tue Nov 19 2019 03:56:38 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that is not allowed here.
+[Tue Nov 19 2019 03:56:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: sweet
+[Tue Nov 19 2019 03:56:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 03:56:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: That looks very fun 🙂
+[Tue Nov 19 2019 03:58:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 3:56:33] (#shermanbot): nigger
+[11/19 3:56:34] (#shermanbot): test
+[11/19 3:56:38] (#shermanbot): I like niggers
+[11/19 3:56:41] (#shermanbot): sweet
+[11/19 3:56:44] (#shermanbot): !purge
+[11/19 3:56:55] (#media): That looks very fun 🙂
+[11/19 3:58:42] (#media): !shutdown
+[Tue Nov 19 2019 04:01:26 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: It is very fun, to be fair I don't do as much traversing but I'm starting to do that aswell and that is fun.
+[Tue Nov 19 2019 04:01:53 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: (Traversing is just climbing sideways instead of upwards)
+[Tue Nov 19 2019 04:02:05 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Cant go too high with traversing incase you fall
+[Tue Nov 19 2019 04:02:44 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: One of the instructors who is quite found of me let's me go higher than you should but he says if I fall it's my under my liability.
+[Tue Nov 19 2019 04:07:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Well that sounds nice
+[Tue Nov 19 2019 04:08:45 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 04:08:57 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 04:14:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !restart
+[11/19 4:14:39] (#shermanbot): !restart
+[Tue Nov 19 2019 04:15:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 4:15:6] (#shermanbot): !shutdown
+[Tue Nov 19 2019 04:15:17 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[Tue Nov 19 2019 04:16:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 4:16:33] (#shermanbot): !shutdown
+[Tue Nov 19 2019 04:17:00 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 4:17:0] (#shermanbot): !shutdown
+[Tue Nov 19 2019 04:17:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !restart
+[11/19 4:17:33] (#shermanbot): !restart
+[Tue Nov 19 2019 04:19:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !restart
+[11/19 4:19:39] (#shermanbot): !restart
+[Tue Nov 19 2019 04:20:10 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !restart
+[11/19 4:20:10] (#shermanbot): !restart
+[Tue Nov 19 2019 04:24:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !restart
+[11/19 4:24:14] (#shermanbot): !restart
+[Tue Nov 19 2019 04:25:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !restart
+[11/19 4:25:59] (#shermanbot): !restart
+[Tue Nov 19 2019 04:29:57 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[11/19 4:29:57] (#shermanbot): !shutdown
+[Tue Nov 19 2019 04:34:10 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Tue Nov 19 2019 04:34:11 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Tue Nov 19 2019 04:34:13 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 04:34:13 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 04:42:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Tue Nov 19 2019 04:42:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 04:43:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Tue Nov 19 2019 04:43:04 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 04:43:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Tue Nov 19 2019 04:43:50 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 04:44:10 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Tue Nov 19 2019 04:44:11 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 04:44:37 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Tue Nov 19 2019 04:44:38 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Tue Nov 19 2019 04:44:38 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 04:44:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 5
+[Tue Nov 19 2019 04:45:21 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 10
+[Tue Nov 19 2019 04:48:40 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 10
+[Tue Nov 19 2019 04:48:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 3
+[Tue Nov 19 2019 04:48:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 1
+[Tue Nov 19 2019 04:48:53 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 2

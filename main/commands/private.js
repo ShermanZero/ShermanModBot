@@ -6,7 +6,7 @@ exports.props = {
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.modID);
+  const modRole = message.member.roles.has(client.config.roles.mod);
   const privateRole = message.guild.roles.get("645418484398030918");
   const privateHangoutChannel = client.channels.get("645418390961258536");
 

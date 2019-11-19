@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const config = require("./config.json");
+const config = require("./resources/config.json");
 const Enmap = require("enmap");
 const fs = require("fs");
 
@@ -8,6 +8,7 @@ const RaceManager = require("./classes/RaceManager.js");
 
 client.config = config;
 client.usersInSession = new Enmap();
+client.masterLog = [];
 
 start();
 
@@ -38,13 +39,12 @@ function start() {
       if(!file.endsWith(".js")) return;
 
       let props = require(`./commands/${file}`);
-
       let commandName = file.split(".")[0];
-      console.log(`Attempting to load command: ${commandName}`);
 
       client.commands.set(commandName, props);
     })
   });
+
 }
 
 function readCommands() {

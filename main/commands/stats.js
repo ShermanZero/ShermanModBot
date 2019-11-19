@@ -12,6 +12,17 @@ exports.run = (client, message, args) => {
   let user = User.getUserFromMessage(message);
   let content = client.usersInSession.get(user);
 
+  if(message.mentions.members.size !== 0) {
+    user = User.getUserFromName(message.mentions.members.first().displayName);
+    content = User.getUserContentsFromName(user);
+  }
+
+  if(!content) {
+    message.delete().catch((err) => {console.log(err)});
+    return message.reply(`${message.mentions.members.first().displayName} does not yet have any stats :( they need to post a message in the server to be registered by me.`)
+      .catch((err) => {console.log(err)});
+  }
+
   message.channel.send(exports.getEmbed(content)).catch((err) => {console.log(err)});
   message.delete().catch((err) => {console.log(err)});
 }

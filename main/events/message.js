@@ -2,6 +2,7 @@ const fs = require('fs');
 const Discord = require("discord.js");
 const User = require("../classes/User.js");
 const ranks = require("../resources/ranks/ranks.json");
+const blacklist = require("../resources/misc/blacklist.json");
 
 module.exports = (client, message) => {
   var forLog = "[" + message.createdAt + "] " + message.author.tag + ": " + message.content + "\n";
@@ -14,6 +15,13 @@ module.exports = (client, message) => {
 
   //register the user
   registerUser(client, message);
+
+  //check against blacklist
+  if(blacklist.words.some(substring => message.content.includes(substring))) {
+    message.delete().catch((err) => {console.log(err)});
+    message.reply("that is not allowed here.").catch((err) => {console.log(err)});
+  }
+
   awardExperience(client, message);
 
   //ignore messages not starting with the prefix
@@ -46,7 +54,7 @@ function registerUser(client, message) {
   if(!client.usersInSession.has(user)) {
     content = User.getUserContentsFromName(user);
     client.usersInSession.set(user, content);
-    console.log("Added new user to session: " + user);
+    console.log(`*Registered [${user}] to session`);
   } else {
     content = client.usersInSession.get(user);
   }
@@ -54,18 +62,44 @@ function registerUser(client, message) {
   let timestamp = message.createdAt;
   let newTimestamp = (timestamp.getMonth()+1) + "/" + timestamp.getDate() + " " + timestamp.getHours() + ":" + timestamp.getMinutes() + ":" + timestamp.getSeconds();
 
-  content.log.push(`[${newTimestamp}] (#${message.channel.name}): ${message.content}\n`);
+  let logMessage = `[${newTimestamp}] (#${message.channel.name}): ${message.content}\n`;
 
-  if(content.log.length >= client.config.preferences.log_threshold) {
-    let logsDir = `${dir}/logs`;
+  //push the message to the master log branch
+  client.masterLog.push(logMessage);
+  //if the log length exceeds the threshold, update the master log
+  updateMasterLog(client);
 
-    for(var i = 0; i < content.log.length; i++)
-      fs.appendFileSync(`${logsDir}/${client.config.files.log_all}`, content.log[i]);
+  //push the user's message directly to the user's log
+  content.userLog.push(logMessage);
+  //if the log length exceeds the threshold, update the user log
+  updateUserLog(client, content);
+}
 
-    content.log = [];
+function updateMasterLog(client) {
+  //if the log length exceeds the threshold, update the master log
+  if(client.masterLog.length >= client.config.preferences.log_threshold_master) {
+    for(var i = 0; i < client.masterLog.length; i++)
+      fs.appendFileSync(`./logs/${client.config.files.log_all}`, client.masterLog[i]);
+
+    client.masterLog = [];
+  }
+}
+
+function updateUserLog(client, content) {
+  //if the log length exceeds the threshold, update the master log
+  if(content.userLog.length >= client.config.preferences.log_threshold_user) {
+    let logsDir = `./users/${content.name}/logs`;
+
+    for(var i = 0; i < content.userLog.length; i++)
+      fs.appendFileSync(`${logsDir}/${client.config.files.log_all}`, content.userLog[i]);
+
+    content.userLog = [];
   }
 
-  client.usersInSession.set(user, content);
+  //have to update the Enmap
+  client.usersInSession.set(content.name, content);
+
+  console.log(content);
 }
 
 //awards the user experience for posting a message
@@ -78,7 +112,6 @@ function awardExperience(client, message) {
   content.rank.xp += 1;
 
   if(content.rank.xp >= content.rank.levelup) {
-    content.rank.xp = 0;
     content.rank.level += 1;
 
     var rank = ranks.levels[content.rank.level];
@@ -95,10 +128,11 @@ function awardExperience(client, message) {
       message.member.addRole(newRole).catch((err) => {console.log(err)});
     }
 
-    content.rank.levelup = Math.round( (4 * Math.pow(3, content.rank.level)) / 5 );
+    content.rank.levelup = content.rank.xp + Math.round( (4 * Math.pow(3, content.rank.level)) / 5 );
     levelUp(client, message, content);
   }
 
+  //have to update the Enmap
   client.usersInSession.set(user, content);
 
   //only write XP changes to the file every 10 messages

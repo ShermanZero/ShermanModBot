@@ -6,8 +6,15 @@ class User {
     return message.member.displayName.replace(/[^\w\s]/gi, '').toLowerCase();
   }
 
+  static getUserFromName(name) {
+    return name.replace(/[^\w\s]/gi, '').toLowerCase();
+  }
+
   static getUserContentsFromName(name) {
     let jsonFile = `./users/${name}/${name}.json`;
+
+    if(!fs.existsSync(jsonFile))
+      return null;
 
     let json = fs.readFileSync(jsonFile);
     let content = JSON.parse(json);
@@ -36,11 +43,11 @@ class User {
   static writeUserContentToFile(client, name, content) {
     let dir = "./users/" + name;
 
-    if(content.log.length != 0) {
-      for(var i = 0; i < content.log.length; i++)
-        fs.appendFileSync(`${dir}/logs/${client.config.files.log_all}`, content.log[i]);
+    if(content.userLog.length != 0) {
+      for(var i = 0; i < content.userLog.length; i++)
+        fs.appendFileSync(`${dir}/logs/${client.config.files.log_all}`, content.userLog[i]);
 
-      content.log = [];
+      content.userLog = [];
     }
 
     fs.writeFileSync(`${dir}/${name}.json`, JSON.stringify(content, null, "\t"));

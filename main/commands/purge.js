@@ -6,7 +6,7 @@ exports.props = {
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.modID);
+  const modRole = message.member.roles.has(client.config.roles.mod);
 
   if(!modRole)
     return;
@@ -16,10 +16,11 @@ exports.run = (client, message, args) => {
   //parse amount
   var amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2]);
 
-  if(!amount) amount = 100;
+  if(!amount || amount > 100) amount = 100;
+  if(amount < 2) amount = 2;
 
   //fetch 100 messages (will be filtered and lowered up to max amount requested)
-  message.channel.fetchMessages({limit: 100})
+  message.channel.fetchMessages({limit: amount})
     .then((messages) => {
       if(user) {
         const filterBy = user ? user.id : Client.user.id;

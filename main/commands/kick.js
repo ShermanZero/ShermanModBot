@@ -6,7 +6,7 @@ exports.props = {
 };
 
 exports.run = (client, message, [mention, ...reason]) => {
-  const modRole = message.member.roles.has(client.config.modID);
+  const modRole = message.member.roles.has(client.config.roles.mod);
 
   if(!modRole)
     return;
@@ -20,6 +20,8 @@ exports.run = (client, message, [mention, ...reason]) => {
   const kickMember = message.mentions.members.first();
 
   kickMember.kick(reason.join(" ")).then(member => {
-    message.reply(`${member.user.username} was kicked by ${message.author.tag} for reason: ${reason}`).catch((err) => {console.log(err)});
+    let modChannel = client.channels.get(client.config.channels.mod.logs);
+    
+    modChannel.send(`${member.user.username} was kicked by ${message.author.tag} for reason: ${reason}`).catch((err) => {console.log(err)});
   });
 };

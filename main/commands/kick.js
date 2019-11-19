@@ -8,14 +8,14 @@ exports.props = {
 exports.run = (client, message, [mention, ...reason]) => {
   const modRole = message.member.roles.has(client.config.modID);
 
-  if (!modRole)
+  if(!modRole)
     return;
 
-  if (message.mentions.members.size === 0)
+  if(message.mentions.members.size === 0)
     return message.reply("please mention a user to kick");
 
-  if (!message.guild.me.hasPermission("KICK_MEMBERS"))
-    return message.reply("");
+  if(!message.guild.me.hasPermission("KICK_MEMBERS"))
+    return;
 
   const kickMember = message.mentions.members.first();
 

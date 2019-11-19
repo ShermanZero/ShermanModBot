@@ -247,3 +247,26 @@ bankickprivatepurgereloadsayhelp
 [Mon Nov 18 2019 19:24:47 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Welcome <@196792512675840000> to **The SherZer Server**!  You are member **#37!  Check out the #server-rules and #server-information regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in #auto-roles, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!
 [Mon Nov 18 2019 19:25:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Depends on the PC and how you encode.  If you encode with your GPU it should be fine.  I have not had much luck encoding with my CPU though.  I do have a 10-series NVIDIA GPU though, which has its own built-in encoder designed specifically for that purpose, which OBS supports.
 [Mon Nov 18 2019 19:40:18 GMT-0500 (Eastern Standard Time)] JstDave#0007: Hi everyone! 🙂 Happy to be here. 😄 <:jstdavL:603524214049472532>
+[Mon Nov 18 2019 22:05:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload nick
+[Mon Nov 18 2019 22:05:03 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "nick" has been reloaded
+[Mon Nov 18 2019 22:05:07 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick ShermanZero test
+[Mon Nov 18 2019 22:05:08 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, please mention a user to change their nickname
+[Mon Nov 18 2019 22:05:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload nick
+[Mon Nov 18 2019 22:05:29 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "nick" has been reloaded
+[Mon Nov 18 2019 22:05:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@349728538439450625> ShermanZero
+[Mon Nov 18 2019 22:06:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@349728538439450625> ShermanZero
+[Mon Nov 18 2019 22:08:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@349728538439450625> ShermanZero
+[Mon Nov 18 2019 22:09:27 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@349728538439450625> ShermanZero
+[Mon Nov 18 2019 22:09:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@349728538439450625> ShermanZero
+[Mon Nov 18 2019 22:11:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@636618628846059530> ShermanMod
+[Mon Nov 18 2019 22:12:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@!636618628846059530> ShermanModBot
+[Mon Nov 18 2019 22:12:16 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload nick
+[Mon Nov 18 2019 22:12:16 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "nick" has been reloaded
+[Mon Nov 18 2019 22:12:22 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@636618628846059530> ShermanModBot
+[Mon Nov 18 2019 22:13:22 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload nick
+[Mon Nov 18 2019 22:13:22 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "nick" has been reloaded
+[Mon Nov 18 2019 22:13:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !nick <@636618628846059530> ShermanModBot
+[Mon Nov 18 2019 22:13:29 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, <@636618628846059530> has been changed!
+[Mon Nov 18 2019 22:15:57 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 22:15:57 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 22:16:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge

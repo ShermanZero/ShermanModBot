@@ -13,11 +13,11 @@ exports.run = (client, message, args) => {
   if(!modRole)
     return;
 
-  if (message.mentions.members.size === 0)
+  if(message.mentions.members.size === 0)
     return message.reply("please mention a user to give private access to");
 
-  if (!message.guild.me.hasPermission("MANAGE_ROLES"))
-    return message.reply("");
+  if(!message.guild.me.hasPermission("MANAGE_ROLES"))
+    return;
 
   const roleMember = message.mentions.members.first();
 

@@ -2,15 +2,12 @@ const User = require("../classes/User.js");
 const fs = require("fs");
 
 exports.props = {
-  "requiresElevation": true,
+  "requiresElevation": "owner",
   "description": "shuts the bot down cleanly",
   "usage": ""
 };
 
 exports.run = (client, message, args) => {
-  if(!message.member.hasPermission("ADMINISTRATOR"))
-    return;
-
   message.delete().catch((err) => {console.log(err)})
     .then(() => {
       //update all current users with their new content

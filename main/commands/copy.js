@@ -1,7 +1,8 @@
-const fs = require("fs-extra");
+const fs = require("graceful-fs");
+const rimraf = require("rimraf");
 
 exports.props = {
-  "requiresElevation": true,
+  "requiresElevation": "owner",
   "description": "copies a user's data to another user, and deletes the original",
   "usage": "{user} {user}"
 };
@@ -26,8 +27,17 @@ exports.run = (client, message, args) => {
   if(!client.usersInSession.has(newUser))
     return message.reply(`I could not find [${newUser}] in my database`);
 
-  fs.moveSync(`./users/${oldUser}`, `./users/${newUser}`);
-  message.delete().catch((err) => {console.log(err)});
+  let content = client.usersInSession.get(oldUser);
+  content.name = newUser;
 
-  //fs.rmdir(`./users/${oldUser}`);
+  let source = `./users/${oldUser}`;
+  let destination = `./users/${newUser}`;
+
+  fs.writeFileSync(`${destination}/${newUser}.json`, JSON.stringify(content, null, "\t"));
+  rimraf(source, (err) => { if(err) console.log(err); });
+
+  client.usersInSession.evict(oldUser);
+  console.log(`*Removed [${oldUser}] from session`);
+
+  message.delete().catch((err) => {console.log(err)});
 }

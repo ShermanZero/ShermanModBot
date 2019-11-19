@@ -1,16 +1,11 @@
 
 exports.props = {
-  "requiresElevation": true,
+  "requiresElevation": "mod",
   "description": "changes the nickname of a member",
   "usage": "{user} {nickname}"
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.roles.mod);
-
-  if(!modRole)
-    return;
-
   if(message.mentions.members.size === 0)
     return message.reply("please mention a user to change their nickname").catch((err) => {console.log(err)});
 

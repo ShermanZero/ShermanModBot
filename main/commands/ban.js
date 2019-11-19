@@ -1,16 +1,11 @@
 
 exports.props = {
-  "requiresElevation": true,
+  "requiresElevation": "mod",
   "description": "bans a member from the server",
   "usage": "{user} {reason}"
 };
 
 exports.run = (client, message, [mention, ...reason]) => {
-  const modRole = message.member.roles.has(client.config.roles.modID);
-
-  if(!modRole)
-    return;
-
   if(message.mentions.members.size === 0)
     return message.reply("please mention a user to kick").catch((err) => {console.log(err)});
 

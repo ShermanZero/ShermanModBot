@@ -1,16 +1,11 @@
 
 exports.props = {
-  "requiresElevation": true,
+  "requiresElevation": "owner",
   "description": "reloads a command",
   "usage": "{command}"
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.roles.mod);
-
-  if (!modRole)
-    return;
-
   if(!args || args.length < 1) return message.reply("you must provide a command name to reload").catch((err) => {console.log(err)});
 
   const commandName = args[0];

@@ -1,16 +1,11 @@
 
 exports.props = {
-  "requiresElevation": true,
+  "requiresElevation": "mod",
   "description": "kicks a member from the server",
   "usage": "{user} {reason}"
 };
 
 exports.run = (client, message, [mention, ...reason]) => {
-  const modRole = message.member.roles.has(client.config.roles.mod);
-
-  if(!modRole)
-    return;
-
   if(message.mentions.members.size === 0)
     return message.reply("please mention a user to kick");
 
@@ -21,7 +16,7 @@ exports.run = (client, message, [mention, ...reason]) => {
 
   kickMember.kick(reason.join(" ")).then(member => {
     let modChannel = client.channels.get(client.config.channels.mod.logs);
-    
+
     modChannel.send(`${member.user.username} was kicked by ${message.author.tag} for reason: ${reason}`).catch((err) => {console.log(err)});
   });
 };

@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 
 exports.props = {
-  "requiresElevation": false,
   "description": "replies to the member with the commands for the server",
   "usage": ""
 };

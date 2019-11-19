@@ -1,17 +1,13 @@
 
 exports.props = {
-  "requiresElevation": true,
+  "requiresElevation": "mod",
   "description": "grants a member access to the private-hangout channel",
   "usage": "{user}"
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.roles.mod);
   const privateRole = message.guild.roles.get("645418484398030918");
   const privateHangoutChannel = client.channels.get("645418390961258536");
-
-  if(!modRole)
-    return;
 
   if(message.mentions.members.size === 0)
     return message.reply("please mention a user to give private access to");

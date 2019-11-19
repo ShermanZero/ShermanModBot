@@ -1,9 +1,9 @@
 {
-	"name": "sean_godlike",
+	"name": "e10_2685",
 	"rank": {
 		"name": "gold",
 		"level": 15,
-		"xp": 11594,
+		"xp": 11520,
 		"levelup": 14797
 	},
 	"race": {
@@ -12,7 +12,7 @@
 	"misc": {
 		"joined": "",
 		"first_message": "",
-		"warnings": 0
+		"warnings": ""
 	},
 	"userLog": []
 }

@@ -1,6 +1,5 @@
 
 exports.props = {
-  "requiresElevation": false,
   "description": "makes the bot say your message",
   "usage": "{message}"
 };

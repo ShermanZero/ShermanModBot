@@ -2,15 +2,18 @@ const fs = require("fs");
 
 class User {
 
-  static getUserFromMessage(message) {
+  static getUsernameFromMessage(message) {
     let username = message.member.user.tag.replace("#", "_");
     username = username.replace(/[^\w\s]/gi, '').toLowerCase();
 
     return username;
   }
 
-  static getUserFromName(name) {
-    return name.replace(/[^\w\s]/gi, '').toLowerCase();
+  static getUsernameFromMember(member) {
+    let username = member.user ? member.user.tag : member.tag;
+    username = username.replace("#", "_").replace(/[^\w\s]/gi, '').toLowerCase();
+
+    return username;
   }
 
   static getUserContentsFromName(name) {

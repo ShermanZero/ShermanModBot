@@ -9,5 +9,10 @@
   "race": {
     "wins": 0
   },
+  "misc": {
+    "joined": "",
+    "first_message": "",
+    "warnings": ""
+  },
   "userLog": []
 }

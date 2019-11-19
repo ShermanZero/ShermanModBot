@@ -9,6 +9,7 @@ const RaceManager = require("./classes/RaceManager.js");
 client.config = config;
 client.usersInSession = new Enmap();
 client.masterLog = [];
+client.guild = null;
 
 start();
 

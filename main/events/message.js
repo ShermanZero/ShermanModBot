@@ -5,11 +5,6 @@ const ranks = require("../resources/ranks/ranks.json");
 const blacklist = require("../resources/misc/blacklist.json");
 
 module.exports = (client, message) => {
-  var forLog = "[" + message.createdAt + "] " + message.author.tag + ": " + message.content + "\n";
-
-  //append the message to the log file
-  fs.appendFileSync("./logs/allmessages.txt", forLog);
-
   //ignore all bots
   if(message.author.bot) return;
 
@@ -37,13 +32,16 @@ module.exports = (client, message) => {
   //if the command doesn't exist
   if(!cmd) return;
 
+  if(cmd.props.requiresElevation || cmd.props.requiresElevation !== "")
+    if(!message.member.roles.has(client.config.roles[cmd.props.requiresElevation])) return;
+
   //run the command
   cmd.run(client, message, args);
 }
 
 //registers the user's actions
 function registerUser(client, message) {
-  let user = User.getUserFromMessage(message);
+  let user = User.getUsernameFromMessage(message);
   let dir = "./users/" + user;
 
   if(!fs.existsSync(dir))
@@ -59,8 +57,12 @@ function registerUser(client, message) {
     content = client.usersInSession.get(user);
   }
 
+  if(!content) return console.error(`Could not retrieve contents for [${user}]`);
+
   let timestamp = message.createdAt;
-  let newTimestamp = (timestamp.getMonth()+1) + "/" + timestamp.getDate() + " " + timestamp.getHours() + ":" + timestamp.getMinutes() + ":" + timestamp.getSeconds();
+  let date = ((timestamp.getMonth() + 1) +"/"+timestamp.getDate()).replace(/.*(\d{2}\/\d{2}).*/, "$1");
+  let time = timestamp.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+  let newTimestamp = date + "  " + time;
 
   let logMessage = `[${newTimestamp}] (#${message.channel.name}): ${message.content}\n`;
 
@@ -73,38 +75,47 @@ function registerUser(client, message) {
   content.userLog.push(logMessage);
   //if the log length exceeds the threshold, update the user log
   updateUserLog(client, content);
+
+  console.log(content);
 }
 
 function updateMasterLog(client) {
+  let masterLog = `./logs/${client.config.files.log_all}`;
+
+  if(!fs.existsSync(masterLog))
+    fs.writeFileSync(masterLog, "");
+
   //if the log length exceeds the threshold, update the master log
   if(client.masterLog.length >= client.config.preferences.log_threshold_master) {
     for(var i = 0; i < client.masterLog.length; i++)
-      fs.appendFileSync(`./logs/${client.config.files.log_all}`, client.masterLog[i]);
+      fs.appendFileSync(masterLog, client.masterLog[i]);
 
     client.masterLog = [];
   }
 }
 
 function updateUserLog(client, content) {
+  let logsDir = `./users/${content.name}/logs`;
+  let userLog = `${logsDir}/${client.config.files.log_all}`;
+
+  if(!fs.existsSync(userLog))
+    fs.writeFileSync(userLog, "");
+
   //if the log length exceeds the threshold, update the master log
   if(content.userLog.length >= client.config.preferences.log_threshold_user) {
-    let logsDir = `./users/${content.name}/logs`;
-
     for(var i = 0; i < content.userLog.length; i++)
-      fs.appendFileSync(`${logsDir}/${client.config.files.log_all}`, content.userLog[i]);
+      fs.appendFileSync(userLog, content.userLog[i]);
 
     content.userLog = [];
   }
 
   //have to update the Enmap
   client.usersInSession.set(content.name, content);
-
-  console.log(content);
 }
 
 //awards the user experience for posting a message
 function awardExperience(client, message) {
-  let user = User.getUserFromMessage(message);
+  let user = User.getUsernameFromMessage(message);
 
   //get the content from the session instead of from the file
   let content = client.usersInSession.get(user);
@@ -145,7 +156,7 @@ function awardExperience(client, message) {
 
 function levelUp(client, message, content) {
   var stats = client.commands.get("stats");
-  let embed = stats.getEmbed(client, content);
+  let embed = stats.getEmbed(client, message, content);
 
   message.channel.send(`Congratulations ${message.author}!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!`);
   message.channel.send(embed);

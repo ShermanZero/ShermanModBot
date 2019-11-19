@@ -1,16 +1,11 @@
 
 exports.props = {
-  "requiresElevation": true,
+  "requiresElevation": "mod",
   "description": "removes a maximum of 100 messages from a channel",
   "usage": "{amount} {user}"
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.roles.mod);
-
-  if(!modRole)
-    return;
-
   const user = message.mentions.users.first();
 
   //parse amount

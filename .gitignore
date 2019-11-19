@@ -102,12 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-# config file
-config.json
-
-# startBot
-startBot.bat
-
-# package-lock
-package-lock.json

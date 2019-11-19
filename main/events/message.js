@@ -13,7 +13,7 @@ module.exports = (client, message) => {
   if(message.author.bot) return;
 
   //register the user
-  registerUser(message);
+  registerUser(client, message);
   awardExperience(client, message);
 
   //ignore messages not starting with the prefix
@@ -34,25 +34,46 @@ module.exports = (client, message) => {
 }
 
 //registers the user's actions
-function registerUser(message) {
+function registerUser(client, message) {
   let user = User.getUserFromMessage(message);
   let dir = "./users/" + user;
 
   if(!fs.existsSync(dir))
     User.createUserDirectory(user);
 
-  let logsDir = `${dir}/logs`;
+  let content = null;
+  //check if the user has been stored in the local client session
+  if(!client.usersInSession.has(user)) {
+    content = User.getUserContentsFromName(user);
+    client.usersInSession.set(user, content);
+    console.log("Added new user to session: " + user);
+  } else {
+    content = client.usersInSession.get(user);
+  }
+
   let timestamp = message.createdAt;
+  let newTimestamp = (timestamp.getMonth()+1) + "/" + timestamp.getDate() + " " + timestamp.getHours() + ":" + timestamp.getMinutes() + ":" + timestamp.getSeconds();
 
-  var newTimestamp = (timestamp.getMonth()+1) + "/" + timestamp.getDate() + " " + timestamp.getHours() + ":" + timestamp.getMinutes() + ":" + timestamp.getSeconds();
+  content.log.push(`[${newTimestamp}] (#${message.channel.name}): ${message.content}\n`);
 
-  fs.appendFileSync(`${logsDir}/allmessages.txt`, `[${newTimestamp}] (#${message.channel.name}): ${message.content}\n`);
+  if(content.log.length >= client.config.preferences.log_threshold) {
+    let logsDir = `${dir}/logs`;
+
+    for(var i = 0; i < content.log.length; i++)
+      fs.appendFileSync(`${logsDir}/${client.config.files.log_all}`, content.log[i]);
+
+    content.log = [];
+  }
+
+  client.usersInSession.set(user, content);
 }
 
 //awards the user experience for posting a message
 function awardExperience(client, message) {
   let user = User.getUserFromMessage(message);
-  let content = User.getUserContentsFromName(user);
+
+  //get the content from the session instead of from the file
+  let content = client.usersInSession.get(user);
 
   content.rank.xp += 1;
 
@@ -60,7 +81,7 @@ function awardExperience(client, message) {
     content.rank.xp = 0;
     content.rank.level += 1;
 
-    var rank = ranks[content.rank.level];
+    var rank = ranks.levels[content.rank.level];
     if(rank) {
       var lastRank = content.rank.name;
 
@@ -78,9 +99,14 @@ function awardExperience(client, message) {
     levelUp(client, message, content);
   }
 
-  let jsonFile = `./users/${user}/${user}.json`;
-  let newJson = JSON.stringify(content, null, "\t");
-  fs.writeFileSync(jsonFile, newJson);
+  client.usersInSession.set(user, content);
+
+  //only write XP changes to the file every 10 messages
+  if((content.rank.xp % client.config.preferences.xp_threshold) === 0) {
+    let jsonFile = `./users/${user}/${user}.json`;
+    let newJson = JSON.stringify(content, null, "\t");
+    fs.writeFileSync(jsonFile, newJson);
+  }
 }
 
 function levelUp(client, message, content) {

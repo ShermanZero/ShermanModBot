@@ -4,5 +4,14 @@
   "prefix": "!",
 
   "ownerID": "349728538439450625",
-  "modID": "471445047041327135"
+  "modID": "471445047041327135",
+
+  "preferences": {
+    "xp_threshold": 10,
+    "log_threshold": 10
+  },
+
+  "files": {
+    "log_all": "allmessages.txt"
+  }
 }

@@ -1,5 +1,6 @@
 const User = require("../classes/User.js");
 const Discord = require("discord.js");
+const ranks = require("../resources/ranks/ranks.json");
 
 exports.props = {
   "requiresElevation": false,
@@ -9,7 +10,7 @@ exports.props = {
 
 exports.run = (client, message, args) => {
   let user = User.getUserFromMessage(message);
-  let content = User.getUserContentsFromName(user);
+  let content = client.usersInSession.get(user);
 
   message.channel.send(exports.getEmbed(content)).catch((err) => {console.log(err)});
   message.delete().catch((err) => {console.log(err)});
@@ -19,6 +20,7 @@ exports.getEmbed = (content) => {
   const embed = new Discord.RichEmbed();
   embed.setTitle(content.name);
   embed.setColor(0x40b7e6);
+  embed.setThumbnail(ranks.urls[content.rank.name]);
 
   var rank = `**rank:**  *${content.rank.name}*`;
   var level = `**level:**  *${content.rank.level}*`;

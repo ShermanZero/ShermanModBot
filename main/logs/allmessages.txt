@@ -667,3 +667,51 @@ bankickprivatepurgereloadsayhelp
 [Tue Nov 19 2019 01:11:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
 [Tue Nov 19 2019 01:12:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
 [Tue Nov 19 2019 01:12:45 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:22:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:23:35 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:23:35 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:25:45 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 01:25:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:25:52 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:36:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:36:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !rank
+[Tue Nov 19 2019 01:36:54 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:36:54 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:37:07 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:37:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:37:12 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:37:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:35 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !test
+[Tue Nov 19 2019 01:38:37 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:38:37 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:38:45 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:45 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:53 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:38:53 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:38:54 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:56 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:38:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:39:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:39:02 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:48:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:49:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:50:20 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:50:21 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:01:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:01:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:02:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[Tue Nov 19 2019 02:02:18 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:02:18 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:02:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 02:02:23 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: hello there
+[Tue Nov 19 2019 02:02:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[Tue Nov 19 2019 02:03:07 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: hello there obi wan
+[Tue Nov 19 2019 02:03:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: how are you doing
+[Tue Nov 19 2019 02:03:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test two three
+[Tue Nov 19 2019 02:03:18 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown
+[Tue Nov 19 2019 02:04:10 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !shutdown

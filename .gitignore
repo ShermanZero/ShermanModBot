@@ -109,5 +109,5 @@ config.json
 # startBot
 startBot.bat
 
-#package-lock
+# package-lock
 package-lock.json

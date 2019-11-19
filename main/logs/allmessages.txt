@@ -1,0 +1,249 @@
+[Mon Nov 18 2019 01:05:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !say this is a test
+[Mon Nov 18 2019 01:07:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !say test
+[Mon Nov 18 2019 01:09:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !say this is a test
+[Mon Nov 18 2019 01:10:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !say this is a test
+[Mon Nov 18 2019 01:10:14 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: this is a test
+[Mon Nov 18 2019 01:10:17 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 100
+[Mon Nov 18 2019 01:11:08 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !say ehhhhh what's up doc??
+[Mon Nov 18 2019 01:11:08 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: ehhhhh what's up doc??
+[Mon Nov 18 2019 01:11:10 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 01:11:11 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you must specify an amount to delete!
+[Mon Nov 18 2019 01:11:13 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 100
+[Mon Nov 18 2019 01:13:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: \@private-hangout-access
+[Mon Nov 18 2019 01:14:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: \<@&471445047041327135>
+[Mon Nov 18 2019 01:16:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 01:16:30 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you must specify an amount to delete!
+[Mon Nov 18 2019 01:16:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !private <@636618628846059530>
+[Mon Nov 18 2019 01:21:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !private <@636618628846059530>
+[Mon Nov 18 2019 01:21:07 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@636618628846059530>, welcome to the private channel!  All the messages will be deleted after you have left.
+[Mon Nov 18 2019 01:21:20 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !private <@636618628846059530>
+[Mon Nov 18 2019 01:21:20 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@636618628846059530>, welcome to the private channel!  All the messages will be deleted after you have left.
+[Mon Nov 18 2019 01:21:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 01:21:29 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you must specify an amount to delete!
+[Mon Nov 18 2019 01:21:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 1000
+[Mon Nov 18 2019 01:28:26 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !private <@636618628846059530>
+[Mon Nov 18 2019 01:28:26 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@636618628846059530>, welcome to the private channel!  All the messages will be deleted after you have left.
+[Mon Nov 18 2019 01:28:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: EOD
+[Mon Nov 18 2019 01:28:29 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: The private session has been concluded
+[Mon Nov 18 2019 01:28:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 1000
+[Mon Nov 18 2019 01:37:54 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: <@642858470919372830>
+[Mon Nov 18 2019 01:38:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: @<642858470919372830>
+[Mon Nov 18 2019 01:38:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: 642858470919372830
+[Mon Nov 18 2019 01:42:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:42:52 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+[object Map]
+[Mon Nov 18 2019 01:44:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 01:44:12 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command help has been reloaded
+[Mon Nov 18 2019 01:44:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:44:15 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+bankickprivatepurgereloadsayhelp
+[Mon Nov 18 2019 01:44:38 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 01:44:38 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command help has been reloaded
+[Mon Nov 18 2019 01:44:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:44:39 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!ban
+!kick
+!private
+!purge
+!reload
+!say
+!help
+[Mon Nov 18 2019 01:46:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:46:03 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!ban
+!help
+!kick
+!private
+!purge
+!reload
+!say
+[Mon Nov 18 2019 01:46:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 01:46:43 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 01:46:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:46:44 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!banundefined
+!kickundefined
+!privateundefined
+!purgeundefined
+!reloadundefined
+!sayundefined
+!helpundefined
+[Mon Nov 18 2019 01:47:24 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:47:25 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!banundefined
+!helpundefined
+!kickundefined
+!privateundefined
+!purgeundefined
+!reloadundefined
+!sayundefined
+[Mon Nov 18 2019 01:49:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 1000
+[Mon Nov 18 2019 01:52:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:52:55 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!ban
+!help
+!kick
+!private
+!purge
+!reload
+!say
+[Mon Nov 18 2019 01:54:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 01:54:51 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 01:54:53 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:55:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:55:50 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!help: Replies to the member with the commands for the server
+[Mon Nov 18 2019 01:57:22 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 01:57:22 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 01:57:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:57:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+[Mon Nov 18 2019 01:58:23 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload helpo
+[Mon Nov 18 2019 01:58:23 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, that command does not exist
+[Mon Nov 18 2019 01:58:27 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 01:58:27 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 01:58:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 01:58:29 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!help: replies to the member with the commands for the server
+[Mon Nov 18 2019 02:02:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:02:50 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!ban: bans a member from the server [!ban {user} {reason}]
+!help: replies to the member with the commands for the server [!help]
+!kick: kicks a member from the server [!kick {user} {reason}]
+!private: grants a member access to the private-hangout channel [!private {user}]
+!purge: removes a maximum of 100 messages from a channel [!purge {amount} {user}]
+!reload: reloads a command [!reload {command}]
+!say: makes the bot say your message [!say {message}]
+[Mon Nov 18 2019 02:05:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:06:13 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:06:13 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!ban: bans a member from the server
+[!ban {user} {reason}]
+!help: replies to the member with the commands for the server
+!kick: kicks a member from the server
+[!kick {user} {reason}]
+!private: grants a member access to the private-hangout channel
+[!private {user}]
+!purge: removes a maximum of 100 messages from a channel
+[!purge {amount} {user}]
+!reload: reloads a command
+[!reload {command}]
+!say: makes the bot say your message
+[!say {message}]
+[Mon Nov 18 2019 02:06:24 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 02:06:24 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 02:06:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:06:25 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!ban: bans a member from the server
+	[!ban {user} {reason}]
+!kick: kicks a member from the server
+	[!kick {user} {reason}]
+!private: grants a member access to the private-hangout channel
+	[!private {user}]
+!purge: removes a maximum of 100 messages from a channel
+	[!purge {amount} {user}]
+!reload: reloads a command
+	[!reload {command}]
+!say: makes the bot say your message
+	[!say {message}]
+!help: replies to the member with the commands for the server
+[Mon Nov 18 2019 02:06:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 02:06:49 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 02:06:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:06:50 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, here are the commands for the server:
+!ban: *bans a member from the server*
+	**[!ban {user} {reason}]**
+!kick: *kicks a member from the server*
+	**[!kick {user} {reason}]**
+!private: *grants a member access to the private-hangout channel*
+	**[!private {user}]**
+!purge: *removes a maximum of 100 messages from a channel*
+	**[!purge {amount} {user}]**
+!reload: *reloads a command*
+	**[!reload {command}]**
+!say: *makes the bot say your message*
+	**[!say {message}]**
+!help: *replies to the member with the commands for the server*
+[Mon Nov 18 2019 02:14:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 02:14:05 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 02:14:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:14:06 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:16:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 02:16:46 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 02:16:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:17:26 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:17:26 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:18:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 02:18:02 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 02:18:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:18:03 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:20:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 02:20:02 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 02:20:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:20:04 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:20:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 02:20:30 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 02:20:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:20:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:21:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 02:21:32 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 02:21:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:21:33 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:22:13 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 10000
+[Mon Nov 18 2019 02:22:16 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:22:16 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:22:54 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:22:54 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:23:15 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:23:15 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:23:56 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload help
+[Mon Nov 18 2019 02:23:57 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "help" has been reloaded
+[Mon Nov 18 2019 02:23:57 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:23:57 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:27:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:27:58 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:28:10 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:28:10 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:28:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 02:28:32 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you must specify an amount to delete!
+[Mon Nov 18 2019 02:28:36 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge 1000
+[Mon Nov 18 2019 02:29:27 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 02:29:27 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you must specify an amount to delete!
+[Mon Nov 18 2019 02:29:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload purge
+[Mon Nov 18 2019 02:29:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "purge" has been reloaded
+[Mon Nov 18 2019 02:29:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 02:29:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 02:31:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:31:03 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:31:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !private <@349728538439450625>
+[Mon Nov 18 2019 02:31:11 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, welcome to the private channel!  All the messages will be deleted after you have left.
+[Mon Nov 18 2019 02:31:15 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: EOD
+[Mon Nov 18 2019 02:31:15 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: The private discussion has concluded, use !purge to clear the channel.
+[Mon Nov 18 2019 02:31:17 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 02:31:35 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
+[Mon Nov 18 2019 02:31:35 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Mon Nov 18 2019 02:31:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: This is what I have done so far <@&471445047041327135>s ^ now I am going to bed
+[Mon Nov 18 2019 02:32:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !say Kieran is very tired and will be shutting his computer down like he does every night, and that includes me 😦
+[Mon Nov 18 2019 02:32:55 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Kieran is very tired and will be shutting his computer down like he does every night, and that includes me 😦
+[Mon Nov 18 2019 02:33:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: But eventually, I will come up with a solution to run my bot constantly
+[Mon Nov 18 2019 16:15:22 GMT-0500 (Eastern Standard Time)] TwitchAlerts#0000: Hey friends, I am now **LIVE** on Twitch (playing **Overwatch**) and if you don't come and watch me I might perma-ban you >:) or I might not... depends on how much I like you :) https://www.twitch.tv/shermanzero
+[Mon Nov 18 2019 17:20:18 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: 
+[Mon Nov 18 2019 17:20:46 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: This is what happens to my veins everytime I climb, this isn't as bad as it can be. Looks gross as hell.
+[Mon Nov 18 2019 17:45:43 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: 
+[Mon Nov 18 2019 17:45:45 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: ^
+[Mon Nov 18 2019 17:48:00 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I'm not too proud of this image I editted in paint but eh...
+[Mon Nov 18 2019 18:56:01 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Hey <@349728538439450625> do you know how to setup OBS in order to make it so people watching me, can view my stream in different resolutions and I'm getting a 30Mbps upload speed soon I want to stream at 720p60fps, possibly higher, is it good to use lots of upload speed or can that make it harder for people viewing on there end for their internet?
+[Mon Nov 18 2019 18:58:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: That is called transcoding, which you have no control over.  Twitch prioritizes transcoding for partners, then affiliates.  As a general rule of thumb, you do not want to upload your stream at a super high bitrate, because then people will need to have the  matching download speed to view the stream, which some people do have and some people don't.  For 720p60fps, I would recommend a 5K bitrate.  You could also choose to stream at a nice middle ground of 1600x900 (900p) which is better than 720, but looks almost as good as 1080.  In that event, a 6K bitrate would be good.  I stream at 1080p with a 6.5K bitrate.  Twitch also encourages streamers to not upload at a higher bitrate than 6K, but they do not prevent it if you do.
+[Mon Nov 18 2019 18:59:35 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Hmm 900p60fps
+[Mon Nov 18 2019 18:59:43 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I'll try it once I get new internet.
+[Mon Nov 18 2019 19:00:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: I streamed at 900p for a long time, before switching to 1080 a couple months ago
+[Mon Nov 18 2019 19:00:15 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Yeah and it did look pretty crisp
+[Mon Nov 18 2019 19:00:42 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I think with a game like smite that I'm getting like 340+ fps on
+[Mon Nov 18 2019 19:00:52 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: I shouldn't be too much stress on my pc right?
+[Mon Nov 18 2019 19:01:01 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Just the internet speed that is the problem..
+[Mon Nov 18 2019 19:02:00 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: (100Mbps down, 6Mbps up) as of right now.
+[Mon Nov 18 2019 19:02:27 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: Thanks for the help anyway.
+[Mon Nov 18 2019 19:02:54 GMT-0500 (Eastern Standard Time)] Sean_Godlike#6114: 💜 👍
+[Mon Nov 18 2019 19:24:47 GMT-0500 (Eastern Standard Time)] JstDave#0007: 
+[Mon Nov 18 2019 19:24:47 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Welcome <@196792512675840000> to **The SherZer Server**!  You are member **#37!  Check out the #server-rules and #server-information regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in #auto-roles, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!
+[Mon Nov 18 2019 19:25:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Depends on the PC and how you encode.  If you encode with your GPU it should be fine.  I have not had much luck encoding with my CPU though.  I do have a 10-series NVIDIA GPU though, which has its own built-in encoder designed specifically for that purpose, which OBS supports.
+[Mon Nov 18 2019 19:40:18 GMT-0500 (Eastern Standard Time)] JstDave#0007: Hi everyone! 🙂 Happy to be here. 😄 <:jstdavL:603524214049472532>

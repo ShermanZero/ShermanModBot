@@ -1,2 +1,32 @@
 [11/19  09:00:15] (#shermanbot): test
 [11/19  09:00:25] (#shermanbot): !shutdown
+[11/19  10:29:55] (#shermanbot): !eval 2+2
+[11/19  10:31:14] (#filtered-hangout): Woah guildmember
+[11/19  10:31:26] (#filtered-hangout): Ah dang back to level 2 hmm
+[11/19  10:31:42] (#filtered-hangout): I just need to merge your old data with your new data
+[11/19  10:31:51] (#filtered-hangout): Yeah
+[11/19  10:31:52] (#filtered-hangout): !merge sean_godlike sean_godlike_6114
+[11/19  10:31:58] (#filtered-hangout): should be good now
+[11/19  10:32:01] (#filtered-hangout): What's this guild you got going
+[11/19  10:32:02] (#filtered-hangout): !stats <@259385419706138624>
+[11/19  10:32:06] (#filtered-hangout): there you go
+[11/19  10:32:08] (#filtered-hangout): Epic
+[11/19  10:32:19] (#filtered-hangout): A guild is a server in Discord language
+[11/19  10:32:45] (#filtered-hangout): Oh poggers like 70 messages infront of <@150749623697408001>
+[11/19  10:32:51] (#filtered-hangout): Ohhhh
+[11/19  10:32:58] (#filtered-hangout): That is pretty awesome
+[11/19  10:33:05] (#filtered-hangout): ._.
+[11/19  10:33:07] (#filtered-hangout): Feels bad
+[11/19  10:33:10] (#filtered-hangout): hahha rekt
+[11/19  10:33:33] (#filtered-hangout): !stats <@259385419706138624>
+[11/19  10:33:36] (#filtered-hangout): weirdddd
+[11/19  10:33:52] (#filtered-hangout): Indeed
+[11/19  10:33:53] (#filtered-hangout): and last I checked you weren't a mod either
+[11/19  10:33:55] (#filtered-hangout): feels weird
+[11/19  10:34:00] (#filtered-hangout): Yeah it says server mod
+[11/19  10:34:12] (#filtered-hangout): !shutdown
+[11/19  11:25:30] (#shermanbot): !test guildMemberUpdate <@349728538439450625> <@610013729492303903>
+[11/19  11:26:49] (#shermanbot): test
+[11/19  11:27:05] (#shermanbot): !shutdown
+[11/19  12:54:08] (#shermanbot): !log <@349728538439450625>
+[11/19  12:55:13] (#shermanbot): !shutdown

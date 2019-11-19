@@ -32,8 +32,8 @@ exports.run = (client, message, args) => {
       amount = logs.length;
 
     logs = logs.slice(-amount);
-    let result = ">>> " + (amount == 1 ? logs[0] : logs.join("\n"));
+    let result = (amount == 1 ? logs[0] : logs.join("\n"));
 
-    message.channel.send(`Here are the last ${amount} message(s) [${username}] sent:\n${result}`);
+    message.channel.send(`Here are the last ${amount} message(s) [${username}] sent:\n${result}`, { split: true });
   });
 }

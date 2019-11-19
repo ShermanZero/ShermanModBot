@@ -17,6 +17,8 @@ class User {
   }
 
   static getUserContentsFromName(name) {
+    name = name.trim().toLowerCase();
+
     let jsonFile = `./users/${name}/${name}.json`;
 
     if(!fs.existsSync(jsonFile))
@@ -46,6 +48,8 @@ class User {
     fs.mkdirSync(`${dir}/logs`);
 
     console.log(`*Created [${name}] for session`);
+
+    return content;
   }
 
   static writeUserContentToFile(client, name, content) {

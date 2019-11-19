@@ -8,11 +8,6 @@ exports.props = {
 };
 
 exports.run = (client, message, args) => {
-  const modRole = message.member.roles.has(client.config.roles.mod);
-
-  if(!modRole)
-    return;
-
   if(args.length != 2)
     return message.reply("you need to specify two users").catch((err) => {console.log(err)});
 
@@ -22,10 +17,12 @@ exports.run = (client, message, args) => {
   const newUser = args[1].trim().toLowerCase();
 
   if(!client.usersInSession.has(oldUser))
-    return message.reply(`I could not find [${oldUser}] in my database`);
+    if(message) return message.reply(`I could not find OLD [${oldUser}] in my database`);
+    else return console.log(`I could not find OLD [${oldUser}] in my database`);
 
   if(!client.usersInSession.has(newUser))
-    return message.reply(`I could not find [${newUser}] in my database`);
+    if(message) return message.reply(`I could not find NEW [${newUser}] in my database`);
+    else return console.log(`I could not find NEW [${newUser}] in my database`);
 
   let content = client.usersInSession.get(oldUser);
   content.name = newUser;
@@ -36,8 +33,8 @@ exports.run = (client, message, args) => {
   fs.writeFileSync(`${destination}/${newUser}.json`, JSON.stringify(content, null, "\t"));
   rimraf(source, (err) => { if(err) console.log(err); });
 
-  client.usersInSession.evict(oldUser);
+  client.usersInSession.delete(oldUser);
   console.log(`*Removed [${oldUser}] from session`);
 
-  message.delete().catch((err) => {console.log(err)});
+  if(message) message.delete().catch((err) => {console.log(err)});
 }

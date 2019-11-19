@@ -32,7 +32,7 @@ module.exports = (client, message) => {
   //if the command doesn't exist
   if(!cmd) return;
 
-  if(cmd.props.requiresElevation || cmd.props.requiresElevation !== "")
+  if(cmd.props.requiresElevation && cmd.props.requiresElevation !== "")
     if(!message.member.roles.has(client.config.roles[cmd.props.requiresElevation])) return;
 
   //run the command
@@ -59,12 +59,10 @@ function registerUser(client, message) {
 
   if(!content) return console.error(`Could not retrieve contents for [${user}]`);
 
-  let timestamp = message.createdAt;
-  let date = ((timestamp.getMonth() + 1) +"/"+timestamp.getDate()).replace(/.*(\d{2}\/\d{2}).*/, "$1");
-  let time = timestamp.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
-  let newTimestamp = date + "  " + time;
+  if(content.misc.firstMessage === "")
+    content.misc.firstMessage = message.content;
 
-  let logMessage = `[${newTimestamp}] (#${message.channel.name}): ${message.content}\n`;
+  let logMessage = `[${getTimestamp(message)}] (#${message.channel.name}): ${message.content}\n`;
 
   //push the message to the master log branch
   client.masterLog.push(logMessage);
@@ -75,8 +73,14 @@ function registerUser(client, message) {
   content.userLog.push(logMessage);
   //if the log length exceeds the threshold, update the user log
   updateUserLog(client, content);
+}
 
-  console.log(content);
+function getTimestamp(message) {
+  let timestamp = message.createdAt;
+  let date = ((timestamp.getMonth() + 1) +"/"+timestamp.getDate()).replace(/.*(\d{2}\/\d{2}).*/, "$1");
+  let time = timestamp.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+
+  return date + "  " + time;
 }
 
 function updateMasterLog(client) {
@@ -111,6 +115,9 @@ function updateUserLog(client, content) {
 
   //have to update the Enmap
   client.usersInSession.set(content.name, content);
+
+  //log it to the console
+  console.log(content);
 }
 
 //awards the user experience for posting a message
@@ -156,7 +163,7 @@ function awardExperience(client, message) {
 
 function levelUp(client, message, content) {
   var stats = client.commands.get("stats");
-  let embed = stats.getEmbed(client, message, content);
+  let embed = stats.getEmbed(client, message.member, content);
 
   message.channel.send(`Congratulations ${message.author}!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!`);
   message.channel.send(embed);

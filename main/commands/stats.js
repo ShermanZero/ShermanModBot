@@ -10,9 +10,11 @@ exports.props = {
 exports.run = (client, message, args) => {
   let user = User.getUsernameFromMessage(message);
   let content = client.usersInSession.get(user);
+  let member = message.member;
 
   if(message.mentions.members.size !== 0) {
-    user = User.getUsernameFromMember(message.mentions.members.first());
+    member = message.mentions.members.first();
+    user = User.getUsernameFromMember(member);
     content = User.getUserContentsFromName(user);
   }
 
@@ -22,32 +24,48 @@ exports.run = (client, message, args) => {
       .catch((err) => {console.log(err)});
   }
 
-  message.channel.send(exports.getEmbed(client, message, content)).catch((err) => {console.log(err)});
+  message.channel.send(exports.getEmbed(client, member, content)).catch((err) => {console.log(err)});
   message.delete().catch((err) => {console.log(err)});
 }
 
-exports.getEmbed = (client, message, content) => {
+exports.getEmbed = (client, member, content) => {
   let name = "**"+content.name.substring(0, content.name.lastIndexOf("_")).toUpperCase()+"**";
 
-  let rankColor = message.guild.roles.find(role => role.name === content.rank.name).color;
+  let rankColor = member.guild.roles.find(role => role.name === content.rank.name).color;
 
   const embed = new Discord.RichEmbed();
   embed.setTitle(name + " | " + calculatePosition(client, content));
   embed.setColor(rankColor);
   embed.setThumbnail(ranks.urls[content.rank.name]);
 
-  let rank = `**rank:**  *${content.rank.name}*`.toUpperCase();
-  let level = `**level:**  *${content.rank.level}*`.toUpperCase();
-  let expGoal = `**xp:**  *${getFormattedNumber(content.rank.xp)} / ${getFormattedNumber(content.rank.levelup)}*`.toUpperCase();
-  embed.addField("**LEVEL STATS**", `${rank}\n${level}\n${expGoal}`);
+  let levelStats = new String();
+  if(content.rank.name !== "")
+    levelStats += `**rank:**  *${content.rank.name}*\n`.toUpperCase();
+  if(content.rank.level !== "")
+    levelStats += `**level:**  *${content.rank.level}*\n`.toUpperCase();
+  if(content.rank.xp !== "")
+    levelStats += `**xp:**  *${getFormattedNumber(content.rank.xp)} / ${getFormattedNumber(content.rank.levelup)}*\n`.toUpperCase();
+  embed.addField("**LEVEL STATS**", levelStats);
 
-  let wins = `**wins:**  *${content.race.wins}*`.toUpperCase();
-  embed.addField("**MARBLE RACE STATS**", `${wins}`);
+  let raceStats = new String();
+  if(content.race.wins !== "")
+    raceStats += `**wins:**  *${content.race.wins}*\n`.toUpperCase();
+  embed.addField("**MARBLE RACE STATS**", raceStats);
 
-  let joined = `**joined:**  *${content.misc.joined}*`.toUpperCase();
-  let firstMessage = `**first message:**  *${content.misc.first_message}*`.toUpperCase();
-  let warnings = `**warnings:**  *${content.misc.warnings}*`.toUpperCase();
-  embed.addField("**MISC STATS**", `${joined}\n${firstMessage}\n${warnings}`);
+  let miscStats = new String();
+  if(content.misc.joined !== "")
+    miscStats += `**joined:**  *${content.misc.joined}*\n`.toUpperCase();
+  if(content.misc.first_message !== "")
+    miscStats += `**first message:**  *${content.misc.first_message}*\n`.toUpperCase();
+  if(content.misc.warnings !== "")
+    miscStats += `**warnings:**  *${content.misc.warnings}*\n`.toUpperCase();
+
+  embed.addField("**MISC. STATS**", miscStats);
+
+  if(member.roles.has(client.config.roles.mod)) {
+    embed.setFooter("BE RESPECTFUL TO ALL - ESPECIALLY MODERATORS", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");
+    embed.setDescription("`SERVER MOD`");
+  }
 
   return embed;
 }

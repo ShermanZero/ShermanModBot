@@ -4,12 +4,9 @@ const config = require("./resources/config.json");
 const Enmap = require("enmap");
 const fs = require("fs");
 
-const RaceManager = require("./classes/RaceManager.js");
-
 client.config = config;
 client.usersInSession = new Enmap();
 client.masterLog = [];
-client.guild = null;
 
 start();
 
@@ -45,29 +42,4 @@ function start() {
       client.commands.set(commandName, props);
     })
   });
-
-}
-
-function readCommands() {
-  var str = "";
-  while(str.toLowerCase().trim() !== "exit") {
-    str = InputHandler.readInput("> ").toLowerCase().trim();
-    this.doCommand(str);
-  }
-}
-
-function doCommand(command) {
-  switch(command) {
-    case "race": {
-      console.log("resources: " + this.resources);
-      var rm = new RaceManager(this.resources);
-      rm.startRace();
-      break;
-    }
-    case "exit": {
-      process.exit();
-      break;
-    }
-    default: console.log("! COMMAND NOT RECOGNIZED !");
-  }
 }

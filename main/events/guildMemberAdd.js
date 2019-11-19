@@ -1,5 +1,4 @@
-//.on("guildMemberAdd") event
-//called when a new member joins the server
+const User = require("../classes/User.js");
 
 module.exports = (client, member) => {
   const guild = member.guild;
@@ -8,5 +7,12 @@ module.exports = (client, member) => {
   let unrankedRole = guild.roles.get("609248072706424863");
   member.addRole(unrankedRole).catch((err) => {console.log(err)});
 
-  defaultChannel.send(`Welcome ${member.user} to **${guild.name}**!  You are member **#${guild.memberCount}!  Check out the #server-rules and #server-information regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in #auto-roles, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!`).catch((err) => {console.log(err)});
+  let serverRules = guild.channels.get(client.config.channels.shermanzeros_hangout.server_rules);
+  let serverInfo = guild.channels.get(client.config.channels.shermanzeros_hangout.server_information);
+  let autoRoles = guild.channels.get(client.config.channels.shermanzeros_hangout.auto_roles);
+
+  defaultChannel.send(`Welcome ${member.user} to **${guild.name}**!  You are member **#${guild.memberCount}!  Check out the ${serverRules} and ${serverInfo} regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in ${autoRoles}, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!`).catch((err) => {console.log(err)});
+
+  let username = User.getUsernameFromMember(member);
+  User.createUserDirectory(username);
 }

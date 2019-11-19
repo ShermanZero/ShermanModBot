@@ -10,10 +10,21 @@ exports.props = {
 exports.run = (client, message, args) => {
   const user = message.mentions.users.first();
 
-  if(!user) return message.reply("you need to specify a user").catch((err) => {console.log(err)});
+  let username = null;
+  let userContent = null;
 
-  let username = User.getUsernameFromMember(user);
-  let userContent = client.usersInSession.get(username);
+  if(!user) {
+    if(args.length == 1) {
+      userContent = User.getUserContentsFromName(args[0]);
+
+      if(!userContent) return message.reply("that user is not registered").catch((err) => {console.log(err)});
+
+      username = userContent.name;
+    } else return message.reply("you need to specify a user").catch((err) => {console.log(err)});
+  } else {
+    username = User.getUsernameFromMember(user);
+    userContent = client.usersInSession.get(username);
+  }
 
   if(!userContent) return message.reply("that user is not registered").catch((err) => {console.log(err)});
 

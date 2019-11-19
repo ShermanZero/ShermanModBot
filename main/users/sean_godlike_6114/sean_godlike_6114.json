@@ -1,18 +1,18 @@
 {
-	"name": "e10_2685",
+	"name": "sean_godlike_6114",
 	"rank": {
 		"name": "gold",
 		"level": 15,
-		"xp": 11520,
+		"xp": 11600,
 		"levelup": 14797
 	},
 	"race": {
-		"wins": 1
+		"wins": 0
 	},
 	"misc": {
 		"joined": "",
 		"first_message": "",
-		"warnings": ""
+		"warnings": 0
 	},
 	"userLog": []
 }

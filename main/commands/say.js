@@ -8,6 +8,6 @@ exports.props = {
 exports.run = (client, message, args) => {
   const sayMessage = args.join(" ");
 
-  message.delete().catch(error=>{});
-  message.channel.send(sayMessage);
+  message.delete().catch((err) => {console.log(err)});
+  message.channel.send(sayMessage).catch((err) => {console.log(err)});
 }

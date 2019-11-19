@@ -270,3 +270,400 @@ bankickprivatepurgereloadsayhelp
 [Mon Nov 18 2019 22:15:57 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !help
 [Mon Nov 18 2019 22:15:57 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
 [Mon Nov 18 2019 22:16:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 22:23:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 22:28:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 22:28:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 22:34:24 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 22:39:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 22:45:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 22:46:35 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test2
+[Mon Nov 18 2019 22:47:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test3
+[Mon Nov 18 2019 23:00:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test5
+[Mon Nov 18 2019 23:01:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test6
+[Mon Nov 18 2019 23:01:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 23:02:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:02:34 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:02:36 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test23
+[Mon Nov 18 2019 23:02:37 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:02:38 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test30
+[Mon Nov 18 2019 23:02:38 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:02:40 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test4020
+[Mon Nov 18 2019 23:02:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test1023
+[Mon Nov 18 2019 23:02:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test12303
+[Mon Nov 18 2019 23:02:45 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test12301203
+[Mon Nov 18 2019 23:02:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test1209312309
+[Mon Nov 18 2019 23:02:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 23:02:48 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:06:24 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:24 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:26 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: testt
+[Mon Nov 18 2019 23:06:26 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:06:26 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:27 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: set
+[Mon Nov 18 2019 23:06:27 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: se
+[Mon Nov 18 2019 23:06:28 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:06:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: tets
+[Mon Nov 18 2019 23:06:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: te
+[Mon Nov 18 2019 23:06:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Mon Nov 18 2019 23:06:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: tse
+[Mon Nov 18 2019 23:06:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: ts
+[Mon Nov 18 2019 23:06:34 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:06:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: et
+[Mon Nov 18 2019 23:06:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: se
+[Mon Nov 18 2019 23:06:35 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: tse
+[Mon Nov 18 2019 23:06:36 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:37 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:38 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:44 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:06:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:45 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:46 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:06:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:06:54 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 23:07:30 GMT-0500 (Eastern Standard Time)] E10#2685: i updated my computer so hopefully that fixes the issues ive been having. i honestly dont know if its the systems fault or i have a virus, i caught two potential viruses before they did anything but there might be one left and aaaaa
+[Mon Nov 18 2019 23:11:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:12:26 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: Why are you getting viruses o.O
+[Mon Nov 18 2019 23:14:24 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:14:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:15:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 23:15:32 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up!  Type !rank to see your rank
+[Mon Nov 18 2019 23:28:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:28:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:07 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: tes
+[Mon Nov 18 2019 23:29:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:29:46 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations undefined!  You just leveld up! [object Object]
+[Mon Nov 18 2019 23:29:46 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, you just leveled up! Type !rank to see your rank
+[Mon Nov 18 2019 23:30:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:30:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations undefined!  You just leveled up![object Object]
+[Mon Nov 18 2019 23:31:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:31:32 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:31:33 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:33:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:33:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:33:45 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:33:49 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:33:49 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:37:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:37:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:37:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:37:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:37:51 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:37:52 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:38:37 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:38:37 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:38:38 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:38:39 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:38:39 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:41:27 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:35 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:35 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:41:36 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:41:50 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:53 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:53 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:54 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:41:55 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:41:55 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:42:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:42:30 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:42:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:43:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:43:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:43:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:43:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:43:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:43:07 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:43:08 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:43:08 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:43:08 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:51:25 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:51:25 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:51:25 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Mon Nov 18 2019 23:52:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Mon Nov 18 2019 23:52:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:52:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:52:07 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:52:08 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:52:08 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:52:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Mon Nov 18 2019 23:52:11 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!
+[Mon Nov 18 2019 23:52:12 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 00:15:34 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:18:37 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:18:57 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:20:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:20:06 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 00:20:06 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 00:20:07 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 00:20:07 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 00:21:16 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:21 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:21 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:22 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:22 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:23 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:23 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 00:21:23 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 00:21:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:48 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:21:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:22:35 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 00:22:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 00:23:56 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 00:23:56 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Tue Nov 19 2019 00:24:00 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 00:29:07 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:30:15 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:30:15 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 00:30:15 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 00:50:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 00:50:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 00:50:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:43 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 00:50:44 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 00:50:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:50:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:51:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:51:59 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 00:51:59 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 00:53:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:53:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:53:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:53:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:53:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:53:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:53:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:53:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 00:53:32 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 00:53:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 00:54:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload stats
+[Tue Nov 19 2019 00:54:12 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "stats" has been reloaded
+[Tue Nov 19 2019 00:54:13 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 00:54:13 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Tue Nov 19 2019 01:02:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:02:58 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !rank
+[Tue Nov 19 2019 01:03:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:03:03 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>
+[Tue Nov 19 2019 01:05:46 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload stats
+[Tue Nov 19 2019 01:05:46 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "stats" has been reloaded
+[Tue Nov 19 2019 01:05:47 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:05:47 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:06:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload stats
+[Tue Nov 19 2019 01:06:03 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "stats" has been reloaded
+[Tue Nov 19 2019 01:06:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:06:04 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:06:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 01:06:08 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:06:08 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:06:27 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:06:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:06:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:06:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:06:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:06:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:06:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:06:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:06:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:07:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !reload stats
+[Tue Nov 19 2019 01:07:12 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 01:07:13 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: <@349728538439450625>, the command "stats" has been reloaded
+[Tue Nov 19 2019 01:07:13 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:07:18 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:07:19 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:07:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 01:08:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: hi
+[Tue Nov 19 2019 01:08:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 01:08:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:08:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:08:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:08:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: test
+[Tue Nov 19 2019 01:08:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:44 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 01:08:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:44 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:08:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: sdf
+[Tue Nov 19 2019 01:08:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: sd
+[Tue Nov 19 2019 01:08:52 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:08:53 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:08:53 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:09:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:09:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:09:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:09:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:09:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:09:02 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:09:04 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:09:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:09:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:09:05 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:09:06 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 01:09:06 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:09:54 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 01:09:54 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 01:09:55 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:10:08 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:10:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:10:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:13 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 01:10:13 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:10:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:14 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:10:18 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:20 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: fd
+[Tue Nov 19 2019 01:10:20 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:20 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:21 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:28 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:30 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:31 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 01:10:31 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:10:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 01:10:40 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:10:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:41 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: g
+[Tue Nov 19 2019 01:10:42 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:43 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:10:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: g
+[Tue Nov 19 2019 01:10:49 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:10:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:10:51 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:10:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:10:59 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:10:59 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:11:01 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:11:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:02 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:11:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:03 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:11:06 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:11:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:11:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:11:09 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:11:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:11 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:12 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:11:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:11:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:19 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:11:20 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:11:20 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:21 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:21 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:11:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:11:29 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:11:30 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:11:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:11:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:11:32 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:33 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: a
+[Tue Nov 19 2019 01:11:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: d
+[Tue Nov 19 2019 01:11:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: f
+[Tue Nov 19 2019 01:11:39 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: s
+[Tue Nov 19 2019 01:11:40 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: Congratulations <@349728538439450625>!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!
+[Tue Nov 19 2019 01:11:40 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 
+[Tue Nov 19 2019 01:11:53 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !pureg
+[Tue Nov 19 2019 01:11:55 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !purge
+[Tue Nov 19 2019 01:12:44 GMT-0500 (Eastern Standard Time)] ShermanZero#1200: !stats
+[Tue Nov 19 2019 01:12:45 GMT-0500 (Eastern Standard Time)] ShermanModBot#0264: 

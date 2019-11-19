@@ -12,7 +12,7 @@ exports.run = (client, message, args) => {
     return;
 
   if(message.mentions.members.size === 0)
-    return message.reply("please mention a user to change their nickname");
+    return message.reply("please mention a user to change their nickname").catch((err) => {console.log(err)});
 
   if(!message.guild.me.hasPermission("MANAGE_NICKNAMES"))
     return;
@@ -20,5 +20,5 @@ exports.run = (client, message, args) => {
   const nickMember = message.mentions.members.first();
   nickMember.setNickname(args[1]);
 
-  message.reply(`${nickMember}'s nickname has been changed!`).catch((err) => {});
+  message.reply(`${nickMember}'s nickname has been changed!`).catch((err) => {console.log(err)});
 };

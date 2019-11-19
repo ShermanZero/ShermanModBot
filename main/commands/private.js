@@ -22,22 +22,22 @@ exports.run = (client, message, args) => {
   const roleMember = message.mentions.members.first();
 
   //add the private role to the member
-  roleMember.addRole(privateRole).catch(console.error);
+  roleMember.addRole(privateRole).catch((err) => {console.log(err)});
 
   //delete the original message
-  message.delete().catch(console.error);
+  message.delete().catch((err) => {console.log(err)});
 
   //alert the member that they are in the channel
   privateHangoutChannel.send(`${roleMember}, welcome to the private channel!  All the messages will be deleted after you have left.`)
     .then(() => {
       privateHangoutChannel.awaitMessages(response => response.content === "EOD", {
         max: 1,
-        time: 60000,
+        time: 600000,
         errors: ['time']
       })
       .then((collected) => {
-        privateHangoutChannel.send("The private discussion has concluded, use !purge to clear the channel.");
-        roleMember.removeRole(privateRole).catch(console.error);
+        privateHangoutChannel.send("The private discussion has concluded, use !purge to clear the channel.").catch((err) => {console.log(err)});
+        roleMember.removeRole(privateRole).catch((err) => {console.log(err)});
       })
     });
 }

@@ -12,7 +12,7 @@ exports.run = (client, message, [mention, ...reason]) => {
     return;
 
   if(message.mentions.members.size === 0)
-    return message.reply("please mention a user to kick");
+    return message.reply("please mention a user to kick").catch((err) => {console.log(err)});
 
   if(!message.guild.me.hasPermission("BAN_MEMBERS"))
     return;
@@ -20,6 +20,6 @@ exports.run = (client, message, [mention, ...reason]) => {
   const banMember = message.mentions.members.first();
 
   banMember.ban(reason.join(" ")).then(member => {
-    message.reply(`${member.user.username} was banned by ${message.author.tag} for reason: ${reason}`);
+    message.reply(`${member.user.username} was banned by ${message.author.tag} for reason: ${reason}`).catch((err) => {console.log(err)});
   });
 }

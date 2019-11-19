@@ -26,6 +26,6 @@ exports.run = (client, message, args) => {
         messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
       }
 
-      message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
+      message.channel.bulkDelete(messages).catch((err) => {console.log(err)});
   });
 }

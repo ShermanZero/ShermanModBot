@@ -10,8 +10,8 @@ exports.run = (client, message, args) => {
 
   if (!modRole)
     return;
-  
-  if(!args || args.length < 1) return message.reply("you must provide a command name to reload");
+
+  if(!args || args.length < 1) return message.reply("you must provide a command name to reload").catch((err) => {console.log(err)});
 
   const commandName = args[0];
 
@@ -27,5 +27,5 @@ exports.run = (client, message, args) => {
   const props = require(`./${commandName}.js`);
   client.commands.set(commandName, props);
 
-  message.reply(`the command "${commandName}" has been reloaded`);
+  message.reply(`the command "${commandName}" has been reloaded`).catch((err) => {console.log(err)});
 };

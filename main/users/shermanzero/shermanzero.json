@@ -1,0 +1,12 @@
+{
+	"name": "shermanzero",
+	"rank": {
+		"name": "platinum",
+		"level": 20,
+		"xp": 3,
+		"levelup": 6400
+	},
+	"race": {
+		"wins": 0
+	}
+}

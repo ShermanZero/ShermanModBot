@@ -29,5 +29,5 @@ exports.run = (client, message, args) => {
     }
   });
 
-  message.reply({embed});
+  message.reply(embed).catch((err) => {console.log(err)});
 }

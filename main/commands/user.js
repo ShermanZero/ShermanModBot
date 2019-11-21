@@ -1,5 +1,6 @@
 const fs = require("fs");
-const User = require("../classes/User.js");
+const path = require("path");
+const User = require(path.join(__dirname, "..", "classes", "User.js"));
 
 exports.props = {
   "requiresElevation": "mod",

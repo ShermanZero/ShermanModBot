@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
+const path = require("path");
 const client = new Discord.Client();
-const config = require("./resources/config.json");
+const config = require(path.join(__dirname, "resources", "config.json"));
 const Enmap = require("enmap");
 const fs = require("fs");
 
@@ -13,30 +14,32 @@ start();
 client.login(config.token);
 
 function start() {
-  fs.readdir("./events/", (err, files) => {
+  let eventsPath = path.join(__dirname, "events");
+  fs.readdir(eventsPath, (err, files) => {
     if(err) return console.error(err);
 
     files.forEach(file => {
       if(!file.endsWith(".js")) return;
 
-      const event = require(`./events/${file}`);
+      const event = require(path.join(__dirname, "events", file));
 
       let eventName = file.split(".")[0];
 
       client.on(eventName, event.bind(null, client));
-      delete require.cache[require.resolve(`./events/${file}`)];
+      delete require.cache[require.resolve(path.join(__dirname, "events", file))];
     })
   });
 
   client.commands = new Enmap();
 
-  fs.readdir("./commands/", (err, files) => {
+  let commandsPath = path.join(__dirname, "commands");
+  fs.readdir(commandsPath, (err, files) => {
     if(err) return console.error(err);
 
     files.forEach(file => {
       if(!file.endsWith(".js")) return;
 
-      let props = require(`./commands/${file}`);
+      let props = require(path.join(__dirname, "commands", file));
       let commandName = file.split(".")[0];
 
       client.commands.set(commandName, props);

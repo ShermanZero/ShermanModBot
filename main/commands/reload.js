@@ -1,3 +1,4 @@
+const path = require("path");
 
 exports.props = {
   "requiresElevation": "owner",
@@ -14,12 +15,11 @@ exports.run = (client, message, args) => {
   if(!client.commands.has(commandName))
     return message.reply("that command does not exist");
 
-  //the path is relative to the *current folder*, so just ./filename.js
-  delete require.cache[require.resolve(`./${commandName}.js`)];
+  delete require.cache[require.resolve(path.join(__dirname, commandName+".js"))];
 
   //delete and reload the command from the client.commands Enmap
   client.commands.delete(commandName);
-  const props = require(`./${commandName}.js`);
+  const props = require(path.join(__dirname, commandName+".js"));
   client.commands.set(commandName, props);
 
   message.reply(`the command "${commandName}" has been reloaded`).catch((err) => {console.log(err)});

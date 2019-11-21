@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 
 class User {
 
@@ -19,7 +20,7 @@ class User {
   static getUserContentsFromName(name) {
     name = name.trim().toLowerCase();
 
-    let jsonFile = `./users/${name}/${name}.json`;
+    let jsonFile = path.join(__dirname, "..", "users", name, name+".json");
 
     if(!fs.existsSync(jsonFile))
       return null;
@@ -31,17 +32,18 @@ class User {
   }
 
   static getUserDirectoryFromName(name) {
-    return "./users/" + name;
+    return path.join(__dirname, "..", "users", name);
   }
 
   //creates the user directory
   static createUserDirectory(name) {
-    let json = fs.readFileSync("./users/base.json");
+    let basePath = path.join(__dirname, "..", "users", "base.json");
+    let json = fs.readFileSync(basePath);
     let content = JSON.parse(json);
 
     content.name = name;
 
-    let dir = "./users/" + name;
+    let dir = path.join(__dirname, "..", "users", name);
 
     fs.mkdirSync(dir);
     fs.writeFileSync(`${dir}/${name}.json`, JSON.stringify(content, null, "\t"));
@@ -53,7 +55,7 @@ class User {
   }
 
   static writeUserContentToFile(client, name, content) {
-    let dir = "./users/" + name;
+    let dir = path.join(__dirname, "..", "users", name);
 
     if(content.userLog.length != 0) {
       for(var i = 0; i < content.userLog.length; i++)

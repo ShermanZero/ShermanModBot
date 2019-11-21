@@ -1,4 +1,5 @@
-const FileHandler = require('./FileHandler.js');
+const path = require("path");
+const FileHandler = require(path.join(__dirname, "FileHandler.js"));
 const readline = require("readline-sync");
 
 class RaceManager {
@@ -59,7 +60,7 @@ class RaceManager {
       members += this.memberList[i];
     }
 
-    FileHandler.writeDataToFile(members, "../marblerace/MarbleRacers.csv");
+    FileHandler.writeDataToFile(members, path.join(__dirname, "..", "marblerace", "MarbleRacers.csv"));
   }
 
   getInput() {

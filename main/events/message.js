@@ -1,8 +1,9 @@
 const fs = require('fs');
+const path = require("path");
 const Discord = require("discord.js");
-const User = require("../classes/User.js");
-const ranks = require("../resources/ranks/ranks.json");
-const blacklist = require("../resources/misc/blacklist.json");
+const User = require(path.join(__dirname, "..", "classes", "User.js"));
+const ranks = require(path.join(__dirname, "..", "resources", "ranks", "ranks.json"));
+const blacklist = require(path.join(__dirname, "..", "resources", "misc", "blacklist.json"));
 
 module.exports = (client, message) => {
   //ignore all bots
@@ -42,7 +43,7 @@ module.exports = (client, message) => {
 //registers the user's actions
 function registerUser(client, message) {
   let user = User.getUsernameFromMessage(message);
-  let dir = "./users/" + user;
+  let dir = path.join(__dirname, "..", "users", user);
 
   if(!fs.existsSync(dir))
     User.createUserDirectory(user);
@@ -84,7 +85,7 @@ function getTimestamp(message) {
 }
 
 function updateMasterLog(client) {
-  let masterLog = `./logs/${client.config.files.log_all}`;
+  let masterLog = path.join(__dirname, "..", "logs", client.config.files.log_all);
 
   if(!fs.existsSync(masterLog))
     fs.writeFileSync(masterLog, "");
@@ -99,7 +100,7 @@ function updateMasterLog(client) {
 }
 
 function updateUserLog(client, content) {
-  let logsDir = `./users/${content.name}/logs`;
+  let logsDir = path.join(__dirname, "..", "users", content.name, "logs");
   let userLog = `${logsDir}/${client.config.files.log_all}`;
 
   if(!fs.existsSync(userLog))
@@ -155,7 +156,7 @@ function awardExperience(client, message) {
 
   //only write XP changes to the file every 10 messages
   if((content.rank.xp % client.config.preferences.xp_threshold) === 0) {
-    let jsonFile = `./users/${user}/${user}.json`;
+    let jsonFile = path.join(__dirname, "..", "users", user, user+".json");
     let newJson = JSON.stringify(content, null, "\t");
     fs.writeFileSync(jsonFile, newJson);
   }

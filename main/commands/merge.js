@@ -1,5 +1,6 @@
 const fs = require("graceful-fs");
 const rimraf = require("rimraf");
+const path = require("path");
 
 exports.props = {
   "requiresElevation": "owner",
@@ -27,8 +28,8 @@ exports.run = (client, message, args) => {
   let content = client.usersInSession.get(oldUser);
   content.name = newUser;
 
-  let source = `./users/${oldUser}`;
-  let destination = `./users/${newUser}`;
+  let source = path.join(__dirname, "..", "users", oldUser);
+  let destination = path.join(__dirname, "..", "users", newUser);
 
   fs.writeFileSync(`${destination}/${newUser}.json`, JSON.stringify(content, null, "\t"));
   rimraf(source, (err) => { if(err) console.log(err); });

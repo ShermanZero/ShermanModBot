@@ -1,5 +1,6 @@
 const fs = require("fs");
-const User = require("../classes/User.js");
+const path = require("path");
+const User = require(path.join(__dirname, "..", "classes", "User.js"));
 
 exports.props = {
   "requiresElevation": "mod",
@@ -13,7 +14,7 @@ exports.run = (client, message, args) => {
   if(!user) return message.reply("you need to specify a user").catch((err) => {console.log(err)});
 
   let username = User.getUsernameFromMember(user);
-  let file = `./users/${username}/logs/${client.config.files.log_all}`;
+  let file = path.join(__dirname, "..", "users", username, "logs", client.config.files.log_all);
   //parse amount
   let amount = !!parseInt(args[1]) ? parseInt(args[1]) : parseInt(args[2]);
 

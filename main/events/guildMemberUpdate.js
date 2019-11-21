@@ -1,4 +1,5 @@
-const User = require("../classes/User.js");
+const path = require("path");
+const User = require(path.join(__dirname, "..", "classes", "User.js"));
 
 module.exports = (client, oldMember, newMember) => {
   console.log(`old: ${oldMember.displayName} | new: ${newMember.displayName}`);

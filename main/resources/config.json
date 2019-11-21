@@ -3,6 +3,11 @@
   "status": "dead | !help",
   "prefix": "!",
 
+  "elevation_names": {
+    "moderator": "mod",
+    "owner": "owner"
+  },
+
   "roles": {
     "owner": "607925465172148234",
     "mod": "471445047041327135"

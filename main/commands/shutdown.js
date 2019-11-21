@@ -1,25 +1,16 @@
-const User = require("../classes/User.js");
 const fs = require("fs");
+const path = require("path");
 
 exports.props = {
   "requiresElevation": "owner",
-  "description": "shuts the bot down cleanly",
+  "description": "shuts the bot down immediately",
   "usage": ""
 };
 
 exports.run = (client, message, args) => {
-  message.delete().catch((err) => {console.log(err)})
-    .then(() => {
-      //update all current users with their new content
-      client.usersInSession.forEach((content, user) => {
-        User.writeUserContentToFile(client, user, content);
-      });
+  let exitCode = 1;
+  if(args.length == 1 && args[0].toLowerCase().includes("force"))
+    exitCode = 2;
 
-      //append all last log data to the master log
-      for(var i = 0; i < client.masterLog.length; i++)
-        fs.appendFileSync(`./logs/${client.config.files.log_all}`, client.masterLog[i]);
-
-      client.destroy();
-      process.exit();
-    });;
+  process.exit(exitCode);
 }

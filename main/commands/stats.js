@@ -1,6 +1,7 @@
-const User = require("../classes/User.js");
+const path = require("path");
+const User = require(path.join(__dirname, "..", "classes", "User.js"));
 const Discord = require("discord.js");
-const ranks = require("../resources/ranks/ranks.json");
+const ranks = require(path.join(__dirname, "..", "resources", "ranks", "ranks.json"));
 
 exports.props = {
   "description": "replies to the user with their current server stats",

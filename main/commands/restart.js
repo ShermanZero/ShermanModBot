@@ -2,7 +2,7 @@ require("colors");
 
 const fs = require("fs");
 const path = require("path");
-const User = require(path.join(__dirname, "..", "classes", "User.js"));
+const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
 
 let alreadyShutdown = false;
 
@@ -12,21 +12,25 @@ exports.props = {
   "usage": ""
 };
 
-exports.run = (client, message, args) => {
-  if(alreadyShutdown) {
+exports.run = (client, message, userTriggered = true) => {
+  if(client.alreadyShutdown) {
     console.log("Already executed clean shutdown... restarting now".magenta);
     return true;
   }
 
-  alreadyShutdown = true;
-
+  client.alreadyShutdown = true;
   console.log("Attempting to restart cleanly...".magenta);
 
-  //check if the command was user-triggered
-  if(message) message.delete().catch((err) => {console.log(err)});
+  client.usersInSession.forEach((content, guildName) => {
+    let usersInGuild = Object.entries(content);
 
-  client.usersInSession.forEach((content, user) => {
-    User.writeUserContentToFile(client, user, content);
+    for(let [username, userContent] of usersInGuild)
+      Resources.writeUserContentToFile(client, username, userContent.content);
+  });
+
+  //check if the command was user-triggered
+  if (userTriggered) message.delete().catch((err) => {
+    console.log(err)
   });
 
   console.log("Successfully wrote user data to files!".magenta);
@@ -35,11 +39,11 @@ exports.run = (client, message, args) => {
   for(var i = 0; i < client.masterLog.length; i++)
     fs.appendFileSync(path.join(__dirname, "..", "logs", client.config.files.log_all), client.masterLog[i]);
 
-  console.log("Succesfully stored pending user logs!".magenta);
+  console.log("Successfully stored pending user logs!".magenta);
 
   console.log("Destroying client...".magenta);
   client.destroy();
 
   console.log("Done".yellow);
-  process.exit(99);
+  process.exit();
 }

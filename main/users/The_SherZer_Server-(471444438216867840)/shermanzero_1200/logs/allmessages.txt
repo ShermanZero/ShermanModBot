@@ -1,0 +1,6 @@
+[11/22  03:09:13] (#shermanbot): yo
+[11/22  03:09:14] (#shermanbot): what up
+[11/22  03:09:16] (#shermanbot): hookers
+[11/22  03:09:26] (#shermanbot): !log <@349728538439450625>
+[11/22  03:09:32] (#shermanbot): !user <@349728538439450625>
+[11/22  03:09:37] (#shermanbot): !shutdown

@@ -1,5 +1,5 @@
 const path = require("path");
-const User = require(path.join(__dirname, "..", "classes", "User.js"));
+const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
 const Discord = require("discord.js");
 const ranks = require(path.join(__dirname, "..", "resources", "ranks", "ranks.json"));
 
@@ -9,14 +9,14 @@ exports.props = {
 };
 
 exports.run = (client, message, args) => {
-  let user = User.getUsernameFromMessage(message);
-  let content = client.usersInSession.get(user);
+  let username = Resources.getUsernameFromMessage(message);
+  let content = client.getUserContent(message.guild, username);
   let member = message.member;
 
   if(message.mentions.members.size !== 0) {
     member = message.mentions.members.first();
-    user = User.getUsernameFromMember(member);
-    content = User.getUserContentsFromName(user);
+    username = Resources.getUsernameFromMember(member);
+    content = Resources.getUserContentsFromName(message.guild, username);
   }
 
   if(!content) {
@@ -30,7 +30,7 @@ exports.run = (client, message, args) => {
 }
 
 exports.getEmbed = (client, member, content) => {
-  let name = "**"+content.name.substring(0, content.name.lastIndexOf("_")).toUpperCase()+"**";
+  let name = "**"+content.hidden.username.substring(0, content.hidden.username.lastIndexOf("_")).toUpperCase()+"**";
 
   let rankColor = member.guild.roles.find(role => role.name === content.rank.name).color;
 
@@ -76,17 +76,13 @@ function getFormattedNumber(number) {
 }
 
 function calculatePosition(client, content) {
+  let guild = client.getGuild(content.hidden.guildname);
   let usersHigher = 0;
-  let totalUsers = 0;
 
-  client.usersInSession.forEach((userContent, user) => {
-    totalUsers++;
-
-    if(user !== content.name) {
-      if(userContent.rank.xp > content.rank.xp)
-        usersHigher++;
-    }
-  });
+  let entries = Object.entries(guild);
+  for (const [username, userContent] of entries)
+    if (username != content.hidden.username && userContent.rank.xp > content.rank.xp)
+      usersHigher++;
 
   return "*RANK #" + (usersHigher + 1) + "*";
 }

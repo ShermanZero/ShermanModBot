@@ -17,21 +17,24 @@ exports.run = (client, message, args) => {
   //the user to copy to
   const newUser = args[1].trim().toLowerCase();
 
-  if(!client.usersInSession.has(oldUser))
+  let oldUsername = Resources.getUsernameFromMember(oldUser);
+  let newUsername = Resources.getUsernameFromMember(newUser);
+
+  if (!client.hasUser(message.guild, oldUsername))
     if(message) return message.reply(`I could not find OLD [${oldUser}] in my database`);
     else return console.log(`I could not find OLD [${oldUser}] in my database`);
 
-  if(!client.usersInSession.has(newUser))
+  if (!client.hasUser(message.guild, newUsername))
     if(message) return message.reply(`I could not find NEW [${newUser}] in my database`);
     else return console.log(`I could not find NEW [${newUser}] in my database`);
 
-  let content = client.usersInSession.get(oldUser);
-  content.name = newUser;
+  let content = client.getUserContent(message.guild, oldUsername);
+  content.hidden.username = newUsername;
 
-  let source = path.join(__dirname, "..", "users", oldUser);
-  let destination = path.join(__dirname, "..", "users", newUser);
+  let source = Resources.getUserDirectoryFromGuild(message.guild, oldUsername);
+  let destination = Resources.getUserDirectoryFromGuild(message.guild, newUsername);
 
-  fs.writeFileSync(`${destination}/${newUser}.json`, JSON.stringify(content, null, "\t"));
+  fs.writeFileSync(path.join(destination, newUsername+".json"), JSON.stringify(content, null, "\t"));
   rimraf(source, (err) => { if(err) console.log(err); });
 
   client.usersInSession.delete(oldUser);

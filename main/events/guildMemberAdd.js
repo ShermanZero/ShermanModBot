@@ -1,5 +1,5 @@
 const path = require("path");
-const User = require(path.join(__dirname, "..", "classes", "User.js"));
+const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
 
 module.exports = (client, member) => {
   const guild = member.guild;
@@ -14,6 +14,5 @@ module.exports = (client, member) => {
 
   defaultChannel.send(`Welcome ${member.user} to **${guild.name}**!  You are member **#${guild.memberCount}!  Check out the ${serverRules} and ${serverInfo} regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in ${autoRoles}, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!`).catch((err) => {console.log(err)});
 
-  let username = User.getUsernameFromMember(member);
-  User.createUserDirectory(username);
+  Resources.createUserDirectory(client, member.guild, member);
 }

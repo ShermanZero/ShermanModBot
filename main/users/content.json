@@ -1,5 +1,8 @@
 {
-  "name": "",
+  "hidden": {
+    "username": null,
+    "guildname": null
+  },
   "rank": {
     "name": "unranked",
     "level": 1,
@@ -10,8 +13,8 @@
     "wins": 0
   },
   "misc": {
-    "joined": "",
-    "first_message": "",
+    "joined": null,
+    "first_message": null,
     "warnings": 0
   },
   "userLog": []

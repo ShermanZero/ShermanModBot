@@ -88,3 +88,53 @@
 [11/21  08:51:34] (#shermanbot): !restart
 [11/21  08:54:04] (#shermanbot): !shutdown
 [11/21  08:55:50] (#shermanbot): !shutdown
+[11/21  18:39:31] (#shermanbot): !stats
+[11/21  18:39:36] (#shermanbot): !purge
+[11/21  21:29:17] (#shermanbot): test
+[11/21  21:29:19] (#shermanbot): !stats
+[11/21  21:29:39] (#shermanbot): test
+[11/21  21:30:38] (#shermanbot): !purge
+[11/21  21:30:54] (#shermanbot): test
+[11/21  21:31:21] (#shermanbot): test
+[11/21  21:31:24] (#shermanbot): test
+[11/21  21:31:30] (#shermanbot): !stats
+[11/21  21:31:38] (#shermanbot): !stats
+[11/21  21:31:51] (#shermanbot): !purge
+[11/21  21:31:57] (#shermanbot): !purge
+[11/21  21:32:15] (#shermanbot): !restart
+[11/21  21:33:21] (#shermanbot): !restart
+[11/21  21:36:03] (#shermanbot): !restart
+[11/21  21:45:27] (#filtered-hangout): <@!187973425275338753> that clip is my favorite thing ever lmao
+[11/21  21:45:54] (#filtered-hangout): !stats <@!380554480271360004>
+[11/21  21:45:58] (#filtered-hangout): unlucky
+[11/21  21:46:14] (#filtered-hangout): Her robot voice is the cutest thing ever
+[11/21  21:46:28] (#filtered-hangout): Yep she'
+[11/21  21:46:32] (#filtered-hangout): she's pretty cute
+[11/21  21:46:47] (#filtered-hangout): Also, stim ended early I is the sad!
+[11/21  21:47:06] (#filtered-hangout): I'm not going to bother correcting that
+[11/21  21:47:22] (#filtered-hangout): I'm sorry 😦 I wasn't feeling up to a long stream today
+[11/21  21:47:39] (#shermanbot): !user amberrrr_8266
+[11/21  22:12:43] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:09:50] (#shermanbot): !test
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:10:21] (#shermanbot): hello
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:10:23] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:11:38] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:11:39] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:13:53] (#shermanbot): hello
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:13:55] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:22:22] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:22:27] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:27:57] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  [11/22  02:28:01] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  [11/22  03:05:39] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  [11/22  03:05:40] (#shermanbot): twp
+/The_SherZer_Server-(471444438216867840)/>  [11/22  03:05:41] (#shermanbot): three
+/The_SherZer_Server-(471444438216867840)/>  [11/22  03:05:41] (#shermanbot): fouir
+/The_SherZer_Server-(471444438216867840)/>  [11/22  03:05:44] (#shermanbot): !log <@349728538439450625>
+/The_SherZer_Server-(471444438216867840)/>  [11/22  03:05:58] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:09:13] (#shermanbot): yo
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:09:14] (#shermanbot): what up
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:09:16] (#shermanbot): hookers
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:09:26] (#shermanbot): !log <@349728538439450625>
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:09:32] (#shermanbot): !user <@349728538439450625>
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:09:37] (#shermanbot): !shutdown

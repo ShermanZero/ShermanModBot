@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require("path");
 const Discord = require("discord.js");
-const User = require(path.join(__dirname, "..", "classes", "User.js"));
+const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
 const ranks = require(path.join(__dirname, "..", "resources", "ranks", "ranks.json"));
 const blacklist = require(path.join(__dirname, "..", "resources", "misc", "blacklist.json"));
 
@@ -10,7 +10,7 @@ module.exports = (client, message) => {
   if(message.author.bot) return;
 
   //register the user
-  registerUser(client, message);
+  registerMessage(client, message);
 
   //check against blacklist
   if(blacklist.words.some(substring => message.content.includes(substring))) {
@@ -40,71 +40,43 @@ module.exports = (client, message) => {
   cmd.run(client, message, args);
 }
 
-//registers the user's actions
-function registerUser(client, message) {
-  let user = User.getUsernameFromMessage(message);
-  let dir = path.join(__dirname, "..", "users", user);
+//registers the message
+function registerMessage(client, message) {
+  let username = Resources.getUsernameFromMessage(message);
+  let guildName = Resources.getGuildNameFromGuild(message.guild);
+  let userDir = Resources.getUserDirectoryFromGuild(message.guild, username);
 
   let content = null;
 
-  if(!fs.existsSync(dir)) {
-    content = User.createUserDirectory(user);
+  //if the user has not been registered
+  if(!fs.existsSync(userDir))
+    Resources.createUserDirectory(client, message.guild, message.member);
 
-    let rolesHas = [];
-    for(var rank in ranks._info) {
-      let role = message.member.roles.find(role => role.name.toLowerCase() === rank.toLowerCase());
-
-      if(role) {
-        rolesHas.push(role);
-
-        content.rank.name = rank;
-        content.rank.xp = ranks._info[rank];
-
-        for(var level in ranks.levels) {
-          if(ranks.levels[level].toLowerCase() === rank) {
-            content.rank.level = parseInt(level);
-            content.rank.levelup = getXPToLevelUp(content.rank.xp, content.rank.level);
-
-            break;
-          }
-        }
-      }
-    }
-
-    rolesHas.splice(-1, 1);
-    rolesHas.forEach((role) => {
-      message.member.removeRole(role).catch((err) => {console.log(err)});
-    });
-
-    
-    client.usersInSession.set(user, content);
-  }
-
-  //check if the user has been stored in the local client session
-  if(!client.usersInSession.has(user)) {
-    content = User.getUserContentsFromName(user);
-    client.usersInSession.set(user, content);
-    console.log(`*Registered [${user}] to session`);
+  //user NOT stored in local client session
+  if(!client.hasUser(message.guild, username)) {
+    content = Resources.getUserContentsFromName(message.guild, username);
+    client.registerUser(message.member.user, content);
+  //user stored in local client session
   } else {
-    content = client.usersInSession.get(user);
-  }
+    content = client.getUserContent(message.guild, username);
+  } 
 
-  if(!content) return console.error(`Could not retrieve contents for [${user}]`);
+  if(!content) return console.error(`Could not retrieve contents for [${username}]`);
 
-  if(content.misc.firstMessage === "")
+  if(!content.misc.firstMessage)
     content.misc.firstMessage = message.content;
 
   let logMessage = `[${getTimestamp(message)}] (#${message.channel.name}): ${message.content}\n`;
 
   //push the message to the master log branch
-  client.masterLog.push(logMessage);
+  client.masterLog.push(`/${guildName}/>  ${username} ${logMessage}`);
   //if the log length exceeds the threshold, update the master log
   updateMasterLog(client);
 
   //push the user's message directly to the user's log
   content.userLog.push(logMessage);
   //if the log length exceeds the threshold, update the user log
-  updateUserLog(client, content);
+  updateUserLog(client, message.guild, content);
 }
 
 function getTimestamp(message) {
@@ -130,12 +102,9 @@ function updateMasterLog(client) {
   }
 }
 
-function updateUserLog(client, content) {
-  let logsDir = path.join(__dirname, "..", "users", content.name, "logs");
-  let userLog = `${logsDir}/${client.config.files.log_all}`;
-
-  if(!fs.existsSync(userLog))
-    fs.writeFileSync(userLog, "");
+function updateUserLog(client, guild, content) {
+  let logsDir = path.join(Resources.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
+  let userLog = path.join(logsDir, client.config.files.log_all);
 
   //if the log length exceeds the threshold, update the master log
   if(content.userLog.length >= client.config.preferences.log_threshold_user) {
@@ -146,7 +115,7 @@ function updateUserLog(client, content) {
   }
 
   //have to update the Enmap
-  client.usersInSession.set(content.name, content);
+  client.updateUser(content);
 
   //log it to the console
   console.log(content);
@@ -154,10 +123,10 @@ function updateUserLog(client, content) {
 
 //awards the user experience for posting a message
 function awardExperience(client, message) {
-  let user = User.getUsernameFromMessage(message);
+  let username = Resources.getUsernameFromMessage(message);
 
   //get the content from the session instead of from the file
-  let content = client.usersInSession.get(user);
+  let content = client.getUserContent(message.guild, username);
 
   content.rank.xp += 1;
 
@@ -178,23 +147,18 @@ function awardExperience(client, message) {
       message.member.addRole(newRole).catch((err) => {console.log(err)});
     }
 
-    content.rank.levelup = getXPToLevelUp(content.rank.xp, content.rank.level);
+    content.rank.levelup = Resources.getXPToLevelUp(content.rank.xp, content.rank.level);
     levelUp(client, message, content);
   }
 
-  //have to update the Enmap
-  client.usersInSession.set(user, content);
+  client.updateUser(content);
 
   //only write XP changes to the file every 10 messages
   if((content.rank.xp % client.config.preferences.xp_threshold) === 0) {
-    let jsonFile = path.join(__dirname, "..", "users", user, user+".json");
+    let jsonFile = path.join(Resources.getUserDirectoryFromGuild(message.guild, username), username + ".json");
     let newJson = JSON.stringify(content, null, "\t");
     fs.writeFileSync(jsonFile, newJson);
   }
-}
-
-function getXPToLevelUp(xp, level) {
-  return xp + Math.round((4 * Math.pow(level, 3)) / 5);
 }
 
 function levelUp(client, message, content) {

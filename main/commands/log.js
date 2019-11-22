@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const User = require(path.join(__dirname, "..", "classes", "User.js"));
+const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
+require(path.join(__dirname, "..", "classes", "StringHandler.js"));
 
 exports.props = {
   "requiresElevation": "mod",
@@ -13,18 +14,26 @@ exports.run = (client, message, args) => {
 
   if(!user) return message.reply("you need to specify a user").catch((err) => {console.log(err)});
 
-  let username = User.getUsernameFromMember(user);
-  let file = path.join(__dirname, "..", "users", username, "logs", client.config.files.log_all);
+  let username = Resources.getUsernameFromMember(user);
+  let file = path.join(Resources.getUserDirectoryFromGuild(message.guild, username), "logs", client.config.files.log_all);
   //parse amount
   let amount = !!parseInt(args[1]) ? parseInt(args[1]) : parseInt(args[2]);
 
   if(!amount || amount > 100) amount = 100;
   if(amount < 1) amount = 1;
 
-  fs.readFile(file, "utf8", (error, data) => {
-    if(error) return message.reply("that user does not have a log file");
+  let logs = null;
 
-    let logs = data.split("\n");
+  fs.readFile(file, "utf8", (error, data) => {
+    let content = client.getUserContent(message.guild, username);
+
+    if (content.userLog.length !== 0)
+      data ? data += content.userLog.join("") : data = content.userLog.join("");
+
+    if(error && !data)
+        return message.reply("that user does not have a log file");
+
+    logs = data.split("\n");
 
     if(logs[logs.length - 1].trim() === "")
       logs = logs.slice(0, -1);
@@ -35,6 +44,6 @@ exports.run = (client, message, args) => {
     logs = logs.slice(-amount);
     let result = (amount == 1 ? logs[0] : logs.join("\n"));
 
-    message.channel.send(`Here are the last ${amount} message(s) [${username}] sent:\n${result}`, { split: true });
+    message.channel.send(`Here are the last ${amount} message(s) [${username.hideID()}] sent:\n${result}`, { split: true });
   });
 }

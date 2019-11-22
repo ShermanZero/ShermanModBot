@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const User = require(path.join(__dirname, "..", "classes", "User.js"));
+const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
+require(path.join(__dirname, "..", "classes", "StringHandler.js"));
 
 exports.props = {
   "requiresElevation": "mod",
@@ -16,19 +17,22 @@ exports.run = (client, message, args) => {
 
   if(!user) {
     if(args.length == 1) {
-      userContent = User.getUserContentsFromName(args[0]);
+      userContent = Resources.getUserContentsFromName(message.guild, args[0]);
 
       if(!userContent) return message.reply("that user is not registered").catch((err) => {console.log(err)});
 
       username = userContent.name;
     } else return message.reply("you need to specify a user").catch((err) => {console.log(err)});
   } else {
-    username = User.getUsernameFromMember(user);
-    userContent = client.usersInSession.get(username);
+    username = Resources.getUsernameFromMember(user);
+    userContent = client.getUserContent(message.guild, username);
   }
 
   if(!userContent) return message.reply("that user is not registered").catch((err) => {console.log(err)});
 
   message.delete().catch((err) => {console.log(err)});
-  message.channel.send(`Here is the data for ${username}\n\`\`\`json\n${JSON.stringify(userContent, null, "\t")}\n\`\`\``).catch((err) => {console.log(err)});
+
+  message.channel.send(`Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(userContent, null, "\t")}\n\`\`\``).catch((err) => {
+    console.log(err)
+  });
 }

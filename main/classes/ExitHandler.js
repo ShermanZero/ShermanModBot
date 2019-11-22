@@ -30,7 +30,7 @@ class ExitHandler {
 
   static exitHandler(client, options, exitCode) {
     //if we executed the "restart" command
-    if(exitCode == 99) return;
+    if(client.alreadyShutdown) return;
 
     console.log(`Preparing to shutdown with exit code (${exitCode})...`.magenta);
 
@@ -39,7 +39,7 @@ class ExitHandler {
       client.destroy();
     } else if(options.clean) {
       console.log("Attempting to run `restart` command...".magenta);
-      client.commands.get("restart").run(client, null, null);
+      client.commands.get("restart").run(client, null, false);
     }
   }
 }

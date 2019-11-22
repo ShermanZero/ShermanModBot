@@ -1,10 +1,10 @@
 {
 	"name": "shermanzerotest_8115",
 	"rank": {
-		"name": "unranked",
-		"level": 1,
-		"xp": 0,
-		"levelup": 1
+		"name": "masters",
+		"level": 30,
+		"xp": 172990,
+		"levelup": 194580
 	},
 	"race": {
 		"wins": 0
@@ -12,7 +12,7 @@
 	"misc": {
 		"joined": "",
 		"first_message": "",
-		"warnings": ""
+		"warnings": 0
 	},
 	"userLog": []
 }

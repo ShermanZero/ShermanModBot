@@ -38,7 +38,7 @@ class ExitHandler {
       console.log("Forcing shutdown without clean attempt, process will not be restarted".red);
       client.destroy();
     } else if(options.clean) {
-      console.log("Attempting to shutdown cleanly and restart...".magenta);
+      console.log("Attempting to run `restart` command...".magenta);
       client.commands.get("restart").run(client, null, null);
     }
   }

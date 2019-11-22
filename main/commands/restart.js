@@ -20,6 +20,8 @@ exports.run = (client, message, args) => {
 
   alreadyShutdown = true;
 
+  console.log("Attempting to restart cleanly...".magenta);
+
   //check if the command was user-triggered
   if(message) message.delete().catch((err) => {console.log(err)});
 
@@ -27,9 +29,13 @@ exports.run = (client, message, args) => {
     User.writeUserContentToFile(client, user, content);
   });
 
+  console.log("Successfully wrote user data to files!".magenta);
+
   //append all last log data to the master log
   for(var i = 0; i < client.masterLog.length; i++)
     fs.appendFileSync(path.join(__dirname, "..", "logs", client.config.files.log_all), client.masterLog[i]);
+
+  console.log("Succesfully stored pending user logs!".magenta);
 
   console.log("Destroying client...".magenta);
   client.destroy();

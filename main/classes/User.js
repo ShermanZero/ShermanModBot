@@ -22,8 +22,7 @@ class User {
 
     let jsonFile = path.join(__dirname, "..", "users", name, name+".json");
 
-    if(!fs.existsSync(jsonFile))
-      return null;
+    if(!fs.existsSync(jsonFile)) return null;
 
     let json = fs.readFileSync(jsonFile);
     let content = JSON.parse(json);
@@ -56,6 +55,8 @@ class User {
 
   static writeUserContentToFile(client, name, content) {
     let dir = path.join(__dirname, "..", "users", name);
+
+    if(!fs.existsSync(dir)) return;
 
     if(content.userLog.length != 0) {
       for(var i = 0; i < content.userLog.length; i++)

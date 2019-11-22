@@ -61,3 +61,30 @@
 [11/21  04:29:46] (#shermanbot): !user <@349728538439450625>
 [11/21  04:29:54] (#shermanbot): !log <@349728538439450625>
 [11/21  04:33:09] (#shermanbot): !log <@349728538439450625>
+[11/21  08:11:48] (#shermanbot): test
+[11/21  08:16:38] (#shermanbot): test
+[11/21  08:19:02] (#shermanbot): test
+[11/21  08:23:28] (#shermanbot): test
+[11/21  08:24:14] (#shermanbot): test
+[11/21  08:24:54] (#shermanbot): test
+[11/21  08:28:51] (#shermanbot): test
+[11/21  08:30:32] (#shermanbot): test
+[11/21  08:34:09] (#shermanbot): test
+[11/21  08:34:56] (#shermanbot): test
+[11/21  08:36:13] (#shermanbot): !rank
+[11/21  08:36:15] (#shermanbot): !stats
+[11/21  08:42:53] (#shermanbot): test
+[11/21  08:44:12] (#shermanbot): test
+[11/21  08:45:22] (#shermanbot): test
+[11/21  08:45:24] (#shermanbot): stats
+[11/21  08:45:25] (#shermanbot): !stats
+[11/21  08:45:30] (#shermanbot): stats
+[11/21  08:45:32] (#shermanbot): !stats
+[11/21  08:45:34] (#shermanbot): !stats
+[11/21  08:45:43] (#shermanbot): !restart
+[11/21  08:45:50] (#shermanbot): !restart
+[11/21  08:46:17] (#shermanbot): !restart
+[11/21  08:46:22] (#shermanbot): !restart
+[11/21  08:51:34] (#shermanbot): !restart
+[11/21  08:54:04] (#shermanbot): !shutdown
+[11/21  08:55:50] (#shermanbot): !shutdown

@@ -1,0 +1,7 @@
+{
+  "editor.tabSize": 2,
+  "editor.hover.delay": 150,
+  "editor.wordWrap": "on",
+  "editor.gotoLocation.multiple": "goto",
+  "references.preferredLocation": "view"
+}

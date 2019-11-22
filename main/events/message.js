@@ -45,10 +45,41 @@ function registerUser(client, message) {
   let user = User.getUsernameFromMessage(message);
   let dir = path.join(__dirname, "..", "users", user);
 
-  if(!fs.existsSync(dir))
-    User.createUserDirectory(user);
-
   let content = null;
+
+  if(!fs.existsSync(dir)) {
+    content = User.createUserDirectory(user);
+
+    let rolesHas = [];
+    for(var rank in ranks._info) {
+      let role = message.member.roles.find(role => role.name.toLowerCase() === rank.toLowerCase());
+
+      if(role) {
+        rolesHas.push(role);
+
+        content.rank.name = rank;
+        content.rank.xp = ranks._info[rank];
+
+        for(var level in ranks.levels) {
+          if(ranks.levels[level].toLowerCase() === rank) {
+            content.rank.level = parseInt(level);
+            content.rank.levelup = getXPToLevelUp(content.rank.xp, content.rank.level);
+
+            break;
+          }
+        }
+      }
+    }
+
+    rolesHas.splice(-1, 1);
+    rolesHas.forEach((role) => {
+      message.member.removeRole(role).catch((err) => {console.log(err)});
+    });
+
+    
+    client.usersInSession.set(user, content);
+  }
+
   //check if the user has been stored in the local client session
   if(!client.usersInSession.has(user)) {
     content = User.getUserContentsFromName(user);
@@ -147,7 +178,7 @@ function awardExperience(client, message) {
       message.member.addRole(newRole).catch((err) => {console.log(err)});
     }
 
-    content.rank.levelup = content.rank.xp + Math.round( (4 * Math.pow(3, content.rank.level)) / 5 );
+    content.rank.levelup = getXPToLevelUp(content.rank.xp, content.rank.level);
     levelUp(client, message, content);
   }
 
@@ -160,6 +191,10 @@ function awardExperience(client, message) {
     let newJson = JSON.stringify(content, null, "\t");
     fs.writeFileSync(jsonFile, newJson);
   }
+}
+
+function getXPToLevelUp(xp, level) {
+  return xp + Math.round((4 * Math.pow(level, 3)) / 5);
 }
 
 function levelUp(client, message, content) {

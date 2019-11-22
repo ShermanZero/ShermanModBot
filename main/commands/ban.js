@@ -9,12 +9,7 @@ exports.run = (client, message, [mention, ...reason]) => {
     if(message.mentions.members.size === 0)
         return message.reply("please mention a user to kick").catch((err) => {console.log(err)});
 
-    if(!message.guild.me.hasPermission("BAN_MEMBERS"))
-        return;
-
     const banMember = message.mentions.members.first();
-
-
     banMember.ban(reason.join(" ")).then(member => {
         let modChannel = client.channels.get(client.config.channels.mod.logs);
 

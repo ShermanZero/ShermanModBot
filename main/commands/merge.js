@@ -1,3 +1,5 @@
+require("colors");
+
 const fs = require("graceful-fs");
 const rimraf = require("rimraf");
 const path = require("path");
@@ -22,11 +24,11 @@ exports.run = (client, message, args) => {
 
   if (!client.hasUser(message.guild, oldUsername))
     if(message) return message.reply(`I could not find OLD [${oldUser}] in my database`);
-    else return console.log(`I could not find OLD [${oldUser}] in my database`);
+    else return console.error(`!! I could not find OLD [${oldUser}] in my database`.red);
 
   if (!client.hasUser(message.guild, newUsername))
     if(message) return message.reply(`I could not find NEW [${newUser}] in my database`);
-    else return console.log(`I could not find NEW [${newUser}] in my database`);
+    else return console.error(`!! I could not find NEW [${newUser}] in my database`.red);
 
   let content = client.getUserContent(message.guild, oldUsername);
   content.hidden.username = newUsername;

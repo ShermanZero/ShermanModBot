@@ -39,29 +39,31 @@ exports.getEmbed = (client, member, content) => {
   embed.setColor(rankColor);
   embed.setThumbnail(ranks.urls[content.rank.name]);
 
-  let levelStats = new String();
-  if(content.rank.name !== "")
+  let levelStats = "";
+  if (content.rank.name !== null)
     levelStats += `**rank:**  *${content.rank.name}*\n`.toUpperCase();
-  if(content.rank.level !== "")
+  if (content.rank.level !== null)
     levelStats += `**level:**  *${content.rank.level}*\n`.toUpperCase();
-  if(content.rank.xp !== "")
+  if (content.rank.xp !== null)
     levelStats += `**xp:**  *${getFormattedNumber(content.rank.xp)} / ${getFormattedNumber(content.rank.levelup)}*\n`.toUpperCase();
-  embed.addField("**LEVEL STATS**", levelStats);
+  if(levelStats !== "")
+    embed.addField("**LEVEL STATS**", levelStats);
 
-  let raceStats = new String();
-  if(content.race.wins !== "")
+  let raceStats = "";
+  if(content.race.wins !== null)
     raceStats += `**wins:**  *${content.race.wins}*\n`.toUpperCase();
-  embed.addField("**MARBLE RACE STATS**", raceStats);
+  if(raceStats !== "")
+    embed.addField("**MARBLE RACE STATS**", raceStats);
 
-  let miscStats = new String();
-  if(content.misc.joined !== "")
+  let miscStats = "";
+  if (content.misc.joined !== null)
     miscStats += `**joined:**  *${content.misc.joined}*\n`.toUpperCase();
-  if(content.misc.first_message !== "")
+  if (content.misc.first_message !== null)
     miscStats += `**first message:**  *${content.misc.first_message}*\n`.toUpperCase();
-  if(content.misc.warnings !== "")
+  if (content.misc.warnings !== null)
     miscStats += `**warnings:**  *${content.misc.warnings}*\n`.toUpperCase();
-
-  embed.addField("**MISC. STATS**", miscStats);
+  if(miscStats !== "")
+    embed.addField("**MISC. STATS**", miscStats);
 
   if(member.roles.has(client.config.roles.mod)) {
     embed.setFooter("BE RESPECTFUL TO ALL - ESPECIALLY MODERATORS", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");

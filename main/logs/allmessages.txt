@@ -138,3 +138,20 @@
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:09:26] (#shermanbot): !log <@349728538439450625>
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:09:32] (#shermanbot): !user <@349728538439450625>
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:09:37] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:34:20] (#shermanbot): hello there
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:34:30] (#shermanbot): !restart
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:41:31] (#shermanbot): !stats
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:41:58] (#shermanbot): !nick <@!610013729492303903> TestAccount
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  03:42:03] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:03:24] (#shermanbot): hello there
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:03:27] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:10:48] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:10:51] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:52:36] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:52:39] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:52:40] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:52:40] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:52:41] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:52:43] (#shermanbot): !log <@349728538439450625>
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:52:48] (#shermanbot): !user <@349728538439450625>
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  04:52:55] (#shermanbot): !shutdown

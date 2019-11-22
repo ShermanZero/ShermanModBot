@@ -17,22 +17,18 @@ function init() {
   client.config = config;
 
   client.usersInSession = new Map();
-  client.guildsInSession = new Map();
-
   client.masterLog = [];
 
   client.getGuild = (guildName) => {
-    return client.usersInSession.get(guildName);
+    return client.usersInSession[guildName];
   };
 
   client.updateUser = (content) => {
-    let userObj = {};
-    userObj[content.hidden.username] = {
-      content: content
-    };
-
     let guildName = content.hidden.guildname;
-    client.usersInSession.set(guildName, userObj);
+    let username = content.hidden.username;
+
+    let guild = client.usersInSession[guildName];
+    guild[username] = content;
 
     Object.defineProperty(content, "hidden", {
       enumerable: false
@@ -41,35 +37,44 @@ function init() {
 
   client.registerUser = (content) => {
     client.updateUser(content);
-    console.log(`   -Registered [${content.hidden.username.magenta}] to guild [${content.hidden.guildname.magenta}]`);
+    console.log(`*Registered [${content.hidden.username.magenta}] to guild [${content.hidden.guildname.magenta}]`);
   };
  
   client.hasUser = (guild, username) => {
-    let userGuild = client.usersInSession.get(Resources.getGuildNameFromGuild(guild));
-    if(!userGuild) return false;
+    let userGuild = client.usersInSession[Resources.getGuildNameFromGuild(guild)];
+    if(userGuild === null || typeof userGuild === "undefined") return false;
 
-    return userGuild[username] !== null;
+    let user = userGuild[username];
+    return !(user === null || typeof user === "undefined");
   };
 
-  client.getUser = (guild, username) => {
-    let userGuild = client.usersInSession.get(Resources.getGuildNameFromGuild(guild));
-    if(!userGuild) return null;
+  client.getUserContent = (guild, username) => {
+    let guildName = Resources.getGuildNameFromGuild(guild);
+    let userGuild = client.usersInSession[guildName];
+
+    if(userGuild === null) {
+      console.error(`!! Could not retrieve [${username}'s] guild`.red);
+      return null;
+    }
+
+    if(userGuild[username] === null || typeof userGuild[username] === "undefined") {
+      console.error(`!! Could not locate [${username}] in [${guildName}]`.red);
+      return null;
+    }
 
     return userGuild[username];
   }
 
-  client.getUserContent = (guild, username) => {
-    let user = client.getUser(guild, username);
-
-    if(user) return user.content;
-    return null;
-  }
-
   client.removeUser = (guild, username) => {
-    let userGuild = client.usersInSession.get(Resources.getGuildNameFromGuild(guild));
-    if (!userGuild) return;
+    let userGuild = client.usersInSession[Resources.getGuildNameFromGuild(guild)];
+    if (userGuild === null || typeof userGuild === "undefined") return;
 
     userGuild.delete(username);
+  }
+
+  client.deleteUser = (guild, username) => {
+    client.removeUser(guild, username);
+    Resources.destroyUserDirectory(guild, username);
   }
 }
 

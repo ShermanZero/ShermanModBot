@@ -3,6 +3,7 @@ require("colors");
 const fs = require("fs");
 const path = require("path");
 const ranks = require(path.join(__dirname, "..", "resources", "ranks", "ranks.json"));
+const rimraf = require("rimraf");
 
 class Resources {
 
@@ -104,6 +105,13 @@ class Resources {
     return content;
   }
 
+  static destroyUserDirectory(guild, username) {
+    let source = this.getUserDirectoryFromGuild(guild, username);
+    rimraf(source, (err) => {
+      if (err) console.log(err);
+    });
+  }
+
   static writeUserContentToFile(client, username, content) {
     Object.defineProperty(content, "hidden", {
       enumerable: true
@@ -111,7 +119,7 @@ class Resources {
 
     let dir = path.join(this.getGuildDirectoryFromName(content.hidden.guildname), username);
 
-    if(!fs.existsSync(dir)) return console.error(`Attempted to write [${username}] contents to log, but no directory exists at [${dir}]`);
+    if(!fs.existsSync(dir)) return console.error(`!! Attempted to write [${username}] contents to log, but no directory exists at [${dir}]`.red);
     
     if(content.userLog && content.userLog.length != 0) {
       for(var i = 0; i < content.userLog.length; i++)

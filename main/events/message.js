@@ -1,3 +1,5 @@
+require("colors");
+
 const fs = require('fs');
 const path = require("path");
 const Discord = require("discord.js");
@@ -10,7 +12,8 @@ module.exports = (client, message) => {
   if(message.author.bot) return;
 
   //register the user
-  registerMessage(client, message);
+  if(!registerMessage(client, message))
+    return console.error(`!! Could not register message sent by [${Resources.getUsernameFromMessage(message)}]`.red);
 
   //check against blacklist
   if(blacklist.words.some(substring => message.content.includes(substring))) {
@@ -61,9 +64,12 @@ function registerMessage(client, message) {
     content = client.getUserContent(message.guild, username);
   } 
 
-  if(!content) return console.error(`Could not retrieve contents for [${username}]`);
+  if(content === null || typeof content === "undefined") {
+    console.error(`!! Could not retrieve contents for [${username}]`.red);
+    return false;
+  }
 
-  if(!content.misc.firstMessage)
+  if(content.misc.firstMessage === null)
     content.misc.firstMessage = message.content;
 
   let logMessage = `[${getTimestamp(message)}] (#${message.channel.name}): ${message.content}\n`;
@@ -77,6 +83,8 @@ function registerMessage(client, message) {
   content.userLog.push(logMessage);
   //if the log length exceeds the threshold, update the user log
   updateUserLog(client, message.guild, content);
+
+  return true;
 }
 
 function getTimestamp(message) {
@@ -127,6 +135,10 @@ function awardExperience(client, message) {
 
   //get the content from the session instead of from the file
   let content = client.getUserContent(message.guild, username);
+
+  if(!content) {
+    return console.error(`!! Could not retrieve contents from [${username}]`);
+  }
 
   content.rank.xp += 1;
 

@@ -36,6 +36,7 @@
   },
 
   "files": {
-    "log_all": "allmessages.txt"
+    "log_all": "allmessages.txt",
+    "removed": ".removed"
   }
 }

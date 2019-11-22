@@ -80,7 +80,7 @@ class RaceManager {
       if(winnerList.length > 0)
         break;
       else {
-        console.log("! NO USERS FOUND !");
+        console.log("!! NO USERS FOUND");
       }
     }
 

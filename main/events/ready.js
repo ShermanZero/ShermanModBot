@@ -37,16 +37,18 @@ module.exports = (client) => {
   client.guilds.forEach(guild => {
     let guildDir = Resources.getGuildDirectoryFromGuild(guild);
 
-    if (!fs.existsSync(guildDir))
+    if (!fs.existsSync(guildDir)) {
       fs.mkdirSync(guildDir);
+      fs.mkdirSync(path.join(guildDir, client.config.files.removed));
+    }
     else if(guild.deleted)
       return fs.rmdirSync(guildDir);
 
     let guildName = Resources.getGuildNameFromGuild(guild);
 
     //set the guild data to to the guild name
-    client.guildsInSession.set(guildName, guild);
-    console.log(`*Registered [${guildName.magenta}] to session`);
+    client.usersInSession[guildName] = {};
+    console.log(`*Registered [${guildName.magenta}] to session --- looking for existing members:`);
 
     fs.readdirSync(guildDir).forEach(dir => {
       let username = dir;
@@ -54,12 +56,18 @@ module.exports = (client) => {
       //if the client does not have the user registered
       if (!client.hasUser(guild, username)) {
         let content = Resources.getUserContentsFromName(guild, username);
-        if (content == null) return;
+        if (content === null || typeof content === "undefined") return;
 
+        process.stdout.write("  ");
         client.registerUser(content);
       }
     });
 
-    console.log(`...\nReady to serve in ${client.channels.size.toString().green} channel(s) on ${client.guilds.size.toString().green} guild(s), for a total of ${client.users.size.toString().green} users.\n`);
+    console.log(`Found all existing members of [${guildName.magenta}] (currently ${(Object.keys(client.getGuild(guildName)).length).toString().green})`);
   });
+
+  let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`.inverse;
+  let footer = "=====================================================================================".red;
+
+  console.log(`...\n${readyMessage}\n${footer}`);
 }

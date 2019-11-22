@@ -4,17 +4,17 @@
 		"guildname": "The_SherZer_Server-(471444438216867840)"
 	},
 	"rank": {
-		"name": "unranked",
-		"level": 1,
-		"xp": 0,
-		"levelup": 1
+		"name": "platinum",
+		"level": 20,
+		"xp": 35283,
+		"levelup": 41680
 	},
 	"race": {
 		"wins": 0
 	},
 	"misc": {
-		"joined": null,
-		"first_message": null,
+		"joined": "7/24/2018",
+		"first_message": "what's up dudettes",
 		"warnings": 0
 	},
 	"userLog": []

@@ -21,12 +21,13 @@ exports.run = (client, message, userTriggered = true) => {
   client.alreadyShutdown = true;
   console.log("Attempting to restart cleanly...".magenta);
 
-  client.usersInSession.forEach((content, guildName) => {
-    let usersInGuild = Object.entries(content);
+  let entries = Object.entries(client.usersInSession);
+  for(const [guild, users] of entries) {
+    let allUsers = Object.entries(users);
 
-    for(let [username, userContent] of usersInGuild)
-      Resources.writeUserContentToFile(client, username, userContent.content);
-  });
+    for(const [username, userContent] of allUsers)
+      Resources.writeUserContentToFile(client, username, userContent);
+  }
 
   //check if the command was user-triggered
   if (userTriggered) message.delete().catch((err) => {

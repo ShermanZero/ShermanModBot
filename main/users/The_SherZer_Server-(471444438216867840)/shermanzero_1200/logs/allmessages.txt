@@ -1,0 +1,3 @@
+[11/22  05:26:53] (#shermanbot): what's up dudettes
+[11/22  05:26:55] (#shermanbot): !stats
+[11/22  05:27:16] (#shermanbot): !shutdown

@@ -60,6 +60,10 @@ class Resources {
     content.hidden.username = this.getUsernameFromMember(member);
     content.hidden.guildname = this.getGuildNameFromGuild(guild);
 
+    let date = member.joinedAt;
+    let joinedAt = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
+    content.misc.joined = joinedAt;
+
     let dir = this.getUserDirectoryFromGuild(guild, content.hidden.username);
 
     fs.mkdirSync(dir);

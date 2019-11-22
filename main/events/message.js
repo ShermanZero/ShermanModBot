@@ -69,8 +69,10 @@ function registerMessage(client, message) {
     return false;
   }
 
-  if(content.misc.firstMessage === null)
-    content.misc.firstMessage = message.content;
+  if(content.misc.first_message === null || typeof content.misc.first_message === "undefined") {
+    content.misc.first_message = message.content;
+    client.updateUser(content);
+  }
 
   let logMessage = `[${getTimestamp(message)}] (#${message.channel.name}): ${message.content}\n`;
 
@@ -126,7 +128,7 @@ function updateUserLog(client, guild, content) {
   client.updateUser(content);
 
   //log it to the console
-  console.log(content);
+  console.log(`[${content.hidden.guildname.magenta}] =>`, `[${content.hidden.username.magenta}] =>`, content);
 }
 
 //awards the user experience for posting a message

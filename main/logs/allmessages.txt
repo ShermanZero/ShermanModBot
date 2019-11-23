@@ -175,3 +175,5 @@
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  05:26:55] (#shermanbot): !stats
 /The_SherZer_Server-(471444438216867840)/>  shermanzerotest_8115 [11/22  05:27:10] (#shermanbot): good to see you hooker
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  05:27:16] (#shermanbot): !shutdown
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  08:08:18] (#shermanbot): !stats
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/22  08:08:36] (#shermanbot): !shutdown

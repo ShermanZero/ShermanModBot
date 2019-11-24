@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+import Discord from "discord.js"
 
 exports.props = {
   "description": "replies to the member with the commands for the server",

@@ -1,8 +1,8 @@
-require("colors");
+import "colors";
 
-const fs = require("fs");
-const path = require("path");
-const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
+import fs from "fs";
+import path from "path";
+import rsrc from "../classes/Resources";
 
 let alreadyShutdown = false;
 
@@ -26,7 +26,7 @@ exports.run = (client, message, userTriggered = true) => {
     let allUsers = Object.entries(users);
 
     for(const [username, userContent] of allUsers)
-      Resources.writeUserContentToFile(client, username, userContent);
+      rsrc.writeUserContentToFile(client, username, userContent);
   }
 
   //check if the command was user-triggered

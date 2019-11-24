@@ -1,4 +1,4 @@
-require("colors");
+import "colors";
 
 class ExitHandler {
   //initialize

@@ -1,19 +1,18 @@
-require("colors");
+import "colors";
 
-const fs = require("fs");
-const path = require("path");
-const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
-const ExitHandler = require(path.join(__dirname, "..", "classes", "ExitHandler.js"));
-const Enmap = require("enmap");
+import fs from "fs";
+import path from "path";
+import rsrc from "../classes/Resources";
+import exit from "../classes/ExitHandler";
 
 module.exports = (client) => {
   client.user.setActivity(client.config.status);
 
-  let bootFile = path.join(__dirname, "..", "resources", "misc", "boot.txt");
+  let bootFile = path.join(__dirname, "..", "rsrc", "misc", "boot.txt");
   let data = fs.readFileSync(bootFile, "utf8");
   console.log(data.brightRed);
 
-  ExitHandler.init(client);
+  exit.init(client);
 
   let commandArray = client.commands.keyArray().sort();
   console.log(`Loaded ${commandArray.length.toString().magenta} command(s)`, "[@everyone]".green, "[@moderator]".yellow, "[@owner]".red);
@@ -35,7 +34,7 @@ module.exports = (client) => {
   console.log("...");
 
   client.guilds.forEach(guild => {
-    let guildDir = Resources.getGuildDirectoryFromGuild(guild);
+    let guildDir = rsrc.getGuildDirectoryFromGuild(guild);
 
     if (!fs.existsSync(guildDir)) {
       fs.mkdirSync(guildDir);
@@ -44,7 +43,7 @@ module.exports = (client) => {
     else if(guild.deleted)
       return fs.rmdirSync(guildDir);
 
-    let guildName = Resources.getGuildNameFromGuild(guild);
+    let guildName = rsrc.getGuildNameFromGuild(guild);
 
     //set the guild data to to the guild name
     client.usersInSession[guildName] = {};
@@ -55,7 +54,7 @@ module.exports = (client) => {
 
       //if the client does not have the user registered
       if (!client.hasUser(guild, username)) {
-        let content = Resources.getUserContentsFromName(guild, null, username);
+        let content = rsrc.getUserContentsFromName(guild, null, username);
         if (content === null || typeof content === "undefined") return;
 
         process.stdout.write("  ");

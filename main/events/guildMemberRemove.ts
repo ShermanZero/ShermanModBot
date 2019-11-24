@@ -1,19 +1,20 @@
-require("colors");
+import "colors";
 
-const path = require("path");
-const ncp = require("ncp").ncp;
-const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
+import path from "path";
+import ncp from "ncp";
+import rsrc from "../classes/Resources";
 
 module.exports = (client, member) => {
-    let username = Resources.getUsernameFromMember(member);
-    let userDir = Resources.getUserDirectoryFromGuild(member.guild, username);
-    let guildDir = Resources.getGuildDirectoryFromGuild(member.guild);
+    let username = rsrc.getUsernameFromMember(member);
+    let userDir = rsrc.getUserDirectoryFromGuild(member.guild, username);
+    let guildDir = rsrc.getGuildDirectoryFromGuild(member.guild);
 
+    let removed: any;
     ncp(userDir, removed = path.join(guildDir, client.config.files.removed, username), { clobber: true }, (err) => {
         if(err)
             return console.error(`!! Failed to transfer [${username}] to ${removed}`);
 
-        console.log(`Member [${username.magenta}] just left the guild [${Resources.getGuildNameFromGuild(member.guild).magenta}]`);
+        console.log(`Member [${username.magenta}] just left the guild [${rsrc.getGuildNameFromGuild(member.guild).magenta}]`);
     });
 
     client.deleteUser(member.guild, username);

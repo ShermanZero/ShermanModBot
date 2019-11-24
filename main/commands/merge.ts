@@ -1,8 +1,9 @@
-require("colors");
+import "colors";
 
-const fs = require("graceful-fs");
-const rimraf = require("rimraf");
-const path = require("path");
+import fs from "graceful-fs";
+import rimraf from "rimraf";
+import path from "path";
+import rsrc from "../classes/Resources";
 
 exports.props = {
   "requiresElevation": "owner",
@@ -19,8 +20,8 @@ exports.run = (client, message, args) => {
   //the user to copy to
   const newUser = args[1].trim().toLowerCase();
 
-  let oldUsername = Resources.getUsernameFromMember(oldUser);
-  let newUsername = Resources.getUsernameFromMember(newUser);
+  let oldUsername = rsrc.getUsernameFromMember(oldUser);
+  let newUsername = rsrc.getUsernameFromMember(newUser);
 
   if (!client.hasUser(message.guild, oldUsername))
     if(message) return message.reply(`I could not find OLD [${oldUser}] in my database`);
@@ -33,8 +34,8 @@ exports.run = (client, message, args) => {
   let content = client.getUserContent(message.guild, oldUsername);
   content.hidden.username = newUsername;
 
-  let source = Resources.getUserDirectoryFromGuild(message.guild, oldUsername);
-  let destination = Resources.getUserDirectoryFromGuild(message.guild, newUsername);
+  let source = rsrc.getUserDirectoryFromGuild(message.guild, oldUsername);
+  let destination = rsrc.getUserDirectoryFromGuild(message.guild, newUsername);
 
   fs.writeFileSync(path.join(destination, newUsername+".json"), JSON.stringify(content, null, "\t"));
   rimraf(source, (err) => { if(err) console.log(err); });

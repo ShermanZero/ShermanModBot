@@ -1,7 +1,7 @@
-const path = require("path");
-const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
-const Discord = require("discord.js");
-const ranks = require(path.join(__dirname, "..", "resources", "ranks", "ranks.json"));
+import path from "path";
+import Discord from "discord.js";
+import rsrc from "../classes/Resources";
+import ranks from "../resources/ranks/ranks.json";
 
 exports.props = {
   "description": "replies to the user with their current server stats",
@@ -9,14 +9,14 @@ exports.props = {
 };
 
 exports.run = (client, message, args) => {
-  let username = Resources.getUsernameFromMessage(message);
+  let username = rsrc.getUsernameFromMessage(message);
   let content = client.getUserContent(message.guild, username);
   let member = message.member;
 
   if(message.mentions.members.size !== 0) {
     member = message.mentions.members.first();
-    username = Resources.getUsernameFromMember(member);
-    content = Resources.getUserContentsFromName(message, username);
+    username = rsrc.getUsernameFromMember(member);
+    content = rsrc.getUserContentsFromName(message, username);
   }
 
   if(!content) {
@@ -82,7 +82,7 @@ function calculatePosition(client, content) {
   let usersHigher = 0;
 
   let entries = Object.entries(guild);
-  for (const [username, userContent] of entries)
+  for (let [username, userContent] of entries)
     if (username != content.hidden.username && userContent.rank.xp > content.rank.xp)
       usersHigher++;
 

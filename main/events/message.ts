@@ -1,13 +1,12 @@
 require("colors");
+import "colors";
 
-const fs = require('fs');
-const path = require("path");
-import Discord = require("discord.js");
-import ranks from '../resources/ranks/ranks.json';
-const ranks = require(path.join(__dirname, "..", "resources", "ranks", "ranks.json"));
-const blacklist = require(path.join(__dirname, "..", "resources", "misc", "blacklist.json"));
-
-import Resources = require("../classes/Resources.js");
+import fs from "fs";
+import path from "path";
+import Discord from "discord.js";
+import rsrc from "../classes/Resources";
+import ranks from "../rsrc/ranks/ranks.json";
+import blacklist from "../rsrc/misc/blacklist.json";
 
 module.exports = (client, message) => {
   //ignore all bots
@@ -15,7 +14,7 @@ module.exports = (client, message) => {
 
   //register the user
   if(!registerMessage(client, message))
-    return console.error(`!! Could not register message sent by [${Resources.getUsernameFromMessage(message)}]`.red);
+    return console.error(`!! Could not register message sent by [${rsrc.getUsernameFromMessage(message)}]`.red);
 
   //check against blacklist
   if(blacklist.words.some(substring => message.content.includes(substring))) {
@@ -47,19 +46,19 @@ module.exports = (client, message) => {
 
 //registers the message
 function registerMessage(client, message) {
-  let username = Resources.getUsernameFromMessage(message);
-  let guildName = Resources.getGuildNameFromGuild(message.guild);
-  let userDir = Resources.getUserDirectoryFromGuild(message.guild, username);
+  let username = rsrc.getUsernameFromMessage(message);
+  let guildName = rsrc.getGuildNameFromGuild(message.guild);
+  let userDir = rsrc.getUserDirectoryFromGuild(message.guild, username);
 
   let content = null;
 
   //if the user has not been registered
   if(!fs.existsSync(userDir))
-    Resources.createUserDirectory(client, message.guild, message.member);
+    rsrc.createUserDirectory(client, message.guild, message.member);
 
   //user NOT stored in local client session
   if(!client.hasUser(message.guild, username)) {
-    content = Resources.getUserContentsFromName(message, username);
+    content = rsrc.getUserContentsFromName(message, username);
     client.registerUser(message.member.user, content);
   //user stored in local client session
   } else {
@@ -115,7 +114,7 @@ function updateMasterLog(client) {
 }
 
 function updateUserLog(client, guild, content) {
-  let logsDir = path.join(Resources.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
+  let logsDir = path.join(rsrc.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
   let userLog = path.join(logsDir, client.config.files.log_all);
 
   //if the log length exceeds the threshold, update the master log
@@ -135,7 +134,7 @@ function updateUserLog(client, guild, content) {
 
 //awards the user experience for posting a message
 function awardExperience(client, message) {
-  let username = Resources.getUsernameFromMessage(message);
+  let username = rsrc.getUsernameFromMessage(message);
 
   //get the content from the session instead of from the file
   let content = client.getUserContent(message.guild, username);
@@ -163,7 +162,7 @@ function awardExperience(client, message) {
       message.member.addRole(newRole).catch((err) => {console.log(err)});
     }
 
-    content.rank.levelup = Resources.getXPToLevelUp(content.rank.xp, content.rank.level);
+    content.rank.levelup = rsrc.getXPToLevelUp(content.rank.xp, content.rank.level);
     levelUp(client, message, content);
   }
 
@@ -171,7 +170,7 @@ function awardExperience(client, message) {
 
   //only write XP changes to the file every 10 messages
   if((content.rank.xp % client.config.preferences.xp_threshold) === 0) {
-    let jsonFile = path.join(Resources.getUserDirectoryFromGuild(message.guild, username), username + ".json");
+    let jsonFile = path.join(rsrc.getUserDirectoryFromGuild(message.guild, username), username + ".json");
     let newJson = JSON.stringify(content, null, "\t");
     fs.writeFileSync(jsonFile, newJson);
   }

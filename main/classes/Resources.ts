@@ -1,9 +1,9 @@
-require("colors");
-
-const fs = require("fs");
-const path = require("path");
-const ranks = require(path.join(__dirname, "..", "resources", "ranks", "ranks.json"));
-const rimraf = require("rimraf");
+import "colors";
+import * as Discord from "discord.js"
+import fs from "fs";
+import path from "path";
+import ranks from "../resources/ranks/ranks.json";
+import rimraf from "rimraf";
 
 class Resources {
 
@@ -21,24 +21,17 @@ class Resources {
     return username;
   }
 
-  static getUserDirectoryFromGuild(guild, username) {
+  static getUserDirectoryFromGuild(guild: any, username: string) {
     return path.join(this.getGuildDirectoryFromGuild(guild), username);
   }
 
-  static getUserContentsFromName(message, username, search=false) {
+  static getUserContentsFromName(message: any, username: string, search: boolean = false): any {
     console.log("username", username);
 
-    return this.getUserContentsFromName(message.guild, message, username, search);
+    return Resources.getUserContentsFromName(message.guild, message, username, search);
   }
 
-  /**
-   * 
-   * @param {*} guild 
-   * @param {*} message 
-   * @param {*} username 
-   * @param {*} search 
-   */
-  static getUserContentsFromName(guild, message, username, search) {
+  static getUserContentsFromName(guild: any, message: any, username: string, search: boolean): any {
     if(!guild) guild = message.guild;
     console.log("username", username);
 
@@ -87,7 +80,7 @@ class Resources {
     }  
 
     let json = fs.readFileSync(jsonFile);
-    let content = JSON.parse(json);
+    let content = JSON.parse(json.toString());
 
     return content;
   }
@@ -119,7 +112,7 @@ class Resources {
   static createUserDirectory(client, guild, member) {
     let basePath = path.join(__dirname, "..", "users", "content.json");
     let json = fs.readFileSync(basePath);
-    let content = JSON.parse(json);
+    let content = JSON.parse(json.toString());
 
     content.hidden.username = this.getUsernameFromMember(member);
     content.hidden.guildname = this.getGuildNameFromGuild(guild);
@@ -165,7 +158,7 @@ class Resources {
 
     rankRolesUserHas.splice(-1, 1);
     rankRolesUserHas.forEach((role) => {
-      message.member.removeRole(role).catch((err) => { console.log(err) });
+      member.removeRole(role).catch((err) => { console.log(err) });
     });
 
     client.registerUser(content);

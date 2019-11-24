@@ -1,7 +1,8 @@
-const fs = require("fs");
-const path = require("path");
-const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
-require(path.join(__dirname, "..", "classes", "StringHandler.js"));
+import "../classes/StringHandler"
+import fs from "fs";
+import path from "path";
+import rsrc from "../classes/Resources";
+
 
 exports.props = {
   "requiresElevation": "mod",
@@ -14,8 +15,8 @@ exports.run = (client, message, args) => {
 
   if(!user) return message.reply("you need to specify a user").catch((err) => {console.log(err)});
 
-  let username = Resources.getUsernameFromMember(user);
-  let file = path.join(Resources.getUserDirectoryFromGuild(message.guild, username), "logs", client.config.files.log_all);
+  let username = rsrc.getUsernameFromMember(user);
+  let file = path.join(rsrc.getUserDirectoryFromGuild(message.guild, username), "logs", client.config.files.log_all);
   //parse amount
   let amount = !!parseInt(args[1]) ? parseInt(args[1]) : parseInt(args[2]);
 

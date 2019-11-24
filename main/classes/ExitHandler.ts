@@ -1,6 +1,6 @@
-import "colors";
+import 'colors';
 
-class ExitHandler {
+export default class ExitHandler {
   //initialize
   static init(client) {
     console.log(`Registered client with ExitHandler... your crashes are protected now :)`.inverse, "\n...");
@@ -22,7 +22,7 @@ class ExitHandler {
     });
 
     //catch unhandled promise rejections
-    process.on("unhandledRejection", (e) => {
+    process.on("unhandledRejection", (e: Error) => {
       console.log("Unhandled rejection:");
       console.log(e.stack.red.dim);
     });
@@ -43,5 +43,3 @@ class ExitHandler {
     }
   }
 }
-
-module.exports = ExitHandler;

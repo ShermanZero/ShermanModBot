@@ -1,37 +1,39 @@
-import "colors";
-import * as Discord from "discord.js"
-import fs from "fs";
-import path from "path";
-import ranks from "../resources/ranks/ranks.json";
-import rimraf from "rimraf";
+import 'colors';
 
-class Resources {
+import { Guild, GuildMember, Message, Role } from 'discord.js';
+import fs from 'fs';
+import path from 'path';
+import rimraf from 'rimraf';
 
-  static getUsernameFromMessage(message) {
+import ranks from '../resources/ranks/ranks.json';
+
+export default class Resources {
+
+  static getUsernameFromMessage(message: Message) {
     let username = message.member.user.tag.replace("#", "_");
     username = username.replace(/[^\w\s]/gi, '').toLowerCase();
 
     return username;
   }
 
-  static getUsernameFromMember(member) {
+  static getUsernameFromMember(member: any) {
     let username = member.user ? member.user.tag : member.tag;
     username = username.replace("#", "_").replace(/[^\w\s]/gi, '').toLowerCase();
 
     return username;
   }
 
-  static getUserDirectoryFromGuild(guild: any, username: string) {
+  static getUserDirectoryFromGuild(guild: Guild, username: string) {
     return path.join(this.getGuildDirectoryFromGuild(guild), username);
   }
 
-  static getUserContentsFromName(message: any, username: string, search: boolean = false): any {
+  static getUserContentsFromName(message: Message, username: string, search: boolean = false): any {
     console.log("username", username);
 
-    return Resources.getUserContentsFromName(message.guild, message, username, search);
+    return Resources.getUserContentsFromNameWithGuild(message.guild, message, username, search);
   }
 
-  static getUserContentsFromName(guild: any, message: any, username: string, search: boolean): any {
+  static getUserContentsFromNameWithGuild(guild: Guild, message: Message, username: string, search: boolean = false): any {
     if(!guild) guild = message.guild;
     console.log("username", username);
 
@@ -42,7 +44,7 @@ class Resources {
     if (!fs.existsSync(jsonFile)) {
       if (!search) return null;
 
-      let possibleMatches = [];
+      let possibleMatches: string[] = [];
 
       let users = this.getGuildUsersFromGuild(guild);
       for (let guildUserUsername in Object.keys(users))
@@ -56,13 +58,13 @@ class Resources {
 
         message.reply(`there are multiple users which contain [${username}], please select the correct one:\n${listOfUsers}`)
           .then(() => {
-            message.channel.awaitMessages(response => response.author === message.author, {
+            message.channel.awaitMessages((response: any) => response.author === message.author, {
               max: 1,
               time: 1000 * 60,
               errors: ['time']
             })
-              .then((collected) => {
-                let answer = parseInt(collected.first().content).catch((err) => { console.log(err) });
+              .then((collected: any) => {
+                let answer = parseInt(collected.first().content);
                 if(answer < 1 || answer > possibleMatches.length) {
                   message.reply("you did not enter a valid number, no user has been selected");
                   return;
@@ -85,23 +87,21 @@ class Resources {
     return content;
   }
 
-  static getGuildNameFromGuild(guild) {
+  static getGuildNameFromGuild(guild: Guild) {
     let guildName = guild.name.replace(/[\W\s]/gi, "_");
     return `${guildName}-(${guild.id})`;
   }
 
-  static getGuildDirectoryFromGuild(guild) {
+  static getGuildDirectoryFromGuild(guild: Guild) {
     return path.join(__dirname, "..", "users", this.getGuildNameFromGuild(guild));
   }
 
-  static getGuildDirectoryFromName(guildname) {
+  static getGuildDirectoryFromName(guildname: string) {
     return path.join(__dirname, "..", "users", guildname);
   }
 
-  static getGuildUsersFromGuild(client, guild) {
-    let entries = Object.entries(client.usersInSession);
-
-    for (const [guildname, users] of entries)
+  static getGuildUsersFromGuild(guild: any) {
+    for (const [guildname, users] of guild)
       if(guildname == this.getGuildNameFromGuild(guild))
         return users;
 
@@ -109,7 +109,7 @@ class Resources {
   }
 
   //creates the user directory
-  static createUserDirectory(client, guild, member) {
+  static createUserDirectory(client: any, guild: Guild, member: GuildMember) {
     let basePath = path.join(__dirname, "..", "users", "content.json");
     let json = fs.readFileSync(basePath);
     let content = JSON.parse(json.toString());
@@ -128,10 +128,10 @@ class Resources {
     fs.mkdirSync(`${dir}/logs`);
 
     let rolesUserHas = member.roles;
-    let rankRolesUserHas = [];
+    let rankRolesUserHas: Role[] = [];
 
     //if the user already has pre-existing roles
-    if(rolesUserHas.length != 0) {
+    if(rolesUserHas.size != 0) {
       let entries = Object.entries(ranks._info);
 
       for(var i = 0; i < entries.length; i++) {
@@ -166,14 +166,14 @@ class Resources {
     return content;
   }
 
-  static destroyUserDirectory(guild, username) {
+  static destroyUserDirectory(guild: Guild, username: string) {
     let source = this.getUserDirectoryFromGuild(guild, username);
     rimraf(source, (err) => {
       if (err) console.log(err);
     });
   }
 
-  static writeUserContentToFile(client, username, content) {
+  static writeUserContentToFile(client: any, username: string, content: any) {
     Object.defineProperty(content, "hidden", {
       enumerable: true
     });
@@ -192,9 +192,7 @@ class Resources {
     fs.writeFileSync(`${dir}/${username}.json`, JSON.stringify(content, null, "\t"));
   }
 
-  static getXPToLevelUp(xp, level) {
+  static getXPToLevelUp(xp: number, level: number) {
     return xp + Math.round((4 * Math.pow(level, 3)) / 5);
   }
 }
-
-module.exports = Resources;

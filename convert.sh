@@ -1,3 +1,5 @@
+#!/bin/bash
+
 convert () {
 	for f in `pwd`/*; do
 		echo "examining $f for .js extension"

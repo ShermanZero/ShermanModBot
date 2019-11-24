@@ -1,6 +1,6 @@
-import fs from "fs";
+import fs from 'fs';
 
-class FileHandler {
+export default class FileHandler {
 
   static readDataFromFile(filePath) {
     var data = fs.readFile('DATA', 'utf8', filePath);
@@ -20,5 +20,3 @@ class FileHandler {
   }
 
 }
-
-module.exports = FileHandler;

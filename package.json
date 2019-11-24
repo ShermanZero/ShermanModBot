@@ -4,6 +4,7 @@
   "description": "The Discord bot for ShermanZero's server",
   "dependencies": {
     "@discordjs/uws": "^10.149.0",
+    "@types/rimraf": "^2.0.3",
     "better-sqlite-pool": "^0.2.2",
     "bufferutil": "^4.0.1",
     "colors": "^1.4.0",
@@ -30,7 +31,7 @@
     "@types/node": "^12.12.12"
   },
   "scripts": {
-    "start": "nodemon main/index.js"
+    "start": "nodemon main/index.ts"
   },
   "repository": {
     "type": "git",

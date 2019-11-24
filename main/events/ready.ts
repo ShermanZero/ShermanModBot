@@ -1,16 +1,17 @@
-import "colors";
+import 'colors';
 
-import fs from "fs";
-import path from "path";
-import rsrc from "../classes/Resources";
-import exit from "../classes/ExitHandler";
+import * as fs from 'fs';
+import * as path from 'path';
+
+import exit from '../classes/ExitHandler';
+import rsrc from '../classes/Resources';
 
 module.exports = (client) => {
   client.user.setActivity(client.config.status);
 
-  let bootFile = path.join(__dirname, "..", "rsrc", "misc", "boot.txt");
-  let data = fs.readFileSync(bootFile, "utf8");
-  console.log(data.brightRed);
+  let bootFile = path.join(__dirname, "..", "resources", "misc", "boot.txt");
+  let data: string = fs.readFileSync(bootFile, "utf8");
+  console.log(data.red);
 
   exit.init(client);
 
@@ -54,7 +55,7 @@ module.exports = (client) => {
 
       //if the client does not have the user registered
       if (!client.hasUser(guild, username)) {
-        let content = rsrc.getUserContentsFromName(guild, null, username);
+        let content = rsrc.getUserContentsFromNameWithGuild(guild, null, username);
         if (content === null || typeof content === "undefined") return;
 
         process.stdout.write("  ");

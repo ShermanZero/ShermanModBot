@@ -1,12 +1,11 @@
-require("colors");
-import "colors";
+import 'colors';
 
-import fs from "fs";
-import path from "path";
-import Discord from "discord.js";
-import rsrc from "../classes/Resources";
-import ranks from "../rsrc/ranks/ranks.json";
-import blacklist from "../rsrc/misc/blacklist.json";
+import * as fs from 'fs';
+import * as path from 'path';
+
+import rsrc from '../classes/Resources';
+import blacklist from '../resources/misc/blacklist.json';
+import ranks from '../resources/ranks/ranks.json';
 
 module.exports = (client, message) => {
   //ignore all bots

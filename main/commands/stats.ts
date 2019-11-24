@@ -1,7 +1,7 @@
-import path from "path";
-import Discord from "discord.js";
-import rsrc from "../classes/Resources";
-import ranks from "../resources/ranks/ranks.json";
+import Discord from 'discord.js';
+
+import rsrc from '../classes/Resources';
+import ranks from '../resources/ranks/ranks.json';
 
 exports.props = {
   "description": "replies to the user with their current server stats",
@@ -83,7 +83,7 @@ function calculatePosition(client, content) {
 
   let entries = Object.entries(guild);
   for (let [username, userContent] of entries)
-    if (username != content.hidden.username && userContent.rank.xp > content.rank.xp)
+    if (username != content.hidden.username && (userContent as any).rank.xp > content.rank.xp)
       usersHigher++;
 
   return "*RANK #" + (usersHigher + 1) + "*";

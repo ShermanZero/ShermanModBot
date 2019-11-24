@@ -1,18 +1,26 @@
 {
   "compilerOptions": {
+    "target": "es6",
     "module": "commonjs",
-    "strict": true,
+    "allowJs": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "suppressImplicitAnyIndexErrors": true
+    "sourceMap": true,
+    "outDir": "./build",
+    "removeComments": true
   },
+  
+  "lib": ["es2019"],
 
   "include": [
-    "./main/*"
-  ],
-
-  "exclude": [
-    "**/users/"
+    "./main",
+    "./main/classes",
+    "./main/commands",
+    "./main/events",
+    "./main/resources",
+    "./main/resources/*"
   ]
 }

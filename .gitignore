@@ -3,3 +3,7 @@
 
 #ignore the the .vs folder
 **/.vs**/
+
+#ignore all .DS_store files
+**.**DS_store
+

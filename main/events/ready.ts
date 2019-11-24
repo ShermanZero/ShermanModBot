@@ -55,7 +55,7 @@ module.exports = (client) => {
 
       //if the client does not have the user registered
       if (!client.hasUser(guild, username)) {
-        let content = Resources.getUserContentsFromName(guild, username);
+        let content = Resources.getUserContentsFromName(guild, null, username);
         if (content === null || typeof content === "undefined") return;
 
         process.stdout.write("  ");

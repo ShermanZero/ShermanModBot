@@ -25,12 +25,66 @@ class Resources {
     return path.join(this.getGuildDirectoryFromGuild(guild), username);
   }
 
-  static getUserContentsFromName(guild, username) {
+  static getUserContentsFromName(message, username, search=false) {
+    console.log("username", username);
+
+    return this.getUserContentsFromName(message.guild, message, username, search);
+  }
+
+  /**
+   * 
+   * @param {*} guild 
+   * @param {*} message 
+   * @param {*} username 
+   * @param {*} search 
+   */
+  static getUserContentsFromName(guild, message, username, search) {
+    if(!guild) guild = message.guild;
+    console.log("username", username);
+
     username = username.trim().toLowerCase();
 
-    let jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username+".json");
+    let jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
 
-    if(!fs.existsSync(jsonFile)) return null;
+    if (!fs.existsSync(jsonFile)) {
+      if (!search) return null;
+
+      let possibleMatches = [];
+
+      let users = this.getGuildUsersFromGuild(guild);
+      for (let guildUserUsername in Object.keys(users))
+        if (guildUserUsername.includes(username))
+          possibleMatches.push(guildUserUsername);
+
+      if(possibleMatches.length > 1) {
+        let listOfUsers = "";
+        for(var i = 0; i < possibleMatches.length; i++)
+          listOfUsers += `${i+1}) ${possibleMatches[i]}`;
+
+        message.reply(`there are multiple users which contain [${username}], please select the correct one:\n${listOfUsers}`)
+          .then(() => {
+            message.channel.awaitMessages(response => response.author === message.author, {
+              max: 1,
+              time: 1000 * 60,
+              errors: ['time']
+            })
+              .then((collected) => {
+                let answer = parseInt(collected.first().content).catch((err) => { console.log(err) });
+                if(answer < 1 || answer > possibleMatches.length) {
+                  message.reply("you did not enter a valid number, no user has been selected");
+                  return;
+                }
+
+                username = possibleMatches[answer - 1];
+                jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
+              })
+              .catch(() => {
+                message.reply("you did not respond in time, no user has been selected");
+                return null;
+              })
+          })
+      }
+    }  
 
     let json = fs.readFileSync(jsonFile);
     let content = JSON.parse(json);
@@ -47,8 +101,18 @@ class Resources {
     return path.join(__dirname, "..", "users", this.getGuildNameFromGuild(guild));
   }
 
-  static getGuildDirectoryFromName(guildName) {
-    return path.join(__dirname, "..", "users", guildName);
+  static getGuildDirectoryFromName(guildname) {
+    return path.join(__dirname, "..", "users", guildname);
+  }
+
+  static getGuildUsersFromGuild(client, guild) {
+    let entries = Object.entries(client.usersInSession);
+
+    for (const [guildname, users] of entries)
+      if(guildname == this.getGuildNameFromGuild(guild))
+        return users;
+
+    return null;
   }
 
   //creates the user directory

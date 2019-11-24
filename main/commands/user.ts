@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
-require(path.join(__dirname, "..", "classes", "StringHandler.js"));
+require(path.join(__dirname, "..", "classes", "StringHandler.js")); 
 
 exports.props = {
   "requiresElevation": "mod",
@@ -12,12 +11,12 @@ exports.props = {
 exports.run = (client, message, args) => {
   const user = message.mentions.users.first();
 
-  let username = null;
+  let username = null; 
   let userContent = null;
 
   if(!user) {
     if(args.length == 1) {
-      userContent = Resources.getUserContentsFromName(message.guild, args[0]);
+      userContent = Resources.getUserContentsFromName(message, args[0], true);
 
       if(!userContent) return message.reply("that user is not registered").catch((err) => {console.log(err)});
 
@@ -27,6 +26,7 @@ exports.run = (client, message, args) => {
     username = Resources.getUsernameFromMember(user);
     userContent = client.getUserContent(message.guild, username);
   }
+
 
   if(!userContent) return message.reply("that user is not registered").catch((err) => {console.log(err)});
 

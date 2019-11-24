@@ -185,3 +185,31 @@
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/23  15:47:59] (#shermanbot): !stats
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/23  15:48:09] (#shermanbot): 
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/23  15:48:25] (#shermanbot): Whatup dog
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:11:27] (#shermanbot): !stats
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:17:31] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:18:04] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:18:27] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:19:21] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:22:06] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:25:22] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:25:35] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:25:54] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:26:31] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:28:09] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:28:44] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:29:56] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:30:46] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:31:52] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:32:06] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:32:44] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:33:13] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  04:34:19] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  05:06:09] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  05:07:10] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  05:07:45] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  05:07:48] (#shermanbot): !user sherman
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  05:09:35] (#shermanbot): !user sherman
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  05:10:05] (#shermanbot): !user sherman
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  05:11:07] (#shermanbot): !user
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  05:11:18] (#shermanbot): !user sherman
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/24  05:14:08] (#shermanbot): !user sherman

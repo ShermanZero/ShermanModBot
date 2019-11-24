@@ -4,6 +4,7 @@
   "description": "The Discord bot for ShermanZero's server",
   "dependencies": {
     "@discordjs/uws": "^10.149.0",
+    "@types/node": "^12.12.12",
     "better-sqlite-pool": "^0.2.2",
     "bufferutil": "^4.0.1",
     "colors": "^1.4.0",
@@ -15,6 +16,7 @@
     "jsonfile": "^5.0.0",
     "libsodium-wrappers": "^0.7.6",
     "ncp": "^2.0.0",
+    "nodejs": "0.0.0",
     "nodemon": "^2.0.1",
     "opusscript": "^0.0.7",
     "readline-sync": "^1.4.10",
@@ -27,7 +29,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon main/Main.js"
+    "start": "nodemon main/index.js"
   },
   "repository": {
     "type": "git",

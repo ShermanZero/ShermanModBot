@@ -16,7 +16,7 @@ exports.run = (client, message, args) => {
   if(message.mentions.members.size !== 0) {
     member = message.mentions.members.first();
     username = Resources.getUsernameFromMember(member);
-    content = Resources.getUserContentsFromName(message.guild, username);
+    content = Resources.getUserContentsFromName(message, username);
   }
 
   if(!content) {

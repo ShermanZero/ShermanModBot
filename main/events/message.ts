@@ -2,10 +2,12 @@ require("colors");
 
 const fs = require('fs');
 const path = require("path");
-const Discord = require("discord.js");
-const Resources = require(path.join(__dirname, "..", "classes", "Resources.js"));
+import Discord = require("discord.js");
+import ranks from '../resources/ranks/ranks.json';
 const ranks = require(path.join(__dirname, "..", "resources", "ranks", "ranks.json"));
 const blacklist = require(path.join(__dirname, "..", "resources", "misc", "blacklist.json"));
+
+import Resources = require("../classes/Resources.js");
 
 module.exports = (client, message) => {
   //ignore all bots
@@ -57,7 +59,7 @@ function registerMessage(client, message) {
 
   //user NOT stored in local client session
   if(!client.hasUser(message.guild, username)) {
-    content = Resources.getUserContentsFromName(message.guild, username);
+    content = Resources.getUserContentsFromName(message, username);
     client.registerUser(message.member.user, content);
   //user stored in local client session
   } else {

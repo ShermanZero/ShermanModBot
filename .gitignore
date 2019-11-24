@@ -1,4 +1,5 @@
 #ignore the node_modules directory
-
 **/node_modules
 
+#ignore the the .vs folder
+**/.vs**/

@@ -1,9 +1,12 @@
 import 'colors';
-import * as fs from 'fs';
-import * as path from 'path';
+
+import fs from 'fs';
+import path from 'path';
+
 import rsrc from '../classes/Resources';
 import blacklist from '../resources/misc/blacklist.json';
 import ranks from '../resources/ranks/ranks.json';
+
 module.exports = (client, message) => {
     if (message.author.bot)
         return;

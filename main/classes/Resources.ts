@@ -8,17 +8,19 @@ import rimraf from 'rimraf';
 import ranks from '../resources/ranks/ranks.json';
 
 export default class Resources {
-
   static getUsernameFromMessage(message: Message) {
     let username = message.member.user.tag.replace("#", "_");
-    username = username.replace(/[^\w\s]/gi, '').toLowerCase();
+    username = username.replace(/[^\w\s]/gi, "").toLowerCase();
 
     return username;
   }
 
   static getUsernameFromMember(member: any) {
     let username = member.user ? member.user.tag : member.tag;
-    username = username.replace("#", "_").replace(/[^\w\s]/gi, '').toLowerCase();
+    username = username
+      .replace("#", "_")
+      .replace(/[^\w\s]/gi, "")
+      .toLowerCase();
 
     return username;
   }
@@ -27,19 +29,37 @@ export default class Resources {
     return path.join(this.getGuildDirectoryFromGuild(guild), username);
   }
 
-  static getUserContentsFromName(message: Message, username: string, search: boolean = false): any {
+  static getUserContentsFromName(
+    message: Message,
+    username: string,
+    search: boolean = false
+  ): any {
     console.log("username", username);
 
-    return Resources.getUserContentsFromNameWithGuild(message.guild, message, username, search);
+    return Resources.getUserContentsFromNameWithGuild(
+      message.guild,
+      message,
+      username,
+      search
+    );
   }
 
-  static getUserContentsFromNameWithGuild(guild: Guild, message: Message, username: string, search: boolean = false): any {
-    if(!guild) guild = message.guild;
+  static getUserContentsFromNameWithGuild(
+    guild: Guild,
+    message: Message,
+    username: string,
+    search: boolean = false
+  ): any {
+    if (!guild) guild = message.guild;
     console.log("username", username);
 
     username = username.trim().toLowerCase();
 
-    let jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
+    let jsonFile = path.join(
+      this.getGuildDirectoryFromGuild(guild),
+      username,
+      username + ".json"
+    );
 
     if (!fs.existsSync(jsonFile)) {
       if (!search) return null;
@@ -51,35 +71,50 @@ export default class Resources {
         if (guildUserUsername.includes(username))
           possibleMatches.push(guildUserUsername);
 
-      if(possibleMatches.length > 1) {
+      if (possibleMatches.length > 1) {
         let listOfUsers = "";
-        for(var i = 0; i < possibleMatches.length; i++)
-          listOfUsers += `${i+1}) ${possibleMatches[i]}`;
+        for (var i = 0; i < possibleMatches.length; i++)
+          listOfUsers += `${i + 1}) ${possibleMatches[i]}`;
 
-        message.reply(`there are multiple users which contain [${username}], please select the correct one:\n${listOfUsers}`)
+        message
+          .reply(
+            `there are multiple users which contain [${username}], please select the correct one:\n${listOfUsers}`
+          )
           .then(() => {
-            message.channel.awaitMessages((response: any) => response.author === message.author, {
-              max: 1,
-              time: 1000 * 60,
-              errors: ['time']
-            })
+            message.channel
+              .awaitMessages(
+                (response: any) => response.author === message.author,
+                {
+                  max: 1,
+                  time: 1000 * 60,
+                  errors: ["time"]
+                }
+              )
               .then((collected: any) => {
                 let answer = parseInt(collected.first().content);
-                if(answer < 1 || answer > possibleMatches.length) {
-                  message.reply("you did not enter a valid number, no user has been selected");
+                if (answer < 1 || answer > possibleMatches.length) {
+                  message.reply(
+                    "you did not enter a valid number, no user has been selected"
+                  );
                   return;
                 }
 
                 username = possibleMatches[answer - 1];
-                jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
+                jsonFile = path.join(
+                  this.getGuildDirectoryFromGuild(guild),
+                  username,
+                  username + ".json"
+                );
               })
               .catch(() => {
-                message.reply("you did not respond in time, no user has been selected");
+                message.reply(
+                  "you did not respond in time, no user has been selected"
+                );
                 return null;
-              })
-          })
+              });
+          });
       }
-    }  
+    }
 
     let json = fs.readFileSync(jsonFile);
     let content = JSON.parse(json.toString());
@@ -93,7 +128,12 @@ export default class Resources {
   }
 
   static getGuildDirectoryFromGuild(guild: Guild) {
-    return path.join(__dirname, "..", "users", this.getGuildNameFromGuild(guild));
+    return path.join(
+      __dirname,
+      "..",
+      "users",
+      this.getGuildNameFromGuild(guild)
+    );
   }
 
   static getGuildDirectoryFromName(guildname: string) {
@@ -102,8 +142,7 @@ export default class Resources {
 
   static getGuildUsersFromGuild(guild: any) {
     for (const [guildname, users] of guild)
-      if(guildname == this.getGuildNameFromGuild(guild))
-        return users;
+      if (guildname == this.getGuildNameFromGuild(guild)) return users;
 
     return null;
   }
@@ -118,23 +157,27 @@ export default class Resources {
     content.hidden.guildname = this.getGuildNameFromGuild(guild);
 
     let date = member.joinedAt;
-    let joinedAt = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
+    let joinedAt = `${date.getMonth() +
+      1}/${date.getDate()}/${date.getFullYear()}`;
     content.misc.joined = joinedAt;
 
     let dir = this.getUserDirectoryFromGuild(guild, content.hidden.username);
 
     fs.mkdirSync(dir);
-    fs.writeFileSync(`${dir}/${content.hidden.username}.json`, JSON.stringify(content, null, "\t"));
+    fs.writeFileSync(
+      `${dir}/${content.hidden.username}.json`,
+      JSON.stringify(content, null, "\t")
+    );
     fs.mkdirSync(`${dir}/logs`);
 
     let rolesUserHas = member.roles;
     let rankRolesUserHas: Role[] = [];
 
     //if the user already has pre-existing roles
-    if(rolesUserHas.size != 0) {
+    if (rolesUserHas.size != 0) {
       let entries = Object.entries(ranks._info);
 
-      for(var i = 0; i < entries.length; i++) {
+      for (var i = 0; i < entries.length; i++) {
         let rank = entries[i][0].toLowerCase();
         let role = member.roles.find(role => role.name.toLowerCase() === rank);
 
@@ -147,7 +190,10 @@ export default class Resources {
           for (var level in ranks.levels) {
             if (ranks.levels[level].toLowerCase() === rank) {
               content.rank.level = parseInt(level);
-              content.rank.levelup = this.getXPToLevelUp(content.rank.xp, content.rank.level);
+              content.rank.levelup = this.getXPToLevelUp(
+                content.rank.xp,
+                content.rank.level
+              );
 
               break;
             }
@@ -157,8 +203,10 @@ export default class Resources {
     }
 
     rankRolesUserHas.splice(-1, 1);
-    rankRolesUserHas.forEach((role) => {
-      member.removeRole(role).catch((err) => { console.log(err) });
+    rankRolesUserHas.forEach(role => {
+      member.removeRole(role).catch(err => {
+        console.log(err);
+      });
     });
 
     client.registerUser(content);
@@ -168,7 +216,7 @@ export default class Resources {
 
   static destroyUserDirectory(guild: Guild, username: string) {
     let source = this.getUserDirectoryFromGuild(guild, username);
-    rimraf(source, (err) => {
+    rimraf(source, err => {
       if (err) console.log(err);
     });
   }
@@ -178,18 +226,31 @@ export default class Resources {
       enumerable: true
     });
 
-    let dir = path.join(this.getGuildDirectoryFromName(content.hidden.guildname), username);
+    let dir = path.join(
+      this.getGuildDirectoryFromName(content.hidden.guildname),
+      username
+    );
 
-    if(!fs.existsSync(dir)) return console.error(`!! Attempted to write [${username}] contents to log, but no directory exists at [${dir}]`.red);
-    
-    if(content.userLog && content.userLog.length != 0) {
-      for(var i = 0; i < content.userLog.length; i++)
-        fs.appendFileSync(`${dir}/logs/${client.config.files.log_all}`, content.userLog[i]);
+    if (!fs.existsSync(dir))
+      return console.error(
+        `!! Attempted to write [${username}] contents to log, but no directory exists at [${dir}]`
+          .red
+      );
+
+    if (content.userLog && content.userLog.length != 0) {
+      for (var i = 0; i < content.userLog.length; i++)
+        fs.appendFileSync(
+          `${dir}/logs/${client.config.files.log_all}`,
+          content.userLog[i]
+        );
 
       content.userLog = [];
     }
 
-    fs.writeFileSync(`${dir}/${username}.json`, JSON.stringify(content, null, "\t"));
+    fs.writeFileSync(
+      `${dir}/${username}.json`,
+      JSON.stringify(content, null, "\t")
+    );
   }
 
   static getXPToLevelUp(xp: number, level: number) {

@@ -1,9 +1,8 @@
 import fs from 'fs';
 
 export default class FileHandler {
-
   static readDataFromFile(filePath: string) {
-    var data = fs.readFileSync(filePath, 'utf8');
+    var data = fs.readFileSync(filePath, "utf8");
     return data;
   }
 
@@ -18,5 +17,4 @@ export default class FileHandler {
   static deleteFile(filePath) {
     fs.unlinkSync(filePath);
   }
-
 }

@@ -1,4 +1,4 @@
-import { GuildMember } from 'discord.js';
+import { GuildMember, TextChannel } from 'discord.js';
 
 import rsrc from '../classes/Resources';
 
@@ -7,6 +7,12 @@ module.exports = (client: any, member: GuildMember) => {
   const defaultChannel = guild.channels.find(
     channel => channel.name === "welcome"
   );
+
+  if (
+    !((defaultChannel): defaultChannel is TextChannel =>
+      defaultChannel.type === "text")(defaultChannel)
+  )
+    return;
 
   let unrankedRole = guild.roles.get("609248072706424863");
   member.addRole(unrankedRole).catch(err => {

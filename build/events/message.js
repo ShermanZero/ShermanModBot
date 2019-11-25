@@ -1,27 +1,15 @@
-"use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-require("colors");
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
-const Resources_1 = __importDefault(require("../classes/Resources"));
-const blacklist_json_1 = __importDefault(require("../resources/misc/blacklist.json"));
-const ranks_json_1 = __importDefault(require("../resources/ranks/ranks.json"));
+import 'colors';
+import * as fs from 'fs';
+import * as path from 'path';
+import rsrc from '../classes/Resources';
+import blacklist from '../resources/misc/blacklist.json';
+import ranks from '../resources/ranks/ranks.json';
 module.exports = (client, message) => {
     if (message.author.bot)
         return;
     if (!registerMessage(client, message))
-        return console.error(`!! Could not register message sent by [${Resources_1.default.getUsernameFromMessage(message)}]`.red);
-    if (blacklist_json_1.default.words.some(substring => message.content.includes(substring))) {
+        return console.error(`!! Could not register message sent by [${rsrc.getUsernameFromMessage(message)}]`.red);
+    if (blacklist.words.some(substring => message.content.includes(substring))) {
         message.delete().catch((err) => { console.log(err); });
         message.reply("that is not allowed here.").catch((err) => { console.log(err); });
     }
@@ -39,14 +27,14 @@ module.exports = (client, message) => {
     cmd.run(client, message, args);
 };
 function registerMessage(client, message) {
-    let username = Resources_1.default.getUsernameFromMessage(message);
-    let guildName = Resources_1.default.getGuildNameFromGuild(message.guild);
-    let userDir = Resources_1.default.getUserDirectoryFromGuild(message.guild, username);
+    let username = rsrc.getUsernameFromMessage(message);
+    let guildName = rsrc.getGuildNameFromGuild(message.guild);
+    let userDir = rsrc.getUserDirectoryFromGuild(message.guild, username);
     let content = null;
     if (!fs.existsSync(userDir))
-        Resources_1.default.createUserDirectory(client, message.guild, message.member);
+        rsrc.createUserDirectory(client, message.guild, message.member);
     if (!client.hasUser(message.guild, username)) {
-        content = Resources_1.default.getUserContentsFromName(message, username);
+        content = rsrc.getUserContentsFromName(message, username);
         client.registerUser(message.member.user, content);
     }
     else {
@@ -84,7 +72,7 @@ function updateMasterLog(client) {
     }
 }
 function updateUserLog(client, guild, content) {
-    let logsDir = path.join(Resources_1.default.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
+    let logsDir = path.join(rsrc.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
     let userLog = path.join(logsDir, client.config.files.log_all);
     if (content.userLog.length >= client.config.preferences.log_threshold_user) {
         for (var i = 0; i < content.userLog.length; i++)
@@ -95,7 +83,7 @@ function updateUserLog(client, guild, content) {
     console.log(`[${content.hidden.guildname.magenta}] =>`, `[${content.hidden.username.magenta}] =>`, content);
 }
 function awardExperience(client, message) {
-    let username = Resources_1.default.getUsernameFromMessage(message);
+    let username = rsrc.getUsernameFromMessage(message);
     let content = client.getUserContent(message.guild, username);
     if (!content) {
         return console.error(`!! Could not retrieve contents from [${username}]`);
@@ -103,7 +91,7 @@ function awardExperience(client, message) {
     content.rank.xp += 1;
     if (content.rank.xp >= content.rank.levelup) {
         content.rank.level += 1;
-        var rank = ranks_json_1.default.levels[content.rank.level];
+        var rank = ranks.levels[content.rank.level];
         if (rank) {
             var lastRank = content.rank.name;
             content.rank.name = rank;
@@ -113,12 +101,12 @@ function awardExperience(client, message) {
                 message.member.removeRole(oldRole).catch((err) => { console.log(err); });
             message.member.addRole(newRole).catch((err) => { console.log(err); });
         }
-        content.rank.levelup = Resources_1.default.getXPToLevelUp(content.rank.xp, content.rank.level);
+        content.rank.levelup = rsrc.getXPToLevelUp(content.rank.xp, content.rank.level);
         levelUp(client, message, content);
     }
     client.updateUser(content);
     if ((content.rank.xp % client.config.preferences.xp_threshold) === 0) {
-        let jsonFile = path.join(Resources_1.default.getUserDirectoryFromGuild(message.guild, username), username + ".json");
+        let jsonFile = path.join(rsrc.getUserDirectoryFromGuild(message.guild, username), username + ".json");
         let newJson = JSON.stringify(content, null, "\t");
         fs.writeFileSync(jsonFile, newJson);
     }

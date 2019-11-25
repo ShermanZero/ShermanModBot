@@ -28,7 +28,7 @@ export default class ExitHandler {
     });
   }
 
-  static exitHandler(client, options, exitCode) {
+  static exitHandler(client: any, options: any, exitCode: number) {
     //if we executed the "restart" command
     if(client.alreadyShutdown) return;
 

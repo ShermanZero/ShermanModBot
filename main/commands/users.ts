@@ -1,5 +1,7 @@
 import '../classes/StringHandler';
 
+import { Message } from 'discord.js';
+
 import rsrc from '../classes/Resources';
 
 exports.props = {
@@ -8,7 +10,7 @@ exports.props = {
   "usage": ""
 };
 
-exports.run = (client, message, args) => {
+exports.run = (client: any, message: Message, args: string[]) => {
   let guildUsers = rsrc.getGuildUsersFromGuild(message.guild);
   let allUsers = Object.keys(guildUsers);
 

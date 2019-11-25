@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.props = {
     "requiresElevation": "owner",
     "description": "shuts the bot down immediately",

@@ -1,3 +1,4 @@
+import { Message } from 'discord.js';
 
 exports.props = {
   "requiresElevation": "mod",
@@ -5,7 +6,7 @@ exports.props = {
   "usage": "{user} {reason}"
 };
 
-exports.run = (client, message, [mention, ...reason]) => {
+exports.run = (client: any, message: Message, [mention, ...reason]) => {
   if(message.mentions.members.size === 0)
     return message.reply("please mention a user to kick");
 

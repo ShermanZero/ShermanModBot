@@ -1,3 +1,4 @@
+import { Message } from 'discord.js';
 
 exports.props = {
   "requiresElevation": "mod",
@@ -5,7 +6,7 @@ exports.props = {
   "usage": "{amount} {user}"
 };
 
-exports.run = (client, message, args) => {
+exports.run = (client: any, message: Message, args: string[]) => {
   const user = message.mentions.users.first();
 
   //parse amount
@@ -16,10 +17,10 @@ exports.run = (client, message, args) => {
 
   //fetch 100 messages (will be filtered and lowered up to max amount requested)
   message.channel.fetchMessages({limit: amount})
-    .then((messages) => {
+    .then((messages: any) => {
       if(user) {
         const filterBy = user ? user.id : client.user.id;
-        messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
+        messages = messages.filter((m: Message) => m.author.id === filterBy).array().slice(0, amount);
       }
 
       message.channel.bulkDelete(messages).catch((err) => {console.log(err)});

@@ -1,23 +1,18 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const discord_js_1 = __importDefault(require("discord.js"));
-const Resources_1 = __importDefault(require("../classes/Resources"));
-const ranks_json_1 = __importDefault(require("../resources/ranks/ranks.json"));
+import Discord from 'discord.js';
+import rsrc from '../classes/Resources';
+import ranks from '../resources/ranks/ranks.json';
 exports.props = {
     "description": "replies to the user with their current server stats",
     "usage": ""
 };
 exports.run = (client, message, args) => {
-    let username = Resources_1.default.getUsernameFromMessage(message);
+    let username = rsrc.getUsernameFromMessage(message);
     let content = client.getUserContent(message.guild, username);
     let member = message.member;
     if (message.mentions.members.size !== 0) {
         member = message.mentions.members.first();
-        username = Resources_1.default.getUsernameFromMember(member);
-        content = Resources_1.default.getUserContentsFromName(message, username);
+        username = rsrc.getUsernameFromMember(member);
+        content = rsrc.getUserContentsFromName(message, username);
     }
     if (!content) {
         message.delete().catch((err) => { console.log(err); });
@@ -30,10 +25,10 @@ exports.run = (client, message, args) => {
 exports.getEmbed = (client, member, content) => {
     let name = "**" + content.hidden.username.substring(0, content.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
     let rankColor = member.guild.roles.find(role => role.name === content.rank.name).color;
-    const embed = new discord_js_1.default.RichEmbed();
+    const embed = new Discord.RichEmbed();
     embed.setTitle(name + " | " + calculatePosition(client, content));
     embed.setColor(rankColor);
-    embed.setThumbnail(ranks_json_1.default.urls[content.rank.name]);
+    embed.setThumbnail(ranks.urls[content.rank.name]);
     let levelStats = "";
     if (content.rank.name !== null)
         levelStats += `**rank:**  *${content.rank.name}*\n`.toUpperCase();

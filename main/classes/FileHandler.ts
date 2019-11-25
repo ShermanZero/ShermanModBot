@@ -2,8 +2,8 @@ import fs from 'fs';
 
 export default class FileHandler {
 
-  static readDataFromFile(filePath) {
-    var data = fs.readFile('DATA', 'utf8', filePath);
+  static readDataFromFile(filePath: string) {
+    var data = fs.readFileSync(filePath, 'utf8');
     return data;
   }
 

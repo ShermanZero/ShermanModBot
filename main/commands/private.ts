@@ -1,3 +1,4 @@
+import { Message } from 'discord.js';
 
 exports.props = {
   "requiresElevation": "mod",
@@ -5,7 +6,7 @@ exports.props = {
   "usage": "{user}"
 };
 
-exports.run = (client, message, args) => {
+exports.run = (client: any, message: Message, args: string[]) => {
   const privateRole = message.guild.roles.get("645418484398030918");
   const privateHangoutChannel = client.channels.get("645418390961258536");
 
@@ -26,12 +27,12 @@ exports.run = (client, message, args) => {
   //alert the member that they are in the channel
   privateHangoutChannel.send(`${roleMember}, welcome to the private channel!  All the messages will be deleted after you have left.`)
     .then(() => {
-      privateHangoutChannel.awaitMessages(response => response.content === "EOD", {
+      privateHangoutChannel.awaitMessages((response: Message) => response.content === "EOD", {
         max: 1,
         time: 600000,
         errors: ['time']
       })
-      .then((collected) => {
+      .then((collected: any) => {
         privateHangoutChannel.send("The private discussion has concluded, use !purge to clear the channel.").catch((err) => {console.log(err)});
         roleMember.removeRole(privateRole).catch((err) => {console.log(err)});
       })

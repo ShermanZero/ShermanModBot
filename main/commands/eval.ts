@@ -1,3 +1,4 @@
+import { Message } from 'discord.js';
 
 exports.props = {
   "requiresElevation": "owner",
@@ -5,7 +6,7 @@ exports.props = {
   "usage": "{javascript}"
 };
 
-exports.run = (client, message, args) => {
+exports.run = (client: any, message: Message, args: string[]) => {
   try {
     const code = args.join(" ");
     let evaled = eval(code);

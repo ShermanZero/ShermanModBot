@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-require("colors");
-class ExitHandler {
+import 'colors';
+export default class ExitHandler {
     static init(client) {
         console.log(`Registered client with ExitHandler... your crashes are protected now :)`.inverse, "\n...");
         process.on("exit", this.exitHandler.bind(null, client, { clean: true }));
@@ -31,5 +29,4 @@ class ExitHandler {
         }
     }
 }
-exports.default = ExitHandler;
 //# sourceMappingURL=ExitHandler.js.map

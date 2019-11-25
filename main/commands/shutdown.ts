@@ -1,5 +1,4 @@
-import fs from "fs";
-import path from "path";
+import { Message } from 'discord.js';
 
 exports.props = {
   "requiresElevation": "owner",
@@ -7,7 +6,7 @@ exports.props = {
   "usage": ""
 };
 
-exports.run = (client, message, args) => {
+exports.run = (client: any, message: Message, args: string[]) => {
   let exitCode = 1;
   if(args.length == 1 && args[0].toLowerCase().includes("force"))
     exitCode = 2;

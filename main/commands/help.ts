@@ -1,17 +1,17 @@
-import Discord from "discord.js"
+import Discord, { Message } from 'discord.js';
 
 exports.props = {
   "description": "replies to the member with the commands for the server",
   "usage": ""
 };
 
-exports.run = (client, message, args) => {
+exports.run = (client: any, message: Message) => {
   const embed = new Discord.RichEmbed();
   embed.setTitle(`${message.guild.name} Commands`);
   embed.setDescription("All the commands **you** have access to in this server");
   embed.setColor(0x00AE86);
 
-  client.commands.forEach((value, key) => {
+  client.commands.forEach((value: any, key: string) => {
     if(!value.props)
       return;
 

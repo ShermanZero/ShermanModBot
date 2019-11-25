@@ -1,4 +1,4 @@
-import Discord from 'discord.js';
+import Discord, { GuildMember, Message } from 'discord.js';
 
 import rsrc from '../classes/Resources';
 import ranks from '../resources/ranks/ranks.json';
@@ -8,7 +8,7 @@ exports.props = {
   "usage": ""
 };
 
-exports.run = (client, message, args) => {
+exports.run = async (client: any, message: Message, args: string[]) => {
   let username = rsrc.getUsernameFromMessage(message);
   let content = client.getUserContent(message.guild, username);
   let member = message.member;
@@ -21,15 +21,19 @@ exports.run = (client, message, args) => {
 
   if(!content) {
     message.delete().catch((err) => {console.log(err)});
-    return message.reply(`${message.mentions.members.first().displayName} does not yet have any stats :( they need to post a message in the server to be registered by me.`)
-      .catch((err) => {console.log(err)});
+    try {
+      return message.reply( `${ message.mentions.members.first().displayName } does not yet have any stats :( they need to post a message in the server to be registered by me.` );
+    }
+    catch ( err_1 ) {
+      console.log( err_1 );
+    }
   }
 
   message.channel.send(exports.getEmbed(client, member, content)).catch((err) => {console.log(err)});
   message.delete().catch((err) => {console.log(err)});
 }
 
-exports.getEmbed = (client, member, content) => {
+exports.getEmbed = (client: any, member: GuildMember, content: any) => {
   let name = "**"+content.hidden.username.substring(0, content.hidden.username.lastIndexOf("_")).toUpperCase()+"**";
 
   let rankColor = member.guild.roles.find(role => role.name === content.rank.name).color;
@@ -73,11 +77,11 @@ exports.getEmbed = (client, member, content) => {
   return embed;
 }
 
-function getFormattedNumber(number) {
+function getFormattedNumber(number: string) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function calculatePosition(client, content) {
+function calculatePosition(client: any, content: any) {
   let guild = client.getGuild(content.hidden.guildname);
   let usersHigher = 0;
 

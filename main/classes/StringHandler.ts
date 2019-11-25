@@ -3,6 +3,6 @@ interface String {
 }
 
 String.prototype.hideID = function (username: string) {
-    if (!username) username = this;
+    if (!username) username = String(this);
     return "**"+String(username).substring(0, String(username).lastIndexOf("_"))+"**";
 };

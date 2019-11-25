@@ -1,26 +1,14 @@
-"use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-require("colors");
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
-const ExitHandler_1 = __importDefault(require("../classes/ExitHandler"));
-const Resources_1 = __importDefault(require("../classes/Resources"));
+import 'colors';
+import * as fs from 'fs';
+import * as path from 'path';
+import exit from '../classes/ExitHandler';
+import rsrc from '../classes/Resources';
 module.exports = (client) => {
     client.user.setActivity(client.config.status);
     let bootFile = path.join(__dirname, "..", "resources", "misc", "boot.txt");
     let data = fs.readFileSync(bootFile, "utf8");
     console.log(data.red);
-    ExitHandler_1.default.init(client);
+    exit.init(client);
     let commandArray = client.commands.keyArray().sort();
     console.log(`Loaded ${commandArray.length.toString().magenta} command(s)`, "[@everyone]".green, "[@moderator]".yellow, "[@owner]".red);
     for (var i = 0; i < commandArray.length; i++) {
@@ -36,20 +24,20 @@ module.exports = (client) => {
     }
     console.log("...");
     client.guilds.forEach(guild => {
-        let guildDir = Resources_1.default.getGuildDirectoryFromGuild(guild);
+        let guildDir = rsrc.getGuildDirectoryFromGuild(guild);
         if (!fs.existsSync(guildDir)) {
             fs.mkdirSync(guildDir);
             fs.mkdirSync(path.join(guildDir, client.config.files.removed));
         }
         else if (guild.deleted)
             return fs.rmdirSync(guildDir);
-        let guildName = Resources_1.default.getGuildNameFromGuild(guild);
+        let guildName = rsrc.getGuildNameFromGuild(guild);
         client.usersInSession[guildName] = {};
         console.log(`*Registered [${guildName.magenta}] to session --- looking for existing members:`);
         fs.readdirSync(guildDir).forEach(dir => {
             let username = dir;
             if (!client.hasUser(guild, username)) {
-                let content = Resources_1.default.getUserContentsFromNameWithGuild(guild, null, username);
+                let content = rsrc.getUserContentsFromNameWithGuild(guild, null, username);
                 if (content === null || typeof content === "undefined")
                     return;
                 process.stdout.write("  ");

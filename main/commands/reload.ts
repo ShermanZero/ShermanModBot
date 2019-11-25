@@ -1,4 +1,5 @@
-import path from "path";
+import { Message } from 'discord.js';
+import path from 'path';
 
 exports.props = {
   "requiresElevation": "owner",
@@ -6,8 +7,13 @@ exports.props = {
   "usage": "{command}"
 };
 
-exports.run = (client, message, args) => {
-  if(!args || args.length < 1) return message.reply("you must provide a command name to reload").catch((err) => {console.log(err)});
+exports.run = async (client: any, message: Message, args: string[]) => {
+  if(!args || args.length < 1) try {
+    return message.reply( "you must provide a command name to reload" );
+  }
+  catch ( err ) {
+    console.log( err );
+  }
 
   const commandName = args[0];
 

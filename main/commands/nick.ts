@@ -1,3 +1,4 @@
+import { Message } from 'discord.js';
 
 exports.props = {
   "requiresElevation": "mod",
@@ -5,7 +6,7 @@ exports.props = {
   "usage": "{user} {nickname}"
 };
 
-exports.run = (client, message, args) => {
+exports.run = (client: any, message: Message, args: string[]) => {
   if(message.mentions.members.size === 0)
     return message.reply("please mention a user to change their nickname").catch((err) => {console.log(err)});
 

@@ -1,7 +1,10 @@
-import "../classes/StringHandler"
-import fs from "fs";
-import path from "path";
-import rsrc from "../classes/Resources";
+import '../classes/StringHandler';
+
+import { Message } from 'discord.js';
+import fs from 'fs';
+import path from 'path';
+
+import rsrc from '../classes/Resources';
 
 
 exports.props = {
@@ -10,7 +13,7 @@ exports.props = {
   "usage": "{amount} {user}"
 };
 
-exports.run = (client, message, args) => {
+exports.run = (client: any, message: Message, args: string[]) => {
   const user = message.mentions.users.first();
 
   if(!user) return message.reply("you need to specify a user").catch((err) => {console.log(err)});

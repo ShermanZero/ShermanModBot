@@ -1,9 +1,11 @@
-import "colors";
+import 'colors';
 
-import fs from "graceful-fs";
-import rimraf from "rimraf";
-import path from "path";
-import rsrc from "../classes/Resources";
+import { Message } from 'discord.js';
+import fs from 'fs';
+import path from 'path';
+import rimraf from 'rimraf';
+
+import rsrc from '../classes/Resources';
 
 exports.props = {
   "requiresElevation": "owner",
@@ -11,7 +13,7 @@ exports.props = {
   "usage": "{user} {user}"
 };
 
-exports.run = (client, message, args) => {
+exports.run = (client: any, message: Message, args: string[]) => {
   if(args.length != 2)
     return message.reply("you need to specify two users").catch((err) => {console.log(err)});
 

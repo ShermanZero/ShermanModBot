@@ -1,10 +1,10 @@
-import "colors";
+import 'colors';
 
-import fs from "fs";
-import path from "path";
-import rsrc from "../classes/Resources";
+import { Message } from 'discord.js';
+import fs from 'fs';
+import path from 'path';
 
-let alreadyShutdown = false;
+import rsrc from '../classes/Resources';
 
 exports.props = {
   "requiresElevation": "owner",
@@ -12,7 +12,7 @@ exports.props = {
   "usage": ""
 };
 
-exports.run = (client, message, userTriggered = true) => {
+exports.run = (client: any, message: Message, userTriggered: boolean = true) => {
   if(client.alreadyShutdown) {
     console.log("Already executed clean shutdown... restarting now".magenta);
     return true;
@@ -22,7 +22,7 @@ exports.run = (client, message, userTriggered = true) => {
   console.log("Attempting to restart cleanly...".magenta);
 
   let entries = Object.entries(client.usersInSession);
-  for(const [guild, users] of entries) {
+  for(const [, users] of entries) {
     let allUsers = Object.entries(users);
 
     for(const [username, userContent] of allUsers)

@@ -1,9 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(require("path"));
+import path from "path";
 exports.props = {
     "requiresElevation": "owner",
     "description": "reloads a command",
@@ -15,9 +10,9 @@ exports.run = (client, message, args) => {
     const commandName = args[0];
     if (!client.commands.has(commandName))
         return message.reply("that command does not exist");
-    delete require.cache[require.resolve(path_1.default.join(__dirname, commandName + ".js"))];
+    delete require.cache[require.resolve(path.join(__dirname, commandName + ".js"))];
     client.commands.delete(commandName);
-    const props = require(path_1.default.join(__dirname, commandName + ".js"));
+    const props = require(path.join(__dirname, commandName + ".js"));
     client.commands.set(commandName, props);
     message.reply(`the command "${commandName}" has been reloaded`).catch((err) => { console.log(err); });
 };

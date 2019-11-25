@@ -66,3 +66,5 @@ export default class ExitHandler {
     }
   }
 }
+
+module.exports = ExitHandler;

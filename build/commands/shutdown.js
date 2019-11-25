@@ -5,8 +5,8 @@ exports.props = {
     description: "shuts the bot down immediately",
     usage: ""
 };
-exports.run = (client, message, args) => {
-    let exitCode = 1;
+exports.run = function (client, message, args) {
+    var exitCode = 1;
     if (args.length == 1 && args[0].toLowerCase().includes("force"))
         exitCode = 2;
     process.exit(exitCode);

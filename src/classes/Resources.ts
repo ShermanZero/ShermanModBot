@@ -257,3 +257,5 @@ export default class Resources {
     return xp + Math.round((4 * Math.pow(level, 3)) / 5);
   }
 }
+
+module.exports = Resources;

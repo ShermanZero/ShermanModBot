@@ -1,24 +1,27 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("colors");
-const fs_1 = require("fs");
-const path_1 = require("path");
-const Resources_1 = require("../classes/Resources");
-const blacklist_json_1 = require("../resources/misc/blacklist.json");
-const ranks_json_1 = require("../resources/ranks/ranks.json");
-module.exports = (client, message) => {
+var fs_1 = __importDefault(require("fs"));
+var path_1 = __importDefault(require("path"));
+var Resources_1 = __importDefault(require("../classes/Resources"));
+var blacklist_json_1 = __importDefault(require("../resources/misc/blacklist.json"));
+var ranks_json_1 = __importDefault(require("../resources/ranks/ranks.json"));
+module.exports = function (client, message) {
     //ignore all bots
     if (message.author.bot)
         return;
     //register the user
     if (!registerMessage(client, message))
-        return console.error(`!! Could not register message sent by [${Resources_1.default.getUsernameFromMessage(message)}]`.red);
+        return console.error(("!! Could not register message sent by [" + Resources_1.default.getUsernameFromMessage(message) + "]").red);
     //check against blacklist
-    if (blacklist_json_1.default.words.some(substring => message.content.includes(substring))) {
-        message.delete().catch(err => {
+    if (blacklist_json_1.default.words.some(function (substring) { return message.content.includes(substring); })) {
+        message.delete().catch(function (err) {
             console.log(err);
         });
-        message.reply("that is not allowed here.").catch(err => {
+        message.reply("that is not allowed here.").catch(function (err) {
             console.log(err);
         });
     }
@@ -27,17 +30,17 @@ module.exports = (client, message) => {
     if (message.content.indexOf(client.config.prefix) !== 0)
         return;
     //standard argument/command name definition
-    const args = message.content
+    var args = message.content
         .slice(client.config.prefix.length)
         .trim()
         .split(/ +/g);
-    let command;
+    var command;
     if (args)
         command = args.shift().toLowerCase();
     if (!command)
         return;
     //grab the command data from the client.commands Enmap
-    const cmd = client.commands.get(command);
+    var cmd = client.commands.get(command);
     //if the command doesn't exist
     if (!cmd)
         return;
@@ -49,10 +52,10 @@ module.exports = (client, message) => {
 };
 //registers the message
 function registerMessage(client, message) {
-    let username = Resources_1.default.getUsernameFromMessage(message);
-    let guildName = Resources_1.default.getGuildNameFromGuild(message.guild);
-    let userDir = Resources_1.default.getUserDirectoryFromGuild(message.guild, username);
-    let content;
+    var username = Resources_1.default.getUsernameFromMessage(message);
+    var guildName = Resources_1.default.getGuildNameFromGuild(message.guild);
+    var userDir = Resources_1.default.getUserDirectoryFromGuild(message.guild, username);
+    var content;
     //if the user has not been registered
     if (!fs_1.default.existsSync(userDir))
         Resources_1.default.createUserDirectory(client, message.guild, message.member);
@@ -66,7 +69,7 @@ function registerMessage(client, message) {
         content = client.getUserContent(message.guild, username);
     }
     if (content === null || typeof content === "undefined") {
-        console.error(`!! Could not retrieve contents for [${username}]`.red);
+        console.error(("!! Could not retrieve contents for [" + username + "]").red);
         return false;
     }
     if (content.misc.first_message === null ||
@@ -74,9 +77,9 @@ function registerMessage(client, message) {
         content.misc.first_message = message.content;
         client.updateUser(content);
     }
-    let logMessage = `[${getTimestamp(message)}] (#${message.channel.name}): ${message.content}\n`;
+    var logMessage = "[" + getTimestamp(message) + "] (#" + message.channel.name + "): " + message.content + "\n";
     //push the message to the master log branch
-    client.masterLog.push(`/${guildName}/>  ${username} ${logMessage}`);
+    client.masterLog.push("/" + guildName + "/>  " + username + " " + logMessage);
     //if the log length exceeds the threshold, update the master log
     updateMasterLog(client);
     //push the user's message directly to the user's log
@@ -86,13 +89,13 @@ function registerMessage(client, message) {
     return true;
 }
 function getTimestamp(message) {
-    let timestamp = message.createdAt;
-    let date = (timestamp.getMonth() + 1 + "/" + timestamp.getDate()).replace(/.*(\d{2}\/\d{2}).*/, "$1");
-    let time = timestamp.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+    var timestamp = message.createdAt;
+    var date = (timestamp.getMonth() + 1 + "/" + timestamp.getDate()).replace(/.*(\d{2}\/\d{2}).*/, "$1");
+    var time = timestamp.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
     return date + "  " + time;
 }
 function updateMasterLog(client) {
-    let masterLog = path_1.default.join(__dirname, "..", "logs", client.config.files.log_all);
+    var masterLog = path_1.default.join(__dirname, "..", "logs", client.config.files.log_all);
     if (!fs_1.default.existsSync(masterLog))
         fs_1.default.writeFileSync(masterLog, "");
     //if the log length exceeds the threshold, update the master log
@@ -103,8 +106,8 @@ function updateMasterLog(client) {
     }
 }
 function updateUserLog(client, guild, content) {
-    let logsDir = path_1.default.join(Resources_1.default.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
-    let userLog = path_1.default.join(logsDir, client.config.files.log_all);
+    var logsDir = path_1.default.join(Resources_1.default.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
+    var userLog = path_1.default.join(logsDir, client.config.files.log_all);
     //if the log length exceeds the threshold, update the master log
     if (content.userLog.length >= client.config.preferences.log_threshold_user) {
         for (var i = 0; i < content.userLog.length; i++)
@@ -114,15 +117,15 @@ function updateUserLog(client, guild, content) {
     //have to update the Enmap
     client.updateUser(content);
     //log it to the console
-    console.log(`[${content.hidden.guildname.magenta}] =>`, `[${content.hidden.username.magenta}] =>`, content);
+    console.log("[" + content.hidden.guildname.magenta + "] =>", "[" + content.hidden.username.magenta + "] =>", content);
 }
 //awards the user experience for posting a message
 function awardExperience(client, message) {
-    let username = Resources_1.default.getUsernameFromMessage(message);
+    var username = Resources_1.default.getUsernameFromMessage(message);
     //get the content from the session instead of from the file
-    let content = client.getUserContent(message.guild, username);
+    var content = client.getUserContent(message.guild, username);
     if (!content) {
-        return console.error(`!! Could not retrieve contents from [${username}]`);
+        return console.error("!! Could not retrieve contents from [" + username + "]");
     }
     content.rank.xp += 1;
     if (content.rank.xp >= content.rank.levelup) {
@@ -131,13 +134,13 @@ function awardExperience(client, message) {
         if (rank) {
             var lastRank = content.rank.name;
             content.rank.name = rank;
-            let oldRole = message.guild.roles.find(role => role.name.toLowerCase() === lastRank.toLowerCase());
-            let newRole = message.guild.roles.find(role => role.name.toLowerCase() === rank.toLowerCase());
+            var oldRole = message.guild.roles.find(function (role) { return role.name.toLowerCase() === lastRank.toLowerCase(); });
+            var newRole = message.guild.roles.find(function (role) { return role.name.toLowerCase() === rank.toLowerCase(); });
             if (oldRole)
-                message.member.removeRole(oldRole).catch(err => {
+                message.member.removeRole(oldRole).catch(function (err) {
                     console.log(err);
                 });
-            message.member.addRole(newRole).catch(err => {
+            message.member.addRole(newRole).catch(function (err) {
                 console.log(err);
             });
         }
@@ -147,15 +150,15 @@ function awardExperience(client, message) {
     client.updateUser(content);
     //only write XP changes to the file every 10 messages
     if (content.rank.xp % client.config.preferences.xp_threshold === 0) {
-        let jsonFile = path_1.default.join(Resources_1.default.getUserDirectoryFromGuild(message.guild, username), username + ".json");
-        let newJson = JSON.stringify(content, null, "\t");
+        var jsonFile = path_1.default.join(Resources_1.default.getUserDirectoryFromGuild(message.guild, username), username + ".json");
+        var newJson = JSON.stringify(content, null, "\t");
         fs_1.default.writeFileSync(jsonFile, newJson);
     }
 }
 function levelUp(client, message, content) {
     var stats = client.commands.get("stats");
-    let embed = stats.getEmbed(client, message.member, content);
-    message.channel.send(`Congratulations ${message.author}!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!`);
+    var embed = stats.getEmbed(client, message.member, content);
+    message.channel.send("Congratulations " + message.author + "!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!");
     message.channel.send(embed);
 }
 //# sourceMappingURL=message.js.map

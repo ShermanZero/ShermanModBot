@@ -1,30 +1,37 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("colors");
-const fs_1 = require("fs");
-const path_1 = require("path");
-const Resources_1 = require("../classes/Resources");
+var fs_1 = __importDefault(require("fs"));
+var path_1 = __importDefault(require("path"));
+var Resources_1 = __importDefault(require("../classes/Resources"));
 exports.props = {
     requiresElevation: "owner",
     description: "shuts the bot down cleanly",
     usage: ""
 };
-exports.run = (client, message, userTriggered = true) => {
+exports.run = function (client, message, userTriggered) {
+    if (userTriggered === void 0) { userTriggered = true; }
     if (client.alreadyShutdown) {
         console.log("Already executed clean shutdown... restarting now".magenta);
         return true;
     }
     client.alreadyShutdown = true;
     console.log("Attempting to restart cleanly...".magenta);
-    let entries = Object.entries(client.usersInSession);
-    for (const [, users] of entries) {
-        let allUsers = Object.entries(users);
-        for (const [username, userContent] of allUsers)
+    var entries = Object.entries(client.usersInSession);
+    for (var _i = 0, entries_1 = entries; _i < entries_1.length; _i++) {
+        var _a = entries_1[_i], users = _a[1];
+        var allUsers = Object.entries(users);
+        for (var _b = 0, allUsers_1 = allUsers; _b < allUsers_1.length; _b++) {
+            var _c = allUsers_1[_b], username = _c[0], userContent = _c[1];
             Resources_1.default.writeUserContentToFile(client, username, userContent);
+        }
     }
     //check if the command was user-triggered
     if (userTriggered)
-        message.delete().catch(err => {
+        message.delete().catch(function (err) {
             console.log(err);
         });
     console.log("Successfully wrote user data to files!".magenta);

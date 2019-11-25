@@ -18,3 +18,5 @@ export default class FileHandler {
     fs.unlinkSync(filePath);
   }
 }
+
+module.exports = FileHandler;

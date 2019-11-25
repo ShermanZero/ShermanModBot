@@ -5,16 +5,16 @@ exports.props = {
     description: "runs a line of javascript",
     usage: "{javascript}"
 };
-exports.run = (client, message, args) => {
+exports.run = function (client, message, args) {
     try {
-        const code = args.join(" ");
-        let evaled = eval(code);
+        var code = args.join(" ");
+        var evaled = eval(code);
         if (typeof evaled !== "string")
             evaled = require("util").inspect(evaled);
         message.channel.send(clean(evaled), { code: "x1" });
     }
     catch (err) {
-        message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+        message.channel.send("`ERROR` ```xl\n" + clean(err) + "\n```");
     }
 };
 function clean(text) {

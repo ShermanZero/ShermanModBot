@@ -5,15 +5,16 @@ exports.props = {
     description: "kicks a member from the server",
     usage: "{user} {reason}"
 };
-exports.run = (client, message, [mention, ...reason]) => {
+exports.run = function (client, message, _a) {
+    var mention = _a[0], reason = _a.slice(1);
     if (message.mentions.members.size === 0)
         return message.reply("please mention a user to kick");
-    const kickMember = message.mentions.members.first();
-    kickMember.kick(reason.join(" ")).then(member => {
-        let modChannel = client.channels.get(client.config.channels.mod.logs);
+    var kickMember = message.mentions.members.first();
+    kickMember.kick(reason.join(" ")).then(function (member) {
+        var modChannel = client.channels.get(client.config.channels.mod.logs);
         modChannel
-            .send(`${member.user.username} was kicked by ${message.author.tag} for reason: ${reason}`)
-            .catch(err => {
+            .send(member.user.username + " was kicked by " + message.author.tag + " for reason: " + reason)
+            .catch(function (err) {
             console.log(err);
         });
     });

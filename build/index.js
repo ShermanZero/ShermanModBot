@@ -1,13 +1,16 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("colors");
-const discord_js_1 = require("discord.js");
-const enmap_1 = require("enmap");
-const fs_1 = require("fs");
-const path_1 = require("path");
-const Resources_1 = require("./classes/Resources");
-const config_json_1 = require("./resources/config.json");
-let client = new discord_js_1.default.Client();
+var discord_js_1 = __importDefault(require("discord.js"));
+var enmap_1 = __importDefault(require("enmap"));
+var fs_1 = __importDefault(require("fs"));
+var path_1 = __importDefault(require("path"));
+var Resources_1 = __importDefault(require("./classes/Resources"));
+var config_json_1 = __importDefault(require("./resources/config.json"));
+var client = new discord_js_1.default.Client();
 init();
 start();
 client.login(config_json_1.default.token);

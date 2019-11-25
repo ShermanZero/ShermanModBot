@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
     "lib": [
@@ -15,7 +14,7 @@
     "noImplicitReturns": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "outDir": "build/dist",
+    "outDir": "./build/",
     "sourceMap": true,
     "strictNullChecks": false,
     "suppressImplicitAnyIndexErrors": false,

@@ -1,7 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.props = {
-    "requiresElevation": "owner",
-    "description": "shuts the bot down immediately",
-    "usage": ""
+    requiresElevation: "owner",
+    description: "shuts the bot down immediately",
+    usage: ""
 };
 exports.run = (client, message, args) => {
     let exitCode = 1;

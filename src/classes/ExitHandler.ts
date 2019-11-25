@@ -1,8 +1,10 @@
 import 'colors';
 
+import { Client } from 'discord.js';
+
 export default class ExitHandler {
   //initialize
-  static init(client) {
+  static init(client: Client) {
     console.log(
       `Registered client with ExitHandler... your crashes are protected now :)`
         .inverse,
@@ -10,25 +12,37 @@ export default class ExitHandler {
     );
 
     //when app is closing
-    process.on("exit", this.exitHandler.bind(null, client, { clean: true }));
+    process.on(
+      "exit" as any,
+      ExitHandler.exitHandler.bind(null, client, { clean: true })
+    );
 
     //catches ctrl-c event
-    process.on("SIGINT", this.exitHandler.bind(null, client, { clean: true }));
+    process.on(
+      "SIGINT" as any,
+      ExitHandler.exitHandler.bind(null, client, { clean: true })
+    );
 
     //catches kill pid
-    process.on("SIGUSR1", this.exitHandler.bind(null, client, { clean: true }));
-    process.on("SIGUSR2", this.exitHandler.bind(null, client, { clean: true }));
+    process.on(
+      "SIGUSR1" as any,
+      ExitHandler.exitHandler.bind(null, client, { clean: true })
+    );
+    process.on(
+      "SIGUSR2" as any,
+      ExitHandler.exitHandler.bind(null, client, { clean: true })
+    );
 
     //catches uncaught exceptions
-    process.on("uncaughtException", e => {
+    process.on("uncaughtException" as any, (e: Error) => {
       console.log("Uncaught exception:");
-      console.log(e.stack.red.dim);
+      console.log(e.stack?.red.dim);
     });
 
     //catch unhandled promise rejections
-    process.on("unhandledRejection", (e: Error) => {
+    process.on("unhandledRejection" as any, (e: Error) => {
       console.log("Unhandled rejection:");
-      console.log(e.stack.red.dim);
+      console.log(e.stack?.red.dim);
     });
   }
 

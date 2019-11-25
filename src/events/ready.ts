@@ -1,6 +1,6 @@
 import 'colors';
 
-import { Guild } from 'discord.js';
+import { Guild, Message } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -68,7 +68,7 @@ module.exports = (client: any) => {
       if (!client.hasUser(guild, username)) {
         let content = rsrc.getUserContentsFromNameWithGuild(
           guild,
-          null,
+          null as unknown as Message,
           username
         );
         if (content === null || typeof content === "undefined") return;

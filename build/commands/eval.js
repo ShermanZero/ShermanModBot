@@ -1,7 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.props = {
-    "requiresElevation": "owner",
-    "description": "runs a line of javascript",
-    "usage": "{javascript}"
+    requiresElevation: "owner",
+    description: "runs a line of javascript",
+    usage: "{javascript}"
 };
 exports.run = (client, message, args) => {
     try {
@@ -16,8 +18,10 @@ exports.run = (client, message, args) => {
     }
 };
 function clean(text) {
-    if (typeof (text) === "string")
-        return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+    if (typeof text === "string")
+        return text
+            .replace(/`/g, "`" + String.fromCharCode(8203))
+            .replace(/@/g, "@" + String.fromCharCode(8203));
     else
         return text;
 }

@@ -1,8 +1,8 @@
 interface String {
-  hideID(username: string);
+  hideID(username?: string);
 }
 
-String.prototype.hideID = function(username: string) {
+String.prototype.hideID = function(username?: string): string {
   if (!username) username = String(this);
   return (
     "**" +

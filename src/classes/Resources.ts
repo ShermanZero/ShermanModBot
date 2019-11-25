@@ -8,14 +8,14 @@ import rimraf from 'rimraf';
 import ranks from '../resources/ranks/ranks.json';
 
 export default class Resources {
-  static getUsernameFromMessage(message: Message) {
+  static getUsernameFromMessage(message: Message): string {
     let username = message.member.user.tag.replace("#", "_");
     username = username.replace(/[^\w\s]/gi, "").toLowerCase();
 
     return username;
   }
 
-  static getUsernameFromMember(member: any) {
+  static getUsernameFromMember(member: any): string {
     let username = member.user ? member.user.tag : member.tag;
     username = username
       .replace("#", "_")
@@ -25,7 +25,7 @@ export default class Resources {
     return username;
   }
 
-  static getUserDirectoryFromGuild(guild: Guild, username: string) {
+  static getUserDirectoryFromGuild(guild: Guild, username: string): string {
     return path.join(this.getGuildDirectoryFromGuild(guild), username);
   }
 
@@ -122,12 +122,12 @@ export default class Resources {
     return content;
   }
 
-  static getGuildNameFromGuild(guild: Guild) {
+  static getGuildNameFromGuild(guild: Guild): string {
     let guildName = guild.name.replace(/[\W\s]/gi, "_");
     return `${guildName}-(${guild.id})`;
   }
 
-  static getGuildDirectoryFromGuild(guild: Guild) {
+  static getGuildDirectoryFromGuild(guild: Guild): string {
     return path.join(
       __dirname,
       "..",
@@ -136,11 +136,11 @@ export default class Resources {
     );
   }
 
-  static getGuildDirectoryFromName(guildname: string) {
+  static getGuildDirectoryFromName(guildname: string): string {
     return path.join(__dirname, "..", "users", guildname);
   }
 
-  static getGuildUsersFromGuild(guild: any) {
+  static getGuildUsersFromGuild(guild: any): any {
     for (const [guildname, users] of guild)
       if (guildname == this.getGuildNameFromGuild(guild)) return users;
 
@@ -148,7 +148,7 @@ export default class Resources {
   }
 
   //creates the user directory
-  static createUserDirectory(client: any, guild: Guild, member: GuildMember) {
+  static createUserDirectory(client: any, guild: Guild, member: GuildMember): any {
     let basePath = path.join(__dirname, "..", "users", "content.json");
     let json = fs.readFileSync(basePath);
     let content = JSON.parse(json.toString());
@@ -253,7 +253,7 @@ export default class Resources {
     );
   }
 
-  static getXPToLevelUp(xp: number, level: number) {
+  static getXPToLevelUp(xp: number, level: number): number {
     return xp + Math.round((4 * Math.pow(level, 3)) / 5);
   }
 }

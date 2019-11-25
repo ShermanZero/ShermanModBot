@@ -32,7 +32,7 @@ exports.run = (client: any, message: Message, args: string[]) => {
   if (!amount || amount > 100) amount = 100;
   if (amount < 1) amount = 1;
 
-  let logs = null;
+  let logs: any;
 
   fs.readFile(file, "utf8", (error, data) => {
     let content = client.getUserContent(message.guild, username);

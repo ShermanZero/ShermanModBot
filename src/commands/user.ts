@@ -13,8 +13,8 @@ exports.props = {
 exports.run = async (client: any, message: Message, args: string[]) => {
   const user = message.mentions.users.first();
 
-  let username = null;
-  let userContent = null;
+  let username: any;
+  let userContent: any;
 
   if (!user) {
     if (args.length == 1) {
@@ -39,7 +39,7 @@ exports.run = async (client: any, message: Message, args: string[]) => {
     userContent = client.getUserContent(message.guild, username);
   }
 
-  if (!userContent)
+  if (!username || !userContent)
     try {
       return message.reply("that user is not registered");
     } catch (err_2) {

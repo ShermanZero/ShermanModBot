@@ -1,6 +1,6 @@
 import 'colors';
 
-import { Message } from 'discord.js';
+import { Message, TextChannel } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -36,11 +36,14 @@ module.exports = (client: any, message: Message) => {
   if (message.content.indexOf(client.config.prefix) !== 0) return;
 
   //standard argument/command name definition
-  const args = message.content
+  const args: any = message.content
     .slice(client.config.prefix.length)
     .trim()
     .split(/ +/g);
-  const command = args.shift().toLowerCase();
+
+  let command: any;
+  if (args) command = args.shift().toLowerCase();
+  if (!command) return;
 
   //grab the command data from the client.commands Enmap
   const cmd = client.commands.get(command);
@@ -61,12 +64,12 @@ module.exports = (client: any, message: Message) => {
 };
 
 //registers the message
-function registerMessage(client, message) {
+function registerMessage(client: any, message: Message) {
   let username = rsrc.getUsernameFromMessage(message);
   let guildName = rsrc.getGuildNameFromGuild(message.guild);
   let userDir = rsrc.getUserDirectoryFromGuild(message.guild, username);
 
-  let content = null;
+  let content: any;
 
   //if the user has not been registered
   if (!fs.existsSync(userDir))
@@ -94,7 +97,7 @@ function registerMessage(client, message) {
     client.updateUser(content);
   }
 
-  let logMessage = `[${getTimestamp(message)}] (#${message.channel.name}): ${
+  let logMessage = `[${getTimestamp(message)}] (#${(message.channel as TextChannel).name}): ${
     message.content
   }\n`;
 
@@ -111,7 +114,7 @@ function registerMessage(client, message) {
   return true;
 }
 
-function getTimestamp(message) {
+function getTimestamp(message: Message) {
   let timestamp = message.createdAt;
   let date = (timestamp.getMonth() + 1 + "/" + timestamp.getDate()).replace(
     /.*(\d{2}\/\d{2}).*/,

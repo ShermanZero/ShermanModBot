@@ -1,1 +1,1 @@
-{"version":3,"file":"guildMemberUpdate.js","sourceRoot":"","sources":["../../main/events/guildMemberUpdate.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,GAAG,CAAC,MAAM,EAAE,SAAS,EAAE,SAAS,EAAE,EAAE;AAElD,CAAC,CAAA"}
+{"version":3,"file":"guildMemberUpdate.js","sourceRoot":"","sources":["../../src/events/guildMemberUpdate.ts"],"names":[],"mappings":";;AAEA,MAAM,CAAC,OAAO,GAAG,CACf,MAAW,EACX,SAAsB,EACtB,SAAsB,EACtB,EAAE,GAAE,CAAC,CAAC"}

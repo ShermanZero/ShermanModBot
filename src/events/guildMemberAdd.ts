@@ -1,4 +1,4 @@
-import { GuildMember, TextChannel } from 'discord.js';
+import { GuildMember, Role, TextChannel } from 'discord.js';
 
 import rsrc from '../classes/Resources';
 
@@ -14,7 +14,9 @@ module.exports = (client: any, member: GuildMember) => {
   )
     return;
 
-  let unrankedRole = guild.roles.get("609248072706424863");
+  let unrankedRole: any = guild.roles.get("609248072706424863");
+  if (unrankedRole) unrankedRole = unrankedRole as Role;
+
   member.addRole(unrankedRole).catch(err => {
     console.log(err);
   });

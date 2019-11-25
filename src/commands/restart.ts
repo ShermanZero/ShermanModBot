@@ -27,7 +27,7 @@ exports.run = (
 
   let entries = Object.entries(client.usersInSession);
   for (const [, users] of entries) {
-    let allUsers = Object.entries(users);
+    let allUsers = Object.entries(users as any);
 
     for (const [username, userContent] of allUsers)
       rsrc.writeUserContentToFile(client, username, userContent);

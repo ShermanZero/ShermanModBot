@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Channel, Message, Role } from 'discord.js';
 
 exports.props = {
   requiresElevation: "mod",
@@ -7,8 +7,11 @@ exports.props = {
 };
 
 exports.run = (client: any, message: Message, args: string[]) => {
-  const privateRole = message.guild.roles.get("645418484398030918");
-  const privateHangoutChannel = client.channels.get("645418390961258536");
+  let privateRole: any = message.guild.roles.get("645418484398030918");
+  let privateHangoutChannel: any = client.channels.get("645418390961258536");
+
+  if (privateRole) privateRole = privateRole as Role;
+  if (privateHangoutChannel) privateHangoutChannel = privateHangoutChannel as Channel;
 
   if (message.mentions.members.size === 0)
     return message.reply("please mention a user to give private access to");

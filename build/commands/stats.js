@@ -1,34 +1,50 @@
-import Discord from 'discord.js';
-import rsrc from '../classes/Resources';
-import ranks from '../resources/ranks/ranks.json';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const discord_js_1 = require("discord.js");
+const Resources_1 = require("../classes/Resources");
+const ranks_json_1 = require("../resources/ranks/ranks.json");
 exports.props = {
-    "description": "replies to the user with their current server stats",
-    "usage": ""
+    description: "replies to the user with their current server stats",
+    usage: ""
 };
-exports.run = (client, message, args) => {
-    let username = rsrc.getUsernameFromMessage(message);
+exports.run = async (client, message, args) => {
+    let username = Resources_1.default.getUsernameFromMessage(message);
     let content = client.getUserContent(message.guild, username);
     let member = message.member;
     if (message.mentions.members.size !== 0) {
         member = message.mentions.members.first();
-        username = rsrc.getUsernameFromMember(member);
-        content = rsrc.getUserContentsFromName(message, username);
+        username = Resources_1.default.getUsernameFromMember(member);
+        content = Resources_1.default.getUserContentsFromName(message, username);
     }
     if (!content) {
-        message.delete().catch((err) => { console.log(err); });
-        return message.reply(`${message.mentions.members.first().displayName} does not yet have any stats :( they need to post a message in the server to be registered by me.`)
-            .catch((err) => { console.log(err); });
+        message.delete().catch(err => {
+            console.log(err);
+        });
+        try {
+            return message.reply(`${message.mentions.members.first().displayName} does not yet have any stats :( they need to post a message in the server to be registered by me.`);
+        }
+        catch (err_1) {
+            console.log(err_1);
+        }
     }
-    message.channel.send(exports.getEmbed(client, member, content)).catch((err) => { console.log(err); });
-    message.delete().catch((err) => { console.log(err); });
+    message.channel.send(exports.getEmbed(client, member, content)).catch(err => {
+        console.log(err);
+    });
+    message.delete().catch(err => {
+        console.log(err);
+    });
 };
 exports.getEmbed = (client, member, content) => {
-    let name = "**" + content.hidden.username.substring(0, content.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
+    let name = "**" +
+        content.hidden.username
+            .substring(0, content.hidden.username.lastIndexOf("_"))
+            .toUpperCase() +
+        "**";
     let rankColor = member.guild.roles.find(role => role.name === content.rank.name).color;
-    const embed = new Discord.RichEmbed();
+    const embed = new discord_js_1.default.RichEmbed();
     embed.setTitle(name + " | " + calculatePosition(client, content));
     embed.setColor(rankColor);
-    embed.setThumbnail(ranks.urls[content.rank.name]);
+    embed.setThumbnail(ranks_json_1.default.urls[content.rank.name]);
     let levelStats = "";
     if (content.rank.name !== null)
         levelStats += `**rank:**  *${content.rank.name}*\n`.toUpperCase();
@@ -66,7 +82,8 @@ function calculatePosition(client, content) {
     let usersHigher = 0;
     let entries = Object.entries(guild);
     for (let [username, userContent] of entries)
-        if (username != content.hidden.username && userContent.rank.xp > content.rank.xp)
+        if (username != content.hidden.username &&
+            userContent.rank.xp > content.rank.xp)
             usersHigher++;
     return "*RANK #" + (usersHigher + 1) + "*";
 }

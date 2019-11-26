@@ -10,7 +10,7 @@ module.exports.props = {
 };
 
 module.exports.run = async (client: any, message: Message, args: string[]) => {
-  let guildUsers = rsrc.getGuildUsersFromGuild(message.guild);
+  let guildUsers = rsrc.getGuildUsersFromGuild(client, message.guild);
   let allUsers = Object.keys(guildUsers);
 
   message.reply(

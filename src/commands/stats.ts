@@ -15,7 +15,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (!message.mentions.members || message.mentions.members.size !== 0) {
     member = message.mentions.members!.first() as GuildMember;
     username = rsrc.getUsernameFromMember(member);
-    content = rsrc.getUserContentsFromName(message, username);
+    content = rsrc.getUserContentsFromName(client, message, username);
   }
 
   if (!content) {

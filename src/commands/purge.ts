@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Message, TextChannel } from 'discord.js';
 
 module.exports.props = {
   requiresElevation: "mod",
@@ -18,7 +18,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (amount < 2) amount = 2;
 
   //fetch 100 messages (will be filtered and lowered up to max amount requested)
-  message.channel.fetch().then((messages: any) => {
+  (message.channel as TextChannel).messages.fetch({limit: 100}).then((messages: any) => {
     if (user) {
       const filterBy = user ? user.id : client.user.id;
       messages = messages

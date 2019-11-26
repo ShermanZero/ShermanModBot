@@ -18,7 +18,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
 
   if (!user) {
     if (args.length == 1) {
-      userContent = rsrc.getUserContentsFromName(message, args[0], true);
+      userContent = rsrc.getUserContentsFromName(client, message, args[0], true);
 
       if (!userContent)
         try {

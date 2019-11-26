@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import rsrc from '../classes/Resources';
+import config from '../config';
 import blacklist from '../resources/misc/blacklist';
 import ranks from '../resources/ranks/ranks';
 
@@ -67,8 +68,8 @@ module.exports = (client: any, message: Message) => {
 function registerMessage(client: any, message: Message) {
   let username = rsrc.getUsernameFromMessage(message);
 
-  if(!message.guild) return;
-  
+  if (!message.guild) return;
+
   let guildName = rsrc.getGuildNameFromGuild(message.guild);
   let userDir = rsrc.getUserDirectoryFromGuild(message.guild, username);
 
@@ -80,7 +81,7 @@ function registerMessage(client: any, message: Message) {
 
   //user NOT stored in local client session
   if (!client.hasUser(message.guild, username)) {
-    content = rsrc.getUserContentsFromName(message, username);
+    content = rsrc.getUserContentsFromName(client, message, username);
     client.registerUser(message.member!.user, content);
     //user stored in local client session
   } else {
@@ -129,14 +130,15 @@ function getTimestamp(message: Message) {
 }
 
 function updateMasterLog(client) {
-  let masterLog = path.join(
-    __dirname,
-    "..",
-    "logs",
-    client.config.files.log_all
-  );
+  let masterLog = path.join(__dirname, "..", "logs");
 
-  if (!fs.existsSync(masterLog)) fs.writeFileSync(masterLog, "");
+  if (!fs.existsSync(masterLog)) {
+    fs.mkdirSync(masterLog, { recursive: true });
+    fs.writeFileSync(
+      path.resolve(masterLog, config.files.log_all),
+      "-- START OF LOG --"
+    );
+  }
 
   //if the log length exceeds the threshold, update the master log
   if (

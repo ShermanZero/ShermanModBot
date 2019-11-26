@@ -1,0 +1,11 @@
+-- START OF LOG --/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  08:53:59] (#shermanbot): !purge
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  08:54:05] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  09:22:30] (#shermanbot): !users
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  09:22:35] (#shermanbot): !purge
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  09:22:38] (#shermanbot): !help
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  09:22:47] (#shermanbot): !log
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  09:22:53] (#shermanbot): !log <@349728538439450625>
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  09:23:08] (#shermanbot): !say wahtup
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  09:23:16] (#shermanbot): !stats
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  09:23:31] (#shermanbot): !user <@349728538439450625>
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  09:23:39] (#shermanbot): !shutdown

@@ -18,10 +18,9 @@
     "ts-node-dev": "^1.0.0-pre.44"
   },
   "scripts": {
-    "start": "node build/index.js",
+    "start": "tsc -p . && node build/index.js",
     "tsc": "tsc -p tsconfig.json",
-    "watch": "tsc -p tsconfig.json -w",
-    "test": "mocha -r ts-node/register \"test/**/*.spec.ts\""
+    "watch": "tsc -p tsconfig.json -w"
   },
   "repository": {
     "type": "git",

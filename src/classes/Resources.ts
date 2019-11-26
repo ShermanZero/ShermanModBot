@@ -35,6 +35,7 @@ export default class Resources {
   }
 
   static getUserContentsFromName(
+    client: any,
     message: Message,
     username: string,
     search: boolean = false
@@ -42,6 +43,7 @@ export default class Resources {
     console.log("username", username);
 
     return Resources.getUserContentsFromNameWithGuild(
+      client,
       message.guild as Guild,
       message,
       username,
@@ -50,6 +52,7 @@ export default class Resources {
   }
 
   static getUserContentsFromNameWithGuild(
+    client: any,
     guild: Guild,
     message: Message,
     username: string,
@@ -71,7 +74,7 @@ export default class Resources {
 
       let possibleMatches: string[] = [];
 
-      let users = this.getGuildUsersFromGuild(guild);
+      let users = this.getGuildUsersFromGuild(client, guild);
       for (let guildUserUsername in Object.keys(users))
         if (guildUserUsername.includes(username))
           possibleMatches.push(guildUserUsername);
@@ -145,8 +148,10 @@ export default class Resources {
     return path.join(__dirname, "..", "users", guildname);
   }
 
-  static getGuildUsersFromGuild(guild: any): any {
-    for (const [guildname, users] of guild)
+  static getGuildUsersFromGuild(client: any, guild: any): any {
+    let entries = Object.entries(client.usersInSession);
+
+    for (const [guildname, users] of entries)
       if (guildname == this.getGuildNameFromGuild(guild)) return users;
 
     return null;

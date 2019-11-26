@@ -5,8 +5,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import rsrc from '../classes/Resources';
-import * as blacklist from '../resources/misc/blacklist.json';
-import * as ranks from '../resources/ranks/ranks.json';
+import blacklist from '../resources/misc/blacklist';
+import ranks from '../resources/ranks/ranks';
 
 export default (client: any, message: Message) => {
   //ignore all bots

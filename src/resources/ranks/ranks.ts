@@ -1,5 +1,5 @@
-{
-  "levels": {
+export default {
+  levels: {
     "0": "unranked",
     "5": "bronze",
     "10": "silver",
@@ -9,7 +9,7 @@
     "30": "masters",
     "35": "grandmaster"
   },
-  "urls": {
+  urls: {
     "bronze": "https://i.ibb.co/Bt7v30V/01-bronze.png",
     "silver": "https://i.ibb.co/k49yxwb/02-silver.png",
     "gold": "https://i.ibb.co/k5PhGLv/03-gold.png",
@@ -18,9 +18,7 @@
     "masters": "https://i.ibb.co/zfHh6Fh/06-masters.png",
     "grandmaster": "https://i.ibb.co/8g04NTS/07-grandmaster.png"
   },
-
-
-  "_info": {
+  _info: {
     "unranked": 0,
     "bronze": 180,
     "silver": 2420,

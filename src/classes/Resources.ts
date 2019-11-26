@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as rimraf from 'rimraf';
 
-import * as ranks from '../resources/ranks/ranks.json';
+import ranks from '../resources/ranks/ranks';
 
 export default class Resources {
   static getUsernameFromMessage(message: Message): any {

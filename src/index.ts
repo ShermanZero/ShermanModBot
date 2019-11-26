@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import rsrc from './classes/Resources';
-import * as config from './resources/config.json';
+import config from './config';
 
 let client: any = new Discord.Client();
 

@@ -1,7 +1,7 @@
 import { ColorResolvable, GuildMember, Message, MessageEmbed } from 'discord.js';
 
 import rsrc from '../classes/Resources';
-import * as ranks from '../resources/ranks/ranks.json';
+import ranks from '../resources/ranks/ranks';
 
 export default class stats {
   props = {

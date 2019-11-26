@@ -7,3 +7,5 @@
 #ignore all .DS_store files
 **.**DS_store
 
+#ignore the workspace file
+ShermanModBot.code-workspace

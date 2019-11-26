@@ -18,9 +18,9 @@
     "ts-node-dev": "^1.0.0-pre.44"
   },
   "scripts": {
-    "start": "tsc -p . && node build/index.js",
-    "tsc": "tsc -p tsconfig.json",
-    "watch": "tsc -p tsconfig.json -w"
+    "start": "tsc -p . && nodemon build/index.js",
+    "watch": "tsc -p tsconfig.json -w",
+    "tsc": "tsc -p tsconfig.json"
   },
   "repository": {
     "type": "git",

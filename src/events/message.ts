@@ -8,7 +8,7 @@ import rsrc from '../classes/Resources';
 import blacklist from '../resources/misc/blacklist';
 import ranks from '../resources/ranks/ranks';
 
-export default (client: any, message: Message) => {
+module.exports = (client: any, message: Message) => {
   //ignore all bots
   if (message.author.bot) return;
 

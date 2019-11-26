@@ -6,7 +6,7 @@ import * as path from 'path';
 
 import rsrc from '../classes/Resources';
 
-export default (client: any, member: GuildMember) => {
+module.exports = (client: any, member: GuildMember) => {
   let username = rsrc.getUsernameFromMember(member);
   let userDir = rsrc.getUserDirectoryFromGuild(member.guild, username);
   let guildDir = rsrc.getGuildDirectoryFromGuild(member.guild);

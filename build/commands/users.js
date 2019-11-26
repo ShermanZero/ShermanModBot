@@ -11,20 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 require("../classes/StringHandler");
 const Resources_1 = require("../classes/Resources");
-class users {
-    constructor() {
-        this.props = {
-            requiresElevation: "mod",
-            description: "displays all members registered in the server",
-        };
-    }
-    run(client, message, args) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let guildUsers = Resources_1.default.getGuildUsersFromGuild(message.guild);
-            let allUsers = Object.keys(guildUsers);
-            message.reply(`here are the current registered members of the server:\n[**${allUsers.join("**, **")}**]`);
-        });
-    }
-}
-exports.default = users;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXNlcnMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvY29tbWFuZHMvdXNlcnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7QUFBQSxvQ0FBa0M7QUFJbEMsb0RBQXdDO0FBRXhDLE1BQXFCLEtBQUs7SUFBMUI7UUFDRSxVQUFLLEdBQUc7WUFDTixpQkFBaUIsRUFBRSxLQUFLO1lBQ3hCLFdBQVcsRUFBRSwrQ0FBK0M7U0FDN0QsQ0FBQztJQVlKLENBQUM7SUFWTyxHQUFHLENBQUMsTUFBVyxFQUFFLE9BQWdCLEVBQUUsSUFBYzs7WUFDckQsSUFBSSxVQUFVLEdBQUcsbUJBQUksQ0FBQyxzQkFBc0IsQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDNUQsSUFBSSxRQUFRLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztZQUV2QyxPQUFPLENBQUMsS0FBSyxDQUNYLDhEQUE4RCxRQUFRLENBQUMsSUFBSSxDQUN6RSxRQUFRLENBQ1QsS0FBSyxDQUNQLENBQUM7UUFDSixDQUFDO0tBQUE7Q0FDRjtBQWhCRCx3QkFnQkMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJy4uL2NsYXNzZXMvU3RyaW5nSGFuZGxlcic7XG5cbmltcG9ydCB7IE1lc3NhZ2UgfSBmcm9tICdkaXNjb3JkLmpzJztcblxuaW1wb3J0IHJzcmMgZnJvbSAnLi4vY2xhc3Nlcy9SZXNvdXJjZXMnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyB1c2VycyB7XG4gIHByb3BzID0ge1xuICAgIHJlcXVpcmVzRWxldmF0aW9uOiBcIm1vZFwiLFxuICAgIGRlc2NyaXB0aW9uOiBcImRpc3BsYXlzIGFsbCBtZW1iZXJzIHJlZ2lzdGVyZWQgaW4gdGhlIHNlcnZlclwiLFxuICB9O1xuXG4gIGFzeW5jIHJ1bihjbGllbnQ6IGFueSwgbWVzc2FnZTogTWVzc2FnZSwgYXJnczogc3RyaW5nW10pIHtcbiAgICBsZXQgZ3VpbGRVc2VycyA9IHJzcmMuZ2V0R3VpbGRVc2Vyc0Zyb21HdWlsZChtZXNzYWdlLmd1aWxkKTtcbiAgICBsZXQgYWxsVXNlcnMgPSBPYmplY3Qua2V5cyhndWlsZFVzZXJzKTtcblxuICAgIG1lc3NhZ2UucmVwbHkoXG4gICAgICBgaGVyZSBhcmUgdGhlIGN1cnJlbnQgcmVnaXN0ZXJlZCBtZW1iZXJzIG9mIHRoZSBzZXJ2ZXI6XFxuWyoqJHthbGxVc2Vycy5qb2luKFxuICAgICAgICBcIioqLCAqKlwiXG4gICAgICApfSoqXWBcbiAgICApO1xuICB9XG59XG4iXX0=
+module.exports.props = {
+    requiresElevation: "mod",
+    description: "displays all members registered in the server"
+};
+module.exports = (client, message, args) => __awaiter(void 0, void 0, void 0, function* () {
+    let guildUsers = Resources_1.default.getGuildUsersFromGuild(message.guild);
+    let allUsers = Object.keys(guildUsers);
+    message.reply(`here are the current registered members of the server:\n[**${allUsers.join("**, **")}**]`);
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXNlcnMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvY29tbWFuZHMvdXNlcnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7QUFBQSxvQ0FBa0M7QUFJbEMsb0RBQXdDO0FBRXhDLE1BQU0sQ0FBQyxPQUFPLENBQUMsS0FBSyxHQUFHO0lBQ3JCLGlCQUFpQixFQUFFLEtBQUs7SUFDeEIsV0FBVyxFQUFFLCtDQUErQztDQUM3RCxDQUFDO0FBRUYsTUFBTSxDQUFDLE9BQU8sR0FBRyxDQUFPLE1BQVcsRUFBRSxPQUFnQixFQUFFLElBQWMsRUFBRSxFQUFFO0lBQ3ZFLElBQUksVUFBVSxHQUFHLG1CQUFJLENBQUMsc0JBQXNCLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQzVELElBQUksUUFBUSxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7SUFFdkMsT0FBTyxDQUFDLEtBQUssQ0FDWCw4REFBOEQsUUFBUSxDQUFDLElBQUksQ0FDekUsUUFBUSxDQUNULEtBQUssQ0FDUCxDQUFDO0FBQ0osQ0FBQyxDQUFBLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJy4uL2NsYXNzZXMvU3RyaW5nSGFuZGxlcic7XG5cbmltcG9ydCB7IE1lc3NhZ2UgfSBmcm9tICdkaXNjb3JkLmpzJztcblxuaW1wb3J0IHJzcmMgZnJvbSAnLi4vY2xhc3Nlcy9SZXNvdXJjZXMnO1xuXG5tb2R1bGUuZXhwb3J0cy5wcm9wcyA9IHtcbiAgcmVxdWlyZXNFbGV2YXRpb246IFwibW9kXCIsXG4gIGRlc2NyaXB0aW9uOiBcImRpc3BsYXlzIGFsbCBtZW1iZXJzIHJlZ2lzdGVyZWQgaW4gdGhlIHNlcnZlclwiXG59O1xuXG5tb2R1bGUuZXhwb3J0cyA9IGFzeW5jIChjbGllbnQ6IGFueSwgbWVzc2FnZTogTWVzc2FnZSwgYXJnczogc3RyaW5nW10pID0+IHtcbiAgbGV0IGd1aWxkVXNlcnMgPSByc3JjLmdldEd1aWxkVXNlcnNGcm9tR3VpbGQobWVzc2FnZS5ndWlsZCk7XG4gIGxldCBhbGxVc2VycyA9IE9iamVjdC5rZXlzKGd1aWxkVXNlcnMpO1xuXG4gIG1lc3NhZ2UucmVwbHkoXG4gICAgYGhlcmUgYXJlIHRoZSBjdXJyZW50IHJlZ2lzdGVyZWQgbWVtYmVycyBvZiB0aGUgc2VydmVyOlxcblsqKiR7YWxsVXNlcnMuam9pbihcbiAgICAgIFwiKiosICoqXCJcbiAgICApfSoqXWBcbiAgKTtcbn07XG4iXX0=

@@ -3,6 +3,7 @@
     "rootDir": "./src/",
     "outDir": "./build/",
 
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "inlineSources": true,
     "inlineSourceMap": true,

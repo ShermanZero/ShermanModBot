@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "The Discord bot for ShermanZero's server",
   "main": "index.js",
-  "type": "module",
   "dependencies": {
     "@types/node": "^12.12.14",
     "colors": "^1.4.0",

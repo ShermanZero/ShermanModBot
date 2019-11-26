@@ -2,7 +2,7 @@ import { GuildMember, Role, TextChannel } from 'discord.js';
 
 import rsrc from '../classes/Resources';
 
-export default (client: any, member: GuildMember) => {
+module.exports = (client: any, member: GuildMember) => {
   const guild = member.guild;
   const defaultChannel = guild.channels.find(
     channel => channel.name === "welcome"

@@ -1,7 +1,7 @@
 import { GuildMember } from 'discord.js';
 
-export default (() => (
+module.exports = (
   client: any,
   oldMember: GuildMember,
   newMember: GuildMember
-) => {});
+) => {};

@@ -6,13 +6,12 @@ import * as path from 'path';
 
 import exit from '../classes/ExitHandler';
 import rsrc from '../classes/Resources';
+import boot from '../resources/misc/boot';
 
-export default (client: any) => {
+module.exports = (client: any) => {
   client.user.setActivity(client.config.status);
 
-  let bootFile = path.join(__dirname, "..", "resources", "misc", "boot.txt");
-  let data: string = fs.readFileSync(bootFile, "utf8");
-  console.log(data.red);
+  console.log(boot.red);
 
   exit.init(client);
 

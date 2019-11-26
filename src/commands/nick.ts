@@ -1,23 +1,25 @@
 import { Message } from 'discord.js';
 
-exports.props = {
-  requiresElevation: "mod",
-  description: "changes the nickname of a member",
-  usage: "{user} {nickname}"
-};
+export default class nick {
+  props = {
+    requiresElevation: "mod",
+    description: "changes the nickname of a member",
+    usage: "<member> <nickname>"
+  };
 
-exports.run = (client: any, message: Message, args: string[]) => {
-  if (message.mentions.members.size === 0)
-    return message
-      .reply("please mention a user to change their nickname")
-      .catch(err => {
-        console.log(err);
-      });
+  async run(client: any, message: Message, args: string[]) {
+    if (!message.mentions.members || message.mentions.members.size === 0)
+      return message
+        .reply("please mention a member to change their nickname")
+        .catch(err => {
+          console.log(err);
+        });
 
-  const nickMember = message.mentions.members.first();
-  nickMember.setNickname(args[1]);
+    const nickMember = message.mentions.members.first();
+    nickMember!.setNickname(args[1]);
 
-  message.reply(`${nickMember}'s nickname has been changed!`).catch(err => {
-    console.log(err);
-  });
-};
+    await message.reply(`${nickMember}'s nickname has been changed!`).catch(err => {
+      console.log(err);
+    });
+  }
+}

@@ -8,88 +8,63 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("../classes/StringHandler");
-var Resources_1 = __importDefault(require("../classes/Resources"));
-exports.props = {
-    requiresElevation: "mod",
-    description: "displays the user's data",
-    usage: "{user}"
-};
-exports.run = function (client, message, args) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, username, userContent;
-    return __generator(this, function (_a) {
-        user = message.mentions.users.first();
-        if (!user) {
-            if (args.length == 1) {
-                userContent = Resources_1.default.getUserContentsFromName(message, args[0], true);
-                if (!userContent)
+const Resources_1 = require("../classes/Resources");
+class user {
+    constructor() {
+        this.props = {
+            requiresElevation: "mod",
+            description: "displays the member's data",
+            usage: "<member>"
+        };
+    }
+    run(client, message, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = message.mentions.users.first();
+            let username;
+            let userContent;
+            if (!user) {
+                if (args.length == 1) {
+                    userContent = Resources_1.default.getUserContentsFromName(message, args[0], true);
+                    if (!userContent)
+                        try {
+                            return message.reply("that user is not registered");
+                        }
+                        catch (err) {
+                            console.log(err);
+                        }
+                    username = userContent.name;
+                }
+                else
                     try {
-                        return [2 /*return*/, message.reply("that user is not registered")];
+                        return message.reply("you need to specify a user");
                     }
-                    catch (err) {
-                        console.log(err);
+                    catch (err_1) {
+                        console.log(err_1);
                     }
-                username = userContent.name;
             }
-            else
+            else {
+                username = Resources_1.default.getUsernameFromMember(user);
+                userContent = client.getUserContent(message.guild, username);
+            }
+            if (!username || !userContent)
                 try {
-                    return [2 /*return*/, message.reply("you need to specify a user")];
+                    return message.reply("that user is not registered");
                 }
-                catch (err_1) {
-                    console.log(err_1);
+                catch (err_2) {
+                    console.log(err_2);
                 }
-        }
-        else {
-            username = Resources_1.default.getUsernameFromMember(user);
-            userContent = client.getUserContent(message.guild, username);
-        }
-        if (!username || !userContent)
-            try {
-                return [2 /*return*/, message.reply("that user is not registered")];
-            }
-            catch (err_2) {
-                console.log(err_2);
-            }
-        message.delete().catch(function (err) {
-            console.log(err);
+            message.delete().catch(err => {
+                console.log(err);
+            });
+            message.channel
+                .send(`Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(userContent, null, "\t")}\n\`\`\``)
+                .catch(err => {
+                console.log(err);
+            });
         });
-        message.channel
-            .send("Here is the data for [" + username.hideID() + "]\n```json\n" + JSON.stringify(userContent, null, "\t") + "\n```")
-            .catch(function (err) {
-            console.log(err);
-        });
-        return [2 /*return*/];
-    });
-}); };
-//# sourceMappingURL=user.js.map
+    }
+}
+exports.default = user;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXNlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jb21tYW5kcy91c2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsb0NBQWtDO0FBSWxDLG9EQUF3QztBQUV4QyxNQUFxQixJQUFJO0lBQXpCO1FBQ0UsVUFBSyxHQUFHO1lBQ04saUJBQWlCLEVBQUUsS0FBSztZQUN4QixXQUFXLEVBQUUsNEJBQTRCO1lBQ3pDLEtBQUssRUFBRSxVQUFVO1NBQ2xCLENBQUM7SUFzREosQ0FBQztJQXBETyxHQUFHLENBQUMsTUFBVyxFQUFFLE9BQWdCLEVBQUUsSUFBYzs7WUFDckQsTUFBTSxJQUFJLEdBQUcsT0FBTyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsS0FBSyxFQUFFLENBQUM7WUFFNUMsSUFBSSxRQUFhLENBQUM7WUFDbEIsSUFBSSxXQUFnQixDQUFDO1lBRXJCLElBQUksQ0FBQyxJQUFJLEVBQUU7Z0JBQ1QsSUFBSSxJQUFJLENBQUMsTUFBTSxJQUFJLENBQUMsRUFBRTtvQkFDcEIsV0FBVyxHQUFHLG1CQUFJLENBQUMsdUJBQXVCLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUMsQ0FBQztvQkFFbkUsSUFBSSxDQUFDLFdBQVc7d0JBQ2QsSUFBSTs0QkFDRixPQUFPLE9BQU8sQ0FBQyxLQUFLLENBQUMsNkJBQTZCLENBQUMsQ0FBQzt5QkFDckQ7d0JBQUMsT0FBTyxHQUFHLEVBQUU7NEJBQ1osT0FBTyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQzt5QkFDbEI7b0JBRUgsUUFBUSxHQUFHLFdBQVcsQ0FBQyxJQUFJLENBQUM7aUJBQzdCOztvQkFDQyxJQUFJO3dCQUNGLE9BQU8sT0FBTyxDQUFDLEtBQUssQ0FBQyw0QkFBNEIsQ0FBQyxDQUFDO3FCQUNwRDtvQkFBQyxPQUFPLEtBQUssRUFBRTt3QkFDZCxPQUFPLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxDQUFDO3FCQUNwQjthQUNKO2lCQUFNO2dCQUNMLFFBQVEsR0FBRyxtQkFBSSxDQUFDLHFCQUFxQixDQUFDLElBQUksQ0FBQyxDQUFDO2dCQUM1QyxXQUFXLEdBQUcsTUFBTSxDQUFDLGNBQWMsQ0FBQyxPQUFPLENBQUMsS0FBSyxFQUFFLFFBQVEsQ0FBQyxDQUFDO2FBQzlEO1lBRUQsSUFBSSxDQUFDLFFBQVEsSUFBSSxDQUFDLFdBQVc7Z0JBQzNCLElBQUk7b0JBQ0YsT0FBTyxPQUFPLENBQUMsS0FBSyxDQUFDLDZCQUE2QixDQUFDLENBQUM7aUJBQ3JEO2dCQUFDLE9BQU8sS0FBSyxFQUFFO29CQUNkLE9BQU8sQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUM7aUJBQ3BCO1lBRUgsT0FBTyxDQUFDLE1BQU0sRUFBRSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsRUFBRTtnQkFDM0IsT0FBTyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUNuQixDQUFDLENBQUMsQ0FBQztZQUVILE9BQU8sQ0FBQyxPQUFPO2lCQUNaLElBQUksQ0FDSCx5QkFBeUIsUUFBUSxDQUFDLE1BQU0sRUFBRSxrQkFBa0IsSUFBSSxDQUFDLFNBQVMsQ0FDeEUsV0FBVyxFQUNYLElBQUksRUFDSixJQUFJLENBQ0wsVUFBVSxDQUNaO2lCQUNBLEtBQUssQ0FBQyxHQUFHLENBQUMsRUFBRTtnQkFDWCxPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQ25CLENBQUMsQ0FBQyxDQUFDO1FBQ1AsQ0FBQztLQUFBO0NBQ0Y7QUEzREQsdUJBMkRDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0ICcuLi9jbGFzc2VzL1N0cmluZ0hhbmRsZXInO1xyXG5cclxuaW1wb3J0IHsgTWVzc2FnZSB9IGZyb20gJ2Rpc2NvcmQuanMnO1xyXG5cclxuaW1wb3J0IHJzcmMgZnJvbSAnLi4vY2xhc3Nlcy9SZXNvdXJjZXMnO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgdXNlciB7XHJcbiAgcHJvcHMgPSB7XHJcbiAgICByZXF1aXJlc0VsZXZhdGlvbjogXCJtb2RcIixcclxuICAgIGRlc2NyaXB0aW9uOiBcImRpc3BsYXlzIHRoZSBtZW1iZXIncyBkYXRhXCIsXHJcbiAgICB1c2FnZTogXCI8bWVtYmVyPlwiXHJcbiAgfTtcclxuXHJcbiAgYXN5bmMgcnVuKGNsaWVudDogYW55LCBtZXNzYWdlOiBNZXNzYWdlLCBhcmdzOiBzdHJpbmdbXSkge1xyXG4gICAgY29uc3QgdXNlciA9IG1lc3NhZ2UubWVudGlvbnMudXNlcnMuZmlyc3QoKTtcclxuXHJcbiAgICBsZXQgdXNlcm5hbWU6IGFueTtcclxuICAgIGxldCB1c2VyQ29udGVudDogYW55O1xyXG5cclxuICAgIGlmICghdXNlcikge1xyXG4gICAgICBpZiAoYXJncy5sZW5ndGggPT0gMSkge1xyXG4gICAgICAgIHVzZXJDb250ZW50ID0gcnNyYy5nZXRVc2VyQ29udGVudHNGcm9tTmFtZShtZXNzYWdlLCBhcmdzWzBdLCB0cnVlKTtcclxuXHJcbiAgICAgICAgaWYgKCF1c2VyQ29udGVudClcclxuICAgICAgICAgIHRyeSB7XHJcbiAgICAgICAgICAgIHJldHVybiBtZXNzYWdlLnJlcGx5KFwidGhhdCB1c2VyIGlzIG5vdCByZWdpc3RlcmVkXCIpO1xyXG4gICAgICAgICAgfSBjYXRjaCAoZXJyKSB7XHJcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKGVycik7XHJcbiAgICAgICAgICB9XHJcblxyXG4gICAgICAgIHVzZXJuYW1lID0gdXNlckNvbnRlbnQubmFtZTtcclxuICAgICAgfSBlbHNlXHJcbiAgICAgICAgdHJ5IHtcclxuICAgICAgICAgIHJldHVybiBtZXNzYWdlLnJlcGx5KFwieW91IG5lZWQgdG8gc3BlY2lmeSBhIHVzZXJcIik7XHJcbiAgICAgICAgfSBjYXRjaCAoZXJyXzEpIHtcclxuICAgICAgICAgIGNvbnNvbGUubG9nKGVycl8xKTtcclxuICAgICAgICB9XHJcbiAgICB9IGVsc2Uge1xyXG4gICAgICB1c2VybmFtZSA9IHJzcmMuZ2V0VXNlcm5hbWVGcm9tTWVtYmVyKHVzZXIpO1xyXG4gICAgICB1c2VyQ29udGVudCA9IGNsaWVudC5nZXRVc2VyQ29udGVudChtZXNzYWdlLmd1aWxkLCB1c2VybmFtZSk7XHJcbiAgICB9XHJcblxyXG4gICAgaWYgKCF1c2VybmFtZSB8fCAhdXNlckNvbnRlbnQpXHJcbiAgICAgIHRyeSB7XHJcbiAgICAgICAgcmV0dXJuIG1lc3NhZ2UucmVwbHkoXCJ0aGF0IHVzZXIgaXMgbm90IHJlZ2lzdGVyZWRcIik7XHJcbiAgICAgIH0gY2F0Y2ggKGVycl8yKSB7XHJcbiAgICAgICAgY29uc29sZS5sb2coZXJyXzIpO1xyXG4gICAgICB9XHJcblxyXG4gICAgbWVzc2FnZS5kZWxldGUoKS5jYXRjaChlcnIgPT4ge1xyXG4gICAgICBjb25zb2xlLmxvZyhlcnIpO1xyXG4gICAgfSk7XHJcblxyXG4gICAgbWVzc2FnZS5jaGFubmVsXHJcbiAgICAgIC5zZW5kKFxyXG4gICAgICAgIGBIZXJlIGlzIHRoZSBkYXRhIGZvciBbJHt1c2VybmFtZS5oaWRlSUQoKX1dXFxuXFxgXFxgXFxganNvblxcbiR7SlNPTi5zdHJpbmdpZnkoXHJcbiAgICAgICAgICB1c2VyQ29udGVudCxcclxuICAgICAgICAgIG51bGwsXHJcbiAgICAgICAgICBcIlxcdFwiXHJcbiAgICAgICAgKX1cXG5cXGBcXGBcXGBgXHJcbiAgICAgIClcclxuICAgICAgLmNhdGNoKGVyciA9PiB7XHJcbiAgICAgICAgY29uc29sZS5sb2coZXJyKTtcclxuICAgICAgfSk7XHJcbiAgfVxyXG59XHJcbiJdfQ==

@@ -8,66 +8,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var path_1 = __importDefault(require("path"));
-exports.props = {
-    requiresElevation: "owner",
-    description: "reloads a command",
-    usage: "{command}"
-};
-exports.run = function (client, message, args) { return __awaiter(void 0, void 0, void 0, function () {
-    var commandName, props;
-    return __generator(this, function (_a) {
-        if (!args || args.length < 1)
-            try {
-                return [2 /*return*/, message.reply("you must provide a command name to reload")];
-            }
-            catch (err) {
+const path = require("path");
+class reload {
+    constructor() {
+        this.props = {
+            requiresElevation: "owner",
+            description: "reloads a command",
+            usage: "<command>"
+        };
+    }
+    run(client, message, args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!args || args.length < 1)
+                try {
+                    return message.reply("you must provide a command name to reload");
+                }
+                catch (err) {
+                    console.log(err);
+                }
+            const commandName = args[0];
+            if (!client.commands.has(commandName))
+                return message.reply("that command does not exist");
+            delete require.cache[require.resolve(path.join(__dirname, commandName + ".js"))];
+            client.commands.delete(commandName);
+            const props = require(path.join(__dirname, commandName + ".js"));
+            client.commands.set(commandName, props);
+            message
+                .reply(`the command "${commandName}" has been reloaded`)
+                .catch(err => {
                 console.log(err);
-            }
-        commandName = args[0];
-        //check if the command exists and is valid
-        if (!client.commands.has(commandName))
-            return [2 /*return*/, message.reply("that command does not exist")];
-        delete require.cache[require.resolve(path_1.default.join(__dirname, commandName + ".js"))];
-        //delete and reload the command from the client.commands Enmap
-        client.commands.delete(commandName);
-        props = require(path_1.default.join(__dirname, commandName + ".js"));
-        client.commands.set(commandName, props);
-        message.reply("the command \"" + commandName + "\" has been reloaded").catch(function (err) {
-            console.log(err);
+            });
         });
-        return [2 /*return*/];
-    });
-}); };
-//# sourceMappingURL=reload.js.map
+    }
+}
+exports.default = reload;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVsb2FkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2NvbW1hbmRzL3JlbG9hZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztBQUNBLDZCQUE2QjtBQUU3QixNQUFxQixNQUFNO0lBQTNCO1FBQ0UsVUFBSyxHQUFHO1lBQ04saUJBQWlCLEVBQUUsT0FBTztZQUMxQixXQUFXLEVBQUUsbUJBQW1CO1lBQ2hDLEtBQUssRUFBRSxXQUFXO1NBQ25CLENBQUM7SUErQkosQ0FBQztJQTdCTyxHQUFHLENBQUMsTUFBVyxFQUFFLE9BQWdCLEVBQUUsSUFBYzs7WUFDckQsSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLENBQUMsTUFBTSxHQUFHLENBQUM7Z0JBQzFCLElBQUk7b0JBQ0YsT0FBTyxPQUFPLENBQUMsS0FBSyxDQUFDLDJDQUEyQyxDQUFDLENBQUM7aUJBQ25FO2dCQUFDLE9BQU8sR0FBRyxFQUFFO29CQUNaLE9BQU8sQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUM7aUJBQ2xCO1lBRUgsTUFBTSxXQUFXLEdBQUcsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBRzVCLElBQUksQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUM7Z0JBQ25DLE9BQU8sT0FBTyxDQUFDLEtBQUssQ0FBQyw2QkFBNkIsQ0FBQyxDQUFDO1lBRXRELE9BQU8sT0FBTyxDQUFDLEtBQUssQ0FDbEIsT0FBTyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxXQUFXLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FDM0QsQ0FBQztZQUdGLE1BQU0sQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQyxDQUFDO1lBQ3BDLE1BQU0sS0FBSyxHQUFHLE9BQU8sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxXQUFXLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQztZQUNqRSxNQUFNLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxXQUFXLEVBQUUsS0FBSyxDQUFDLENBQUM7WUFFeEMsT0FBTztpQkFDSixLQUFLLENBQUMsZ0JBQWdCLFdBQVcscUJBQXFCLENBQUM7aUJBQ3ZELEtBQUssQ0FBQyxHQUFHLENBQUMsRUFBRTtnQkFDWCxPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQ25CLENBQUMsQ0FBQyxDQUFDO1FBQ1AsQ0FBQztLQUFBO0NBQ0Y7QUFwQ0QseUJBb0NDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTWVzc2FnZSB9IGZyb20gJ2Rpc2NvcmQuanMnO1xyXG5pbXBvcnQgKiBhcyBwYXRoIGZyb20gJ3BhdGgnO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgcmVsb2FkIHtcclxuICBwcm9wcyA9IHtcclxuICAgIHJlcXVpcmVzRWxldmF0aW9uOiBcIm93bmVyXCIsXHJcbiAgICBkZXNjcmlwdGlvbjogXCJyZWxvYWRzIGEgY29tbWFuZFwiLFxyXG4gICAgdXNhZ2U6IFwiPGNvbW1hbmQ+XCJcclxuICB9O1xyXG5cclxuICBhc3luYyBydW4oY2xpZW50OiBhbnksIG1lc3NhZ2U6IE1lc3NhZ2UsIGFyZ3M6IHN0cmluZ1tdKSB7XHJcbiAgICBpZiAoIWFyZ3MgfHwgYXJncy5sZW5ndGggPCAxKVxyXG4gICAgICB0cnkge1xyXG4gICAgICAgIHJldHVybiBtZXNzYWdlLnJlcGx5KFwieW91IG11c3QgcHJvdmlkZSBhIGNvbW1hbmQgbmFtZSB0byByZWxvYWRcIik7XHJcbiAgICAgIH0gY2F0Y2ggKGVycikge1xyXG4gICAgICAgIGNvbnNvbGUubG9nKGVycik7XHJcbiAgICAgIH1cclxuXHJcbiAgICBjb25zdCBjb21tYW5kTmFtZSA9IGFyZ3NbMF07XHJcblxyXG4gICAgLy9jaGVjayBpZiB0aGUgY29tbWFuZCBleGlzdHMgYW5kIGlzIHZhbGlkXHJcbiAgICBpZiAoIWNsaWVudC5jb21tYW5kcy5oYXMoY29tbWFuZE5hbWUpKVxyXG4gICAgICByZXR1cm4gbWVzc2FnZS5yZXBseShcInRoYXQgY29tbWFuZCBkb2VzIG5vdCBleGlzdFwiKTtcclxuXHJcbiAgICBkZWxldGUgcmVxdWlyZS5jYWNoZVtcclxuICAgICAgcmVxdWlyZS5yZXNvbHZlKHBhdGguam9pbihfX2Rpcm5hbWUsIGNvbW1hbmROYW1lICsgXCIuanNcIikpXHJcbiAgICBdO1xyXG5cclxuICAgIC8vZGVsZXRlIGFuZCByZWxvYWQgdGhlIGNvbW1hbmQgZnJvbSB0aGUgY2xpZW50LmNvbW1hbmRzIEVubWFwXHJcbiAgICBjbGllbnQuY29tbWFuZHMuZGVsZXRlKGNvbW1hbmROYW1lKTtcclxuICAgIGNvbnN0IHByb3BzID0gcmVxdWlyZShwYXRoLmpvaW4oX19kaXJuYW1lLCBjb21tYW5kTmFtZSArIFwiLmpzXCIpKTtcclxuICAgIGNsaWVudC5jb21tYW5kcy5zZXQoY29tbWFuZE5hbWUsIHByb3BzKTtcclxuXHJcbiAgICBtZXNzYWdlXHJcbiAgICAgIC5yZXBseShgdGhlIGNvbW1hbmQgXCIke2NvbW1hbmROYW1lfVwiIGhhcyBiZWVuIHJlbG9hZGVkYClcclxuICAgICAgLmNhdGNoKGVyciA9PiB7XHJcbiAgICAgICAgY29uc29sZS5sb2coZXJyKTtcclxuICAgICAgfSk7XHJcbiAgfVxyXG59XHJcbiJdfQ==

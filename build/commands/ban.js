@@ -8,62 +8,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.props = {
-    requiresElevation: "mod",
-    description: "bans a member from the server",
-    usage: "{user} {reason}"
-};
-exports.run = function (client, message, _a) {
-    var mention = _a[0], reason = _a.slice(1);
-    return __awaiter(void 0, void 0, void 0, function () {
-        var banMember;
-        return __generator(this, function (_b) {
-            if (message.mentions.members.size === 0)
+class ban {
+    constructor() {
+        this.props = {
+            requiresElevation: "mod",
+            description: "bans a member from the server",
+            usage: "<member> <?reason>"
+        };
+    }
+    run(client, message, [mention, ...reason]) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!message.mentions.members || message.mentions.members.size === 0)
                 try {
-                    return [2 /*return*/, message.reply("please mention a user to kick")];
+                    return message.reply("please mention a user to kick");
                 }
                 catch (err) {
                     console.log(err);
+                    return;
                 }
-            banMember = message.mentions.members.first();
-            banMember.ban(reason.join(" ")).then(function (member) {
-                var modChannel = client.channels.get(client.config.channels.mod.logs);
-                modChannel
-                    .send(member.user.username + " was banned by " + message.author.tag + " for reason: " + reason)
-                    .catch(function (err) {
-                    console.log(err);
-                });
-            });
-            return [2 /*return*/];
+            const banMember = message.mentions.members.first();
+            yield banMember.ban({ reason: reason.join(" ") });
+            let modChannel = client.channels.get(client.config.channels.mod.logs);
+            yield modChannel.send(`${banMember.user.username} was banned by ${message.author.tag} for reason: ${reason}`);
         });
-    });
-};
-//# sourceMappingURL=ban.js.map
+    }
+}
+exports.default = ban;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFuLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2NvbW1hbmRzL2Jhbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztBQUVBLE1BQXFCLEdBQUc7SUFBeEI7UUFDRSxVQUFLLEdBQUc7WUFDTixpQkFBaUIsRUFBRSxLQUFLO1lBQ3hCLFdBQVcsRUFBRSwrQkFBK0I7WUFDNUMsS0FBSyxFQUFFLG9CQUFvQjtTQUM1QixDQUFDO0lBbUJKLENBQUM7SUFqQk8sR0FBRyxDQUFDLE1BQVcsRUFBRSxPQUFnQixFQUFFLENBQUMsT0FBTyxFQUFFLEdBQUcsTUFBTSxDQUFDOztZQUMzRCxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxPQUFPLElBQUksT0FBTyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsSUFBSSxLQUFLLENBQUM7Z0JBQ2xFLElBQUk7b0JBQ0YsT0FBTyxPQUFPLENBQUMsS0FBSyxDQUFDLCtCQUErQixDQUFDLENBQUM7aUJBQ3ZEO2dCQUFDLE9BQU8sR0FBRyxFQUFFO29CQUNaLE9BQU8sQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUM7b0JBQ2pCLE9BQU87aUJBQ1I7WUFFSCxNQUFNLFNBQVMsR0FBRyxPQUFPLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxLQUFLLEVBQWlCLENBQUM7WUFDbEUsTUFBTSxTQUFTLENBQUMsR0FBRyxDQUFDLEVBQUUsTUFBTSxFQUFFLE1BQU0sQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1lBRWxELElBQUksVUFBVSxHQUFHLE1BQU0sQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUN0RSxNQUFNLFVBQVUsQ0FBQyxJQUFJLENBQ25CLEdBQUcsU0FBUyxDQUFDLElBQUksQ0FBQyxRQUFRLGtCQUFrQixPQUFPLENBQUMsTUFBTSxDQUFDLEdBQUcsZ0JBQWdCLE1BQU0sRUFBRSxDQUN2RixDQUFDO1FBQ0osQ0FBQztLQUFBO0NBQ0Y7QUF4QkQsc0JBd0JDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgR3VpbGRNZW1iZXIsIE1lc3NhZ2UgfSBmcm9tICdkaXNjb3JkLmpzJztcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGNsYXNzIGJhbiB7XHJcbiAgcHJvcHMgPSB7XHJcbiAgICByZXF1aXJlc0VsZXZhdGlvbjogXCJtb2RcIixcclxuICAgIGRlc2NyaXB0aW9uOiBcImJhbnMgYSBtZW1iZXIgZnJvbSB0aGUgc2VydmVyXCIsXHJcbiAgICB1c2FnZTogXCI8bWVtYmVyPiA8P3JlYXNvbj5cIlxyXG4gIH07XHJcblxyXG4gIGFzeW5jIHJ1bihjbGllbnQ6IGFueSwgbWVzc2FnZTogTWVzc2FnZSwgW21lbnRpb24sIC4uLnJlYXNvbl0pIHtcclxuICAgIGlmICghbWVzc2FnZS5tZW50aW9ucy5tZW1iZXJzIHx8IG1lc3NhZ2UubWVudGlvbnMubWVtYmVycy5zaXplID09PSAwKVxyXG4gICAgICB0cnkge1xyXG4gICAgICAgIHJldHVybiBtZXNzYWdlLnJlcGx5KFwicGxlYXNlIG1lbnRpb24gYSB1c2VyIHRvIGtpY2tcIik7XHJcbiAgICAgIH0gY2F0Y2ggKGVycikge1xyXG4gICAgICAgIGNvbnNvbGUubG9nKGVycik7XHJcbiAgICAgICAgcmV0dXJuO1xyXG4gICAgICB9XHJcblxyXG4gICAgY29uc3QgYmFuTWVtYmVyID0gbWVzc2FnZS5tZW50aW9ucy5tZW1iZXJzLmZpcnN0KCkgYXMgR3VpbGRNZW1iZXI7XHJcbiAgICBhd2FpdCBiYW5NZW1iZXIuYmFuKHsgcmVhc29uOiByZWFzb24uam9pbihcIiBcIikgfSk7XHJcblxyXG4gICAgbGV0IG1vZENoYW5uZWwgPSBjbGllbnQuY2hhbm5lbHMuZ2V0KGNsaWVudC5jb25maWcuY2hhbm5lbHMubW9kLmxvZ3MpO1xyXG4gICAgYXdhaXQgbW9kQ2hhbm5lbC5zZW5kKFxyXG4gICAgICBgJHtiYW5NZW1iZXIudXNlci51c2VybmFtZX0gd2FzIGJhbm5lZCBieSAke21lc3NhZ2UuYXV0aG9yLnRhZ30gZm9yIHJlYXNvbjogJHtyZWFzb259YFxyXG4gICAgKTtcclxuICB9XHJcbn1cclxuIl19

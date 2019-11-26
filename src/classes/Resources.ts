@@ -1,15 +1,19 @@
 import 'colors';
 
 import { Guild, GuildMember, Message, Role } from 'discord.js';
-import fs from 'fs';
-import path from 'path';
-import rimraf from 'rimraf';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as rimraf from 'rimraf';
 
-import ranks from '../resources/ranks/ranks.json';
+import * as ranks from '../resources/ranks/ranks.json';
 
 export default class Resources {
-  static getUsernameFromMessage(message: Message): string {
-    let username = message.member.user.tag.replace("#", "_");
+  static getUsernameFromMessage(message: Message): any {
+    let username: string;
+    if(message.member)
+      username = message.member.user.tag.replace("#", "_");
+    else return null;
+
     username = username.replace(/[^\w\s]/gi, "").toLowerCase();
 
     return username;
@@ -37,7 +41,7 @@ export default class Resources {
     console.log("username", username);
 
     return Resources.getUserContentsFromNameWithGuild(
-      message.guild,
+      message.guild as Guild,
       message,
       username,
       search
@@ -50,7 +54,7 @@ export default class Resources {
     username: string,
     search: boolean = false
   ): any {
-    if (!guild) guild = message.guild;
+    if (!guild) guild = message.guild as Guild;
     console.log("username", username);
 
     username = username.trim().toLowerCase();
@@ -157,8 +161,8 @@ export default class Resources {
     content.hidden.guildname = this.getGuildNameFromGuild(guild);
 
     let date = member.joinedAt;
-    let joinedAt = `${date.getMonth() +
-      1}/${date.getDate()}/${date.getFullYear()}`;
+    let joinedAt = `${date!.getMonth() +
+      1}/${date!.getDate()}/${date!.getFullYear()}`;
     content.misc.joined = joinedAt;
 
     let dir = this.getUserDirectoryFromGuild(guild, content.hidden.username);
@@ -204,7 +208,7 @@ export default class Resources {
 
     rankRolesUserHas.splice(-1, 1);
     rankRolesUserHas.forEach(role => {
-      member.removeRole(role).catch(err => {
+      member.roles.remove(role).catch(err => {
         console.log(err);
       });
     });
@@ -257,5 +261,3 @@ export default class Resources {
     return xp + Math.round((4 * Math.pow(level, 3)) / 5);
   }
 }
-
-module.exports = Resources;

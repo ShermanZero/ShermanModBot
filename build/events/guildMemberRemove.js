@@ -1,22 +1,19 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("colors");
-var ncp_1 = __importDefault(require("ncp"));
-var path_1 = __importDefault(require("path"));
-var Resources_1 = __importDefault(require("../classes/Resources"));
-module.exports = function (client, member) {
-    var username = Resources_1.default.getUsernameFromMember(member);
-    var userDir = Resources_1.default.getUserDirectoryFromGuild(member.guild, username);
-    var guildDir = Resources_1.default.getGuildDirectoryFromGuild(member.guild);
-    var removed;
-    ncp_1.default(userDir, (removed = path_1.default.join(guildDir, client.config.files.removed, username)), { clobber: true }, function (err) {
+const ncp = require("ncp");
+const path = require("path");
+const Resources_1 = require("../classes/Resources");
+exports.default = (client, member) => {
+    let username = Resources_1.default.getUsernameFromMember(member);
+    let userDir = Resources_1.default.getUserDirectoryFromGuild(member.guild, username);
+    let guildDir = Resources_1.default.getGuildDirectoryFromGuild(member.guild);
+    let removed;
+    ncp(userDir, (removed = path.join(guildDir, client.config.files.removed, username)), { clobber: true }, err => {
         if (err)
-            return console.error("!! Failed to transfer [" + username + "] to " + removed);
-        console.log("Member [" + username.magenta + "] just left the guild [" + Resources_1.default.getGuildNameFromGuild(member.guild).magenta + "]");
+            return console.error(`!! Failed to transfer [${username}] to ${removed}`);
+        console.log(`Member [${username.magenta}] just left the guild [${Resources_1.default.getGuildNameFromGuild(member.guild).magenta}]`);
     });
     client.deleteUser(member.guild, username);
 };
-//# sourceMappingURL=guildMemberRemove.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ3VpbGRNZW1iZXJSZW1vdmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvZXZlbnRzL2d1aWxkTWVtYmVyUmVtb3ZlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWdCO0FBR2hCLDJCQUEyQjtBQUMzQiw2QkFBNkI7QUFFN0Isb0RBQXdDO0FBRXhDLGtCQUFlLENBQUMsTUFBVyxFQUFFLE1BQW1CLEVBQUUsRUFBRTtJQUNsRCxJQUFJLFFBQVEsR0FBRyxtQkFBSSxDQUFDLHFCQUFxQixDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQ2xELElBQUksT0FBTyxHQUFHLG1CQUFJLENBQUMseUJBQXlCLENBQUMsTUFBTSxDQUFDLEtBQUssRUFBRSxRQUFRLENBQUMsQ0FBQztJQUNyRSxJQUFJLFFBQVEsR0FBRyxtQkFBSSxDQUFDLDBCQUEwQixDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUU3RCxJQUFJLE9BQVksQ0FBQztJQUNqQixHQUFHLENBQ0QsT0FBTyxFQUNQLENBQUMsT0FBTyxHQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFLE1BQU0sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLE9BQU8sRUFBRSxRQUFRLENBQUMsQ0FBQyxFQUN0RSxFQUFFLE9BQU8sRUFBRSxJQUFJLEVBQUUsRUFDakIsR0FBRyxDQUFDLEVBQUU7UUFDSixJQUFJLEdBQUc7WUFDTCxPQUFPLE9BQU8sQ0FBQyxLQUFLLENBQ2xCLDBCQUEwQixRQUFRLFFBQVEsT0FBTyxFQUFFLENBQ3BELENBQUM7UUFFSixPQUFPLENBQUMsR0FBRyxDQUNULFdBQVcsUUFBUSxDQUFDLE9BQU8sMEJBQ3pCLG1CQUFJLENBQUMscUJBQXFCLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLE9BQzNDLEdBQUcsQ0FDSixDQUFDO0lBQ0osQ0FBQyxDQUNGLENBQUM7SUFFRixNQUFNLENBQUMsVUFBVSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEVBQUUsUUFBUSxDQUFDLENBQUM7QUFDNUMsQ0FBQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0ICdjb2xvcnMnO1xyXG5cclxuaW1wb3J0IHsgR3VpbGRNZW1iZXIgfSBmcm9tICdkaXNjb3JkLmpzJztcclxuaW1wb3J0ICogYXMgbmNwIGZyb20gJ25jcCc7XHJcbmltcG9ydCAqIGFzIHBhdGggZnJvbSAncGF0aCc7XHJcblxyXG5pbXBvcnQgcnNyYyBmcm9tICcuLi9jbGFzc2VzL1Jlc291cmNlcyc7XHJcblxyXG5leHBvcnQgZGVmYXVsdCAoY2xpZW50OiBhbnksIG1lbWJlcjogR3VpbGRNZW1iZXIpID0+IHtcclxuICBsZXQgdXNlcm5hbWUgPSByc3JjLmdldFVzZXJuYW1lRnJvbU1lbWJlcihtZW1iZXIpO1xyXG4gIGxldCB1c2VyRGlyID0gcnNyYy5nZXRVc2VyRGlyZWN0b3J5RnJvbUd1aWxkKG1lbWJlci5ndWlsZCwgdXNlcm5hbWUpO1xyXG4gIGxldCBndWlsZERpciA9IHJzcmMuZ2V0R3VpbGREaXJlY3RvcnlGcm9tR3VpbGQobWVtYmVyLmd1aWxkKTtcclxuXHJcbiAgbGV0IHJlbW92ZWQ6IGFueTtcclxuICBuY3AoXHJcbiAgICB1c2VyRGlyLFxyXG4gICAgKHJlbW92ZWQgPSBwYXRoLmpvaW4oZ3VpbGREaXIsIGNsaWVudC5jb25maWcuZmlsZXMucmVtb3ZlZCwgdXNlcm5hbWUpKSxcclxuICAgIHsgY2xvYmJlcjogdHJ1ZSB9LFxyXG4gICAgZXJyID0+IHtcclxuICAgICAgaWYgKGVycilcclxuICAgICAgICByZXR1cm4gY29uc29sZS5lcnJvcihcclxuICAgICAgICAgIGAhISBGYWlsZWQgdG8gdHJhbnNmZXIgWyR7dXNlcm5hbWV9XSB0byAke3JlbW92ZWR9YFxyXG4gICAgICAgICk7XHJcblxyXG4gICAgICBjb25zb2xlLmxvZyhcclxuICAgICAgICBgTWVtYmVyIFske3VzZXJuYW1lLm1hZ2VudGF9XSBqdXN0IGxlZnQgdGhlIGd1aWxkIFske1xyXG4gICAgICAgICAgcnNyYy5nZXRHdWlsZE5hbWVGcm9tR3VpbGQobWVtYmVyLmd1aWxkKS5tYWdlbnRhXHJcbiAgICAgICAgfV1gXHJcbiAgICAgICk7XHJcbiAgICB9XHJcbiAgKTtcclxuXHJcbiAgY2xpZW50LmRlbGV0ZVVzZXIobWVtYmVyLmd1aWxkLCB1c2VybmFtZSk7XHJcbn07XHJcbiJdfQ==

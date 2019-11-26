@@ -1,12 +1,12 @@
 import 'colors';
 
 import { GuildMember } from 'discord.js';
-import ncp from 'ncp';
-import path from 'path';
+import * as ncp from 'ncp';
+import * as path from 'path';
 
 import rsrc from '../classes/Resources';
 
-module.exports = (client: any, member: GuildMember) => {
+export default (client: any, member: GuildMember) => {
   let username = rsrc.getUsernameFromMember(member);
   let userDir = rsrc.getUserDirectoryFromGuild(member.guild, username);
   let guildDir = rsrc.getGuildDirectoryFromGuild(member.guild);

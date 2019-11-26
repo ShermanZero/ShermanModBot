@@ -1,27 +1,20 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var fs_1 = __importDefault(require("fs"));
-var FileHandler = /** @class */ (function () {
-    function FileHandler() {
-    }
-    FileHandler.readDataFromFile = function (filePath) {
-        var data = fs_1.default.readFileSync(filePath, "utf8");
+const fs = require("fs");
+class FileHandler {
+    static readDataFromFile(filePath) {
+        var data = fs.readFileSync(filePath, "utf8");
         return data;
-    };
-    FileHandler.writeDataToFile = function (data, filePath) {
-        fs_1.default.writeFileSync(filePath, data);
-    };
-    FileHandler.appendDataToFile = function (data, filePath) {
-        fs_1.default.appendFileSync(filePath, data);
-    };
-    FileHandler.deleteFile = function (filePath) {
-        fs_1.default.unlinkSync(filePath);
-    };
-    return FileHandler;
-}());
+    }
+    static writeDataToFile(data, filePath) {
+        fs.writeFileSync(filePath, data);
+    }
+    static appendDataToFile(data, filePath) {
+        fs.appendFileSync(filePath, data);
+    }
+    static deleteFile(filePath) {
+        fs.unlinkSync(filePath);
+    }
+}
 exports.default = FileHandler;
-module.exports = FileHandler;
-//# sourceMappingURL=FileHandler.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRmlsZUhhbmRsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvY2xhc3Nlcy9GaWxlSGFuZGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHlCQUF5QjtBQUV6QixNQUFxQixXQUFXO0lBQzlCLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFnQjtRQUN0QyxJQUFJLElBQUksR0FBRyxFQUFFLENBQUMsWUFBWSxDQUFDLFFBQVEsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUM3QyxPQUFPLElBQUksQ0FBQztJQUNkLENBQUM7SUFFRCxNQUFNLENBQUMsZUFBZSxDQUFDLElBQVksRUFBRSxRQUFnQjtRQUNuRCxFQUFFLENBQUMsYUFBYSxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUNuQyxDQUFDO0lBRUQsTUFBTSxDQUFDLGdCQUFnQixDQUFDLElBQVksRUFBRSxRQUFnQjtRQUNwRCxFQUFFLENBQUMsY0FBYyxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUNwQyxDQUFDO0lBRUQsTUFBTSxDQUFDLFVBQVUsQ0FBQyxRQUFnQjtRQUNoQyxFQUFFLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzFCLENBQUM7Q0FDRjtBQWpCRCw4QkFpQkMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBmcyBmcm9tICdmcyc7XHJcblxyXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBGaWxlSGFuZGxlciB7XHJcbiAgc3RhdGljIHJlYWREYXRhRnJvbUZpbGUoZmlsZVBhdGg6IHN0cmluZyk6IHN0cmluZyB7XHJcbiAgICB2YXIgZGF0YSA9IGZzLnJlYWRGaWxlU3luYyhmaWxlUGF0aCwgXCJ1dGY4XCIpO1xyXG4gICAgcmV0dXJuIGRhdGE7XHJcbiAgfVxyXG5cclxuICBzdGF0aWMgd3JpdGVEYXRhVG9GaWxlKGRhdGE6IHN0cmluZywgZmlsZVBhdGg6IHN0cmluZykge1xyXG4gICAgZnMud3JpdGVGaWxlU3luYyhmaWxlUGF0aCwgZGF0YSk7XHJcbiAgfVxyXG5cclxuICBzdGF0aWMgYXBwZW5kRGF0YVRvRmlsZShkYXRhOiBzdHJpbmcsIGZpbGVQYXRoOiBzdHJpbmcpIHtcclxuICAgIGZzLmFwcGVuZEZpbGVTeW5jKGZpbGVQYXRoLCBkYXRhKTtcclxuICB9XHJcblxyXG4gIHN0YXRpYyBkZWxldGVGaWxlKGZpbGVQYXRoOiBzdHJpbmcpIHtcclxuICAgIGZzLnVubGlua1N5bmMoZmlsZVBhdGgpO1xyXG4gIH1cclxufSJdfQ==

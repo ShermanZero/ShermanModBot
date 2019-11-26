@@ -1,12 +1,11 @@
 import 'colors';
 
-import Discord from 'discord.js';
-import Enmap from 'enmap';
-import fs from 'fs';
-import path from 'path';
+import * as Discord from 'discord.js';
+import * as fs from 'fs';
+import * as path from 'path';
 
 import rsrc from './classes/Resources';
-import config from './resources/config.json';
+import * as config from './resources/config.json';
 
 let client: any = new Discord.Client();
 
@@ -102,7 +101,7 @@ function start() {
     });
   });
 
-  client.commands = new Enmap();
+  client.commands = new Map();
   var commandsPath = path.join(__dirname, "commands");
 
   fs.readdir(commandsPath, function(err, files) {

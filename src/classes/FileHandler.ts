@@ -1,4 +1,4 @@
-import fs from 'fs';
+import * as fs from 'fs';
 
 export default class FileHandler {
   static readDataFromFile(filePath: string): string {
@@ -18,5 +18,3 @@ export default class FileHandler {
     fs.unlinkSync(filePath);
   }
 }
-
-module.exports = FileHandler;

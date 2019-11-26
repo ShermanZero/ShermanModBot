@@ -1,5 +1,5 @@
 interface String {
-  hideID(username?: string);
+  hideID(username?: string): string;
 }
 
 String.prototype.hideID = function(username?: string): string {

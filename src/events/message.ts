@@ -1,14 +1,14 @@
 import 'colors';
 
 import { Message, TextChannel } from 'discord.js';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 
 import rsrc from '../classes/Resources';
-import blacklist from '../resources/misc/blacklist.json';
-import ranks from '../resources/ranks/ranks.json';
+import * as blacklist from '../resources/misc/blacklist.json';
+import * as ranks from '../resources/ranks/ranks.json';
 
-module.exports = (client: any, message: Message) => {
+export default (client: any, message: Message) => {
   //ignore all bots
   if (message.author.bot) return;
 
@@ -53,7 +53,7 @@ module.exports = (client: any, message: Message) => {
 
   if (cmd.props.requiresElevation && cmd.props.requiresElevation !== "")
     if (
-      !message.member.roles.has(
+      !message.member?.roles.has(
         client.config.roles[cmd.props.requiresElevation]
       )
     )
@@ -66,6 +66,9 @@ module.exports = (client: any, message: Message) => {
 //registers the message
 function registerMessage(client: any, message: Message) {
   let username = rsrc.getUsernameFromMessage(message);
+
+  if(!message.guild) return;
+  
   let guildName = rsrc.getGuildNameFromGuild(message.guild);
   let userDir = rsrc.getUserDirectoryFromGuild(message.guild, username);
 
@@ -73,12 +76,12 @@ function registerMessage(client: any, message: Message) {
 
   //if the user has not been registered
   if (!fs.existsSync(userDir))
-    rsrc.createUserDirectory(client, message.guild, message.member);
+    rsrc.createUserDirectory(client, message.guild, message.member!);
 
   //user NOT stored in local client session
   if (!client.hasUser(message.guild, username)) {
     content = rsrc.getUserContentsFromName(message, username);
-    client.registerUser(message.member.user, content);
+    client.registerUser(message.member!.user, content);
     //user stored in local client session
   } else {
     content = client.getUserContent(message.guild, username);
@@ -97,9 +100,9 @@ function registerMessage(client: any, message: Message) {
     client.updateUser(content);
   }
 
-  let logMessage = `[${getTimestamp(message)}] (#${(message.channel as TextChannel).name}): ${
-    message.content
-  }\n`;
+  let logMessage = `[${getTimestamp(message)}] (#${
+    (message.channel as TextChannel).name
+  }): ${message.content}\n`;
 
   //push the message to the master log branch
   client.masterLog.push(`/${guildName}/>  ${username} ${logMessage}`);

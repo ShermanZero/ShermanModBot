@@ -3,20 +3,16 @@
     "rootDir": "./src/",
     "outDir": "./build/",
 
-    "allowJs": true,
-    "checkJs": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-
-    "lib": [
-      "es2016", "es2017", "es2018", "esnext"
-    ],
+    "inlineSources": true,
+    "inlineSourceMap": true,
 
     "listEmittedFiles": true,
     "locale": "en",
 
-    "target": "es5",
+    "lib": ["esnext", "dom"],
+
+    "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
 
@@ -27,39 +23,14 @@
     "noErrorTruncation": true,
 
     "pretty": true,
+    "removeComments": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "sourceMap": true,
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
+    "typeRoots": ["./node_modules/@types"]
   },
 
-  "include": [
-    "./src/index.ts",
-    "./src/events/ready.ts",
-    "./src/events/guildMemberUpdate.ts",
-    "./src/events/guildMemberRemove.ts",
-    "./src/events/message.ts",
-    "./src/events/guildMemberAdd.ts",
-    "./src/classes/ExitHandler.ts",
-    "./src/classes/FileHandler.ts",
-    "./src/classes/Resources.ts",
-    "./src/classes/StringHandler.ts",
-    "./src/commands/private.ts",
-    "./src/commands/users.ts",
-    "./src/commands/reload.ts",
-    "./src/commands/restart.ts",
-    "./src/commands/kick.ts",
-    "./src/commands/shutdown.ts",
-    "./src/commands/nick.ts",
-    "./src/commands/help.ts",
-    "./src/commands/say.ts",
-    "./src/commands/purge.ts",
-    "./src/commands/log.ts",
-    "./src/commands/merge.ts",
-    "./src/commands/ban.ts",
-    "./src/commands/eval.ts",
-    "./src/commands/user.ts",
-    "./src/commands/stats.ts"
-  ]
+  "include": [ "./src/" ],
+  "exclude": [ "./node_modules/"]
 }

@@ -2,22 +2,18 @@ import { GuildMember, Role, TextChannel } from 'discord.js';
 
 import rsrc from '../classes/Resources';
 
-module.exports = (client: any, member: GuildMember) => {
+export default (client: any, member: GuildMember) => {
   const guild = member.guild;
   const defaultChannel = guild.channels.find(
     channel => channel.name === "welcome"
   );
 
-  if (
-    !((defaultChannel): defaultChannel is TextChannel =>
-      defaultChannel.type === "text")(defaultChannel)
-  )
-    return;
+  if (!(defaultChannel as TextChannel)) return;
 
   let unrankedRole: any = guild.roles.get("609248072706424863");
   if (unrankedRole) unrankedRole = unrankedRole as Role;
 
-  member.addRole(unrankedRole).catch(err => {
+  member.roles.add(unrankedRole).catch(err => {
     console.log(err);
   });
 
@@ -31,11 +27,11 @@ module.exports = (client: any, member: GuildMember) => {
     client.config.channels.shermanzeros_hangout.auto_roles
   );
 
-  defaultChannel
+  (defaultChannel as TextChannel)!
     .send(
       `Welcome ${member.user} to **${guild.name}**!  You are member **#${guild.memberCount}!  Check out the ${serverRules} and ${serverInfo} regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in ${autoRoles}, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!`
     )
-    .catch(err => {
+    .catch((err: any) => {
       console.log(err);
     });
 

@@ -1,25 +1,23 @@
 import { Message } from 'discord.js';
 
-exports.props = {
-  requiresElevation: "mod",
-  description: "kicks a member from the server",
-  usage: "{user} {reason}"
-};
+export default class kick {
+  props = {
+    requiresElevation: "mod",
+    description: "kicks a member from the server",
+    usage: "<member> <?reason>"
+  };
 
-exports.run = (client: any, message: Message, [mention, ...reason]) => {
-  if (message.mentions.members.size === 0)
-    return message.reply("please mention a user to kick");
+  async run(client: any, message: Message, [mention, ...reason]) {
+    if (!message.mentions.members || message.mentions.members.size === 0)
+      return message.reply("please mention a user to kick");
 
-  const kickMember = message.mentions.members.first();
-  kickMember.kick(reason.join(" ")).then(member => {
+    const kickMember = message.mentions.members.first();
+
+    await kickMember!.kick(reason.join(" "));
+
     let modChannel = client.channels.get(client.config.channels.mod.logs);
-
-    modChannel
-      .send(
-        `${member.user.username} was kicked by ${message.author.tag} for reason: ${reason}`
-      )
-      .catch(err => {
-        console.log(err);
-      });
-  });
-};
+    await modChannel.send(
+      `${kickMember!.user.username} was kicked by ${message.author.tag} for reason: ${reason}`
+    );
+  }
+}

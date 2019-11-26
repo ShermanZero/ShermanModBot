@@ -36,13 +36,13 @@ export default class ExitHandler {
     //catches uncaught exceptions
     process.on("uncaughtException" as any, (e: Error) => {
       console.log("Uncaught exception:");
-      console.log(e.stack?.red.dim);
+      console.log((e.stack as any).red.dim);
     });
 
     //catch unhandled promise rejections
     process.on("unhandledRejection" as any, (e: Error) => {
       console.log("Unhandled rejection:");
-      console.log(e.stack?.red.dim);
+      console.log((e.stack as any).red.dim);
     });
   }
 
@@ -66,5 +66,3 @@ export default class ExitHandler {
     }
   }
 }
-
-module.exports = ExitHandler;

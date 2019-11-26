@@ -1,13 +1,13 @@
 import 'colors';
 
 import { Guild, Message } from 'discord.js';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 
 import exit from '../classes/ExitHandler';
 import rsrc from '../classes/Resources';
 
-module.exports = (client: any) => {
+export default (client: any) => {
   client.user.setActivity(client.config.status);
 
   let bootFile = path.join(__dirname, "..", "resources", "misc", "boot.txt");

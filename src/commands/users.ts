@@ -4,19 +4,20 @@ import { Message } from 'discord.js';
 
 import rsrc from '../classes/Resources';
 
-exports.props = {
-  requiresElevation: "mod",
-  description: "displays all users registered in the server",
-  usage: ""
-};
+export default class users {
+  props = {
+    requiresElevation: "mod",
+    description: "displays all members registered in the server",
+  };
 
-exports.run = (client: any, message: Message, args: string[]) => {
-  let guildUsers = rsrc.getGuildUsersFromGuild(message.guild);
-  let allUsers = Object.keys(guildUsers);
+  async run(client: any, message: Message, args: string[]) {
+    let guildUsers = rsrc.getGuildUsersFromGuild(message.guild);
+    let allUsers = Object.keys(guildUsers);
 
-  message.reply(
-    `here are the current registered users of the server:\n[**${allUsers.join(
-      "**, **"
-    )}**]`
-  );
-};
+    message.reply(
+      `here are the current registered members of the server:\n[**${allUsers.join(
+        "**, **"
+      )}**]`
+    );
+  }
+}

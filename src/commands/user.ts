@@ -4,61 +4,63 @@ import { Message } from 'discord.js';
 
 import rsrc from '../classes/Resources';
 
-exports.props = {
-  requiresElevation: "mod",
-  description: "displays the user's data",
-  usage: "{user}"
-};
+export default class user {
+  props = {
+    requiresElevation: "mod",
+    description: "displays the member's data",
+    usage: "<member>"
+  };
 
-exports.run = async (client: any, message: Message, args: string[]) => {
-  const user = message.mentions.users.first();
+  async run(client: any, message: Message, args: string[]) {
+    const user = message.mentions.users.first();
 
-  let username: any;
-  let userContent: any;
+    let username: any;
+    let userContent: any;
 
-  if (!user) {
-    if (args.length == 1) {
-      userContent = rsrc.getUserContentsFromName(message, args[0], true);
+    if (!user) {
+      if (args.length == 1) {
+        userContent = rsrc.getUserContentsFromName(message, args[0], true);
 
-      if (!userContent)
+        if (!userContent)
+          try {
+            return message.reply("that user is not registered");
+          } catch (err) {
+            console.log(err);
+          }
+
+        username = userContent.name;
+      } else
         try {
-          return message.reply("that user is not registered");
-        } catch (err) {
-          console.log(err);
+          return message.reply("you need to specify a user");
+        } catch (err_1) {
+          console.log(err_1);
         }
-
-      username = userContent.name;
-    } else
-      try {
-        return message.reply("you need to specify a user");
-      } catch (err_1) {
-        console.log(err_1);
-      }
-  } else {
-    username = rsrc.getUsernameFromMember(user);
-    userContent = client.getUserContent(message.guild, username);
-  }
-
-  if (!username || !userContent)
-    try {
-      return message.reply("that user is not registered");
-    } catch (err_2) {
-      console.log(err_2);
+    } else {
+      username = rsrc.getUsernameFromMember(user);
+      userContent = client.getUserContent(message.guild, username);
     }
 
-  message.delete().catch(err => {
-    console.log(err);
-  });
+    if (!username || !userContent)
+      try {
+        return message.reply("that user is not registered");
+      } catch (err_2) {
+        console.log(err_2);
+      }
 
-  message.channel
-    .send(
-      `Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(
-        userContent,
-        null,
-        "\t"
-      )}\n\`\`\``
-    )
-    .catch(err => {
+    message.delete().catch(err => {
       console.log(err);
     });
-};
+
+    message.channel
+      .send(
+        `Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(
+          userContent,
+          null,
+          "\t"
+        )}\n\`\`\``
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  }
+}

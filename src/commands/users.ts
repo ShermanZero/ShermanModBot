@@ -9,7 +9,7 @@ module.exports.props = {
   description: "displays all members registered in the server"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   let guildUsers = rsrc.getGuildUsersFromGuild(message.guild);
   let allUsers = Object.keys(guildUsers);
 

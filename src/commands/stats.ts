@@ -7,7 +7,7 @@ module.exports.props = {
   description: "replies to the member with their current server stats"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   let username = rsrc.getUsernameFromMessage(message);
   let content = client.getUserContent(message.guild, username);
   let member: GuildMember = message.member as GuildMember;

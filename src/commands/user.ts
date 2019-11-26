@@ -10,7 +10,7 @@ module.exports.props = {
   usage: "<member>"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   const user = message.mentions.users.first();
 
   let username: any;

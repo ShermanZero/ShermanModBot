@@ -11,7 +11,7 @@ module.exports.props = {
   description: "shuts the bot down cleanly"
 };
 
-module.exports = async (
+module.exports.run = async (
   client: any,
   message: Message,
   userTriggered: boolean = true

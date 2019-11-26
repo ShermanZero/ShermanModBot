@@ -4,7 +4,7 @@ module.exports.props = {
   description: "replies to the member with the commands for the server"
 };
 
-module.exports = async (client: any, message: Message) => {
+module.exports.run = async (client: any, message: Message) => {
   const embed = new MessageEmbed();
 
   if (!message.guild) return;

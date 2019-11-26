@@ -15,7 +15,7 @@ module.exports = (client: any) => {
 
   exit.init(client);
 
-  let commandArray = client.commands.keyArray().sort();
+  let commandArray: string[] = [ ...client.commands.keys() ].sort();
   console.log(
     `Loaded ${commandArray.length.toString().magenta} command(s)`,
     "[@everyone]".green,
@@ -49,8 +49,8 @@ module.exports = (client: any) => {
     let guildDir = rsrc.getGuildDirectoryFromGuild(guild);
 
     if (!fs.existsSync(guildDir)) {
-      fs.mkdirSync(guildDir);
-      fs.mkdirSync(path.join(guildDir, client.config.files.removed));
+      fs.mkdirSync(guildDir, {recursive: true});
+      fs.mkdirSync(path.join(guildDir, client.config.files.removed), {recursive: true});
     }
     let guildName = rsrc.getGuildNameFromGuild(guild);
 

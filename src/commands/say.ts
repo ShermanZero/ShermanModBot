@@ -5,7 +5,7 @@ module.exports.props = {
   usage: "<message>"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   const sayMessage = args.join(" ");
 
   message.delete().catch(err => {

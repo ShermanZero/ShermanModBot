@@ -6,7 +6,7 @@ module.exports.props = {
   usage: "<javascript>"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   try {
     const code: string = args.join(" ");
     let evaled = eval(code);

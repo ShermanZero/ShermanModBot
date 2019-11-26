@@ -93,8 +93,10 @@ function start() {
     if (err) return console.error(err);
     files.forEach(function(file) {
       if (!file.endsWith(".js")) return;
-      var event = require(path.join(__dirname, "events", file));
+      var event = require(path.join(__dirname, "events", file)) as Function;
       var eventName = file.split(".")[0];
+
+      console.log("--registering event", eventName);
       client.on(eventName, event.bind(null, client));
       delete require
         .cache[require.resolve(path.join(__dirname, "events", file))];
@@ -110,7 +112,11 @@ function start() {
       if (!file.endsWith(".js")) return;
       var props = require(path.join(__dirname, "commands", file));
       var commandName = file.split(".")[0];
+
+      console.log("--registering command", commandName, props);
       client.commands.set(commandName, props);
+
+      console.log("--set command", commandName, props);
     });
   });
 }

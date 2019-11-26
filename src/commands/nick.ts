@@ -6,7 +6,7 @@ module.exports.props = {
   usage: "<member> <nickname>"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (!message.mentions.members || message.mentions.members.size === 0)
     return message
       .reply("please mention a member to change their nickname")

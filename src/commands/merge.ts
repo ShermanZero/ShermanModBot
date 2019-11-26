@@ -13,7 +13,7 @@ module.exports.props = {
   usage: "<old_member> <new_member>"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (args.length != 2)
     return message.reply("you need to specify two users").catch(err => {
       console.log(err);

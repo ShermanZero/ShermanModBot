@@ -6,7 +6,7 @@ module.exports.props = {
   usage: "<member>"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (!message.guild) return;
 
   let privateRole: any = message.guild.roles.get("645418484398030918");

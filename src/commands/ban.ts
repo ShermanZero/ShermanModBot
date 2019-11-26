@@ -6,7 +6,7 @@ module.exports.props = {
   usage: "<member> <?reason>"
 };
 
-module.exports = async (client: any, message: Message, [mention, ...reason]) => {
+module.exports.run = async (client: any, message: Message, [mention, ...reason]) => {
     if (!message.mentions.members || message.mentions.members.size === 0)
       try {
         return message.reply("please mention a user to kick");

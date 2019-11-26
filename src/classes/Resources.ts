@@ -6,6 +6,7 @@ import * as path from 'path';
 import * as rimraf from 'rimraf';
 
 import ranks from '../resources/ranks/ranks';
+import def from '../users/defaults';
 
 export default class Resources {
   static getUsernameFromMessage(message: Message): any {
@@ -153,9 +154,7 @@ export default class Resources {
 
   //creates the user directory
   static createUserDirectory(client: any, guild: Guild, member: GuildMember): any {
-    let basePath = path.join(__dirname, "..", "users", "content.json");
-    let json = fs.readFileSync(basePath);
-    let content = JSON.parse(json.toString());
+    let content: any = def;
 
     content.hidden.username = this.getUsernameFromMember(member);
     content.hidden.guildname = this.getGuildNameFromGuild(guild);
@@ -167,12 +166,12 @@ export default class Resources {
 
     let dir = this.getUserDirectoryFromGuild(guild, content.hidden.username);
 
-    fs.mkdirSync(dir);
+    fs.mkdirSync(dir, {recursive: true});
     fs.writeFileSync(
       `${dir}/${content.hidden.username}.json`,
       JSON.stringify(content, null, "\t")
     );
-    fs.mkdirSync(`${dir}/logs`);
+    fs.mkdirSync(`${dir}/logs`, {recursive: true});
 
     let rolesUserHas = member.roles;
     let rankRolesUserHas: Role[] = [];

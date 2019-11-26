@@ -5,7 +5,7 @@ module.exports.props = {
   description: "shuts the bot down immediately"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   let exitCode = 1;
   if (args.length == 1 && args[0].toLowerCase().includes("force")) exitCode = 2;
 

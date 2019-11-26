@@ -6,7 +6,7 @@ module.exports.props = {
   usage: "<member> <?reason>"
 };
 
-module.exports = async (
+module.exports.run = async (
   client: any,
   message: Message,
   [mention, ...reason]

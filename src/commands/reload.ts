@@ -7,7 +7,7 @@ module.exports.props = {
   usage: "<command>"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (!args || args.length < 1)
     try {
       return message.reply("you must provide a command name to reload");

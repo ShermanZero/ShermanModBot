@@ -6,7 +6,7 @@ module.exports.props = {
   usage: "<amount> <?member>"
 };
 
-module.exports = async (client: any, message: Message, args: string[]) => {
+module.exports.run = async (client: any, message: Message, args: string[]) => {
   const user = message.mentions.users.first();
 
   //parse amount

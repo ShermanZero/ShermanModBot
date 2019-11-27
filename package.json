@@ -8,6 +8,7 @@
     "discord.js": "github:discordjs/discord.js",
     "inversify": "^5.0.1",
     "ncp": "^2.0.0",
+    "node-fetch": "^2.6.0",
     "rimraf": "^3.0.0",
     "typescript": "^3.7.2"
   },

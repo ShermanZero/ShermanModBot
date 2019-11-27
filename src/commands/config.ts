@@ -53,6 +53,7 @@ async function getChannel(nameOfChannel: string, alias: string, purpose: string,
 
   await rsrc
     .askQuestion(
+      message.member,
       message.channel as TextChannel,
       `Do you have a ${alias} channel?  This will be used to ${purpose}.  If you do, and want to enable this feature, simply mention the name of the channel (using #), otherwise, press enter`
     )
@@ -79,6 +80,7 @@ async function getRole(nameOfRole: string, message: Message) {
 
   await rsrc
     .askQuestion(
+      message.member,
       message.channel as TextChannel,
       `What is the ${nameOfRole} role ID?  You can mention a member with this role, the role itself, input the role's name, or input the ID directly if you know it`
     )

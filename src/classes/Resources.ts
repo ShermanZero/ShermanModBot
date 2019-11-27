@@ -204,7 +204,14 @@ export default class Resources {
     return xp + Math.round((4 * Math.pow(level, 3)) / 5);
   }
 
-  static async askQuestion(channel: TextChannel, question: string, deleteMessage: boolean = false, filter = () => true, options = { max: 1, time: 60 * 1000, errors: ["time"] }) {
+  static async askQuestion(
+    member: GuildMember,
+    channel: TextChannel,
+    question: string,
+    deleteMessage: boolean = false,
+    useFilter: boolean = true,
+    options = { max: 1, time: 60 * 1000, errors: ["time"] }
+  ) {
     let value: any;
 
     let questionMessage: Message;
@@ -213,14 +220,17 @@ export default class Resources {
       questionMessage = message;
     });
 
+    const filter = (response: Message): boolean => {
+      return response.member === member;
+    };
+
     await channel
-      .awaitMessages(filter, options)
+      .awaitMessages(useFilter ? filter : () => true, options)
       .then(async collected => {
         value = collected.first()?.content;
         value = (value as string).replace(/[<>@&#]/g, "");
 
-        if(deleteMessage)
-          await questionMessage.delete();
+        if (deleteMessage) await questionMessage.delete();
 
         await collected.first()?.delete();
       })

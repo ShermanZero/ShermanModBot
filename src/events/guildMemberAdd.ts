@@ -12,7 +12,7 @@ module.exports = (client: any, member: GuildMember) => {
   if (!(defaultChannel as TextChannel)) return;
 
   let unrankedRole = guild.roles.get("609248072706424863");
-  
+
   member.roles.add(unrankedRole).catch(err => {
     console.log(err);
   });

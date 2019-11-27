@@ -9,3 +9,6 @@
 
 #ignore the workspace file
 ShermanModBot.code-workspace
+
+#ignore the build directory
+**/build

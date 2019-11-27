@@ -6,4 +6,4 @@ https://discord.gg/sJ5rz2h
 
 
 ### Change Log
-**v1.0.0** - Initial release
+**v1.0.0 (11/27/19)** - Initial release

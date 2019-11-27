@@ -22,9 +22,7 @@ module.exports = (client: any, member: GuildMember) => {
   let autoRoles = guild.channels.get(client.config.channels.shermanzeros_hangout.auto_roles);
 
   (defaultChannel as TextChannel)!
-    .send(
-      `Welcome ${member.user} to **${guild.name}**!  You are member **#${guild.memberCount}!  Check out the ${serverRules} and ${serverInfo} regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in ${autoRoles}, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!`
-    )
+    .send(`Welcome ${member.user} to **${guild.name}**!  You are member **#${guild.memberCount}!  Check out the ${serverRules} and ${serverInfo} regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in ${autoRoles}, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!`)
     .catch((err: any) => {
       console.log(err);
     });

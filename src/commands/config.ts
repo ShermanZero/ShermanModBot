@@ -52,11 +52,7 @@ async function getChannel(nameOfChannel: string, alias: string, purpose: string,
   let channel: TextChannel;
 
   await rsrc
-    .askQuestion(
-      message.member,
-      message.channel as TextChannel,
-      `Do you have a ${alias} channel?  This will be used to ${purpose}.  If you do, and want to enable this feature, simply mention the name of the channel (using #), otherwise, press enter`
-    )
+    .askQuestion(message.member, message.channel as TextChannel, `Do you have a ${alias} channel?  This will be used to ${purpose}.  If you do, and want to enable this feature, simply mention the name of the channel (using #), otherwise, press enter`)
     .then(response => {
       let channelByID = message.guild.channels.find(channel => channel.id === response);
 
@@ -79,11 +75,7 @@ async function getRole(nameOfRole: string, message: Message) {
   let role: Role;
 
   await rsrc
-    .askQuestion(
-      message.member,
-      message.channel as TextChannel,
-      `What is the ${nameOfRole} role ID?  You can mention a member with this role, the role itself, input the role's name, or input the ID directly if you know it`
-    )
+    .askQuestion(message.member, message.channel as TextChannel, `What is the ${nameOfRole} role ID?  You can mention a member with this role, the role itself, input the role's name, or input the ID directly if you know it`)
     .then(response => {
       let roleByName = message.guild.roles.find(role => role.name === response);
       let roleByID = message.guild.roles.find(role => role.id === response);

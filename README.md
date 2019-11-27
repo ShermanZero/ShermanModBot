@@ -6,4 +6,4 @@ https://discord.gg/sJ5rz2h
 
 
 ### Change Log
-**v1.0.0 (11/27/19)** - Initial release
+**[v1.0.0 (11/27/19)](https://github.com/ShermanZero/ShermanModBot/releases/tag/v1.0.0)** - Initial release

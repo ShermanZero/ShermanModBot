@@ -1,10 +1,15 @@
 import { GuildMember, Role, TextChannel } from 'discord.js';
+import * as path from 'path';
 
 import rsrc from '../classes/Resources';
 
 module.exports = (client: any, member: GuildMember) => {
   const guild = member.guild;
-  const defaultChannel = guild.channels.find(channel => channel.name === "welcome");
+
+  let guildDir = rsrc.getGuildDirectoryFromGuild(member.guild);
+  let guildConfig = require(path.resolve(guildDir, client.global_config.files.guild_config));
+
+  const defaultChannel = guild.channels.get(guildConfig.channels.default);
 
   if (!(defaultChannel as TextChannel)) return;
 

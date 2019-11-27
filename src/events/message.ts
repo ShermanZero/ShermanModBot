@@ -6,7 +6,7 @@ import * as path from 'path';
 
 import rsrc from '../classes/Resources';
 import blacklist from '../resources/blacklist';
-import config from '../resources/global_config';
+import global_config from '../resources/global_config';
 import ranks from '../resources/ranks';
 
 module.exports = (client: any, message: Message) => {
@@ -29,11 +29,11 @@ module.exports = (client: any, message: Message) => {
   awardExperience(client, message);
 
   //ignore messages not starting with the prefix
-  if (message.content.indexOf(client.config.prefix) !== 0) return;
+  if (message.content.indexOf(client.global_config.prefix) !== 0) return;
 
   //standard argument/command name definition
   const args: any = message.content
-    .slice(client.config.prefix.length)
+    .slice(client.global_config.prefix.length)
     .trim()
     .split(/ +/g);
 
@@ -47,7 +47,19 @@ module.exports = (client: any, message: Message) => {
   //if the command doesn't exist
   if (!cmd) return;
 
-  if (cmd.props.requiresElevation && cmd.props.requiresElevation !== "") if (!message.member?.roles.has(client.config.roles[cmd.props.requiresElevation])) return;
+  let guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
+
+  let guildConfigFile = path.resolve(guildDir, client.global_config.files.guild_config);
+  let guildConfig: any;
+  if (fs.existsSync(guildConfigFile)) guildConfig = require(guildConfigFile);
+
+  if (command != "config") {
+    if (!guildConfig?.setup) return message.reply("your guild owner has to configure me before I can execute commands :(");
+    if (cmd.props.requiresElevation && cmd.props.requiresElevation !== "") {
+      if (cmd.props.requiresElevation === "botowner" && message.member.user.tag != "ShermanZero#1200") return;
+      else if (!message.member?.roles.has(guildConfig.roles[cmd.props.requiresElevation])) return;
+    }
+  }
 
   //run the command
   cmd.run(client, message, args);
@@ -114,11 +126,11 @@ function updateMasterLog(client) {
 
   if (!fs.existsSync(masterLog)) {
     fs.mkdirSync(masterLog, { recursive: true });
-    fs.writeFileSync(path.resolve(masterLog, config.files.log_all), "-- START OF LOG --");
+    fs.writeFileSync(path.resolve(masterLog, global_config.files.log_all), "-- START OF LOG --");
   }
 
   //if the log length exceeds the threshold, update the master log
-  if (client.masterLog.length >= client.config.preferences.log_threshold_master) {
+  if (client.masterLog.length >= client.global_config.preferences.log_threshold_master) {
     for (var i = 0; i < client.masterLog.length; i++) fs.appendFileSync(masterLog, client.masterLog[i]);
 
     client.masterLog = [];
@@ -127,10 +139,10 @@ function updateMasterLog(client) {
 
 function updateUserLog(client, guild, content) {
   let logsDir = path.join(rsrc.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
-  let userLog = path.join(logsDir, client.config.files.log_all);
+  let userLog = path.join(logsDir, client.global_config.files.log_all);
 
   //if the log length exceeds the threshold, update the master log
-  if (content.userLog.length >= client.config.preferences.log_threshold_user) {
+  if (content.userLog.length >= client.global_config.preferences.log_threshold_user) {
     for (var i = 0; i < content.userLog.length; i++) fs.appendFileSync(userLog, content.userLog[i]);
 
     content.userLog = [];
@@ -184,7 +196,7 @@ function awardExperience(client, message) {
   client.updateUser(content);
 
   //only write XP changes to the file every 10 messages
-  if (content.rank.xp % client.config.preferences.xp_threshold === 0) {
+  if (content.rank.xp % client.global_config.preferences.xp_threshold === 0) {
     let jsonFile = path.join(rsrc.getUserDirectoryFromGuild(message.guild, username), username + ".json");
     let newJson = JSON.stringify(content, null, "\t");
     fs.writeFileSync(jsonFile, newJson);

@@ -1,7 +1,9 @@
 import { Message, TextChannel } from 'discord.js';
 
+import config from '../resources/global_config';
+
 module.exports.props = {
-  requiresElevation: "mod",
+  requiresElevation: config.elevation_names.moderator,
   description: "removes a maximum of 100 messages from a channel",
   usage: "<amount> <?member>"
 };

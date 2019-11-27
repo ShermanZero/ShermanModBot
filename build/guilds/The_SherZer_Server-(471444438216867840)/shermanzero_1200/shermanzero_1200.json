@@ -6,7 +6,7 @@
 	"rank": {
 		"name": "platinum",
 		"level": 20,
-		"xp": 35308,
+		"xp": 35294,
 		"levelup": 41680
 	},
 	"race": {
@@ -14,7 +14,7 @@
 	},
 	"misc": {
 		"joined": "7/24/2018",
-		"first_message": "I’m",
+		"first_message": "!purge",
 		"warnings": 0
 	},
 	"userLog": []

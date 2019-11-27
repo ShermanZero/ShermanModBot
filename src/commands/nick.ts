@@ -1,7 +1,9 @@
 import { Message } from 'discord.js';
 
+import config from '../resources/global_config';
+
 module.exports.props = {
-  requiresElevation: "mod",
+  requiresElevation: config.elevation_names.moderator,
   description: "changes the nickname of a member",
   usage: "<member> <nickname>"
 };

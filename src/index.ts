@@ -5,17 +5,17 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import rsrc from './classes/Resources';
-import config from './resources/global_config';
+import global_config from './resources/global_config';
 
 let client: any = new Discord.Client();
 
 init();
 start();
 
-client.login(config.token);
+client.login(global_config.token);
 
 function init() {
-  client.config = config;
+  client.global_config = global_config;
   client.usersInSession = new Map();
   client.masterLog = [];
 

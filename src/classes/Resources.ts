@@ -96,11 +96,11 @@ export default class Resources {
   }
 
   static getGuildDirectoryFromGuild(guild: Guild): string {
-    return path.join(__dirname, "..", "users", this.getGuildNameFromGuild(guild));
+    return path.join(__dirname, "..", "guilds", this.getGuildNameFromGuild(guild));
   }
 
   static getGuildDirectoryFromName(guildname: string): string {
-    return path.join(__dirname, "..", "users", guildname);
+    return path.join(__dirname, "..", "guilds", guildname);
   }
 
   static getGuildUsersFromGuild(client: any, guild: any): any {
@@ -186,7 +186,7 @@ export default class Resources {
     if (!fs.existsSync(dir)) return console.error(`!! Attempted to write [${username}] contents to log, but no directory exists at [${dir}]`.red);
 
     if (content.userLog && content.userLog.length != 0) {
-      for (var i = 0; i < content.userLog.length; i++) fs.appendFileSync(`${dir}/logs/${client.config.files.log_all}`, content.userLog[i]);
+      for (var i = 0; i < content.userLog.length; i++) fs.appendFileSync(`${dir}/logs/${client.global_config.files.log_all}`, content.userLog[i]);
 
       content.userLog = [];
     }

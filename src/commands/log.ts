@@ -5,9 +5,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import rsrc from '../classes/Resources';
+import config from '../resources/global_config';
 
 module.exports.props = {
-  requiresElevation: "mod",
+  requiresElevation: config.elevation_names.moderator,
   description: "displays the last number of messages a member has posted",
   usage: "<amount> <member>"
 };
@@ -21,7 +22,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
     });
 
   let username = rsrc.getUsernameFromMember(user);
-  let file = path.join(rsrc.getUserDirectoryFromGuild(message.guild as Guild, username), "logs", client.config.files.log_all);
+  let file = path.join(rsrc.getUserDirectoryFromGuild(message.guild as Guild, username), "logs", client.global_config.files.log_all);
   //parse amount
   let amount = !!parseInt(args[1]) ? parseInt(args[1]) : parseInt(args[2]);
 

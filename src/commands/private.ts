@@ -1,7 +1,9 @@
 import { Channel, Message, Role } from 'discord.js';
 
+import config from '../resources/global_config';
+
 module.exports.props = {
-  requiresElevation: "mod",
+  requiresElevation: config.elevation_names.moderator,
   description: "grants a member access to the private-hangout channel",
   usage: "<member>"
 };

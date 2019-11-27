@@ -6,9 +6,10 @@ import * as path from 'path';
 import * as rimraf from 'rimraf';
 
 import rsrc from '../classes/Resources';
+import config from '../resources/global_config';
 
 module.exports.props = {
-  requiresElevation: "owner",
+  requiresElevation: config.elevation_names.botowner,
   description: "copies a user's data to another user, and deletes the original",
   usage: "<old_member> <new_member>"
 };

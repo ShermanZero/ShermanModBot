@@ -6,6 +6,8 @@ export default {
 
   channels: {
     default: null,
-    mod_logs: null
-  }
+    mog_logs: null
+  },
+
+  setup: false
 };

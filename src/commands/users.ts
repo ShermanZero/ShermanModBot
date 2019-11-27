@@ -3,9 +3,10 @@ import '../classes/StringHandler';
 import { Message } from 'discord.js';
 
 import rsrc from '../classes/Resources';
+import config from '../resources/global_config';
 
 module.exports.props = {
-  requiresElevation: "mod",
+  requiresElevation: config.elevation_names.moderator,
   description: "displays all members registered in the server"
 };
 

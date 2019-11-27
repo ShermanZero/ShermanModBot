@@ -1,7 +1,9 @@
 import { Message } from 'discord.js';
 
+import config from '../resources/global_config';
+
 module.exports.props = {
-  requiresElevation: "owner",
+  requiresElevation: config.elevation_names.moderator,
   description: "runs a line of javascript",
   usage: "<javascript>"
 };

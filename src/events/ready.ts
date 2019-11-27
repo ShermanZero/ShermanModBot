@@ -9,24 +9,32 @@ import rsrc from '../classes/Resources';
 import boot from '../resources/boot';
 
 module.exports = (client: any) => {
-  client.user.setActivity(client.config.status);
+  client.user.setActivity(client.global_config.status);
 
   console.log(boot.red);
 
   exit.init(client);
 
   let commandArray: string[] = [...client.commands.keys()].sort();
-  console.log(`Loaded ${commandArray.length.toString().magenta} command(s)`, "[@everyone]".green, "[@moderator]".yellow, "[@owner]".red);
+  console.log(`Loaded ${commandArray.length.toString().magenta} command(s)`, "[@everyone]".green, "[@moderator]".yellow, "[@owner]".red, "[@botowner]".cyan);
 
-  for (var i = 0; i < commandArray.length; i++) {
-    var commandName = commandArray[i];
-    var command = client.commands.get(commandName);
+  for (let i = 0; i < commandArray.length; i++) {
+    let commandName = commandArray[i];
+    let command = client.commands.get(commandName);
 
-    commandName = `[${commandName}]`;
+    if (command.props.requiresElevation) {
+      if (command.props.requiresElevation === client.global_config.elevation_names.moderator) {
+        commandName = commandName.yellow;
+      } else if (command.props.requiresElevation === client.global_config.elevation_names.owner) {
+        commandName = commandName.red;
+      } else if (command.props.requiresElevation === client.global_config.elevation_names.botowner) {
+        commandName = commandName.cyan;
+      }
+    } else {
+      commandName = commandName.green;
+    }
 
-    if (command.props.requiresElevation && command.props.requiresElevation === client.config.elevation_names.moderator) console.log(commandArray[i].yellow + " - " + command.props.description);
-    else if (command.props.requiresElevation && command.props.requiresElevation === client.config.elevation_names.owner) console.log(commandArray[i].red + " - " + command.props.description);
-    else console.log(commandArray[i].green + " - " + command.props.description);
+    console.log(`${ ('['+commandName+']').padEnd(30, ".") } ${command.props.description}`);
   }
 
   console.log("...");
@@ -36,7 +44,7 @@ module.exports = (client: any) => {
 
     if (!fs.existsSync(guildDir)) {
       fs.mkdirSync(guildDir, { recursive: true });
-      fs.mkdirSync(path.join(guildDir, client.config.files.removed), {
+      fs.mkdirSync(path.join(guildDir, client.global_config.files.removed), {
         recursive: true
       });
     }

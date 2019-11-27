@@ -4,8 +4,14 @@ export default {
   prefix: "!",
 
   elevation_names: {
+    botowner: "shermanzero",
     owner: "owner",
     moderator: "mod"
+  },
+
+  channel_names: {
+    default: "default",
+    mod_logs: "mod_logs"
   },
 
   preferences: {
@@ -16,6 +22,7 @@ export default {
 
   files: {
     log_all: "allmessages.txt",
-    removed: ".removed"
+    removed: ".removed",
+    guild_config: "guild_config.json"
   }
 };

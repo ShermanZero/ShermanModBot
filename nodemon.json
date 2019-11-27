@@ -1,5 +1,5 @@
 {
   "verbose": false,
-  "ignore": ["**users/*"],
+  "ignore": ["**guilds/*"],
   "delay": 1000
 }

@@ -58,7 +58,7 @@ export default class Resources {
 
       if (possibleMatches.length > 1) {
         let listOfUsers = "";
-        for (var i = 0; i < possibleMatches.length; i++) listOfUsers += `${i + 1}) ${possibleMatches[i]}`;
+        for (var i = 0; i < possibleMatches.length; i++) listOfUsers += `${i + 1}) **${possibleMatches[i]}**\n`;
 
         message.reply(`there are multiple users which contain [${username}], please select the correct one:\n${listOfUsers}`).then(() => {
           message.channel
@@ -89,6 +89,8 @@ export default class Resources {
         return null;
       }
     }
+
+    if(!fs.existsSync(jsonFile)) return null;
 
     let json = fs.readFileSync(jsonFile);
     let content = JSON.parse(json.toString());

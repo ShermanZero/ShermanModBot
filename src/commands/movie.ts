@@ -6,7 +6,7 @@ import config from '../resources/global_config';
 
 module.exports.props = {
   requiresElevation: config.elevation_names.moderator,
-  description: "creates a media invite embed",
+  description: "creates a movie invite embed",
   usage: "<?done>"
 };
 
@@ -52,6 +52,9 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   embed.addField("AT", mediaTime, true);
 
   if (medialDetails && medialDetails?.toLowerCase().trim() !== "none") embed.addField("DETAILS", medialDetails);
+  let hangout: TextChannel = message.guild.channels.find(channel => channel.name === "movie-hangout") as TextChannel;
+
+  (await hangout.send(embed)).pin();
 
   embed.setDescription(`\`\`\`React with ${reactToJoinEmoji} to join!\nReact with ${reactToNotifyEmoji} to be notified in the future!\nReact with ${reactToRemoveEmoji} to unsubscribe from notifications\`\`\``.toUpperCase());
 
@@ -72,7 +75,6 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
       if (passJoin) {
         member.roles.add(mediaRole);
 
-        let hangout: TextChannel = message.guild.channels.find(channel => channel.name === "movie-hangout") as TextChannel;
         hangout.send(`Welcome ${member} to the hangout!  Get prepared to join us for **${mediaName}** over in the movie room at **${mediaTime}**!`);
       }
 

@@ -8,25 +8,24 @@ module.exports.props = {
 };
 
 module.exports.run = async (client: any, message: Message, args: string[]) => {
-  let username = rsrc.getUsernameFromMessage(message);
+  let username: string = rsrc.getUsernameFromMessage(message);
   let content = client.getUserContent(message.guild, username);
   let member: GuildMember = message.member as GuildMember;
 
-  if (!message.mentions.members || message.mentions.members.array.length !== 0) {
+  if (message.mentions?.members?.array.length !== 0) {
     member = message.mentions.members!.first() as GuildMember;
     username = rsrc.getUsernameFromMember(member);
     content = rsrc.getUserContentsFromName(client, message, username);
+  } else if (args.length === 1) {
+    content = rsrc.getUserContentsFromNameWithGuild(client, message.guild, message, args[0], true);
+    username = content?.hidden?.username;
   }
 
   if (!content) {
     message.delete().catch(err => {
       console.log(err);
     });
-    try {
-      return message.reply(`${message.mentions.members!.first()!.displayName} does not yet have any stats :( they need to post a message in the server to be registered by me.`);
-    } catch (err) {
-      console.log(err);
-    }
+    return message.reply(`they do not yet have any stats :( they need to post a message in the server to be registered by me`);
   }
 
   message.channel.send(getEmbed(client, member, content)).catch(err => {

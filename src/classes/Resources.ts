@@ -1,6 +1,6 @@
 import 'colors';
 
-import { Guild, GuildMember, Message, Role } from 'discord.js';
+import { Guild, GuildMember, Message, Role, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as rimraf from 'rimraf';
@@ -138,7 +138,7 @@ export default class Resources {
     let rankRolesUserHas: Role[] = [];
 
     //if the user already has pre-existing roles
-    if (rolesUserHas.size != 0) {
+    if (rolesUserHas.array.length != 0) {
       let entries = Object.entries(ranks._info);
 
       for (var i = 0; i < entries.length; i++) {
@@ -202,5 +202,24 @@ export default class Resources {
 
   static getXPToLevelUp(xp: number, level: number): number {
     return xp + Math.round((4 * Math.pow(level, 3)) / 5);
+  }
+
+  static async askQuestion(channel: TextChannel, question: string, filter = () => true, options = { max: 1, time: 60 * 1000, errors: ["time"] }) {
+    let value: any;
+
+    await channel.send(question);
+    await channel
+      .awaitMessages(filter, options)
+      .then(async collected => {
+        value = collected.first()?.content;
+        value = (value as string).replace(/[<>@&#]/g, "");
+
+        await collected.first()?.delete();
+      })
+      .catch(collected => {
+        channel.send("No answer was given in time");
+      });
+
+    return value;
   }
 }

@@ -11,13 +11,16 @@ module.exports.props = {
 module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (!message.guild) return;
 
-  let privateRole: any = message.guild.roles.get("645418484398030918");
-  let privateHangoutChannel: any = client.channels.get("645418390961258536");
+  let privateRole: Role;
+  message.guild.roles.fetch("645418484398030918").then(role => {
+    privateRole = role;
+  });
+  let privateHangoutChannel: any = client.channels("645418390961258536");
 
   if (privateRole) privateRole = privateRole as Role;
   if (privateHangoutChannel) privateHangoutChannel = privateHangoutChannel as Channel;
 
-  if (!message.mentions.members || message.mentions.members.size === 0) return message.reply("please mention a user to give private access to");
+  if (!message.mentions.members || message.mentions.members.array.length === 0) return message.reply("please mention a user to give private access to");
 
   const roleMember = message.mentions.members.first();
 

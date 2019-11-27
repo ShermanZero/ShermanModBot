@@ -9,7 +9,7 @@ module.exports.props = {
 };
 
 module.exports.run = async (client: any, message: Message, [mention, ...reason]) => {
-  if (!message.mentions.members || message.mentions.members.size === 0) return message.reply("please mention a user to kick");
+  if (!message.mentions.members || message.mentions.members.array.length === 0) return message.reply("please mention a user to kick");
 
   const kickMember = message.mentions.members.first();
 

@@ -9,7 +9,7 @@ module.exports.props = {
 };
 
 module.exports.run = async (client: any, message: Message, args: string[]) => {
-  if (!message.mentions.members || message.mentions.members.size === 0)
+  if (!message.mentions.members || message.mentions.members.array.length === 0)
     return message.reply("please mention a member to change their nickname").catch(err => {
       console.log(err);
     });

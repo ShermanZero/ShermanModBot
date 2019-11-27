@@ -55,8 +55,7 @@ module.exports = (client: any) => {
     client.guild_configs[guildName] = null;
 
     let guildConfig = path.resolve(guildDir, client.global_config.files.guild_config);
-    if(fs.existsSync(guildConfig))
-      client.guild_configs[guildName] = require(guildConfig);
+    if (fs.existsSync(guildConfig)) client.guild_configs[guildName] = require(guildConfig);
 
     console.log(`*Registered [${guildName.magenta}] to session --- looking for existing members:`);
 

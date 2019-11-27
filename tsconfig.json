@@ -11,9 +11,9 @@
     "listEmittedFiles": true,
     "locale": "en",
 
-    "lib": ["esnext", "dom"],
+    "lib": ["es2016", "dom"],
 
-    "target": "es6",
+    "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
 

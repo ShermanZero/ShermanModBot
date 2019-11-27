@@ -34,8 +34,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
     userContent = client.getUserContent(message.guild, username);
   }
 
-  if (!username || !userContent)
-    return message.reply("that user is not registered");
+  if (!username || !userContent) return message.reply("that user is not registered");
 
   userContent = client.hideUserInfo(userContent);
 

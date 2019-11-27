@@ -12,7 +12,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   let content = client.getUserContent(message.guild, username);
   let member: GuildMember = message.member as GuildMember;
 
-  if (!message.mentions.members || message.mentions.members.size !== 0) {
+  if (!message.mentions.members || message.mentions.members.array.length !== 0) {
     member = message.mentions.members!.first() as GuildMember;
     username = rsrc.getUsernameFromMember(member);
     content = rsrc.getUserContentsFromName(client, message, username);
@@ -64,7 +64,7 @@ function getEmbed(client: any, member: GuildMember, content: any) {
   if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats, true);
 
   let guildName = rsrc.getGuildNameFromGuild(member.guild);
-  if (member.roles.has(client.guild_configs[guildName].roles.mod)) {
+  if (member.roles.find(client.guild_configs[guildName].roles.mod)) {
     embed.setFooter("BE RESPECTFUL TO ALL - ESPECIALLY MODERATORS", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");
     embed.setDescription("`SERVER MOD`");
   }

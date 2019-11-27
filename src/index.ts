@@ -43,7 +43,7 @@ function init() {
     });
 
     return content;
-  }
+  };
 
   client.hasUser = function(guild: Discord.Guild, username: string) {
     var userGuild = client.usersInSession[rsrc.getGuildNameFromGuild(guild)];

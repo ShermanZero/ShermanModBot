@@ -7,20 +7,23 @@ module.exports = (client: any, member: GuildMember) => {
 
   let guildConfig = client.guild_configsp[rsrc.getGuildNameFromGuild(member.guild)];
 
-  const defaultChannel = guild.channels.get(guildConfig.channels.default);
+  const defaultChannel = guild.channels.find(guildConfig.channels.default);
 
   if (!(defaultChannel as TextChannel)) return;
 
-  let unrankedRole: any = guild.roles.get("609248072706424863");
+  let unrankedRole: Role;
+  guild.roles.fetch("609248072706424863").then(role => {
+    unrankedRole = role;
+  });
   if (unrankedRole) unrankedRole = unrankedRole as Role;
 
   member.roles.add(unrankedRole).catch(err => {
     console.log(err);
   });
 
-  let serverRules = guild.channels.get(client.config.channels.shermanzeros_hangout.server_rules);
-  let serverInfo = guild.channels.get(client.config.channels.shermanzeros_hangout.server_information);
-  let autoRoles = guild.channels.get(client.config.channels.shermanzeros_hangout.auto_roles);
+  let serverRules = guild.channels.find(client.config.channels.shermanzeros_hangout.server_rules);
+  let serverInfo = guild.channels.find(client.config.channels.shermanzeros_hangout.server_information);
+  let autoRoles = guild.channels.find(client.config.channels.shermanzeros_hangout.auto_roles);
 
   (defaultChannel as TextChannel)!
     .send(

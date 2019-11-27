@@ -9,7 +9,7 @@ module.exports.props = {
 };
 
 module.exports.run = async (client: any, message: Message, [mention, ...reason]) => {
-  if (!message.mentions.members || message.mentions.members.size === 0)
+  if (!message.mentions.members || message.mentions.members.array.length === 0)
     try {
       return message.reply("please mention a user to kick");
     } catch (err) {

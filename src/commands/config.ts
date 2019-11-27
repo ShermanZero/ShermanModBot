@@ -3,9 +3,12 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import rsrc from '../classes/Resources';
+import config from '../resources/global_config';
 import guild_config from '../resources/guild_config';
 
+
 module.exports.props = {
+  requiresElevation: config.elevation_names.owner,
   description: "sets up the discord bot for the server"
 };
 

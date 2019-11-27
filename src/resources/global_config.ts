@@ -2,9 +2,10 @@ export default {
   token: "NjM2NjE4NjI4ODQ2MDU5NTMw.XdItDg.lj4bgzJ5-GYW_-OywI9HKLgEZgg",
   status: "dead | !help",
   prefix: "!",
+  botowner: "349728538439450625",
 
   elevation_names: {
-    botowner: "shermanzero",
+    botowner: "botowner",
     owner: "owner",
     moderator: "mod"
   },

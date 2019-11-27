@@ -55,9 +55,8 @@ module.exports = (client: any, message: Message) => {
 
   if (command != "config") {
     if (!guildConfig?.setup) return message.reply("your guild owner has to configure me before I can execute commands :(");
-    if (cmd.props.requiresElevation && cmd.props.requiresElevation !== "") {
-      if (cmd.props.requiresElevation === "botowner" && message.member.user.tag != "ShermanZero#1200") return;
-      else if (!message.member?.roles.has(guildConfig.roles[cmd.props.requiresElevation])) return;
+    if (cmd.props.requiresElevation && message.member.user.id !== client.global_config.botowner) {
+      if (!message.member?.roles.has(guildConfig.roles[cmd.props.requiresElevation])) return;
     }
   }
 

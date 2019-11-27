@@ -15,7 +15,7 @@ module.exports.run = async (client: any, message: Message) => {
   embed.setDescription("All the commands **you** have access to in this server");
   embed.setColor(0x00ae86);
 
-  let guildConfig = client.guild_configsp[rsrc.getGuildNameFromGuild(message.guild)];
+  let guildConfig = client.guild_configs[rsrc.getGuildNameFromGuild(message.guild)];
 
   client.commands.forEach((value: any, key: string) => {
     if (!value.props || !message.member) return;
@@ -23,12 +23,15 @@ module.exports.run = async (client: any, message: Message) => {
     let elevatedPermissions = value.props.requiresElevation && message.member.roles.has(guildConfig.roles[value.props.requiresElevation]);
     let noPermissions = !value.props.requiresElevation || value.props.requiresElevation === "";
 
+    if(message.member.user.id === client.global_config.botowner)
+      elevatedPermissions = true;
+
     if (elevatedPermissions || noPermissions) {
       var header = "**!" + key + "**";
       let desc = value.props.description;
       if (value.props.usage) header += `\n\t*!${key} ${value.props.usage}*`;
 
-      if (elevatedPermissions) desc += `  \`\`\`css\n[${value.props.requiresElevation}]\`\`\``;
+      if (elevatedPermissions && !noPermissions) desc += `  \`\`\`css\n[${value.props.requiresElevation}]\`\`\``;
 
       embed.addField(header, desc, true);
     }

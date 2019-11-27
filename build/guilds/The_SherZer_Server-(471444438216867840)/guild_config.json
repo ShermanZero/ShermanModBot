@@ -5,6 +5,7 @@
 	},
 	"channels": {
 		"default": "471444855206445057",
+		"mog_logs": null,
 		"mod_logs": "604912256865665024"
 	},
 	"setup": true

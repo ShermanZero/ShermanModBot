@@ -34,7 +34,7 @@ module.exports = (client: any) => {
       commandName = commandName.green;
     }
 
-    console.log(`${ ('['+commandName+']').padEnd(30, ".") } ${command.props.description}`);
+    console.log(`${("[" + commandName + "]").padEnd(30, ".")} ${command.props.description}`);
   }
 
   console.log("...");
@@ -52,6 +52,12 @@ module.exports = (client: any) => {
 
     //set the guild data to to the guild name
     client.usersInSession[guildName] = {};
+    client.guild_configs[guildName] = null;
+
+    let guildConfig = path.resolve(guildDir, client.global_config.files.guild_config);
+    if(fs.existsSync(guildConfig))
+      client.guild_configs[guildName] = require(guildConfig);
+
     console.log(`*Registered [${guildName.magenta}] to session --- looking for existing members:`);
 
     fs.readdirSync(guildDir).forEach(dir => {

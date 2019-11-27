@@ -24,8 +24,8 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
     });
     try {
       return message.reply(`${message.mentions.members!.first()!.displayName} does not yet have any stats :( they need to post a message in the server to be registered by me.`);
-    } catch (err_1) {
-      console.log(err_1);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -51,19 +51,20 @@ function getEmbed(client: any, member: GuildMember, content: any) {
   if (content.rank.name !== null) levelStats += `**rank:**  *${content.rank.name}*\n`.toUpperCase();
   if (content.rank.level !== null) levelStats += `**level:**  *${content.rank.level}*\n`.toUpperCase();
   if (content.rank.xp !== null) levelStats += `**xp:**  *${getFormattedNumber(content.rank.xp)} / ${getFormattedNumber(content.rank.levelup)}*\n`.toUpperCase();
-  if (levelStats !== "") embed.addField("**LEVEL STATS**", levelStats);
+  if (levelStats !== "") embed.addField("**LEVEL STATS**", levelStats, true);
 
   let raceStats = "";
   if (content.race.wins !== null) raceStats += `**wins:**  *${content.race.wins}*\n`.toUpperCase();
-  if (raceStats !== "") embed.addField("**MARBLE RACE STATS**", raceStats);
+  if (raceStats !== "") embed.addField("**MARBLE RACE STATS**", raceStats, true);
 
   let miscStats = "";
   if (content.misc.joined !== null) miscStats += `**joined:**  *${content.misc.joined}*\n`.toUpperCase();
-  if (content.misc.first_message !== null) miscStats += `**first message:**  *${content.misc.first_message}*\n`.toUpperCase();
+  if (content.misc.first_message !== null) miscStats += `**first message:**  "*${content.misc.first_message}*"\n`;
   if (content.misc.warnings !== null) miscStats += `**warnings:**  *${content.misc.warnings}*\n`.toUpperCase();
-  if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats);
+  if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats, true);
 
-  if (member.roles.has(client.config.roles.mod)) {
+  let guildName = rsrc.getGuildNameFromGuild(member.guild);
+  if (member.roles.has(client.guild_configs[guildName].roles.mod)) {
     embed.setFooter("BE RESPECTFUL TO ALL - ESPECIALLY MODERATORS", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");
     embed.setDescription("`SERVER MOD`");
   }

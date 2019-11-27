@@ -14,38 +14,30 @@ module.exports.props = {
 module.exports.run = async (client: any, message: Message, args: string[]) => {
   const user = message.mentions.users.first();
 
-  let username: any;
+  let username: string;
   let userContent: any;
 
   if (!user) {
     if (args.length == 1) {
       userContent = rsrc.getUserContentsFromName(client, message, args[0], true);
 
-      if (!userContent)
-        try {
-          return message.reply("that user is not registered");
-        } catch (err) {
-          console.log(err);
-        }
-
-      username = userContent.name;
-    } else
-      try {
-        return message.reply("you need to specify a user");
-      } catch (err_1) {
-        console.log(err_1);
+      if (!userContent) {
+        return message.reply("that user is not registered");
+      } else {
+        username = userContent?.hidden?.username;
       }
+    } else {
+      return message.reply("you need to specify a user");
+    }
   } else {
     username = rsrc.getUsernameFromMember(user);
     userContent = client.getUserContent(message.guild, username);
   }
 
   if (!username || !userContent)
-    try {
-      return message.reply("that user is not registered");
-    } catch (err_2) {
-      console.log(err_2);
-    }
+    return message.reply("that user is not registered");
+
+  userContent = client.hideUserInfo(userContent);
 
   message.delete().catch(err => {
     console.log(err);

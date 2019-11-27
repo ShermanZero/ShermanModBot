@@ -1,7 +1,6 @@
 import { Message, MessageEmbed } from 'discord.js';
-import * as path from 'path';
 
-import Resources from '../classes/Resources';
+import rsrc from '../classes/Resources';
 
 module.exports.props = {
   description: "replies to the member with the commands for the server"
@@ -16,8 +15,7 @@ module.exports.run = async (client: any, message: Message) => {
   embed.setDescription("All the commands **you** have access to in this server");
   embed.setColor(0x00ae86);
 
-  let guildDir = Resources.getGuildDirectoryFromGuild(message.guild);
-  let guildConfig = require(path.resolve(guildDir, client.global_config.files.guild_config));
+  let guildConfig = client.guild_configsp[rsrc.getGuildNameFromGuild(message.guild)];
 
   client.commands.forEach((value: any, key: string) => {
     if (!value.props || !message.member) return;
@@ -27,11 +25,12 @@ module.exports.run = async (client: any, message: Message) => {
 
     if (elevatedPermissions || noPermissions) {
       var header = "**!" + key + "**";
-      if (value.props.usage) header += `\t*!${key} ${value.props.usage}*`;
+      let desc = value.props.description;
+      if (value.props.usage) header += `\n\t*!${key} ${value.props.usage}*`;
 
-      if (elevatedPermissions) header += `  \`\`\`${value.props.requiresElevation}\`\`\``;
+      if (elevatedPermissions) desc += `  \`\`\`css\n[${value.props.requiresElevation}]\`\`\``;
 
-      embed.addField(header, value.props.description);
+      embed.addField(header, desc, true);
     }
   });
 

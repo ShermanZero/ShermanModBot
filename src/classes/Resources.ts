@@ -34,15 +34,11 @@ export default class Resources {
   }
 
   static getUserContentsFromName(client: any, message: Message, username: string, search: boolean = false): any {
-    console.log("username", username);
-
     return Resources.getUserContentsFromNameWithGuild(client, message.guild as Guild, message, username, search);
   }
 
   static getUserContentsFromNameWithGuild(client: any, guild: Guild, message: Message, username: string, search: boolean = false): any {
     if (!guild) guild = message.guild as Guild;
-    console.log("username", username);
-
     username = username.trim().toLowerCase();
 
     let jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
@@ -53,7 +49,12 @@ export default class Resources {
       let possibleMatches: string[] = [];
 
       let users = this.getGuildUsersFromGuild(client, guild);
-      for (let guildUserUsername in Object.keys(users)) if (guildUserUsername.includes(username)) possibleMatches.push(guildUserUsername);
+
+      const keys = Object.keys(users);
+
+      for (const guildUserUsername of keys) {
+        if (guildUserUsername.includes(username)) possibleMatches.push(guildUserUsername);
+      }
 
       if (possibleMatches.length > 1) {
         let listOfUsers = "";
@@ -81,6 +82,11 @@ export default class Resources {
               return null;
             });
         });
+      } else if (possibleMatches.length == 1) {
+        username = possibleMatches[0];
+        jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
+      } else {
+        return null;
       }
     }
 

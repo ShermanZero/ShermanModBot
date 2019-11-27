@@ -18,6 +18,7 @@ function init() {
   client.global_config = global_config;
   client.usersInSession = new Map();
   client.masterLog = [];
+  client.guild_configs = new Map();
 
   client.getGuild = function(guildName: string) {
     return client.usersInSession[guildName];
@@ -28,15 +29,21 @@ function init() {
     var username = content.hidden.username;
     var guild = client.usersInSession[guildName];
     guild[username] = content;
-    Object.defineProperty(content, "hidden", {
-      enumerable: false
-    });
+    content = client.hideUserInfo(content);
   };
 
   client.registerUser = function(content: any) {
     client.updateUser(content);
     console.log("*Registered [" + content.hidden.username.magenta + "] to guild [" + content.hidden.guildname.magenta + "]");
   };
+
+  client.hideUserInfo = function(content: any) {
+    Object.defineProperty(content, "hidden", {
+      enumerable: false
+    });
+
+    return content;
+  }
 
   client.hasUser = function(guild: Discord.Guild, username: string) {
     var userGuild = client.usersInSession[rsrc.getGuildNameFromGuild(guild)];

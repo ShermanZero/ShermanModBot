@@ -2,7 +2,7 @@ import { Message, Role, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import Resources from '../classes/Resources';
+import rsrc from '../classes/Resources';
 import guild_config from '../resources/guild_config';
 
 module.exports.props = {
@@ -11,10 +11,10 @@ module.exports.props = {
 
 module.exports.run = async (client: any, message: Message) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return;
-  
+
   let guildDir: string;
 
-  if (message.guild) guildDir = Resources.getGuildDirectoryFromGuild(message.guild);
+  if (message.guild) guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
   else guildDir = null as any;
 
   if (!guildDir) return await message.reply("you are not messaging me from a guild!");
@@ -23,9 +23,9 @@ module.exports.run = async (client: any, message: Message) => {
   if (!fs.existsSync(configFile)) await message.reply("you don't appear to have a configuration set up for your guild, let's create one");
 
   await getRole(client.global_config.elevation_names.owner, message).then(result => {
-    if(!result) return message.channel.send("You will need to rerun the setup before commands become available");
+    if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
   });
-  await getRole(client.global_config.elevation_names.mod, message).then(result => {
+  await getRole(client.global_config.elevation_names.moderator, message).then(result => {
     if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
   });
 
@@ -34,24 +34,38 @@ module.exports.run = async (client: any, message: Message) => {
 
   guild_config.setup = true;
 
+  client.guild_configs[rsrc.getGuildNameFromGuild(message.guild)] = guild_config;
+
   //create the config file
-  fs.writeFileSync(configFile, JSON.stringify(guild_config, null, "\t"));
+  fs.writeFile(configFile, JSON.stringify(guild_config, null, "\t"), (error) => {
+    if(error) {
+      message.reply("there was a problem creating your config file, you will need to rerun the setup");
+    } else {
+      message.reply("your configuration has been stored!  You can rerun this setup at any time");
+    }
+  });
 };
 
 async function getChannel(nameOfChannel: string, alias: string, purpose: string, message: Message) {
   let channel: TextChannel;
 
-  await askQuestion(message.channel as TextChannel, `Do you have a ${alias} channel?  This will be used to ${purpose}.  If you do, and want to enable this feature, simply mention the name of the channel (using #), otherwise, press enter`).then(response => {
-    console.log("response", response);
+  await askQuestion(
+    message.channel as TextChannel,
+    `Do you have a ${alias} channel?  This will be used to ${purpose}.  If you do, and want to enable this feature, simply mention the name of the channel (using #), otherwise, press enter`
+  )
+    .then(response => {
+      let channelByID = message.guild.channels.find(channel => channel.id === response);
 
-    let channelByID = message.guild.channels.find(channel => channel.id === response);
+      if (channelByID) channel = channelByID as TextChannel;
+    })
+    .catch(() => {
+      message.reply("Your config has been partially generated, but you can rerun at any time");
+      return false;
+    });
 
-    if(channelByID) channel = channelByID as TextChannel;
-  });
-
-  if(channel) {
+  if (channel) {
     guild_config.channels[nameOfChannel] = channel.id;
-    await message.channel.send(`${channel} has been set as the ${alias} channel!`);
+    await message.channel.send(`\`\`\`${channel} has been set as the ${alias} channel!\`\`\``);
   }
 
   return true;
@@ -60,22 +74,28 @@ async function getChannel(nameOfChannel: string, alias: string, purpose: string,
 async function getRole(nameOfRole: string, message: Message) {
   let role: Role;
 
-  await askQuestion(message.channel as TextChannel, `What is the ${nameOfRole} role ID?  You can mention a member with this role, the role itself, input the role's name, or input the ID directly if you know it`).then(response => {
-    console.log("response", response);
+  await askQuestion(
+    message.channel as TextChannel,
+    `What is the ${nameOfRole} role ID?  You can mention a member with this role, the role itself, input the role's name, or input the ID directly if you know it`
+  )
+    .then(response => {
+      let roleByName = message.guild.roles.find(role => role.name === response);
+      let roleByID = message.guild.roles.find(role => role.id === response);
+      let roleByUser = message.guild.members.get(response)?.roles.highest;
 
-    let roleByName = message.guild.roles.find(role => role.name === response);
-    let roleByID = message.guild.roles.find(role => role.id === response);
-    let roleByUser = message.guild.members.get(response)?.roles.highest;
-
-    if (roleByName) role = roleByName;
-    else if (roleByID) role = roleByID;
-    else if (roleByUser) role = roleByUser;
-    else message.reply(`I could not find the ${nameOfRole} role based on your input`);
-  });
+      if (roleByName) role = roleByName;
+      else if (roleByID) role = roleByID;
+      else if (roleByUser) role = roleByUser;
+      else message.reply(`I could not find the ${nameOfRole} role based on your input`);
+    })
+    .catch(() => {
+      message.reply("You will need to rerun the setup, your config file was not generated");
+      return false;
+    });
 
   if (role) {
     guild_config.roles[nameOfRole] = role.id;
-    await message.channel.send(`${role} has been set as the ${nameOfRole} role!`);
+    await message.channel.send(`\`\`\`${role} has been set as the ${nameOfRole} role!\`\`\``);
   }
 
   return true;
@@ -90,9 +110,11 @@ async function askQuestion(channel: TextChannel, question: string, filter = () =
     .then(collected => {
       value = collected.first()?.content;
       value = (value as string).replace(/[<>@&#]/g, "");
+      
+      collected.first()?.delete();
     })
     .catch(collected => {
-      channel.send("No answer was given in time, aborting setup.  Run !config to rereun setup");
+      channel.send("No answer was given in time");
     });
 
   return value;

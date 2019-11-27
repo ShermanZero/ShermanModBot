@@ -11,11 +11,7 @@ module.exports.props = {
   description: "shuts the bot down cleanly"
 };
 
-module.exports.run = async (
-  client: any,
-  message: Message,
-  userTriggered: boolean = true
-) => {
+module.exports.run = async (client: any, message: Message, userTriggered: boolean = true) => {
   if (client.alreadyShutdown) {
     console.log("Already executed clean shutdown... restarting now".magenta);
     return true;
@@ -28,8 +24,7 @@ module.exports.run = async (
   for (const [, users] of entries) {
     let allUsers = Object.entries(users as any);
 
-    for (const [username, userContent] of allUsers)
-      rsrc.writeUserContentToFile(client, username, userContent);
+    for (const [username, userContent] of allUsers) rsrc.writeUserContentToFile(client, username, userContent);
   }
 
   //check if the command was user-triggered
@@ -41,11 +36,7 @@ module.exports.run = async (
   console.log("Successfully wrote user data to files!".magenta);
 
   //append all last log data to the master log
-  for (var i = 0; i < client.masterLog.length; i++)
-    fs.appendFileSync(
-      path.join(__dirname, "..", "logs", client.config.files.log_all),
-      client.masterLog[i]
-    );
+  for (var i = 0; i < client.masterLog.length; i++) fs.appendFileSync(path.join(__dirname, "..", "logs", client.config.files.log_all), client.masterLog[i]);
 
   console.log("Successfully stored pending user logs!".magenta);
 

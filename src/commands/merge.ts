@@ -28,37 +28,20 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   let newUsername = rsrc.getUsernameFromMember(newUser);
 
   if (!client.hasUser(message.guild, oldUsername))
-    if (message)
-      return message.reply(`I could not find OLD [${oldUser}] in my database`);
-    else
-      return console.error(
-        `!! I could not find OLD [${oldUser}] in my database`.red
-      );
+    if (message) return message.reply(`I could not find OLD [${oldUser}] in my database`);
+    else return console.error(`!! I could not find OLD [${oldUser}] in my database`.red);
 
   if (!client.hasUser(message.guild, newUsername))
-    if (message)
-      return message.reply(`I could not find NEW [${newUser}] in my database`);
-    else
-      return console.error(
-        `!! I could not find NEW [${newUser}] in my database`.red
-      );
+    if (message) return message.reply(`I could not find NEW [${newUser}] in my database`);
+    else return console.error(`!! I could not find NEW [${newUser}] in my database`.red);
 
   let content = client.getUserContent(message.guild, oldUsername);
   content.hidden.username = newUsername;
 
-  let source = rsrc.getUserDirectoryFromGuild(
-    message.guild as Guild,
-    oldUsername
-  );
-  let destination = rsrc.getUserDirectoryFromGuild(
-    message.guild as Guild,
-    newUsername
-  );
+  let source = rsrc.getUserDirectoryFromGuild(message.guild as Guild, oldUsername);
+  let destination = rsrc.getUserDirectoryFromGuild(message.guild as Guild, newUsername);
 
-  fs.writeFileSync(
-    path.join(destination, newUsername + ".json"),
-    JSON.stringify(content, null, "\t")
-  );
+  fs.writeFileSync(path.join(destination, newUsername + ".json"), JSON.stringify(content, null, "\t"));
   rimraf(source, err => {
     if (err) console.log(err);
   });

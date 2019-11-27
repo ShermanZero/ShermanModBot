@@ -13,9 +13,5 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   let guildUsers = rsrc.getGuildUsersFromGuild(client, message.guild);
   let allUsers = Object.keys(guildUsers);
 
-  message.reply(
-    `here are the current registered members of the server:\n[**${allUsers.join(
-      "**, **"
-    )}**]`
-  );
+  message.reply(`here are the current registered members of the server:\n[**${allUsers.join("**, **")}**]`);
 };

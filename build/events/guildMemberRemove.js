@@ -5,15 +5,14 @@ const ncp = require("ncp");
 const path = require("path");
 const Resources_1 = require("../classes/Resources");
 module.exports = (client, member) => {
-    let username = Resources_1.default.getUsernameFromMember(member);
-    let userDir = Resources_1.default.getUserDirectoryFromGuild(member.guild, username);
-    let guildDir = Resources_1.default.getGuildDirectoryFromGuild(member.guild);
-    let removed;
-    ncp(userDir, (removed = path.join(guildDir, client.config.files.removed, username)), { clobber: true }, err => {
-        if (err)
-            return console.error(`!! Failed to transfer [${username}] to ${removed}`);
-        console.log(`Member [${username.magenta}] just left the guild [${Resources_1.default.getGuildNameFromGuild(member.guild).magenta}]`);
-    });
-    client.deleteUser(member.guild, username);
+  let username = Resources_1.default.getUsernameFromMember(member);
+  let userDir = Resources_1.default.getUserDirectoryFromGuild(member.guild, username);
+  let guildDir = Resources_1.default.getGuildDirectoryFromGuild(member.guild);
+  let removed;
+  ncp(userDir, (removed = path.join(guildDir, client.config.files.removed, username)), { clobber: true }, err => {
+    if (err) return console.error(`!! Failed to transfer [${username}] to ${removed}`);
+    console.log(`Member [${username.magenta}] just left the guild [${Resources_1.default.getGuildNameFromGuild(member.guild).magenta}]`);
+  });
+  client.deleteUser(member.guild, username);
 };
 //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ3VpbGRNZW1iZXJSZW1vdmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvZXZlbnRzL2d1aWxkTWVtYmVyUmVtb3ZlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWdCO0FBR2hCLDJCQUEyQjtBQUMzQiw2QkFBNkI7QUFFN0Isb0RBQXdDO0FBRXhDLE1BQU0sQ0FBQyxPQUFPLEdBQUcsQ0FBQyxNQUFXLEVBQUUsTUFBbUIsRUFBRSxFQUFFO0lBQ3BELElBQUksUUFBUSxHQUFHLG1CQUFJLENBQUMscUJBQXFCLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDbEQsSUFBSSxPQUFPLEdBQUcsbUJBQUksQ0FBQyx5QkFBeUIsQ0FBQyxNQUFNLENBQUMsS0FBSyxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ3JFLElBQUksUUFBUSxHQUFHLG1CQUFJLENBQUMsMEJBQTBCLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBRTdELElBQUksT0FBWSxDQUFDO0lBQ2pCLEdBQUcsQ0FDRCxPQUFPLEVBQ1AsQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUUsTUFBTSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxDQUFDLEVBQ3RFLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRSxFQUNqQixHQUFHLENBQUMsRUFBRTtRQUNKLElBQUksR0FBRztZQUNMLE9BQU8sT0FBTyxDQUFDLEtBQUssQ0FDbEIsMEJBQTBCLFFBQVEsUUFBUSxPQUFPLEVBQUUsQ0FDcEQsQ0FBQztRQUVKLE9BQU8sQ0FBQyxHQUFHLENBQ1QsV0FBVyxRQUFRLENBQUMsT0FBTywwQkFDekIsbUJBQUksQ0FBQyxxQkFBcUIsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsT0FDM0MsR0FBRyxDQUNKLENBQUM7SUFDSixDQUFDLENBQ0YsQ0FBQztJQUVGLE1BQU0sQ0FBQyxVQUFVLENBQUMsTUFBTSxDQUFDLEtBQUssRUFBRSxRQUFRLENBQUMsQ0FBQztBQUM1QyxDQUFDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJ2NvbG9ycyc7XHJcblxyXG5pbXBvcnQgeyBHdWlsZE1lbWJlciB9IGZyb20gJ2Rpc2NvcmQuanMnO1xyXG5pbXBvcnQgKiBhcyBuY3AgZnJvbSAnbmNwJztcclxuaW1wb3J0ICogYXMgcGF0aCBmcm9tICdwYXRoJztcclxuXHJcbmltcG9ydCByc3JjIGZyb20gJy4uL2NsYXNzZXMvUmVzb3VyY2VzJztcclxuXHJcbm1vZHVsZS5leHBvcnRzID0gKGNsaWVudDogYW55LCBtZW1iZXI6IEd1aWxkTWVtYmVyKSA9PiB7XHJcbiAgbGV0IHVzZXJuYW1lID0gcnNyYy5nZXRVc2VybmFtZUZyb21NZW1iZXIobWVtYmVyKTtcclxuICBsZXQgdXNlckRpciA9IHJzcmMuZ2V0VXNlckRpcmVjdG9yeUZyb21HdWlsZChtZW1iZXIuZ3VpbGQsIHVzZXJuYW1lKTtcclxuICBsZXQgZ3VpbGREaXIgPSByc3JjLmdldEd1aWxkRGlyZWN0b3J5RnJvbUd1aWxkKG1lbWJlci5ndWlsZCk7XHJcblxyXG4gIGxldCByZW1vdmVkOiBhbnk7XHJcbiAgbmNwKFxyXG4gICAgdXNlckRpcixcclxuICAgIChyZW1vdmVkID0gcGF0aC5qb2luKGd1aWxkRGlyLCBjbGllbnQuY29uZmlnLmZpbGVzLnJlbW92ZWQsIHVzZXJuYW1lKSksXHJcbiAgICB7IGNsb2JiZXI6IHRydWUgfSxcclxuICAgIGVyciA9PiB7XHJcbiAgICAgIGlmIChlcnIpXHJcbiAgICAgICAgcmV0dXJuIGNvbnNvbGUuZXJyb3IoXHJcbiAgICAgICAgICBgISEgRmFpbGVkIHRvIHRyYW5zZmVyIFske3VzZXJuYW1lfV0gdG8gJHtyZW1vdmVkfWBcclxuICAgICAgICApO1xyXG5cclxuICAgICAgY29uc29sZS5sb2coXHJcbiAgICAgICAgYE1lbWJlciBbJHt1c2VybmFtZS5tYWdlbnRhfV0ganVzdCBsZWZ0IHRoZSBndWlsZCBbJHtcclxuICAgICAgICAgIHJzcmMuZ2V0R3VpbGROYW1lRnJvbUd1aWxkKG1lbWJlci5ndWlsZCkubWFnZW50YVxyXG4gICAgICAgIH1dYFxyXG4gICAgICApO1xyXG4gICAgfVxyXG4gICk7XHJcblxyXG4gIGNsaWVudC5kZWxldGVVc2VyKG1lbWJlci5ndWlsZCwgdXNlcm5hbWUpO1xyXG59O1xyXG4iXX0=

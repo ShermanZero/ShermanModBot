@@ -21,11 +21,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
     });
 
   let username = rsrc.getUsernameFromMember(user);
-  let file = path.join(
-    rsrc.getUserDirectoryFromGuild(message.guild as Guild, username),
-    "logs",
-    client.config.files.log_all
-  );
+  let file = path.join(rsrc.getUserDirectoryFromGuild(message.guild as Guild, username), "logs", client.config.files.log_all);
   //parse amount
   let amount = !!parseInt(args[1]) ? parseInt(args[1]) : parseInt(args[2]);
 
@@ -37,13 +33,9 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   fs.readFile(file, "utf8", (error, data) => {
     let content = client.getUserContent(message.guild, username);
 
-    if (content.userLog.length !== 0)
-      data
-        ? (data += content.userLog.join(""))
-        : (data = content.userLog.join(""));
+    if (content.userLog.length !== 0) data ? (data += content.userLog.join("")) : (data = content.userLog.join(""));
 
-    if (error && !data)
-      return message.reply("that user does not have a log file");
+    if (error && !data) return message.reply("that user does not have a log file");
 
     logs = data.split("\n");
 
@@ -54,9 +46,6 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
     logs = logs.slice(-amount);
     let result = amount == 1 ? logs[0] : logs.join("\n");
 
-    message.channel.send(
-      `Here are the last ${amount} message(s) [${username.hideID()}] sent:\n${result}`,
-      { split: true }
-    );
+    message.channel.send(`Here are the last ${amount} message(s) [${username.hideID()}] sent:\n${result}`, { split: true });
   });
 };

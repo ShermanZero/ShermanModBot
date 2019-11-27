@@ -13,3 +13,15 @@
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  12:29:54] (#shermanbot): !users
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  12:30:09] (#shermanbot): !user <@349728538439450625>
 /The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  12:30:43] (#shermanbot): !stats
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:01:59] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:02:29] (#shermanbot): test
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:02:40] (#shermanbot): !purge
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:03:10] (#shermanbot): !priv
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:03:12] (#shermanbot): !help
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:03:24] (#shermanbot): !private <@636618628846059530>
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:03:31] (#private-hangout): EOD
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:03:38] (#private-hangout): !purge
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:03:41] (#private-hangout): clear
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:03:44] (#private-hangout): !purge
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:14:43] (#shermanbot): <#608697651545899077>
+/The_SherZer_Server-(471444438216867840)/>  shermanzero_1200 [11/26  23:14:43] (#shermanbot): <#608697651545899077>

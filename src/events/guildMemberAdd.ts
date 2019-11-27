@@ -4,9 +4,7 @@ import rsrc from '../classes/Resources';
 
 module.exports = (client: any, member: GuildMember) => {
   const guild = member.guild;
-  const defaultChannel = guild.channels.find(
-    channel => channel.name === "welcome"
-  );
+  const defaultChannel = guild.channels.find(channel => channel.name === "welcome");
 
   if (!(defaultChannel as TextChannel)) return;
 
@@ -17,15 +15,9 @@ module.exports = (client: any, member: GuildMember) => {
     console.log(err);
   });
 
-  let serverRules = guild.channels.get(
-    client.config.channels.shermanzeros_hangout.server_rules
-  );
-  let serverInfo = guild.channels.get(
-    client.config.channels.shermanzeros_hangout.server_information
-  );
-  let autoRoles = guild.channels.get(
-    client.config.channels.shermanzeros_hangout.auto_roles
-  );
+  let serverRules = guild.channels.get(client.config.channels.shermanzeros_hangout.server_rules);
+  let serverInfo = guild.channels.get(client.config.channels.shermanzeros_hangout.server_information);
+  let autoRoles = guild.channels.get(client.config.channels.shermanzeros_hangout.auto_roles);
 
   (defaultChannel as TextChannel)!
     .send(

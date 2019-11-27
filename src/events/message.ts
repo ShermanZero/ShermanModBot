@@ -5,21 +5,16 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import rsrc from '../classes/Resources';
-import config from '../config';
-import blacklist from '../resources/misc/blacklist';
-import ranks from '../resources/ranks/ranks';
+import blacklist from '../resources/blacklist';
+import config from '../resources/global_config';
+import ranks from '../resources/ranks';
 
 module.exports = (client: any, message: Message) => {
   //ignore all bots
   if (message.author.bot) return;
 
   //register the user
-  if (!registerMessage(client, message))
-    return console.error(
-      `!! Could not register message sent by [${rsrc.getUsernameFromMessage(
-        message
-      )}]`.red
-    );
+  if (!registerMessage(client, message)) return console.error(`!! Could not register message sent by [${rsrc.getUsernameFromMessage(message)}]`.red);
 
   //check against blacklist
   if (blacklist.words.some(substring => message.content.includes(substring))) {
@@ -52,13 +47,7 @@ module.exports = (client: any, message: Message) => {
   //if the command doesn't exist
   if (!cmd) return;
 
-  if (cmd.props.requiresElevation && cmd.props.requiresElevation !== "")
-    if (
-      !message.member?.roles.has(
-        client.config.roles[cmd.props.requiresElevation]
-      )
-    )
-      return;
+  if (cmd.props.requiresElevation && cmd.props.requiresElevation !== "") if (!message.member?.roles.has(client.config.roles[cmd.props.requiresElevation])) return;
 
   //run the command
   cmd.run(client, message, args);
@@ -76,8 +65,7 @@ function registerMessage(client: any, message: Message) {
   let content: any;
 
   //if the user has not been registered
-  if (!fs.existsSync(userDir))
-    rsrc.createUserDirectory(client, message.guild, message.member!);
+  if (!fs.existsSync(userDir)) rsrc.createUserDirectory(client, message.guild, message.member!);
 
   //user NOT stored in local client session
   if (!client.hasUser(message.guild, username)) {
@@ -93,17 +81,12 @@ function registerMessage(client: any, message: Message) {
     return false;
   }
 
-  if (
-    content.misc.first_message === null ||
-    typeof content.misc.first_message === "undefined"
-  ) {
+  if (content.misc.first_message === null || typeof content.misc.first_message === "undefined") {
     content.misc.first_message = message.content;
     client.updateUser(content);
   }
 
-  let logMessage = `[${getTimestamp(message)}] (#${
-    (message.channel as TextChannel).name
-  }): ${message.content}\n`;
+  let logMessage = `[${getTimestamp(message)}] (#${(message.channel as TextChannel).name}): ${message.content}\n`;
 
   //push the message to the master log branch
   client.masterLog.push(`/${guildName}/>  ${username} ${logMessage}`);
@@ -120,10 +103,7 @@ function registerMessage(client: any, message: Message) {
 
 function getTimestamp(message: Message) {
   let timestamp = message.createdAt;
-  let date = (timestamp.getMonth() + 1 + "/" + timestamp.getDate()).replace(
-    /.*(\d{2}\/\d{2}).*/,
-    "$1"
-  );
+  let date = (timestamp.getMonth() + 1 + "/" + timestamp.getDate()).replace(/.*(\d{2}\/\d{2}).*/, "$1");
   let time = timestamp.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
 
   return date + "  " + time;
@@ -134,34 +114,24 @@ function updateMasterLog(client) {
 
   if (!fs.existsSync(masterLog)) {
     fs.mkdirSync(masterLog, { recursive: true });
-    fs.writeFileSync(
-      path.resolve(masterLog, config.files.log_all),
-      "-- START OF LOG --"
-    );
+    fs.writeFileSync(path.resolve(masterLog, config.files.log_all), "-- START OF LOG --");
   }
 
   //if the log length exceeds the threshold, update the master log
-  if (
-    client.masterLog.length >= client.config.preferences.log_threshold_master
-  ) {
-    for (var i = 0; i < client.masterLog.length; i++)
-      fs.appendFileSync(masterLog, client.masterLog[i]);
+  if (client.masterLog.length >= client.config.preferences.log_threshold_master) {
+    for (var i = 0; i < client.masterLog.length; i++) fs.appendFileSync(masterLog, client.masterLog[i]);
 
     client.masterLog = [];
   }
 }
 
 function updateUserLog(client, guild, content) {
-  let logsDir = path.join(
-    rsrc.getUserDirectoryFromGuild(guild, content.hidden.username),
-    "logs"
-  );
+  let logsDir = path.join(rsrc.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
   let userLog = path.join(logsDir, client.config.files.log_all);
 
   //if the log length exceeds the threshold, update the master log
   if (content.userLog.length >= client.config.preferences.log_threshold_user) {
-    for (var i = 0; i < content.userLog.length; i++)
-      fs.appendFileSync(userLog, content.userLog[i]);
+    for (var i = 0; i < content.userLog.length; i++) fs.appendFileSync(userLog, content.userLog[i]);
 
     content.userLog = [];
   }
@@ -170,11 +140,7 @@ function updateUserLog(client, guild, content) {
   client.updateUser(content);
 
   //log it to the console
-  console.log(
-    `[${content.hidden.guildname.magenta}] =>`,
-    `[${content.hidden.username.magenta}] =>`,
-    content
-  );
+  console.log(`[${content.hidden.guildname.magenta}] =>`, `[${content.hidden.username.magenta}] =>`, content);
 }
 
 //awards the user experience for posting a message
@@ -198,12 +164,8 @@ function awardExperience(client, message) {
       var lastRank = content.rank.name;
 
       content.rank.name = rank;
-      let oldRole = message.guild.roles.find(
-        role => role.name.toLowerCase() === lastRank.toLowerCase()
-      );
-      let newRole = message.guild.roles.find(
-        role => role.name.toLowerCase() === rank.toLowerCase()
-      );
+      let oldRole = message.guild.roles.find(role => role.name.toLowerCase() === lastRank.toLowerCase());
+      let newRole = message.guild.roles.find(role => role.name.toLowerCase() === rank.toLowerCase());
 
       if (oldRole)
         message.member.removeRole(oldRole).catch(err => {
@@ -215,10 +177,7 @@ function awardExperience(client, message) {
       });
     }
 
-    content.rank.levelup = rsrc.getXPToLevelUp(
-      content.rank.xp,
-      content.rank.level
-    );
+    content.rank.levelup = rsrc.getXPToLevelUp(content.rank.xp, content.rank.level);
     levelUp(client, message, content);
   }
 
@@ -226,10 +185,7 @@ function awardExperience(client, message) {
 
   //only write XP changes to the file every 10 messages
   if (content.rank.xp % client.config.preferences.xp_threshold === 0) {
-    let jsonFile = path.join(
-      rsrc.getUserDirectoryFromGuild(message.guild, username),
-      username + ".json"
-    );
+    let jsonFile = path.join(rsrc.getUserDirectoryFromGuild(message.guild, username), username + ".json");
     let newJson = JSON.stringify(content, null, "\t");
     fs.writeFileSync(jsonFile, newJson);
   }
@@ -239,8 +195,6 @@ function levelUp(client, message, content) {
   var stats = client.commands.get("stats");
   let embed = stats.getEmbed(client, message.member, content);
 
-  message.channel.send(
-    `Congratulations ${message.author}!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!`
-  );
+  message.channel.send(`Congratulations ${message.author}!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!`);
   message.channel.send(embed);
 }

@@ -2,24 +2,24 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Resources_1 = require("../classes/Resources");
 module.exports = (client, member) => {
-    const guild = member.guild;
-    const defaultChannel = guild.channels.find(channel => channel.name === "welcome");
-    if (!defaultChannel)
-        return;
-    let unrankedRole = guild.roles.get("609248072706424863");
-    if (unrankedRole)
-        unrankedRole = unrankedRole;
-    member.roles.add(unrankedRole).catch(err => {
-        console.log(err);
+  const guild = member.guild;
+  const defaultChannel = guild.channels.find(channel => channel.name === "welcome");
+  if (!defaultChannel) return;
+  let unrankedRole = guild.roles.get("609248072706424863");
+  if (unrankedRole) unrankedRole = unrankedRole;
+  member.roles.add(unrankedRole).catch(err => {
+    console.log(err);
+  });
+  let serverRules = guild.channels.get(client.config.channels.shermanzeros_hangout.server_rules);
+  let serverInfo = guild.channels.get(client.config.channels.shermanzeros_hangout.server_information);
+  let autoRoles = guild.channels.get(client.config.channels.shermanzeros_hangout.auto_roles);
+  defaultChannel
+    .send(
+      `Welcome ${member.user} to **${guild.name}**!  You are member **#${guild.memberCount}!  Check out the ${serverRules} and ${serverInfo} regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in ${autoRoles}, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!`
+    )
+    .catch(err => {
+      console.log(err);
     });
-    let serverRules = guild.channels.get(client.config.channels.shermanzeros_hangout.server_rules);
-    let serverInfo = guild.channels.get(client.config.channels.shermanzeros_hangout.server_information);
-    let autoRoles = guild.channels.get(client.config.channels.shermanzeros_hangout.auto_roles);
-    defaultChannel
-        .send(`Welcome ${member.user} to **${guild.name}**!  You are member **#${guild.memberCount}!  Check out the ${serverRules} and ${serverInfo} regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in ${autoRoles}, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!`)
-        .catch((err) => {
-        console.log(err);
-    });
-    Resources_1.default.createUserDirectory(client, member.guild, member);
+  Resources_1.default.createUserDirectory(client, member.guild, member);
 };
 //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ3VpbGRNZW1iZXJBZGQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvZXZlbnRzL2d1aWxkTWVtYmVyQWRkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBRUEsb0RBQXdDO0FBRXhDLE1BQU0sQ0FBQyxPQUFPLEdBQUcsQ0FBQyxNQUFXLEVBQUUsTUFBbUIsRUFBRSxFQUFFO0lBQ3BELE1BQU0sS0FBSyxHQUFHLE1BQU0sQ0FBQyxLQUFLLENBQUM7SUFDM0IsTUFBTSxjQUFjLEdBQUcsS0FBSyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQ3hDLE9BQU8sQ0FBQyxFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksS0FBSyxTQUFTLENBQ3RDLENBQUM7SUFFRixJQUFJLENBQUUsY0FBOEI7UUFBRSxPQUFPO0lBRTdDLElBQUksWUFBWSxHQUFRLEtBQUssQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLG9CQUFvQixDQUFDLENBQUM7SUFDOUQsSUFBSSxZQUFZO1FBQUUsWUFBWSxHQUFHLFlBQW9CLENBQUM7SUFFdEQsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsWUFBWSxDQUFDLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxFQUFFO1FBQ3pDLE9BQU8sQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDbkIsQ0FBQyxDQUFDLENBQUM7SUFFSCxJQUFJLFdBQVcsR0FBRyxLQUFLLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FDbEMsTUFBTSxDQUFDLE1BQU0sQ0FBQyxRQUFRLENBQUMsb0JBQW9CLENBQUMsWUFBWSxDQUN6RCxDQUFDO0lBQ0YsSUFBSSxVQUFVLEdBQUcsS0FBSyxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQ2pDLE1BQU0sQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFDLG9CQUFvQixDQUFDLGtCQUFrQixDQUMvRCxDQUFDO0lBQ0YsSUFBSSxTQUFTLEdBQUcsS0FBSyxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQ2hDLE1BQU0sQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFDLG9CQUFvQixDQUFDLFVBQVUsQ0FDdkQsQ0FBQztJQUVELGNBQStCO1NBQzdCLElBQUksQ0FDSCxXQUFXLE1BQU0sQ0FBQyxJQUFJLFNBQVMsS0FBSyxDQUFDLElBQUksMEJBQTBCLEtBQUssQ0FBQyxXQUFXLG9CQUFvQixXQUFXLFFBQVEsVUFBVSxvTUFBb00sU0FBUyxvR0FBb0csQ0FDdmI7U0FDQSxLQUFLLENBQUMsQ0FBQyxHQUFRLEVBQUUsRUFBRTtRQUNsQixPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQ25CLENBQUMsQ0FBQyxDQUFDO0lBRUwsbUJBQUksQ0FBQyxtQkFBbUIsQ0FBQyxNQUFNLEVBQUUsTUFBTSxDQUFDLEtBQUssRUFBRSxNQUFNLENBQUMsQ0FBQztBQUN6RCxDQUFDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBHdWlsZE1lbWJlciwgUm9sZSwgVGV4dENoYW5uZWwgfSBmcm9tICdkaXNjb3JkLmpzJztcclxuXHJcbmltcG9ydCByc3JjIGZyb20gJy4uL2NsYXNzZXMvUmVzb3VyY2VzJztcclxuXHJcbm1vZHVsZS5leHBvcnRzID0gKGNsaWVudDogYW55LCBtZW1iZXI6IEd1aWxkTWVtYmVyKSA9PiB7XHJcbiAgY29uc3QgZ3VpbGQgPSBtZW1iZXIuZ3VpbGQ7XHJcbiAgY29uc3QgZGVmYXVsdENoYW5uZWwgPSBndWlsZC5jaGFubmVscy5maW5kKFxyXG4gICAgY2hhbm5lbCA9PiBjaGFubmVsLm5hbWUgPT09IFwid2VsY29tZVwiXHJcbiAgKTtcclxuXHJcbiAgaWYgKCEoZGVmYXVsdENoYW5uZWwgYXMgVGV4dENoYW5uZWwpKSByZXR1cm47XHJcblxyXG4gIGxldCB1bnJhbmtlZFJvbGU6IGFueSA9IGd1aWxkLnJvbGVzLmdldChcIjYwOTI0ODA3MjcwNjQyNDg2M1wiKTtcclxuICBpZiAodW5yYW5rZWRSb2xlKSB1bnJhbmtlZFJvbGUgPSB1bnJhbmtlZFJvbGUgYXMgUm9sZTtcclxuXHJcbiAgbWVtYmVyLnJvbGVzLmFkZCh1bnJhbmtlZFJvbGUpLmNhdGNoKGVyciA9PiB7XHJcbiAgICBjb25zb2xlLmxvZyhlcnIpO1xyXG4gIH0pO1xyXG5cclxuICBsZXQgc2VydmVyUnVsZXMgPSBndWlsZC5jaGFubmVscy5nZXQoXHJcbiAgICBjbGllbnQuY29uZmlnLmNoYW5uZWxzLnNoZXJtYW56ZXJvc19oYW5nb3V0LnNlcnZlcl9ydWxlc1xyXG4gICk7XHJcbiAgbGV0IHNlcnZlckluZm8gPSBndWlsZC5jaGFubmVscy5nZXQoXHJcbiAgICBjbGllbnQuY29uZmlnLmNoYW5uZWxzLnNoZXJtYW56ZXJvc19oYW5nb3V0LnNlcnZlcl9pbmZvcm1hdGlvblxyXG4gICk7XHJcbiAgbGV0IGF1dG9Sb2xlcyA9IGd1aWxkLmNoYW5uZWxzLmdldChcclxuICAgIGNsaWVudC5jb25maWcuY2hhbm5lbHMuc2hlcm1hbnplcm9zX2hhbmdvdXQuYXV0b19yb2xlc1xyXG4gICk7XHJcblxyXG4gIChkZWZhdWx0Q2hhbm5lbCBhcyBUZXh0Q2hhbm5lbCkhXHJcbiAgICAuc2VuZChcclxuICAgICAgYFdlbGNvbWUgJHttZW1iZXIudXNlcn0gdG8gKioke2d1aWxkLm5hbWV9KiohICBZb3UgYXJlIG1lbWJlciAqKiMke2d1aWxkLm1lbWJlckNvdW50fSEgIENoZWNrIG91dCB0aGUgJHtzZXJ2ZXJSdWxlc30gYW5kICR7c2VydmVySW5mb30gcmVnYXJkaW5nIHRoZSBkaWZmZXJlbnQgY2hhbm5lbHMuICAqKlBsZWFzZSBjaGFuZ2UgeW91ciBuaWNrbmFtZSB0byBtYXRjaCB5b3VyIFR3aXRjaCBhY2NvdW50IG5hbWUsIGFuZCBsaW5rIHlvdXIgVHdpdGNoIGFuZCBEaXNjb3JkIHRvZ2V0aGVyLioqICBCZSBzdXJlIHRvIGFzc2lnbiB5b3Vyc2VsZiBzb21lIHJvbGVzIG92ZXIgaW4gJHthdXRvUm9sZXN9LCBiYXNlZCBvbiB3aGF0IHlvdSB3YW50IHRvIHNlZSEgIEdldCB0byBrbm93IGV2ZXJ5b25lLCBoYXZlIGEgZ3JlYXQgdGltZSwgYW5kIHRoYW5rcyBmb3Igam9pbmluZyFgXHJcbiAgICApXHJcbiAgICAuY2F0Y2goKGVycjogYW55KSA9PiB7XHJcbiAgICAgIGNvbnNvbGUubG9nKGVycik7XHJcbiAgICB9KTtcclxuXHJcbiAgcnNyYy5jcmVhdGVVc2VyRGlyZWN0b3J5KGNsaWVudCwgbWVtYmVyLmd1aWxkLCBtZW1iZXIpO1xyXG59O1xyXG4iXX0=

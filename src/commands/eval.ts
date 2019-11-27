@@ -20,9 +20,6 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
 };
 
 function clean(text: any) {
-  if (typeof text === "string")
-    return text
-      .replace(/`/g, "`" + String.fromCharCode(8203))
-      .replace(/@/g, "@" + String.fromCharCode(8203));
+  if (typeof text === "string") return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
   else return text;
 }

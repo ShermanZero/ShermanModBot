@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import rsrc from './classes/Resources';
-import config from './config';
+import config from './resources/global_config';
 
 let client: any = new Discord.Client();
 
@@ -35,13 +35,7 @@ function init() {
 
   client.registerUser = function(content: any) {
     client.updateUser(content);
-    console.log(
-      "*Registered [" +
-        content.hidden.username.magenta +
-        "] to guild [" +
-        content.hidden.guildname.magenta +
-        "]"
-    );
+    console.log("*Registered [" + content.hidden.username.magenta + "] to guild [" + content.hidden.guildname.magenta + "]");
   };
 
   client.hasUser = function(guild: Discord.Guild, username: string) {
@@ -61,13 +55,8 @@ function init() {
       return null;
     }
 
-    if (
-      userGuild[username] === null ||
-      typeof userGuild[username] === "undefined"
-    ) {
-      console.error(
-        ("!! Could not locate [" + username + "] in [" + guildName + "]").red
-      );
+    if (userGuild[username] === null || typeof userGuild[username] === "undefined") {
+      console.error(("!! Could not locate [" + username + "] in [" + guildName + "]").red);
       return null;
     }
 
@@ -98,8 +87,7 @@ function start() {
 
       console.log("--registering event", eventName);
       client.on(eventName, event.bind(null, client));
-      delete require
-        .cache[require.resolve(path.join(__dirname, "events", file))];
+      delete require.cache[require.resolve(path.join(__dirname, "events", file))];
     });
   });
 

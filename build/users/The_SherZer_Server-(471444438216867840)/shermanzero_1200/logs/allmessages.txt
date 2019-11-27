@@ -25,3 +25,5 @@
 [11/26  23:03:38] (#private-hangout): !purge
 [11/26  23:03:41] (#private-hangout): clear
 [11/26  23:03:44] (#private-hangout): !purge
+[11/26  23:14:43] (#shermanbot): <#608697651545899077>
+[11/26  23:14:43] (#shermanbot): <#608697651545899077>

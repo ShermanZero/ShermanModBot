@@ -18,12 +18,9 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   const commandName = args[0];
 
   //check if the command exists and is valid
-  if (!client.commands.has(commandName))
-    return message.reply("that command does not exist");
+  if (!client.commands.has(commandName)) return message.reply("that command does not exist");
 
-  delete require.cache[
-    require.resolve(path.join(__dirname, commandName + ".js"))
-  ];
+  delete require.cache[require.resolve(path.join(__dirname, commandName + ".js"))];
 
   //delete and reload the command from the client.commands Enmap
   client.commands.delete(commandName);

@@ -50,15 +50,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
     console.log(err);
   });
 
-  message.channel
-    .send(
-      `Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(
-        userContent,
-        null,
-        "\t"
-      )}\n\`\`\``
-    )
-    .catch(err => {
-      console.log(err);
-    });
+  message.channel.send(`Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(userContent, null, "\t")}\n\`\`\``).catch(err => {
+    console.log(err);
+  });
 };

@@ -1,6 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
-    words: ["nigger", "childfucker", "motherfucker", "nigga"]
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmxhY2tsaXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vc3JjL3Jlc291cmNlcy9taXNjL2JsYWNrbGlzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGtCQUFlO0lBQ2IsS0FBSyxFQUFFLENBQUMsUUFBUSxFQUFFLGFBQWEsRUFBRSxjQUFjLEVBQUUsT0FBTyxDQUFDO0NBQzFELENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCB7XG4gIHdvcmRzOiBbXCJuaWdnZXJcIiwgXCJjaGlsZGZ1Y2tlclwiLCBcIm1vdGhlcmZ1Y2tlclwiLCBcIm5pZ2dhXCJdXG59O1xuIl19

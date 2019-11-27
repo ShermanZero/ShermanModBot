@@ -20,7 +20,7 @@ module.exports.run = async (client: any, message: Message) => {
   client.commands.forEach((value: any, key: string) => {
     if (!value.props || !message.member) return;
 
-    let elevatedPermissions = value.props.requiresElevation && message.member.roles.find(guildConfig.roles[value.props.requiresElevation]) !== null;
+    let elevatedPermissions = value.props.requiresElevation && message.member.roles.get(guildConfig.roles[value.props.requiresElevation]) !== null;
     let noPermissions = !value.props.requiresElevation || value.props.requiresElevation === "";
 
     if (message.member.user.id === client.global_config.botowner) elevatedPermissions = true;

@@ -11,10 +11,7 @@ module.exports.props = {
 module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (!message.guild) return;
 
-  let privateRole: Role;
-  message.guild.roles.fetch("645418484398030918").then(role => {
-    privateRole = role;
-  });
+  let privateRole = message.guild.roles.get("645418484398030918");
   let privateHangoutChannel: any = client.channels("645418390961258536");
 
   if (privateRole) privateRole = privateRole as Role;

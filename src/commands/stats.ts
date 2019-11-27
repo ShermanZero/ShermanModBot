@@ -64,7 +64,7 @@ function getEmbed(client: any, member: GuildMember, content: any) {
   if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats, true);
 
   let guildName = rsrc.getGuildNameFromGuild(member.guild);
-  if (member.roles.find(client.guild_configs[guildName].roles.mod)) {
+  if (member.roles.get(client.guild_configs[guildName].roles.mod)) {
     embed.setFooter("BE RESPECTFUL TO ALL - ESPECIALLY MODERATORS", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");
     embed.setDescription("`SERVER MOD`");
   }

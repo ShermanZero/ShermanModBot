@@ -204,15 +204,23 @@ export default class Resources {
     return xp + Math.round((4 * Math.pow(level, 3)) / 5);
   }
 
-  static async askQuestion(channel: TextChannel, question: string, filter = () => true, options = { max: 1, time: 60 * 1000, errors: ["time"] }) {
+  static async askQuestion(channel: TextChannel, question: string, deleteMessage: boolean = false, filter = () => true, options = { max: 1, time: 60 * 1000, errors: ["time"] }) {
     let value: any;
 
-    await channel.send(question);
+    let questionMessage: Message;
+
+    await channel.send(question).then(message => {
+      questionMessage = message;
+    });
+
     await channel
       .awaitMessages(filter, options)
       .then(async collected => {
         value = collected.first()?.content;
         value = (value as string).replace(/[<>@&#]/g, "");
+
+        if(deleteMessage)
+          await questionMessage.delete();
 
         await collected.first()?.delete();
       })

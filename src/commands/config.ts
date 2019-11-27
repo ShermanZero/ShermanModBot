@@ -85,11 +85,7 @@ async function getRole(nameOfRole: string, message: Message) {
     .then(response => {
       let roleByName = message.guild.roles.find(role => role.name === response);
       let roleByID = message.guild.roles.find(role => role.id === response);
-      let roleByUser: Role;
-
-      message.guild.members.fetch(response).then(member => {
-        roleByUser = member.roles.highest;
-      });
+      let roleByUser = message.guild.members.get(response)?.roles?.highest;
 
       if (roleByName) role = roleByName;
       else if (roleByID) role = roleByID;

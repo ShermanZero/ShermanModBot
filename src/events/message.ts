@@ -1,6 +1,6 @@
 import 'colors';
 
-import { Message, TextChannel } from 'discord.js';
+import { Message, Role, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -56,7 +56,7 @@ module.exports = (client: any, message: Message) => {
   if (command != "config") {
     if (!guildConfig?.setup) return message.reply("your guild owner has to configure me before I can execute commands :(");
     if (cmd.props.requiresElevation && message.member.user.id !== client.global_config.botowner) {
-      if (!message.member?.roles.find(guildConfig.roles[cmd.props.requiresElevation])) return;
+      if (!message.member?.roles.get(guildConfig.roles[cmd.props.requiresElevation])) return;
     }
   }
 
@@ -175,15 +175,15 @@ function awardExperience(client, message) {
       var lastRank = content.rank.name;
 
       content.rank.name = rank;
-      let oldRole = message.guild.roles.find(role => role.name.toLowerCase() === lastRank.toLowerCase());
-      let newRole = message.guild.roles.find(role => role.name.toLowerCase() === rank.toLowerCase());
+      let oldRole = message.guild.roles.find((role: Role) => role.name.toLowerCase() === lastRank.toLowerCase());
+      let newRole = message.guild.roles.find((role: Role) => role.name.toLowerCase() === rank.toLowerCase());
 
       if (oldRole)
-        message.member.removeRole(oldRole).catch(err => {
+        message.member.removeRole(oldRole).catch((err: any) => {
           console.log(err);
         });
 
-      message.member.addRole(newRole).catch(err => {
+      message.member.addRole(newRole).catch((err: any) => {
         console.log(err);
       });
     }

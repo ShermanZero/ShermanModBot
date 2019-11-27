@@ -1,12 +1,8 @@
 {
-	"hidden": {
-		"username": "shermanzero_1200",
-		"guildname": "The_SherZer_Server-(471444438216867840)"
-	},
 	"rank": {
 		"name": "platinum",
 		"level": 20,
-		"xp": 35293,
+		"xp": 35300,
 		"levelup": 41680
 	},
 	"race": {
@@ -17,5 +13,9 @@
 		"first_message": "I’m",
 		"warnings": 0
 	},
-	"userLog": []
+	"userLog": [
+		"[11/26  23:01:59] (#shermanbot): test\n",
+		"[11/26  23:02:29] (#shermanbot): test\n",
+		"[11/26  23:02:40] (#shermanbot): !purge\n"
+	]
 }

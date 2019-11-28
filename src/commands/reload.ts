@@ -10,12 +10,7 @@ module.exports.props = {
 };
 
 module.exports.run = async (client: any, message: Message, args: string[]) => {
-  if (!args || args.length < 1)
-    try {
-      return message.reply("you must provide a command name to reload");
-    } catch (err) {
-      console.log(err);
-    }
+  if (!args || args.length < 1) return await message.reply("you must provide a command name to reload");
 
   const commandName = args[0];
 
@@ -29,7 +24,5 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   const props = require(path.join(__dirname, commandName + ".js"));
   client.commands.set(commandName, props);
 
-  message.reply(`the command "${commandName}" has been reloaded`).catch(err => {
-    console.log(err);
-  });
+  await message.reply(`the command "${commandName}" has been reloaded`);
 };

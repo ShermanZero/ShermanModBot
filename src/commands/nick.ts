@@ -9,15 +9,10 @@ module.exports.props = {
 };
 
 module.exports.run = async (client: any, message: Message, args: string[]) => {
-  if (!message.mentions.members || message.mentions.members.array.length === 0)
-    return message.reply("please mention a member to change their nickname").catch(err => {
-      console.log(err);
-    });
+  if (!message.mentions.members || message.mentions.members.array.length === 0) return await message.reply("please mention a member to change their nickname");
 
   const nickMember = message.mentions.members.first();
   nickMember!.setNickname(args[1]);
 
-  await message.reply(`${nickMember}'s nickname has been changed!`).catch(err => {
-    console.log(err);
-  });
+  await message.reply(`${nickMember}'s nickname has been changed!`);
 };

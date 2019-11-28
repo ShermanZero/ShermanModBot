@@ -19,7 +19,7 @@ Discord.Client.prototype.getGuild = function(guildName: string): string {
 
 Discord.Client.prototype.updateUser = function(content: any): boolean {
   if (!content) {
-    console.error(`!! Attempted to update with ${content}, but failed`.red);
+    `Attempted to update with ${content}, but failed`.error();
     return false;
   }
 
@@ -27,7 +27,7 @@ Discord.Client.prototype.updateUser = function(content: any): boolean {
   let username = content.hidden?.username;
 
   if (!guildName || !username) {
-    console.error(`!! Attempted to update with ${content}, but failed`.red);
+    `Attempted to update with ${content}, but failed`.error();
     return false;
   }
 
@@ -43,9 +43,9 @@ Discord.Client.prototype.registerUser = function(content: any): boolean {
   if (!content) return;
 
   let success = Discord.Client.prototype.updateUser(content);
-  if (success) console.log("*Registered [" + content.hidden.username.magenta + "] to guild [" + content.hidden.guildname.magenta + "]");
+  if (success) ("*Registered [" + content.hidden.username.magenta + "] to guild [" + content.hidden.guildname.magenta + "]").normal();
   else {
-    console.error(`!! Was not able to register ${content} to the guild`.red);
+    `Was not able to register ${content} to the guild`.error();
     return false;
   }
 
@@ -63,8 +63,6 @@ Discord.Client.prototype.hideUserInfo = function(content: any): any {
 Discord.Client.prototype.hasUser = function(guild: Discord.Guild, username: string, search?: boolean): string {
   let userGuild = Discord.Client.prototype.usersInSession[rsrc.getGuildNameFromGuild(guild)];
   if (userGuild === null || typeof userGuild === "undefined") return null;
-
-  console.log(Object.keys(userGuild));
 
   if (search) {
     let guildMembers = Array.from(guild.members.values());
@@ -89,12 +87,12 @@ Discord.Client.prototype.getUserContent = function(guild: Discord.Guild, usernam
   let userGuild = Discord.Client.prototype.usersInSession[guildName];
 
   if (userGuild === null) {
-    console.error(("!! Could not retrieve [" + username + "'s] guild").red);
+    ("Could not retrieve [" + username + "'s] guild").error();
     return null;
   }
 
   if (userGuild[username] === null || typeof userGuild[username] === "undefined") {
-    console.error(("!! Could not locate [" + username + "] in [" + guildName + "]").red);
+    ("!! Could not locate [" + username + "] in [" + guildName + "]").error();
     return null;
   }
 

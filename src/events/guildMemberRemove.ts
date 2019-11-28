@@ -13,9 +13,9 @@ module.exports = (client: any, member: GuildMember) => {
 
   let removed: any;
   ncp(userDir, (removed = path.join(guildDir, client.config.files.removed, username)), { clobber: true }, err => {
-    if (err) return console.error(`!! Failed to transfer [${username}] to ${removed}`);
+    if (err) return `Failed to transfer [${username}] to ${removed}`.error();
 
-    console.log(`Member [${username.magenta}] just left the guild [${rsrc.getGuildNameFromGuild(member.guild).magenta}]`);
+    `Member [${username.magenta}] just left the guild [${rsrc.getGuildNameFromGuild(member.guild).magenta}]`.warning(true);
   });
 
   client.deleteUser(member.guild, username);

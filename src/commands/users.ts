@@ -1,5 +1,3 @@
-import '../handlers/stringHandler';
-
 import { Message } from 'discord.js';
 
 import config from '../resources/global_config';

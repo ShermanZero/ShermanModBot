@@ -22,14 +22,10 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   const roleMember = message.mentions.members.first();
 
   //add the private role to the member
-  roleMember?.roles.add(privateRole).catch(err => {
-    console.log(err);
-  });
+  await roleMember?.roles.add(privateRole);
 
   //delete the original message
-  message.delete().catch(err => {
-    console.log(err);
-  });
+  await message.delete();
 
   //alert the member that they are in the channel
   await privateHangoutChannel.send(`${roleMember}, welcome to the private channel!  All the messages will be deleted after you have left.`);
@@ -42,7 +38,5 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
 
   await privateHangoutChannel.send("The private discussion has concluded, use !purge to clear the channel.");
 
-  roleMember?.roles.remove(privateRole).catch(err => {
-    console.log(err);
-  });
+  await roleMember?.roles.remove(privateRole);
 };

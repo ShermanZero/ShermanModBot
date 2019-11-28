@@ -5,8 +5,9 @@ import { Client } from 'discord.js';
 export default class ExitHandler {
   //initialize
   static init(client: Client) {
-    console.log(`Registered client with ExitHandler... your crashes are protected now :)`.inverse, "\n...");
+    `Registered client with ExitHandler... your crashes are protected now :)`.inverse.normal();
 
+    "...".normal();
     //when app is closing
     process.on("exit" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
 
@@ -19,14 +20,14 @@ export default class ExitHandler {
 
     //catches uncaught exceptions
     process.on("uncaughtException" as any, (e: Error) => {
-      console.log("Uncaught exception:");
-      console.log((e.stack as any).red.dim);
+      "Uncaught exception:".error();
+      e.stack.red.dim.error();
     });
 
     //catch unhandled promise rejections
     process.on("unhandledRejection" as any, (e: Error) => {
-      console.log("Unhandled rejection:");
-      console.log((e.stack as any).red.dim);
+      "Unhandled rejection:".error();
+      e.stack.dim.dim.error();
     });
   }
 
@@ -34,13 +35,13 @@ export default class ExitHandler {
     //if we executed the "restart" command
     if (client.alreadyShutdown) return;
 
-    console.log(`Preparing to shutdown with exit code (${exitCode})...`.magenta);
+    `Preparing to shutdown with exit code (${exitCode})...`.mention;
 
     if (exitCode == 2) {
-      console.log("Forcing shutdown without clean attempt, process will not be restarted".red);
+      "Forcing shutdown without clean attempt, process will not be restarted".error();
       client.destroy();
     } else if (options.clean) {
-      console.log("Attempting to run `restart` command...".magenta);
+      "Attempting to run `restart` command...".mention;
       client.getCommand("restart").run(client, null, false);
     }
   }

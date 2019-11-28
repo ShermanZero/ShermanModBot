@@ -14,12 +14,12 @@ module.exports.props = {
 
 module.exports.run = async (client: any, message: Message, userTriggered: boolean = true) => {
   if (client.alreadyShutdown) {
-    console.log("Already executed clean shutdown... restarting now".magenta);
+    "Already executed clean shutdown... restarting now".mention;
     return true;
   }
 
   client.alreadyShutdown = true;
-  console.log("Attempting to restart cleanly...".magenta);
+  "Attempting to restart cleanly...".mention;
 
   let entries = Object.entries(client.usersInSession);
   for (const [, users] of entries) {
@@ -29,21 +29,18 @@ module.exports.run = async (client: any, message: Message, userTriggered: boolea
   }
 
   //check if the command was user-triggered
-  if (userTriggered)
-    message.delete().catch(err => {
-      console.log(err);
-    });
+  if (userTriggered) await message.delete();
 
-  console.log("Successfully wrote user data to files!".magenta);
+  "Successfully wrote user data to files!".mention;
 
   //append all last log data to the master log
-  for (let i = 0; i < client.masterLog.length; i++) fs.appendFileSync(path.join(__dirname, "..", "logs", client.global_config.files.log_all), client.masterLog[i]);
+  for (let i = 0; i < client.masterLog.length; i++) fs.appendFileSync(path.join(__dirname, "..", "logs", client.global_config.files.logs.all), client.masterLog[i]);
 
-  console.log("Successfully stored pending user logs!".magenta);
+  "Successfully stored pending user logs!".mention;
 
-  console.log("Destroying client...".magenta);
+  "Destroying client...".magenta.mention;
   client.destroy();
 
-  console.log("Done".yellow);
+  "Done".highlight(true);
   process.exit();
 };

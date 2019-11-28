@@ -9,13 +9,7 @@ module.exports.props = {
 };
 
 module.exports.run = async (client: any, message: Message, [mention, ...reason]) => {
-  if (!message.mentions.members || message.mentions.members.array.length === 0)
-    try {
-      return message.reply("please mention a user to kick");
-    } catch (err) {
-      console.log(err);
-      return;
-    }
+  if (!message.mentions.members || message.mentions.members.array.length === 0) return await message.reply("please mention a user to kick");
 
   const banMember = message.mentions.members.first() as GuildMember;
   await banMember.ban({ reason: reason.join(" ") });

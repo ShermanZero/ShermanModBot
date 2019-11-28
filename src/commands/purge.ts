@@ -18,7 +18,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (amount < 2) amount = 2;
 
   //fetch 100 messages (will be filtered and lowered up to max amount requested)
-  (message.channel as TextChannel).messages.fetch({ limit: 100 }).then((messages: any) => {
+  (message.channel as TextChannel).messages.fetch({ limit: 100 }).then(async (messages: any) => {
     if (user) {
       const filterBy = user ? user.id : client.user.id;
       messages = messages
@@ -27,8 +27,6 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
         .slice(0, amount);
     }
 
-    message.channel.bulkDelete(messages).catch(err => {
-      console.log(err);
-    });
+    await message.channel.bulkDelete(messages);
   });
 };

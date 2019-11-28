@@ -1,29 +1,32 @@
 import 'colors';
 
-import { Client, Guild, Message, Role, TextChannel } from 'discord.js';
+import { Client, Message, Role, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
 import blacklist from '../resources/blacklist';
-import global_config from '../resources/global_config';
 import ranks from '../resources/ranks';
 import rsrc from '../resources/resources';
 
-module.exports = (client: Client, message: Message) => {
+module.exports = async (client: Client, message: Message) => {
   //ignore all bots
   if (message.author.bot) return;
 
   //register the user
-  if (!registerMessage(client, message)) return console.error(`!! Could not register message sent by [${rsrc.getUsernameFromMessage(message)}]`.red);
+  if (!registerMessage(client, message)) return `Could not register message sent by [${rsrc.getUsernameFromMessage(message)}]`.error();
 
   //check against blacklist
   if (blacklist.words.some(substring => message.content.includes(substring))) {
-    message.delete().catch(err => {
-      console.log(err);
-    });
-    message.reply("that is not allowed here.").catch(err => {
-      console.log(err);
-    });
+    await message.delete();
+    await message.reply("that is not allowed here, you have been warned.");
+
+    let username = rsrc.getUsernameFromMessage(message);
+    let content = rsrc.getUserContentsFromName(client, message, username);
+
+    if (content) {
+      content.misc.warnings++;
+      client.updateUser(content);
+    }
   }
 
   awardExperience(client, message);
@@ -88,7 +91,7 @@ function registerMessage(client: Client, message: Message) {
   }
 
   if (content === null || typeof content === "undefined") {
-    console.error(`!! Could not retrieve contents for [${username}]`.red);
+    `Could not retrieve contents for [${username}]`.error();
     return false;
   }
 
@@ -102,12 +105,12 @@ function registerMessage(client: Client, message: Message) {
   //push the message to the master log branch
   client.masterLog.push(`/${guildName}/>  ${username} ${logMessage}`);
   //if the log length exceeds the threshold, update the master log
-  updateMasterLog(client);
+  `/${guildName}/>  ${username} ${logMessage}`.masterLog(client, client.global_config.files.logs.message);
 
   //push the user's message directly to the user's log
   content.userLog.push(logMessage);
   //if the log length exceeds the threshold, update the user log
-  updateUserLog(client, message.guild, content);
+  logMessage.userLog(client, message.guild, content, client.global_config.files.logs.message);
 
   return true;
 }
@@ -120,49 +123,15 @@ function getTimestamp(message: Message) {
   return date + "  " + time;
 }
 
-function updateMasterLog(client: Client) {
-  let masterLog = path.join(__dirname, "..", "logs");
-
-  if (!fs.existsSync(masterLog)) {
-    fs.mkdirSync(masterLog, { recursive: true });
-    fs.writeFileSync(path.resolve(masterLog, global_config.files.log_all), "-- START OF LOG --");
-  }
-
-  //if the log length exceeds the threshold, update the master log
-  if (client.masterLog.length >= client.global_config.preferences.log_threshold_master) {
-    for (let i = 0; i < client.masterLog.length; i++) fs.appendFileSync(masterLog, client.masterLog[i]);
-
-    client.masterLog = [];
-  }
-}
-
-function updateUserLog(client: Client, guild: Guild, content: any) {
-  let logsDir = path.join(rsrc.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
-  let userLog = path.join(logsDir, client.global_config.files.log_all);
-
-  //if the log length exceeds the threshold, update the master log
-  if (content.userLog.length >= client.global_config.preferences.log_threshold_user) {
-    for (let i = 0; i < content.userLog.length; i++) fs.appendFileSync(userLog, content.userLog[i]);
-
-    content.userLog = [];
-  }
-
-  //have to update the Enmap
-  client.updateUser(content);
-
-  //log it to the console
-  console.log(`[${content.hidden.guildname.magenta}] =>`, `[${content.hidden.username.magenta}] =>`, content);
-}
-
 //awards the user experience for posting a message
-function awardExperience(client, message) {
+async function awardExperience(client, message) {
   let username = rsrc.getUsernameFromMessage(message);
 
   //get the content from the session instead of from the file
   let content = client.getUserContent(message.guild, username);
 
   if (!content) {
-    return console.error(`!! Could not retrieve contents from [${username}]`);
+    return `Could not retrieve contents from [${username}]`.error();
   }
 
   content.rank.xp += 1;
@@ -178,14 +147,9 @@ function awardExperience(client, message) {
       let oldRole = message.guild.roles.find((role: Role) => role.name.toLowerCase() === lastRank.toLowerCase());
       let newRole = message.guild.roles.find((role: Role) => role.name.toLowerCase() === rank.toLowerCase());
 
-      if (oldRole)
-        message.member.removeRole(oldRole).catch((err: any) => {
-          console.log(err);
-        });
+      if (oldRole) await message.member.removeRole(oldRole);
 
-      message.member.addRole(newRole).catch((err: any) => {
-        console.log(err);
-      });
+      await message.member.addRole(newRole);
     }
 
     content.rank.levelup = rsrc.getXPToLevelUp(content.rank.xp, content.rank.level);

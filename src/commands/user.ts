@@ -1,5 +1,3 @@
-import '../handlers/stringHandler';
-
 import { Message } from 'discord.js';
 
 import config from '../resources/global_config';
@@ -38,11 +36,6 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
 
   userContent = client.hideUserInfo(userContent);
 
-  message.delete().catch(err => {
-    console.log(err);
-  });
-
-  message.channel.send(`Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(userContent, null, "\t")}\n\`\`\``).catch(err => {
-    console.log(err);
-  });
+  await message.delete();
+  await message.channel.send(`Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(userContent, null, "\t")}\n\`\`\``);
 };

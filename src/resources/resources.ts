@@ -60,28 +60,27 @@ export default class Resources {
         let listOfUsers = "";
         for (let i = 0; i < possibleMatches.length; i++) listOfUsers += `${i + 1})\t**${possibleMatches[i]}**\n`;
 
-        message.reply(`there are multiple users which contain "${username}", please select the correct one:\n${listOfUsers}`)
-        .then(() => {
+        message.reply(`there are multiple users which contain "${username}", please select the correct one:\n${listOfUsers}`).then(() => {
           message.channel
-          .awaitMessages((response: Message) => response.author === message.author, {
-            max: 1,
-            time: 1000 * 60,
-            errors: ["time"]
-          })
-          .then(collected => {
-            let answer = parseInt(collected.first().content);
-            if (answer < 1 || answer > possibleMatches.length) {
-              message.reply("you did not enter a valid number, no user has been selected");
-              return;
-            }
+            .awaitMessages((response: Message) => response.author === message.author, {
+              max: 1,
+              time: 1000 * 60,
+              errors: ["time"]
+            })
+            .then(collected => {
+              let answer = parseInt(collected.first().content);
+              if (answer < 1 || answer > possibleMatches.length) {
+                message.reply("you did not enter a valid number, no user has been selected");
+                return;
+              }
 
-            username = possibleMatches[answer - 1];
-            jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
-          })
-          .catch(() => {
-            message.reply("you did not respond in time, no user has been selected");
-            return null;
-          });
+              username = possibleMatches[answer - 1];
+              jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
+            })
+            .catch(() => {
+              message.reply("you did not respond in time, no user has been selected");
+              return null;
+            });
         });
       } else if (possibleMatches.length == 1) {
         username = possibleMatches[0];
@@ -167,10 +166,8 @@ export default class Resources {
     }
 
     rankRolesUserHas.splice(-1, 1);
-    rankRolesUserHas.forEach(role => {
-      member.roles.remove(role).catch(err => {
-        console.log(err);
-      });
+    rankRolesUserHas.forEach(async role => {
+      await member.roles.remove(role);
     });
 
     client.registerUser(content);
@@ -182,7 +179,7 @@ export default class Resources {
     let source = this.getUserDirectoryFromGuild(guild, username);
     rimraf(source, err => {
       if (err) {
-        console.log(err);
+        err.error();
         return false;
       }
     });
@@ -197,10 +194,10 @@ export default class Resources {
 
     let dir = path.join(this.getGuildDirectoryFromName(content.hidden.guildname), username);
 
-    if (!fs.existsSync(dir)) return console.error(`!! Attempted to write [${username}] contents to log, but no directory exists at [${dir}]`.red);
+    if (!fs.existsSync(dir)) return `Attempted to write [${username}] contents to log, but no directory exists at [${dir}]`.error();
 
     if (content.userLog && content.userLog.length != 0) {
-      for (let i = 0; i < content.userLog.length; i++) fs.appendFileSync(`${dir}/logs/${client.global_config.files.log_all}`, content.userLog[i]);
+      for (let i = 0; i < content.userLog.length; i++) fs.appendFileSync(`${dir}/logs/${client.global_config.files.logs.all}`, content.userLog[i]);
 
       content.userLog = [];
     }

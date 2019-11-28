@@ -1,6 +1,7 @@
 export default {
   status: "dead | !help",
   debug: true,
+  verbose: true,
   prefix: "!",
 
   elevation_names: {
@@ -21,7 +22,13 @@ export default {
   },
 
   files: {
-    log_all: "allmessages.txt",
+    logs: {
+      all: "all.txt",
+      message: "messages.txt",
+      warning: "warnings.txt",
+      command: "commands.txt",
+      twitch: "twitch_messages.txt"
+    },
     removed: ".removed",
     guild_config: "guild_config.json"
   }

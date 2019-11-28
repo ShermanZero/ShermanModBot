@@ -3,7 +3,7 @@ import * as Discord from 'discord.js';
 declare module "discord.js" {
   interface Client {
     defaultGuild: Guild;
-    secrets: any,
+    secrets: any;
     global_config: any;
     usersInSession: Map<string, any>;
     guild_configs: Map<string, any>;

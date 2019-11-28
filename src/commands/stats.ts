@@ -22,18 +22,12 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   }
 
   if (!content) {
-    message.delete().catch(err => {
-      console.log(err);
-    });
-    return message.reply(`they do not yet have any stats :( they need to post a message in the server to be registered by me`);
+    await message.delete();
+    return await message.reply(`they do not yet have any stats :( they need to post a message in the server to be registered by me`);
   }
 
-  message.channel.send(module.exports.getEmbed(client, member, content)).catch(err => {
-    console.log(err);
-  });
-  message.delete().catch(err => {
-    console.log(err);
-  });
+  await message.channel.send(module.exports.getEmbed(client, member, content));
+  await message.delete();
 };
 
 module.exports.getEmbed = (client: any, member: GuildMember, content: any) => {
@@ -69,7 +63,7 @@ module.exports.getEmbed = (client: any, member: GuildMember, content: any) => {
   }
 
   return embed;
-}
+};
 
 function getFormattedNumber(number: string) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

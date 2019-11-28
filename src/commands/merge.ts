@@ -15,10 +15,7 @@ module.exports.props = {
 };
 
 module.exports.run = async (client: any, message: Message, args: string[]) => {
-  if (args.length != 2)
-    return message.reply("you need to specify two users").catch(err => {
-      console.log(err);
-    });
+  if (args.length != 2) await message.reply("you need to specify two users");
 
   //the user to copy from
   const oldUser = args[0].trim().toLowerCase();
@@ -30,11 +27,11 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
 
   if (!client.hasUser(message.guild, oldUsername))
     if (message) return message.reply(`I could not find OLD [${oldUser}] in my database`);
-    else return console.error(`!! I could not find OLD [${oldUser}] in my database`.red);
+    else return `I could not find OLD [${oldUser}] in my database`.error();
 
   if (!client.hasUser(message.guild, newUsername))
     if (message) return message.reply(`I could not find NEW [${newUser}] in my database`);
-    else return console.error(`!! I could not find NEW [${newUser}] in my database`.red);
+    else return `I could not find NEW [${newUser}] in my database`.error();
 
   let content = client.getUserContent(message.guild, oldUsername);
   content.hidden.username = newUsername;
@@ -43,15 +40,12 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   let destination = rsrc.getUserDirectoryFromGuild(message.guild as Guild, newUsername);
 
   fs.writeFileSync(path.join(destination, newUsername + ".json"), JSON.stringify(content, null, "\t"));
-  rimraf(source, err => {
-    if (err) console.log(err);
+  rimraf(source, (err: string) => {
+    if (err) err.normal(true);
   });
 
   client.usersInSession.delete(oldUser);
-  console.log(`*Removed [${oldUser}] from session`);
+  `*Removed [${oldUser}] from session`.warning(true);
 
-  if (message)
-    message.delete().catch(err => {
-      console.log(err);
-    });
+  if (message) await message.delete();
 };

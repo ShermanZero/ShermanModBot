@@ -14,41 +14,36 @@ export default class TwitchIntegration {
     const clientID = secrets.twitch.client_id;
     const accessToken = secrets.twitch.access_token;
 
-    console.log(`...\n${"Beginning Twitch integration".inverse}`);
-
-    console.log("  *Attempting to authorize to Twitch...");
+    `...\n${"Beginning Twitch integration".inverse}`.normal();
+    "  *Attempting to authorize to Twitch...".normal();
     const twitchClient = await TwitchClient.withCredentials(clientID, accessToken);
 
-    console.log("  *Attempting to authorize chat client...");
+    "  *Attempting to authorize chat client...".normal();
     const chatClient = await ChatClient.forTwitchClient(twitchClient);
 
-    console.log("    *Successful authorization to Twitch!".green);
-
+    "    *Successful authorization to Twitch!".success();
     await chatClient.connect();
 
-    console.log("  *Connected to chat client, awaiting registration...");
+    "  *Connected to chat client, awaiting registration...".normal();
     await chatClient.waitForRegistration();
 
-    console.log("  *Got registration, attempting to join....");
+    "  *Got registration, attempting to join....".normal();
     await chatClient.join("ShermanZero");
-
-    console.log("    *Joined chat!".green);
+    "    *Joined chat!".success();
 
     this.loadCommands();
 
-    console.log(`${"Twitch chat has been linked".inverse}\n...`);
-
+    `${"Twitch chat has been linked".inverse}\n...`.normal();
     chatClient.onPrivmsg((channel: string, username: string, message: string) => {
       if (message.indexOf(client.global_config.prefix) !== 0) return;
 
       let guildUsername: string = client.hasUser(client.defaultGuild, username, true);
-      let guildUser: any;
-
-      console.log("username:", username, "guildUsername:", guildUsername);
+      let guildUserContent: any;
 
       if (guildUsername) {
-        guildUser = client.getUserContent(client.defaultGuild, guildUsername);
-        console.log(`Member ${guildUser.hidden.name} just posted "${message}" in Twitch chat`);
+        guildUserContent = client.getUserContent(client.defaultGuild, guildUsername);
+
+        `Member ${guildUserContent.hidden.username} just posted "${message}" in Twitch chat`.userLog(client, client.defaultGuild, guildUserContent, client.global_config.files.logs.twitch);
       }
 
       const commandName = message.slice(1);
@@ -80,14 +75,14 @@ export default class TwitchIntegration {
     let aliases = this.aliases;
 
     fs.readdir(commandsPath, function(err, files) {
-      if (err) return console.error(err);
+      if (err) return String(err).error();
       files.forEach(function(file) {
         if (!file.endsWith(".js")) return;
 
         let command: any = require(path.join(commandsPath, file));
         let commandName = file.split(".")[0];
 
-        console.log("--registering command", commandName, command);
+        `--registering command ${commandName.cyan}`.normal();
 
         //store the command
         commands.set(commandName, command);
@@ -97,7 +92,7 @@ export default class TwitchIntegration {
           aliases.set(alias, commandName);
         });
 
-        console.log("--completed".green);
+        "--completed".success();
       });
     });
 

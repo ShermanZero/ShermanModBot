@@ -1,5 +1,3 @@
-import '../handlers/stringHandler';
-
 import { Guild, Message } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -16,13 +14,10 @@ module.exports.props = {
 module.exports.run = async (client: any, message: Message, args: string[]) => {
   const user = message.mentions.users.first();
 
-  if (!user)
-    return message.reply("you need to specify a user").catch(err => {
-      console.log(err);
-    });
+  if (!user) await message.reply("you need to specify a user");
 
   let username = rsrc.getUsernameFromMember(user);
-  let file = path.join(rsrc.getUserDirectoryFromGuild(message.guild as Guild, username), "logs", client.global_config.files.log_all);
+  let file = path.join(rsrc.getUserDirectoryFromGuild(message.guild as Guild, username), "logs", client.global_config.files.logs.all);
   //parse amount
   let amount = !!parseInt(args[1]) ? parseInt(args[1]) : parseInt(args[2]);
 

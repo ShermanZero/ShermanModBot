@@ -37,7 +37,5 @@ module.exports.run = async (client: any, message: Message) => {
     }
   });
 
-  message.channel.send(embed).catch(err => {
-    console.log(err);
-  });
+  await message.channel.send(embed);
 };

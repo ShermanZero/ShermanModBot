@@ -2,6 +2,7 @@ import * as Discord from 'discord.js';
 
 declare module "discord.js" {
   interface Client {
+    defaultGuild: Guild;
     secrets: any,
     global_config: any;
     usersInSession: Map<string, any>;
@@ -14,7 +15,7 @@ declare module "discord.js" {
     updateUser(content: any): boolean;
     registerUser(content: any): boolean;
     hideUserInfo(content: any): any;
-    hasUser(guild: Discord.Guild, username: string): boolean;
+    hasUser(guild: Discord.Guild, username: string, search?: boolean): string;
     getUserContent(guild: Discord.Guild, username: string): any;
     removeUser(guild: Discord.Guild, username: string): boolean;
     deleteUser(guild: Discord.Guild, username: string): boolean;

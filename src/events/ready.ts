@@ -7,7 +7,7 @@ import * as path from 'path';
 import exit from '../handlers/exitHandler';
 import boot from '../resources/boot';
 import rsrc from '../resources/resources';
-import twitch from '../twitch/twitchIntegration';
+import TwitchIntegration from '../twitch/twitchIntegration';
 
 module.exports = (client: Client) => {
   client.user.setActivity(client.global_config.status);
@@ -42,6 +42,9 @@ module.exports = (client: Client) => {
   console.log("...");
 
   client.guilds.forEach((guild: Guild) => {
+    if(guild.id === client.secrets.guild_id)
+      client.defaultGuild = guild;
+
     let guildDir = rsrc.getGuildDirectoryFromGuild(guild);
 
     if (!fs.existsSync(guildDir)) {
@@ -82,5 +85,6 @@ module.exports = (client: Client) => {
 
   console.log(`...\n${readyMessage}\n${footer}`);
 
-  twitch.start();
+  let twitch = new TwitchIntegration();
+  twitch.start(client);
 };

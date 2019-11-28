@@ -28,7 +28,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
     return message.reply(`they do not yet have any stats :( they need to post a message in the server to be registered by me`);
   }
 
-  message.channel.send(getEmbed(client, member, content)).catch(err => {
+  message.channel.send(module.exports.getEmbed(client, member, content)).catch(err => {
     console.log(err);
   });
   message.delete().catch(err => {
@@ -36,7 +36,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   });
 };
 
-function getEmbed(client: any, member: GuildMember, content: any) {
+module.exports.getEmbed = (client: any, member: GuildMember, content: any) => {
   let name = "**" + content.hidden.username.substring(0, content.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
 
   let rankColor = member.guild.roles.find(role => role.name === content.rank.name)?.color;

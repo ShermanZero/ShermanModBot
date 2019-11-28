@@ -4,8 +4,9 @@ import global_config from '../resources/global_config';
 import rsrc from '../resources/resources';
 import secrets from '../secrets';
 
-Discord.Client.prototype.global_config = global_config;
+Discord.Client.prototype.defaultGuild = null;
 Discord.Client.prototype.secrets = secrets;
+Discord.Client.prototype.global_config = global_config;
 Discord.Client.prototype.usersInSession = new Map();
 Discord.Client.prototype.guild_configs = new Map();
 Discord.Client.prototype.commands = new Map();
@@ -35,11 +36,11 @@ Discord.Client.prototype.updateUser = function(content: any): boolean {
   guild[username] = content;
   content = Discord.Client.prototype.hideUserInfo(content);
 
-  return (content !== null);
+  return content !== null;
 };
 
 Discord.Client.prototype.registerUser = function(content: any): boolean {
-  if(!content) return;
+  if (!content) return;
 
   let success = Discord.Client.prototype.updateUser(content);
   if (success) console.log("*Registered [" + content.hidden.username.magenta + "] to guild [" + content.hidden.guildname.magenta + "]");
@@ -59,12 +60,28 @@ Discord.Client.prototype.hideUserInfo = function(content: any): any {
   return content;
 };
 
-Discord.Client.prototype.hasUser = function(guild: Discord.Guild, username: string): boolean {
+Discord.Client.prototype.hasUser = function(guild: Discord.Guild, username: string, search?: boolean): string {
   let userGuild = Discord.Client.prototype.usersInSession[rsrc.getGuildNameFromGuild(guild)];
-  if (userGuild === null || typeof userGuild === "undefined") return false;
+  if (userGuild === null || typeof userGuild === "undefined") return null;
+
+  console.log(Object.keys(userGuild));
+
+  if (search) {
+    let guildMembers = Array.from(guild.members.values());
+    for (var i = 0; i < guildMembers.length; i++) {
+      let member = guildMembers[i];
+
+      let searchTargetDisplayName = member.displayName.toLowerCase().trim();
+      let searchTargetUserName = member.user.username.toLowerCase().trim();
+
+      username = username.toLowerCase().trim();
+      if (searchTargetDisplayName.includes(username) || searchTargetUserName.includes(username)) return rsrc.getUsernameFromMember(member);
+    }
+  }
 
   let user = userGuild[username];
-  return !(user === null || typeof user === "undefined");
+  if (!user) return null;
+  return String(user);
 };
 
 Discord.Client.prototype.getUserContent = function(guild: Discord.Guild, username: string): any {

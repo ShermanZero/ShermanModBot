@@ -4,5 +4,9 @@ interface String {
 
 String.prototype.hideID = function(username?: string): string {
   if (!username) username = String(this);
-  return "**" + String(username).substring(0, String(username).lastIndexOf("_")) + "**";
+
+  if(username.indexOf("_") == -1)
+    return username;
+    
+  return String(username).substring(0, String(username).lastIndexOf("_"));
 };

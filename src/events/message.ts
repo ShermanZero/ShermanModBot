@@ -1,6 +1,6 @@
 import 'colors';
 
-import { Message, Role, TextChannel } from 'discord.js';
+import { Client, Guild, Message, Role, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -9,7 +9,7 @@ import global_config from '../resources/global_config';
 import ranks from '../resources/ranks';
 import rsrc from '../resources/resources';
 
-module.exports = (client: any, message: Message) => {
+module.exports = (client: Client, message: Message) => {
   //ignore all bots
   if (message.author.bot) return;
 
@@ -65,7 +65,7 @@ module.exports = (client: any, message: Message) => {
 };
 
 //registers the message
-function registerMessage(client: any, message: Message) {
+function registerMessage(client: Client, message: Message) {
   let username = rsrc.getUsernameFromMessage(message);
 
   if (!message.guild) return;
@@ -81,7 +81,7 @@ function registerMessage(client: any, message: Message) {
   //user NOT stored in local client session
   if (!client.hasUser(message.guild, username)) {
     content = rsrc.getUserContentsFromName(client, message, username);
-    client.registerUser(message.member!.user, content);
+    client.registerUser(content);
     //user stored in local client session
   } else {
     content = client.getUserContent(message.guild, username);
@@ -120,7 +120,7 @@ function getTimestamp(message: Message) {
   return date + "  " + time;
 }
 
-function updateMasterLog(client) {
+function updateMasterLog(client: Client) {
   let masterLog = path.join(__dirname, "..", "logs");
 
   if (!fs.existsSync(masterLog)) {
@@ -136,7 +136,7 @@ function updateMasterLog(client) {
   }
 }
 
-function updateUserLog(client, guild, content) {
+function updateUserLog(client: Client, guild: Guild, content: any) {
   let logsDir = path.join(rsrc.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
   let userLog = path.join(logsDir, client.global_config.files.log_all);
 
@@ -202,7 +202,7 @@ function awardExperience(client, message) {
   }
 }
 
-function levelUp(client, message, content) {
+function levelUp(client: Client, message: Message, content: any) {
   let stats = client.getCommand("stats");
   let embed = stats.getEmbed(client, message.member, content);
 

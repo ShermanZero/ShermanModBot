@@ -28,13 +28,12 @@ function startBot() {
   });
 
   let commandsPath = path.join(__dirname, "commands");
-
   fs.readdir(commandsPath, function(err, files) {
     if (err) return console.error(err);
     files.forEach(function(file) {
       if (!file.endsWith(".js")) return;
 
-      let command: any = require(path.join(__dirname, "commands", file));
+      let command: any = require(path.join(commandsPath, file));
       let commandName = file.split(".")[0];
 
       console.log("--registering command", commandName, command);
@@ -47,7 +46,7 @@ function startBot() {
         client.aliases.set(alias, commandName);
       });
 
-      console.log("--set command", commandName, command);
+      console.log("--completed".green);
     });
   });
 }

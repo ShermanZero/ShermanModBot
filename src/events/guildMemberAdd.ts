@@ -1,6 +1,6 @@
 import { GuildMember, TextChannel } from 'discord.js';
 
-import rsrc from '../classes/Resources';
+import rsrc from '../resources/resources';
 
 module.exports = (client: any, member: GuildMember) => {
   const guild = member.guild;

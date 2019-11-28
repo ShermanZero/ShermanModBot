@@ -1,7 +1,7 @@
 import * as Discord from 'discord.js';
 
-import rsrc from '../classes/Resources';
 import global_config from '../resources/global_config';
+import rsrc from '../resources/resources';
 import secrets from '../secrets';
 
 Discord.Client.prototype.global_config = global_config;

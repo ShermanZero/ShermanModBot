@@ -1,8 +1,8 @@
 import { GuildMember, Message, MessageEmbed, MessageReaction, TextChannel, User } from 'discord.js';
 import fetch from 'node-fetch';
 
-import rsrc from '../classes/Resources';
 import config from '../resources/global_config';
+import rsrc from '../resources/resources';
 
 module.exports.props = {
   requiresElevation: config.elevation_names.moderator,

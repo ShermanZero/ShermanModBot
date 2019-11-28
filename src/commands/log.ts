@@ -1,11 +1,11 @@
-import '../classes/StringHandler';
+import '../handlers/stringHandler';
 
 import { Guild, Message } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import rsrc from '../classes/Resources';
 import config from '../resources/global_config';
+import rsrc from '../resources/resources';
 
 module.exports.props = {
   requiresElevation: config.elevation_names.moderator,

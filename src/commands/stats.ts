@@ -1,7 +1,7 @@
 import { ColorResolvable, GuildMember, Message, MessageEmbed } from 'discord.js';
 
-import rsrc from '../classes/Resources';
 import ranks from '../resources/ranks';
+import rsrc from '../resources/resources';
 
 module.exports.props = {
   description: "replies to the member with their current server stats"

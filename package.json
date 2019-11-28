@@ -9,20 +9,23 @@
     "inversify": "^5.0.1",
     "ncp": "^2.0.0",
     "node-fetch": "^2.6.0",
-    "paypal-rest-sdk": "^1.8.1",
     "rimraf": "^3.0.0",
+    "twitch": "^3.5.6",
+    "twitch-chat-client": "^3.6.0",
+    "twitch-pubsub-client": "^3.5.9",
+    "twitch-webhooks": "^3.5.6",
     "typescript": "^3.7.2"
   },
   "devDependencies": {
-    "@types/paypal-rest-sdk": "^1.7.5",
     "@types/node": "^12.12.14",
     "nodemon": "^2.0.1",
     "types": "github:discordjs/discord.js"
   },
   "scripts": {
-    "start": "tsc -p . && nodemon ./build/index.js",
+    "wipe": "find ./build/ -type f -name '*.js' -exec rm {} +",
+    "build": "tsc -p .",
     "watch": "tsc -p . -w",
-    "tsc": "tsc -p ."
+    "start": "tsc -p . && nodemon ./build/index.js"
   },
   "repository": {
     "type": "git",

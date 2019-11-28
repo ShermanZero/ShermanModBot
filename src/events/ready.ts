@@ -4,9 +4,10 @@ import { Client, Guild, Message } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import exit from '../classes/ExitHandler';
-import rsrc from '../classes/Resources';
+import exit from '../handlers/exitHandler';
 import boot from '../resources/boot';
+import rsrc from '../resources/resources';
+import twitch from '../twitch/twitchIntegration';
 
 module.exports = (client: Client) => {
   client.user.setActivity(client.global_config.status);
@@ -80,4 +81,6 @@ module.exports = (client: Client) => {
   let footer = "=====================================================================================".red;
 
   console.log(`...\n${readyMessage}\n${footer}`);
+
+  twitch.start();
 };

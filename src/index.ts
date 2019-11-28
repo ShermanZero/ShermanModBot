@@ -8,12 +8,11 @@ import * as path from 'path';
 import secrets from './secrets';
 
 let client: Client = new Client();
-
-start();
+startBot();
 
 client.login(secrets.token);
 
-function start() {
+function startBot() {
   let eventsPath = path.join(__dirname, "events");
   fs.readdir(eventsPath, function(err, files) {
     if (err) return console.error(err);

@@ -4,10 +4,10 @@ import { Message, Role, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import rsrc from '../classes/Resources';
 import blacklist from '../resources/blacklist';
 import global_config from '../resources/global_config';
 import ranks from '../resources/ranks';
+import rsrc from '../resources/resources';
 
 module.exports = (client: any, message: Message) => {
   //ignore all bots

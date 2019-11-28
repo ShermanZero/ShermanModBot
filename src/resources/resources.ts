@@ -5,8 +5,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as rimraf from 'rimraf';
 
-import ranks from '../resources/ranks';
-import def from '../resources/user_config';
+import ranks from './ranks';
+import def from './user_config';
 
 export default class Resources {
   static getUsernameFromMessage(message: Message): any {

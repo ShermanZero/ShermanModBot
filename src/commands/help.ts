@@ -23,7 +23,7 @@ module.exports.run = async (client: any, message: Message) => {
     let elevatedPermissions = value.props.requiresElevation && message.member.roles.get(guildConfig.roles[value.props.requiresElevation]) !== null;
     let noPermissions = !value.props.requiresElevation || value.props.requiresElevation === "";
 
-    if (message.member.user.id === client.global_config.botowner) elevatedPermissions = true;
+    if (message.member.user.id === client.secrets.botowner) elevatedPermissions = true;
 
     if (elevatedPermissions || noPermissions) {
       let header = "**!" + key + "**";

@@ -12,3 +12,6 @@ ShermanModBot.code-workspace
 
 #ignore the build directory
 **/build
+
+#ignore the secrets file
+**/secrets.*

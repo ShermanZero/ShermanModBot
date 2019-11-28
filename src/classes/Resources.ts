@@ -37,7 +37,7 @@ export default class Resources {
     return Resources.getUserContentsFromNameWithGuild(client, message.guild as Guild, message, username, search);
   }
 
-  static async getUserContentsFromNameWithGuild(client: any, guild: Guild, message: Message, username: string, search: boolean = false) {
+  static getUserContentsFromNameWithGuild(client: any, guild: Guild, message: Message, username: string, search: boolean = false) {
     if (!guild) guild = message.guild as Guild;
     username = username.trim().toLowerCase();
 
@@ -60,8 +60,9 @@ export default class Resources {
         let listOfUsers = "";
         for (let i = 0; i < possibleMatches.length; i++) listOfUsers += `${i + 1})\t**${possibleMatches[i]}**\n`;
 
-        await message.reply(`there are multiple users which contain "${username}", please select the correct one:\n${listOfUsers}`);
-        await message.channel
+        message.reply(`there are multiple users which contain "${username}", please select the correct one:\n${listOfUsers}`)
+        .then(() => {
+          message.channel
           .awaitMessages((response: Message) => response.author === message.author, {
             max: 1,
             time: 1000 * 60,
@@ -81,6 +82,7 @@ export default class Resources {
             message.reply("you did not respond in time, no user has been selected");
             return null;
           });
+        });
       } else if (possibleMatches.length == 1) {
         username = possibleMatches[0];
         jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
@@ -176,11 +178,16 @@ export default class Resources {
     return content;
   }
 
-  static destroyUserDirectory(guild: Guild, username: string) {
+  static destroyUserDirectory(guild: Guild, username: string): boolean {
     let source = this.getUserDirectoryFromGuild(guild, username);
     rimraf(source, err => {
-      if (err) console.log(err);
+      if (err) {
+        console.log(err);
+        return false;
+      }
     });
+
+    return true;
   }
 
   static writeUserContentToFile(client: any, username: string, content: any) {

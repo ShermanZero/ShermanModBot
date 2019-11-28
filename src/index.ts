@@ -1,16 +1,17 @@
+import './types/discordjs';
 import 'colors';
 
-import * as Discord from 'discord.js';
+import { Client } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import global_config from './resources/global_config';
+import secrets from './secrets';
 
-let client: Discord.Client = new Discord.Client();
+let client: Client = new Client();
 
 start();
 
-client.login(global_config.token);
+client.login(secrets.token);
 
 function start() {
   let eventsPath = path.join(__dirname, "events");

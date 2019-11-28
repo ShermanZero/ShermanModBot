@@ -1,6 +1,6 @@
 import 'colors';
 
-import { Guild, Message } from 'discord.js';
+import { Client, Guild, Message } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -8,8 +8,9 @@ import exit from '../classes/ExitHandler';
 import rsrc from '../classes/Resources';
 import boot from '../resources/boot';
 
-module.exports = (client: any) => {
+module.exports = (client: Client) => {
   client.user.setActivity(client.global_config.status);
+  client.user.setStatus(client.global_config.debug ? "invisible" : "online");
 
   console.log(boot.red);
 
@@ -64,11 +65,11 @@ module.exports = (client: any) => {
 
       //if the client does not have the user registered
       if (!client.hasUser(guild, username)) {
-        let content = rsrc.getUserContentsFromNameWithGuild(client, guild, (null as unknown) as Message, username);
-        if (content === null || typeof content === "undefined") return;
+        const response = rsrc.getUserContentsFromNameWithGuild(client, guild, (null as unknown) as Message, username);
+        if(!response) return;
 
         process.stdout.write("  ");
-        client.registerUser(content);
+        client.registerUser(response);
       }
     });
 

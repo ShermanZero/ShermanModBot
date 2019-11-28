@@ -41,7 +41,7 @@ export default class ExitHandler {
       client.destroy();
     } else if (options.clean) {
       console.log("Attempting to run `restart` command...".magenta);
-      client.commands.get("restart").run(client, null, false);
+      client.getCommand("restart").run(client, null, false);
     }
   }
 }

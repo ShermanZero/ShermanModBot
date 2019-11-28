@@ -42,7 +42,7 @@ module.exports = (client: any, message: Message) => {
   if (!command) return;
 
   //grab the command data from the client.commands Enmap
-  const cmd = client.commands.get(command);
+  const cmd = client.getCommand(command);
 
   //if the command doesn't exist
   if (!cmd) return;
@@ -130,7 +130,7 @@ function updateMasterLog(client) {
 
   //if the log length exceeds the threshold, update the master log
   if (client.masterLog.length >= client.global_config.preferences.log_threshold_master) {
-    for (var i = 0; i < client.masterLog.length; i++) fs.appendFileSync(masterLog, client.masterLog[i]);
+    for (let i = 0; i < client.masterLog.length; i++) fs.appendFileSync(masterLog, client.masterLog[i]);
 
     client.masterLog = [];
   }
@@ -142,7 +142,7 @@ function updateUserLog(client, guild, content) {
 
   //if the log length exceeds the threshold, update the master log
   if (content.userLog.length >= client.global_config.preferences.log_threshold_user) {
-    for (var i = 0; i < content.userLog.length; i++) fs.appendFileSync(userLog, content.userLog[i]);
+    for (let i = 0; i < content.userLog.length; i++) fs.appendFileSync(userLog, content.userLog[i]);
 
     content.userLog = [];
   }
@@ -170,9 +170,9 @@ function awardExperience(client, message) {
   if (content.rank.xp >= content.rank.levelup) {
     content.rank.level += 1;
 
-    var rank = ranks.levels[content.rank.level];
+    let rank = ranks.levels[content.rank.level];
     if (rank) {
-      var lastRank = content.rank.name;
+      let lastRank = content.rank.name;
 
       content.rank.name = rank;
       let oldRole = message.guild.roles.find((role: Role) => role.name.toLowerCase() === lastRank.toLowerCase());
@@ -203,7 +203,7 @@ function awardExperience(client, message) {
 }
 
 function levelUp(client, message, content) {
-  var stats = client.commands.get("stats");
+  let stats = client.getCommand("stats");
   let embed = stats.getEmbed(client, message.member, content);
 
   message.channel.send(`Congratulations ${message.author}!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!`);

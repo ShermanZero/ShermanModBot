@@ -20,7 +20,7 @@ module.exports = (client: any) => {
 
   for (let i = 0; i < commandArray.length; i++) {
     let commandName = commandArray[i];
-    let command = client.commands.get(commandName);
+    let command = client.getCommand(commandName);
 
     if (command.props.requiresElevation) {
       if (command.props.requiresElevation === client.global_config.elevation_names.moderator) {

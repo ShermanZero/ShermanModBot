@@ -2,7 +2,7 @@ import * as fs from 'fs';
 
 export default class FileHandler {
   static readDataFromFile(filePath: string): string {
-    var data = fs.readFileSync(filePath, "utf8");
+    let data = fs.readFileSync(filePath, "utf8");
     return data;
   }
 

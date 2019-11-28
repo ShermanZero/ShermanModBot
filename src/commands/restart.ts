@@ -37,7 +37,7 @@ module.exports.run = async (client: any, message: Message, userTriggered: boolea
   console.log("Successfully wrote user data to files!".magenta);
 
   //append all last log data to the master log
-  for (var i = 0; i < client.masterLog.length; i++) fs.appendFileSync(path.join(__dirname, "..", "logs", client.global_config.files.log_all), client.masterLog[i]);
+  for (let i = 0; i < client.masterLog.length; i++) fs.appendFileSync(path.join(__dirname, "..", "logs", client.global_config.files.log_all), client.masterLog[i]);
 
   console.log("Successfully stored pending user logs!".magenta);
 

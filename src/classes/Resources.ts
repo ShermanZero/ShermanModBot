@@ -37,7 +37,7 @@ export default class Resources {
     return Resources.getUserContentsFromNameWithGuild(client, message.guild as Guild, message, username, search);
   }
 
-  static getUserContentsFromNameWithGuild(client: any, guild: Guild, message: Message, username: string, search: boolean = false): any {
+  static async getUserContentsFromNameWithGuild(client: any, guild: Guild, message: Message, username: string, search: boolean = false) {
     if (!guild) guild = message.guild as Guild;
     username = username.trim().toLowerCase();
 
@@ -58,30 +58,29 @@ export default class Resources {
 
       if (possibleMatches.length > 1) {
         let listOfUsers = "";
-        for (var i = 0; i < possibleMatches.length; i++) listOfUsers += `${i + 1}) **${possibleMatches[i]}**\n`;
+        for (let i = 0; i < possibleMatches.length; i++) listOfUsers += `${i + 1})\t**${possibleMatches[i]}**\n`;
 
-        message.reply(`there are multiple users which contain [${username}], please select the correct one:\n${listOfUsers}`).then(() => {
-          message.channel
-            .awaitMessages((response: any) => response.author === message.author, {
-              max: 1,
-              time: 1000 * 60,
-              errors: ["time"]
-            })
-            .then((collected: any) => {
-              let answer = parseInt(collected.first().content);
-              if (answer < 1 || answer > possibleMatches.length) {
-                message.reply("you did not enter a valid number, no user has been selected");
-                return;
-              }
+        await message.reply(`there are multiple users which contain "${username}", please select the correct one:\n${listOfUsers}`);
+        await message.channel
+          .awaitMessages((response: Message) => response.author === message.author, {
+            max: 1,
+            time: 1000 * 60,
+            errors: ["time"]
+          })
+          .then(collected => {
+            let answer = parseInt(collected.first().content);
+            if (answer < 1 || answer > possibleMatches.length) {
+              message.reply("you did not enter a valid number, no user has been selected");
+              return;
+            }
 
-              username = possibleMatches[answer - 1];
-              jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
-            })
-            .catch(() => {
-              message.reply("you did not respond in time, no user has been selected");
-              return null;
-            });
-        });
+            username = possibleMatches[answer - 1];
+            jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
+          })
+          .catch(() => {
+            message.reply("you did not respond in time, no user has been selected");
+            return null;
+          });
       } else if (possibleMatches.length == 1) {
         username = possibleMatches[0];
         jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
@@ -90,7 +89,7 @@ export default class Resources {
       }
     }
 
-    if(!fs.existsSync(jsonFile)) return null;
+    if (!fs.existsSync(jsonFile)) return null;
 
     let json = fs.readFileSync(jsonFile);
     let content = JSON.parse(json.toString());
@@ -143,7 +142,7 @@ export default class Resources {
     if (rolesUserHas.array.length != 0) {
       let entries = Object.entries(ranks._info);
 
-      for (var i = 0; i < entries.length; i++) {
+      for (let i = 0; i < entries.length; i++) {
         let rank = entries[i][0].toLowerCase();
         let role = member.roles.find(role => role.name.toLowerCase() === rank);
 
@@ -153,7 +152,7 @@ export default class Resources {
           content.rank.name = rank;
           content.rank.xp = ranks._info[rank];
 
-          for (var level in ranks.levels) {
+          for (let level in ranks.levels) {
             if (ranks.levels[level].toLowerCase() === rank) {
               content.rank.level = parseInt(level);
               content.rank.levelup = this.getXPToLevelUp(content.rank.xp, content.rank.level);
@@ -194,7 +193,7 @@ export default class Resources {
     if (!fs.existsSync(dir)) return console.error(`!! Attempted to write [${username}] contents to log, but no directory exists at [${dir}]`.red);
 
     if (content.userLog && content.userLog.length != 0) {
-      for (var i = 0; i < content.userLog.length; i++) fs.appendFileSync(`${dir}/logs/${client.global_config.files.log_all}`, content.userLog[i]);
+      for (let i = 0; i < content.userLog.length; i++) fs.appendFileSync(`${dir}/logs/${client.global_config.files.log_all}`, content.userLog[i]);
 
       content.userLog = [];
     }

@@ -26,7 +26,7 @@ module.exports.run = async (client: any, message: Message) => {
     if (message.member.user.id === client.global_config.botowner) elevatedPermissions = true;
 
     if (elevatedPermissions || noPermissions) {
-      var header = "**!" + key + "**";
+      let header = "**!" + key + "**";
 
       let desc = value.props.description;
       if (value.props.usage) header += `\n\t*!${key} ${value.props.usage}*`;

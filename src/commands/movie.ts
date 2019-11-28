@@ -84,10 +84,12 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
       }
 
       if (passRemove) {
-        member.roles.remove(mediaNotifyRole)
-        .then(() => {
-          message.channel.send(`${member} you will no longer be notified of movie events`);
-        }).catch(reason => {});
+        member.roles
+          .remove(mediaNotifyRole)
+          .then(() => {
+            message.channel.send(`${member} you will no longer be notified of movie events`);
+          })
+          .catch(reason => {});
       }
     };
 
@@ -95,7 +97,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   });
 
   //bot testing channel
-  if(message.channel.id === "642167914518282250") return;
+  if (message.channel.id === "642167914518282250") return;
 
   for (let i = 0; i < guildMembers.length; i++) if (guildMembers[i].roles.has(mediaNotifyRole.id)) await guildMembers[i].send(`Hey!  A movie alert for **${mediaName}** was just posted in **${message.guild.name}**, in the **${message.channel.toString()}** channel!`).catch(reason => {});
 };

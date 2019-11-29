@@ -3,8 +3,11 @@ import * as fs from "fs";
 import * as path from "path";
 import TwitchClient from "twitch";
 import ChatClient from "twitch-chat-client";
+import { DiscordConfig } from "../shared/configs/discord_config";
+import { TwitchSecrets } from "../twitch_secrets";
 
-import secrets from "../secrets";
+let globalConfig: DiscordConfig;
+let twitchSecrets: TwitchSecrets;
 
 /**
  * The class for integrating the bot with Twitch
@@ -21,8 +24,8 @@ export default class TwitchIntegration {
    * @param {Client} client the Discord `Client`
    */
   async start(client: Client) {
-    const clientID = secrets.twitch.client_id;
-    const accessToken = secrets.twitch.access_token;
+    const clientID = twitchSecrets.client_id;
+    const accessToken = twitchSecrets.access_token;
 
     `...\n${"Beginning Twitch integration".inverse}`.print();
     "  *Attempting to authorize to Twitch...".print();
@@ -41,20 +44,20 @@ export default class TwitchIntegration {
     await chatClient.join("ShermanZero");
     "    *Joined chat!".success();
 
-    this.loadCommands();
+    this.loadCommands(client);
 
     `${"Twitch chat has been linked".inverse}\n...`.print();
     chatClient.onPrivmsg((channel: string, username: string, message: string) => {
-      if (message.indexOf(client.global_config.prefix) !== 0) return;
+      if (message.indexOf(globalConfig.prefix) !== 0) return;
 
       let guildUsername: string = client.hasMember(client.defaultGuild, username, true);
-      let guildUserContent: any;
+      let MemberConfig;
 
       if (guildUsername) {
-        guildUserContent = client.getMemberContent(client.defaultGuild, guildUsername);
+        MemberConfig = client.getMemberConfig(client.defaultGuild, guildUsername);
 
-        let logMessage = `Member ${String(guildUserContent.hidden.username).magenta} just posted "${message.magenta}" in Twitch chat`;
-        logMessage.userLog(client, client.defaultGuild, guildUserContent, client.global_config.files.logs.twitch);
+        let logMessage = `Member ${String(MemberConfig.hidden.username).magenta} just posted "${message.magenta}" in Twitch chat`;
+        logMessage.memberLog(client, client.defaultGuild, MemberConfig, "INSERT TWITCH LOG THINGY HERE");
         logMessage.print(true);
       }
 
@@ -81,7 +84,7 @@ export default class TwitchIntegration {
   /**
    * Loads the commands that the Twitch bot will listen to
    */
-  loadCommands(): void {
+  loadCommands(client: Client): void {
     this.commands = new Map<string, any>();
     this.aliases = new Map<string, string>();
 
@@ -89,15 +92,16 @@ export default class TwitchIntegration {
     let commands = this.commands;
     let aliases = this.aliases;
 
-    fs.readdir(commandsPath, function(err, files) {
-      if (err) return String(err).error();
+    fs.readdir(commandsPath, (err, files): boolean => {
+      if (err) {
+        String(err).error();
+        return false;
+      }
       files.forEach(function(file) {
         if (!file.endsWith(".js")) return;
 
         let command: any = require(path.join(commandsPath, file));
         let commandName = file.split(".")[0];
-
-        `--registering command ${commandName.cyan}`.print();
 
         //store the command
         commands.set(commandName, command);
@@ -106,12 +110,36 @@ export default class TwitchIntegration {
         command.aliases?.forEach((alias: string) => {
           aliases.set(alias, commandName);
         });
-
-        "--completed".success();
       });
+
+      return true;
     });
 
     this.commands = commands;
     this.aliases = aliases;
+
+    let commandArray: string[] = [...this.commands.keys()].sort();
+    `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green}, ${"[@subscribers]".yellow}, ${"[@moderator]".red}, ${"[@broadcaster]".cyan}`.print();
+
+    for (let i = 0; i < commandArray.length; i++) {
+      let commandName = commandArray[i];
+      let command = this.commands.get(commandName);
+
+      if (command.props.requiresElevation) {
+        if (command.props.requiresElevation === globalConfig.elevation_names.moderator) {
+          commandName = commandName.yellow;
+        } else if (command.props.requiresElevation === globalConfig.elevation_names.owner) {
+          commandName = commandName.red;
+        } else if (command.props.requiresElevation === globalConfig.elevation_names.botowner) {
+          commandName = commandName.cyan;
+        }
+      } else {
+        commandName = commandName.green;
+      }
+
+      `${("[" + commandName + "]").padEnd(30, ".")} ${command.props.description}`.print();
+    }
+
+    "...".print();
   }
 }

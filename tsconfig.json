@@ -3,29 +3,29 @@
     "rootDir": "./src/",
     "outDir": "./build/",
 
-    "allowSyntheticDefaultImports": true,
+    //  "allowSyntheticDefaultImports": true,
+    "declaration": true,
     "forceConsistentCasingInFileNames": true,
-    "inlineSources": true,
-    "inlineSourceMap": true,
+    //  "inlineSources": true,
+    //  "inlineSourceMap": true,
 
-    "listEmittedFiles": false,
+    //  "listEmittedFiles": true,
     "locale": "en",
-
     "lib": ["es2016"],
 
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
 
-    "noImplicitAny": false,
-    "noImplicitReturns": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noErrorTruncation": true,
 
     "pretty": true,
-    "removeComments": true,
-    "suppressImplicitAnyIndexErrors": true
+    "removeComments": true
+    //  "suppressImplicitAnyIndexErrors": true
   },
 
   "include": ["./src/"],

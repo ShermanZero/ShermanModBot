@@ -1,13 +1,10 @@
 import { Client, GuildMember, Message, MessageEmbed, MessageReaction, TextChannel, User } from "discord.js";
 import fetch from "node-fetch";
 
-import rsrc from "../../shared/resources/resources";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-
-let discordConfig: DiscordConfig;
+import rsrc from "../discord-resources";
 
 module.exports.props = {
-  requiresElevation: discordConfig.elevation_names.moderator,
+  requiresElevation: DiscordConfig.elevation_names.moderator,
   description: "creates a movie invite embed",
   usage: "<?done>"
 };

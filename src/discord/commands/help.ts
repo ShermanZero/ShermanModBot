@@ -1,7 +1,4 @@
 import { Client, Message, MessageEmbed } from "discord.js";
-import { DiscordSecrets } from "../../discord_secrets";
-
-let discordSecrets: DiscordSecrets;
 
 module.exports.props = {
   description: "replies to the member with the commands for the server"
@@ -24,7 +21,7 @@ module.exports.run = async (client: Client, message: Message): Promise<boolean> 
     let elevatedPermissions = value.props.requiresElevation && message.member.roles.get(guildConfig.roles[value.props.requiresElevation]) !== null;
     let noPermissions = !value.props.requiresElevation || value.props.requiresElevation === "";
 
-    if (message.member.user.id === discordSecrets.botowner) elevatedPermissions = true;
+    if (message.member.user.id === DiscordSecrets.botowner) elevatedPermissions = true;
 
     if (elevatedPermissions || noPermissions) {
       let header = "**!" + key + "**";

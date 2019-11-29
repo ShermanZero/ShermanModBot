@@ -3,13 +3,10 @@ import * as fs from "fs";
 import * as path from "path";
 import * as rimraf from "rimraf";
 
-import rsrc from "../../shared/resources/resources";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-
-let discordConfig: DiscordConfig;
+import rsrc from "../discord-resources";
 
 module.exports.props = {
-  requiresElevation: discordConfig.elevation_names.botowner,
+  requiresElevation: DiscordConfig.elevation_names.botowner,
   description: "copies a member's data to another member, and deletes the original",
   usage: "<old_member> <new_member>"
 };

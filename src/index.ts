@@ -1,16 +1,13 @@
-import "./shared/types/discordjs-extend";
-import "./shared/types/string-extend";
+import "./discord/extensions/discordjs-extend";
+import "./shared/extensions/string/string-extend";
 import "colors";
 
 import { Client } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
-import { DiscordSecrets } from "./discord_secrets";
 
 let client: Client = new Client();
 loadEventsAndCommands();
-
-let discordSecrets: DiscordSecrets;
 
 let dev: boolean = false,
   ver: boolean = false;
@@ -26,7 +23,7 @@ export namespace BuildOptions {
   export const verbose = ver;
 }
 
-client.login(discordSecrets.token);
+client.login(DiscordSecrets.token);
 
 /**
  * Loads the events and commands for the bot

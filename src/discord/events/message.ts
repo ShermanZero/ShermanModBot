@@ -3,14 +3,9 @@ import * as fs from "fs";
 import * as path from "path";
 
 import blacklist from "../../shared/resources/blacklist";
-import rsrc from "../../shared/resources/resources";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-import { MemberConfig } from "../../shared/configs/member_config";
-import { RankConfig } from "../../shared/configs/ranks_config";
-import { DiscordSecrets } from "../../discord_secrets";
-
-let discordSecrets: DiscordSecrets;
-let discordConfig: DiscordConfig;
+import rsrc from "../discord-resources";
+import { MemberConfig } from "../configs/member_config";
+import { RankConfig } from "../configs/ranks_config";
 
 module.exports = async (client: Client, message: Message): Promise<boolean> => {
   //ignore all bots
@@ -39,11 +34,11 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
   awardExperience(client, message);
 
   //ignore messages not starting with the prefix
-  if (message.content.indexOf(discordConfig.prefix) !== 0) return false;
+  if (message.content.indexOf(DiscordConfig.prefix) !== 0) return false;
 
   //standard argument/command name definition
   const args: any = message.content
-    .slice(discordConfig.prefix.length)
+    .slice(DiscordConfig.prefix.length)
     .trim()
     .split(/ +/g);
 
@@ -68,7 +63,7 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
       await message.reply("your guild owner has to configure me before I can execute commands :(");
       return false;
     }
-    if (cmd.props.requiresElevation && message.member.user.id !== discordSecrets.botowner) {
+    if (cmd.props.requiresElevation && message.member.user.id !== DiscordSecrets.botowner) {
       if (!message.member?.roles.get(guildConfig.roles[cmd.props.requiresElevation])) return false;
     }
   }
@@ -123,10 +118,10 @@ function registerMessage(client: Client, message: Message): boolean {
   let masterLogMessage = `/${guildName.magenta}/>  ${username.magenta} ${memberLogMessage}`;
 
   client.masterLog.push(masterLogMessage.stripColors + "\n");
-  masterLogMessage.masterLog(client, discordConfig.logs.message, true);
+  masterLogMessage.masterLog(client, DiscordConfig.logs.message, true);
 
   memberConfig.memberLog.push(memberLogMessage.stripColors + "\n");
-  memberLogMessage.memberLog(client, message.guild, memberConfig, discordConfig.logs.message);
+  memberLogMessage.memberLog(client, message.guild, memberConfig, DiscordConfig.logs.message);
 
   return true;
 }
@@ -152,7 +147,7 @@ function getTimestamp(message: Message) {
  */
 async function awardExperience(client: Client, message: Message): Promise<any> {
   let username = rsrc.getUsernameFromMessage(message);
-  let rankConfig: RankConfig;
+  let rankConfig: RankConfig = {} as any;
 
   //get the config from the session instead of from the file
   let memberConfig = client.getMemberConfig(message.guild, username);
@@ -187,7 +182,7 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
   client.updateMember(memberConfig);
 
   //only write XP changes to the file every 10 messages
-  if (memberConfig.rank.xp % discordConfig.preferences.xp_threshold === 0) {
+  if (memberConfig.rank.xp % DiscordConfig.preferences.xp_threshold === 0) {
     let jsonFile = path.join(rsrc.getMemberDirectoryFromGuild(message.guild, username), username + ".json");
     let newJson = JSON.stringify(memberConfig, null, "\t");
     fs.writeFileSync(jsonFile, newJson);

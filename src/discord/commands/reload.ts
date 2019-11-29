@@ -1,11 +1,8 @@
 import { Client, Message } from "discord.js";
 import * as path from "path";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-
-let discordConfig: DiscordConfig;
 
 module.exports.props = {
-  requiresElevation: discordConfig.elevation_names.botowner,
+  requiresElevation: DiscordConfig.elevation_names.botowner,
   description: "reloads a command",
   usage: "<command>"
 };

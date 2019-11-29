@@ -3,17 +3,15 @@ import * as fs from "fs";
 import * as path from "path";
 import * as rimraf from "rimraf";
 
-import ArgumentsNotFulfilled from "../types/error-extend";
-import { MemberConfig } from "../configs/member_config";
-import { RankConfig } from "../configs/ranks_config";
-import { DiscordConfig } from "../configs/discord_config";
+import { MemberConfig } from "./configs/member_config";
+import { RankConfig } from "./configs/ranks_config";
 
 /**
  * Multiple resources dealing with handling members/users/guilds and more
  *
  * @class Resources
  */
-export default class Resources {
+export default class DiscordResources {
   /**
    * Returns the username from a message
    *
@@ -84,13 +82,13 @@ export default class Resources {
    * @param {string} username the username
    * @param {boolean} [search=false] whether or not to do a recursive search for the member given the incomplete username
    */
-  static getMemberConfigFromName(client: Client, message: Message, username: string, search: boolean = false): any {
+  static getMemberConfigFromName(client: Client, message: Message, username: string, search: boolean = false): MemberConfig {
     if (!client || !message || !username) {
       new ArgumentsNotFulfilled(...arguments);
       return null;
     }
 
-    return Resources.getMemberConfigFromNameWithGuild(client, message.guild as Guild, message, username, search);
+    return DiscordResources.getMemberConfigFromNameWithGuild(client, message.guild as Guild, message, username, search);
   }
 
   /**
@@ -102,7 +100,7 @@ export default class Resources {
    * @param {string} username the username
    * @param {boolean} [search=false] whether or not to do a recursive search for the member given the incomplete username
    */
-  static getMemberConfigFromNameWithGuild(client: Client, guild: Guild, message: Message, username: string, search: boolean = false): any {
+  static getMemberConfigFromNameWithGuild(client: Client, guild: Guild, message: Message, username: string, search: boolean = false): MemberConfig {
     if (!client) {
       new ArgumentsNotFulfilled(...arguments);
       return null;
@@ -111,7 +109,7 @@ export default class Resources {
     if (!guild) {
       if (!message) {
         new ArgumentsNotFulfilled(...arguments);
-        return;
+        return null;
       }
 
       guild = message.guild as Guild;
@@ -167,7 +165,7 @@ export default class Resources {
     if (!fs.existsSync(jsonFile)) return null;
 
     let json = fs.readFileSync(jsonFile);
-    let config = JSON.parse(json.toString());
+    let config = JSON.parse(json.toString()) as MemberConfig;
 
     return config;
   }
@@ -250,8 +248,7 @@ export default class Resources {
       return null;
     }
 
-    let memberConfig: MemberConfig;
-
+    let memberConfig: MemberConfig = {} as any;
     memberConfig.hidden.username = this.getUsernameFromMember(member);
     memberConfig.hidden.guildname = this.getGuildNameFromGuild(guild);
 
@@ -272,11 +269,11 @@ export default class Resources {
 
     //if the member already has pre-existing roles
     if (rolesMemberHas.length != 0) {
-      let ranksConfig: RankConfig;
+      let rankConfig: RankConfig = {} as any;
 
       `Member already has pre-existing roles: [${rolesMemberHas.join(", ").cyan}]`.print(true);
 
-      let entries = Object.entries(ranksConfig.info);
+      let entries = Object.entries(rankConfig.info);
 
       for (let i = 0; i < entries.length; i++) {
         let rank = entries[i][0].toLowerCase();
@@ -289,10 +286,10 @@ export default class Resources {
           rankRolesUserHas.push(role);
 
           memberConfig.rank.name = rank;
-          memberConfig.rank.xp = ranksConfig.info[rank];
+          memberConfig.rank.xp = rankConfig.info[rank];
 
-          for (let level in ranksConfig.levels) {
-            if (ranksConfig.levels[level].toLowerCase() === rank) {
+          for (let level in rankConfig.levels) {
+            if (rankConfig.levels[level].toLowerCase() === rank) {
               memberConfig.rank.level = parseInt(level);
               memberConfig.rank.levelup = this.getXPToLevelUp(memberConfig.rank.xp, memberConfig.rank.level);
 
@@ -360,9 +357,8 @@ export default class Resources {
 
     if (!fs.existsSync(dir)) return `Attempted to write [${username}'s] log, but no directory exists at [${dir}]`.error();
 
-    let discordConfig: DiscordConfig;
     if (config.memberLog && config.memberLog.length != 0) {
-      for (let i = 0; i < config.memberLog.length; i++) fs.appendFileSync(`${dir}/logs/${discordConfig.logs.all}`, config.memberLog[i]);
+      for (let i = 0; i < config.memberLog.length; i++) fs.appendFileSync(`${dir}/logs/${DiscordConfig.logs.all}`, config.memberLog[i]);
 
       config.memberLog = [];
     }

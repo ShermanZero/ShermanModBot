@@ -1,13 +1,10 @@
 import { Client, Message } from "discord.js";
 
-import rsrc from "../../shared/resources/resources";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-import { MemberConfig } from "../../shared/configs/member_config";
-
-let discordConfig: DiscordConfig;
+import rsrc from "../discord-resources";
+import { MemberConfig } from "../configs/member_config";
 
 module.exports.props = {
-  requiresElevation: discordConfig.elevation_names.moderator,
+  requiresElevation: DiscordConfig.elevation_names.moderator,
   description: "displays the member's data",
   usage: "<member>"
 };

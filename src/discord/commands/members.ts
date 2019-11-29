@@ -1,12 +1,9 @@
 import { Client, Message } from "discord.js";
 
-import rsrc from "../../shared/resources/resources";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-
-let discordConfig: DiscordConfig;
+import rsrc from "../discord-resources";
 
 module.exports.props = {
-  requiresElevation: discordConfig.elevation_names.moderator,
+  requiresElevation: DiscordConfig.elevation_names.moderator,
   description: "displays all members registered in the server"
 };
 

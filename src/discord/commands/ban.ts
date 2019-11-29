@@ -1,10 +1,7 @@
 import { Client, GuildMember, Message, TextChannel } from "discord.js";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-
-let discordConfig: DiscordConfig;
 
 module.exports.props = {
-  requiresElevation: discordConfig.elevation_names.moderator,
+  requiresElevation: DiscordConfig.elevation_names.moderator,
   description: "bans a member from the server",
   usage: "<member> <?reason>"
 };

@@ -2,12 +2,9 @@ import { Client, Guild } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
 
-import { BuildOptions } from "../..";
-import { MemberConfig } from "../configs/member_config";
-import rsrc from "../resources/resources";
-import { DiscordConfig } from "../configs/discord_config";
-
-let discordConfig: DiscordConfig;
+import { BuildOptions } from "../../..";
+import { MemberConfig } from "../../../discord/configs/member_config";
+import rsrc from "../../../discord/discord-resources";
 
 String.prototype.hideID = function(username?: string): string {
   if (!username) username = String(this);
@@ -71,7 +68,7 @@ String.prototype.masterLog = function(client: Client, logType?: string, output?:
   if (!message) message = String(this);
   if (!message.endsWith("\n")) message += "\n";
 
-  if (!logType) logType = discordConfig.logs.all;
+  if (!logType) logType = DiscordConfig.logs.all;
 
   let masterLogDir = path.join(__dirname, "..", "discord", "logs");
   if (!fs.existsSync(masterLogDir)) {
@@ -80,11 +77,11 @@ String.prototype.masterLog = function(client: Client, logType?: string, output?:
   }
 
   //if the log length exceeds the threshold, update the master log
-  if (client.masterLog.length >= discordConfig.preferences.log_threshold_master) {
+  if (client.masterLog.length >= DiscordConfig.preferences.log_threshold_master) {
     for (let i = 0; i < client.masterLog.length; i++) {
       fs.appendFileSync(masterLogDir, client.masterLog[i]);
 
-      if (logType !== discordConfig.logs.all) fs.appendFileSync(path.resolve(masterLogDir, discordConfig.logs.all), client.masterLog[i]);
+      if (logType !== DiscordConfig.logs.all) fs.appendFileSync(path.resolve(masterLogDir, DiscordConfig.logs.all), client.masterLog[i]);
     }
 
     client.masterLog = [];
@@ -107,17 +104,17 @@ String.prototype.memberLog = function(client: Client, guild: Guild, config: Memb
   if (!message) message = String(this);
   if (!message.endsWith("\n")) message += "\n";
 
-  if (!logType) logType = discordConfig.logs.all;
+  if (!logType) logType = DiscordConfig.logs.all;
 
   let logsDir = path.join(rsrc.getMemberDirectoryFromGuild(guild, config.hidden.username), "logs");
   let memberLog = path.join(logsDir, logType);
 
   //if the log length exceeds the threshold, update the master log
-  if (config.memberLog.length >= discordConfig.preferences.log_threshold_member) {
+  if (config.memberLog.length >= DiscordConfig.preferences.log_threshold_member) {
     for (let i = 0; i < config.memberLog.length; i++) {
       fs.appendFileSync(memberLog, config.memberLog[i]);
 
-      if (logType !== discordConfig.logs.all) fs.appendFileSync(path.resolve(logsDir, discordConfig.logs.all), config.memberLog[i]);
+      if (logType !== DiscordConfig.logs.all) fs.appendFileSync(path.resolve(logsDir, DiscordConfig.logs.all), config.memberLog[i]);
     }
 
     config.memberLog = [];

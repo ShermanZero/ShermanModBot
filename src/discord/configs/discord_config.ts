@@ -1,29 +1,29 @@
-export interface DiscordConfig {
-  readonly status: "dead | !help";
-  readonly prefix: "!";
-  readonly verbose: true;
+class DiscordConfig {
+  static readonly status: "dead | !help";
+  static readonly prefix: "!";
+  static readonly verbose: true;
 
-  readonly elevation_names: {
+  static readonly elevation_names: {
     [key: string]: string;
     readonly botowner: "botowner";
     readonly owner: "owner";
     readonly moderator: "mod";
   };
 
-  readonly channel_names: {
+  static readonly channel_names: {
     [key: string]: string;
     readonly default: "default";
     readonly mod_logs: "mod_logs";
   };
 
-  readonly preferences: {
+  static readonly preferences: {
     [key: string]: number;
     readonly xp_threshold: 10;
     readonly log_threshold_member: 10;
     readonly log_threshold_master: 50;
   };
 
-  readonly logs: {
+  static readonly logs: {
     [key: string]: string;
     readonly all: "all.txt";
     readonly message: "messages.txt";
@@ -32,7 +32,7 @@ export interface DiscordConfig {
     readonly twitch: "twitch.txt";
   };
 
-  readonly files: {
+  static readonly files: {
     [key: string]: string;
     readonly removed: ".removed";
   };

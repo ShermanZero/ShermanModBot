@@ -1,15 +1,16 @@
 /**
- * A class which extends `Error`, requiring args to be passed with the constructor
+ * Creates a new error symbolizing that the arguments were not fulfilled, when creating, use `...arguments` as the constructor property
  *
- * @class ArgumentsNotFulfilled
+ * @class ArgumentsNotFulfillled
  */
-export default class ArgumentsNotFulfilled extends Error {
+class ArgumentsNotFulfilled extends Error {
   /**
-   * Creates an instance of ArgumentsNotFulfilled.
-   *
-   * @param {...any[]} args use `...arguments` or manually specify arguments
+   *Creates an instance of ArgumentsNotFulfillled.
+   * @param {...string[]} args the arguments to pass in, recommended usage of `...arguments`
    */
-  constructor(...args: any[]) {
+  constructor(...args: string[]) {
+    super("ArgumentsNotFulfilled");
+
     let message = "!! ".red;
     let argsNotProvidedCount = 0;
 
@@ -28,10 +29,7 @@ export default class ArgumentsNotFulfilled extends Error {
     argumentCheck = argumentCheck.replace(/(FAIL)/g, "FAIL".red);
     message += `${argumentCheck} [${argsNotProvidedCount.toString().red}] argument(s) were not provided `;
 
-    super(message);
-
-    let stack = this.stack;
-    let methodName = stack.split("Function.")[1];
+    let methodName = Error.prototype.stack.split("Function.")[1];
     let errorLocation = methodName.substring(methodName.indexOf(":") + 1, methodName.indexOf(")"));
 
     methodName = methodName.substring(0, methodName.indexOf("(")).trim();

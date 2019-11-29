@@ -1,8 +1,8 @@
 import { Client, ColorResolvable, GuildMember, Message, MessageEmbed } from "discord.js";
 
-import rsrc from "../../shared/resources/resources";
-import { RankConfig } from "../../shared/configs/ranks_config";
-import { MemberConfig } from "../../shared/configs/member_config";
+import rsrc from "../discord-resources";
+import { RankConfig } from "../configs/ranks_config";
+import { MemberConfig } from "../configs/member_config";
 
 module.exports.props = {
   description: "replies to the member with their current server stats"
@@ -34,7 +34,7 @@ module.exports.run = async (client: Client, message: Message, args: string[]): P
 module.exports.getEmbed = (client: Client, member: GuildMember, config: MemberConfig) => {
   let name = "**" + config.hidden.username.substring(0, config.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
   let rankColor = member.guild.roles.find(role => role.name === config.rank.name)?.color;
-  let rankConfig: RankConfig;
+  let rankConfig: RankConfig = {} as any;
 
   const embed = new MessageEmbed();
   embed.setTitle(name + " | " + calculatePosition(client, config));

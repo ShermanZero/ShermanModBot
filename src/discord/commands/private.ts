@@ -1,10 +1,7 @@
 import { Client, Message, Role, TextChannel } from "discord.js";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-
-let discordConfig: DiscordConfig;
 
 module.exports.props = {
-  requiresElevation: discordConfig.elevation_names.moderator,
+  requiresElevation: DiscordConfig.elevation_names.moderator,
   description: "grants a member access to the private-hangout channel",
   usage: "<member>"
 };

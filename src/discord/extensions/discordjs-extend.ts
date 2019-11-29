@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 
-import rsrc from "../resources/resources";
+import rsrc from "../discord-resources";
 import { Guild } from "discord.js";
 import { MemberConfig } from "../configs/member_config";
 import { GuildConfig } from "../configs/guild_config";

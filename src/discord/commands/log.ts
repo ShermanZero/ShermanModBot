@@ -2,13 +2,10 @@ import { Client, Message } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
 
-import rsrc from "../../shared/resources/resources";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-
-let discordConfig: DiscordConfig;
+import rsrc from "../discord-resources";
 
 module.exports.props = {
-  requiresElevation: discordConfig.elevation_names.moderator,
+  requiresElevation: DiscordConfig.elevation_names.moderator,
   description: "displays the last number of messages a member has posted",
   usage: "<amount> <member>"
 };
@@ -22,7 +19,7 @@ module.exports.run = async (client: Client, message: Message, args: string[]): P
   }
 
   let username = rsrc.getUsernameFromMember(member);
-  let file = path.join(rsrc.getMemberDirectoryFromGuild(message.guild, username), "logs", discordConfig.logs.all);
+  let file = path.join(rsrc.getMemberDirectoryFromGuild(message.guild, username), "logs", DiscordConfig.logs.all);
   //parse amount
   let amount = !!parseInt(args[1]) ? parseInt(args[1]) : parseInt(args[2]);
 

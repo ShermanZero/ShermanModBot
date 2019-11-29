@@ -2,15 +2,13 @@ import { Client, Message, Role, TextChannel } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
 
-import rsrc from "../../shared/resources/resources";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-import { GuildConfig } from "../../shared/configs/guild_config";
+import rsrc from "../discord-resources";
+import { GuildConfig } from "../configs/guild_config";
 
-let discordConfig: DiscordConfig;
-let guildConfig: GuildConfig;
+let guildConfig: GuildConfig = {} as any;
 
 module.exports.props = {
-  requiresElevation: discordConfig.elevation_names.owner,
+  requiresElevation: DiscordConfig.elevation_names.owner,
   description: "sets up the discord bot for the server"
 };
 
@@ -30,15 +28,15 @@ module.exports.run = async (client: Client, message: Message): Promise<boolean> 
   let configFile = path.resolve(guildDir, "guild_config.json");
   if (!fs.existsSync(configFile)) await message.reply("you don't appear to have a configuration set up for your guild, let's create one");
 
-  await getRole(discordConfig.elevation_names.owner, message).then((result): any => {
+  await getRole(DiscordConfig.elevation_names.owner, message).then((result): any => {
     if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
   });
-  await getRole(discordConfig.elevation_names.moderator, message).then((result): any => {
+  await getRole(DiscordConfig.elevation_names.moderator, message).then((result): any => {
     if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
   });
 
-  await getChannel(discordConfig.channel_names.default, "default/welcome", "welcome new members of the guild as they arrive", message);
-  await getChannel(discordConfig.channel_names.mod_logs, "mod logs", "log any moderation action taken by mods and me", message);
+  await getChannel(DiscordConfig.channel_names.default, "default/welcome", "welcome new members of the guild as they arrive", message);
+  await getChannel(DiscordConfig.channel_names.mod_logs, "mod logs", "log any moderation action taken by mods and me", message);
 
   guildConfig.setup = true;
 

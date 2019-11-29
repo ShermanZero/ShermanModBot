@@ -3,11 +3,9 @@ import * as fs from "fs";
 import * as path from "path";
 import TwitchClient from "twitch";
 import ChatClient from "twitch-chat-client";
-import { DiscordConfig } from "../shared/configs/discord_config";
 import { TwitchSecrets } from "../twitch_secrets";
 
-let globalConfig: DiscordConfig;
-let twitchSecrets: TwitchSecrets;
+let twitchSecrets: TwitchSecrets = {} as any;
 
 /**
  * The class for integrating the bot with Twitch
@@ -48,7 +46,7 @@ export default class TwitchIntegration {
 
     `${"Twitch chat has been linked".inverse}\n...`.print();
     chatClient.onPrivmsg((channel: string, username: string, message: string) => {
-      if (message.indexOf(globalConfig.prefix) !== 0) return;
+      if (message.indexOf(DiscordConfig.prefix) !== 0) return;
 
       let guildUsername: string = client.hasMember(client.defaultGuild, username, true);
       let MemberConfig;
@@ -126,11 +124,11 @@ export default class TwitchIntegration {
       let command = this.commands.get(commandName);
 
       if (command.props.requiresElevation) {
-        if (command.props.requiresElevation === globalConfig.elevation_names.moderator) {
+        if (command.props.requiresElevation === DiscordConfig.elevation_names.moderator) {
           commandName = commandName.yellow;
-        } else if (command.props.requiresElevation === globalConfig.elevation_names.owner) {
+        } else if (command.props.requiresElevation === DiscordConfig.elevation_names.owner) {
           commandName = commandName.red;
-        } else if (command.props.requiresElevation === globalConfig.elevation_names.botowner) {
+        } else if (command.props.requiresElevation === DiscordConfig.elevation_names.botowner) {
           commandName = commandName.cyan;
         }
       } else {

@@ -4,14 +4,9 @@ import * as path from "path";
 
 import { BuildOptions } from "../..";
 import boot from "../../shared/resources/boot";
-import rsrc from "../../shared/resources/resources";
+import rsrc from "../discord-resources";
 import TwitchIntegration from "../../twitch/twitchIntegration";
 import exit from "../handlers/exitHandler";
-import { DiscordConfig } from "../../shared/configs/discord_config";
-import { DiscordSecrets } from "../../discord_secrets";
-
-let globalConfig: DiscordConfig;
-let discordSecrets: DiscordSecrets;
 
 module.exports = async (client: Client): Promise<boolean> => {
   boot.red.print();
@@ -26,11 +21,11 @@ module.exports = async (client: Client): Promise<boolean> => {
     let command = client.getCommand(commandName);
 
     if (command.props.requiresElevation) {
-      if (command.props.requiresElevation === globalConfig.elevation_names.moderator) {
+      if (command.props.requiresElevation === DiscordConfig.elevation_names.moderator) {
         commandName = commandName.yellow;
-      } else if (command.props.requiresElevation === globalConfig.elevation_names.owner) {
+      } else if (command.props.requiresElevation === DiscordConfig.elevation_names.owner) {
         commandName = commandName.red;
-      } else if (command.props.requiresElevation === globalConfig.elevation_names.botowner) {
+      } else if (command.props.requiresElevation === DiscordConfig.elevation_names.botowner) {
         commandName = commandName.cyan;
       }
     } else {
@@ -43,13 +38,13 @@ module.exports = async (client: Client): Promise<boolean> => {
   "...".print();
 
   client.guilds.forEach((guild: Guild) => {
-    if (guild.id === discordSecrets.guild_id) client.defaultGuild = guild;
+    if (guild.id === DiscordSecrets.guild_id) client.defaultGuild = guild;
 
     let guildDir = rsrc.getGuildDirectoryFromGuild(guild);
 
     if (!fs.existsSync(guildDir)) {
       fs.mkdirSync(guildDir, { recursive: true });
-      fs.mkdirSync(path.join(guildDir, globalConfig.files.removed), {
+      fs.mkdirSync(path.join(guildDir, DiscordConfig.files.removed), {
         recursive: true
       });
     }
@@ -89,7 +84,7 @@ module.exports = async (client: Client): Promise<boolean> => {
   let twitch = new TwitchIntegration();
   await twitch.start(client);
 
-  client.user.setActivity(globalConfig.status);
+  client.user.setActivity(DiscordConfig.status);
   client.user.setStatus(BuildOptions.development ? "invisible" : "online");
 
   client.ready = true;

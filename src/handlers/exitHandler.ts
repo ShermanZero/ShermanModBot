@@ -1,13 +1,22 @@
-import 'colors';
+import { Client } from "discord.js";
 
-import { Client } from 'discord.js';
-
+/**
+ * Protects the bot against some of the standard exit commands
+ *
+ * @author ShermanZero
+ */
 export default class ExitHandler {
-  //initialize
+  /**
+   * Initializes the exit handler
+   *
+   * @static
+   * @param client the Discord client
+   * @memberof ExitHandler
+   */
   static init(client: Client) {
-    `Registered client with ExitHandler... your crashes are protected now :)`.inverse.normal();
+    `Registered client with ExitHandler... your crashes are protected now :)`.inverse.print();
 
-    "...".normal();
+    "...".print();
     //when app is closing
     process.on("exit" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
 
@@ -20,18 +29,28 @@ export default class ExitHandler {
 
     //catches uncaught exceptions
     process.on("uncaughtException" as any, (e: Error) => {
-      "Uncaught exception:".error();
-      e.stack.red.dim.error();
+      "Uncaught exception:".error(true);
+      e.stack.red.dim.error(true);
     });
 
     //catch unhandled promise rejections
     process.on("unhandledRejection" as any, (e: Error) => {
-      "Unhandled rejection:".error();
-      e.stack.dim.dim.error();
+      "Unhandled rejection:".error(true);
+      e.stack.dim.dim.error(true);
     });
   }
 
-  static exitHandler(client: any, options: any, exitCode: number) {
+  /**
+   * The method bound to the exit handler
+   *
+   * @static
+   * @param {Client} client the Discord client
+   * @param {*} options { clean }
+   * @param {number} exitCode the exit code
+   * @returns
+   * @memberof ExitHandler
+   */
+  static exitHandler(client: Client, options: any, exitCode: number) {
     //if we executed the "restart" command
     if (client.alreadyShutdown) return;
 

@@ -1,8 +1,9 @@
-import * as Discord from 'discord.js';
+import * as Discord from "discord.js";
 
-import global_config from '../resources/global_config';
-import rsrc from '../resources/resources';
-import secrets from '../secrets';
+import global_config from "../resources/global_config";
+import rsrc from "../resources/resources";
+import secrets from "../secrets";
+import { Guild } from "discord.js";
 
 Discord.Client.prototype.defaultGuild = null;
 Discord.Client.prototype.secrets = secrets;
@@ -12,12 +13,24 @@ Discord.Client.prototype.guild_configs = new Map();
 Discord.Client.prototype.commands = new Map();
 Discord.Client.prototype.aliases = new Map();
 Discord.Client.prototype.masterLog = [];
+Discord.Client.prototype.ready = false;
+Discord.Client.prototype.alreadyShutdown = false;
 
+/**
+ * Returns the gulid from the guild's name
+ *
+ * @param guildName the guild's name
+ */
 Discord.Client.prototype.getGuild = function(guildName: string): string {
   return Discord.Client.prototype.usersInSession[guildName];
 };
 
-Discord.Client.prototype.updateUser = function(content: any): boolean {
+/**
+ * Updates the stored member data
+ *
+ * @param content the member's content
+ */
+Discord.Client.prototype.updateMember = function(content: any): boolean {
   if (!content) {
     `Attempted to update with ${content}, but failed`.error();
     return false;
@@ -34,16 +47,21 @@ Discord.Client.prototype.updateUser = function(content: any): boolean {
   let guild = Discord.Client.prototype.usersInSession[guildName];
 
   guild[username] = content;
-  content = Discord.Client.prototype.hideUserInfo(content);
+  content = Discord.Client.prototype.hideMemberInfo(content);
 
   return content !== null;
 };
 
-Discord.Client.prototype.registerUser = function(content: any): boolean {
+/**
+ * Registers the member and stores them in the `Client`
+ *
+ * @param content the member's content
+ */
+Discord.Client.prototype.registerMember = function(content: any): boolean {
   if (!content) return;
 
-  let success = Discord.Client.prototype.updateUser(content);
-  if (success) ("*Registered [" + content.hidden.username.magenta + "] to guild [" + content.hidden.guildname.magenta + "]").normal();
+  let success = Discord.Client.prototype.updateMember(content);
+  if (success) ("*Registered [" + content.hidden.username.magenta + "] to guild [" + content.hidden.guildname.magenta + "]").print();
   else {
     `Was not able to register ${content} to the guild`.error();
     return false;
@@ -52,7 +70,12 @@ Discord.Client.prototype.registerUser = function(content: any): boolean {
   return true;
 };
 
-Discord.Client.prototype.hideUserInfo = function(content: any): any {
+/**
+ * Hides a member's info (tag)
+ *
+ * @param content the member's content
+ */
+Discord.Client.prototype.hideMemberInfo = function(content: any): any {
   Object.defineProperty(content, "hidden", {
     enumerable: false
   });
@@ -60,7 +83,14 @@ Discord.Client.prototype.hideUserInfo = function(content: any): any {
   return content;
 };
 
-Discord.Client.prototype.hasUser = function(guild: Discord.Guild, username: string, search?: boolean): string {
+/**
+ * Returns if the client has a member stored in the cache
+ *
+ * @param guild the Discord `Guild`
+ * @param username the member's username
+ * @param search (optional) whether or not to recursively search given an incomplete username
+ */
+Discord.Client.prototype.hasMember = function(guild: Guild, username: string, search?: boolean): string {
   let userGuild = Discord.Client.prototype.usersInSession[rsrc.getGuildNameFromGuild(guild)];
   if (userGuild === null || typeof userGuild === "undefined") return null;
 
@@ -82,7 +112,13 @@ Discord.Client.prototype.hasUser = function(guild: Discord.Guild, username: stri
   return String(user);
 };
 
-Discord.Client.prototype.getUserContent = function(guild: Discord.Guild, username: string): any {
+/**
+ * Gets a stored member's content
+ *
+ * @param guild the Discord `Guild`
+ * @param username the member's username
+ */
+Discord.Client.prototype.getMemberContent = function(guild: Guild, username: string): any {
   let guildName = rsrc.getGuildNameFromGuild(guild);
   let userGuild = Discord.Client.prototype.usersInSession[guildName];
 
@@ -99,22 +135,39 @@ Discord.Client.prototype.getUserContent = function(guild: Discord.Guild, usernam
   return userGuild[username];
 };
 
-Discord.Client.prototype.removeUser = function(guild: Discord.Guild, username: string): boolean {
+/**
+ * Removes the member from the stored cache
+ *
+ * @param guild the Discord `Guild`
+ * @param username the member's username
+ */
+Discord.Client.prototype.removeMember = function(guild: Guild, username: string): boolean {
   let userGuild = Discord.Client.prototype.usersInSession[rsrc.getGuildNameFromGuild(guild)];
   if (userGuild === null || typeof userGuild === "undefined") return;
 
-  userGuild["delete"](username);
+  userGuild.remove(username);
 
   return true;
 };
 
-Discord.Client.prototype.deleteUser = function(guild: Discord.Guild, username: string): boolean {
-  let passRemove: boolean = Discord.Client.prototype.removeUser(guild, username);
-  let passDestroy: boolean = rsrc.destroyUserDirectory(guild, username);
+/**
+ * Deletes a member completely from the server
+ *
+ * @param guild the Discord `Guild`
+ * @param username the member's username
+ */
+Discord.Client.prototype.deleteMember = function(guild: Guild, username: string): boolean {
+  let passRemove: boolean = Discord.Client.prototype.removeMember(guild, username);
+  let passDestroy: boolean = rsrc.destroyMemberDirectory(guild, username);
 
   return passRemove && passDestroy;
 };
 
+/**
+ * Returns a command stored in the cache
+ *
+ * @param commandName the command's name
+ */
 Discord.Client.prototype.getCommand = function(commandName: string): any {
   let command = Discord.Client.prototype.commands.get(commandName);
 

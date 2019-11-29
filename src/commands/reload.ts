@@ -1,7 +1,7 @@
-import { Message } from 'discord.js';
-import * as path from 'path';
+import { Message } from "discord.js";
+import * as path from "path";
 
-import config from '../resources/global_config';
+import config from "../resources/global_config";
 
 module.exports.props = {
   requiresElevation: config.elevation_names.botowner,

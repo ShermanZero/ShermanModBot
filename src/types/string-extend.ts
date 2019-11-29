@@ -1,8 +1,10 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from "fs";
+import * as path from "path";
 
-import global_config from '../resources/global_config';
-import rsrc from '../resources/resources';
+import global_config from "../resources/global_config";
+import rsrc from "../resources/resources";
+import { Client } from "discord.js";
+import { Guild } from "discord.js";
 
 String.prototype.hideID = function(username?: string): string {
   if (!username) username = String(this);
@@ -10,9 +12,9 @@ String.prototype.hideID = function(username?: string): string {
   return String(username).substring(0, String(username).lastIndexOf("_"));
 };
 
-String.prototype.normal = function(verbose?: boolean, message?: string): any {
+String.prototype.print = function(verbose?: boolean, message?: string): any {
   if (!message) message = String(this);
-  String.prototype.log(message?.white, verbose);
+  String.prototype.log(message, verbose);
 };
 
 String.prototype.warning = function(verbose?: boolean, message?: string): any {
@@ -42,18 +44,27 @@ String.prototype.highlight = function(verbose?: boolean, message?: string): any 
 
 String.prototype.log = function(message?: string, verbose?: boolean): any {
   if (!message) message = String(this);
+  if (message.endsWith("\n")) message = message.substring(0, message.lastIndexOf("\n"));
   if (!verbose || (verbose && global_config.verbose)) console.log(message);
 
   return message;
 };
 
-String.prototype.masterLog = function(client: any, logType?: string, message?: string): any {
-  if(!message) message = String(this);
-
-  let masterLogDir = path.join(__dirname, "..", "logs");
+/**
+ * Appends a message to the master log contained by the Discord `Client`
+ *
+ * @param client the Discord `Client`
+ * @param logType (optional) specify the type of the log
+ * @param output (optional) whether or not to print to the console
+ * @param message (optional) the message to log
+ */
+String.prototype.masterLog = function(client: Client, logType?: string, output?: boolean, message?: string): any {
+  if (!message) message = String(this);
+  if (!message.endsWith("\n")) message += "\n";
 
   if (!logType) logType = client.global_config.files.logs.all;
 
+  let masterLogDir = path.join(__dirname, "..", "logs");
   if (!fs.existsSync(masterLogDir)) {
     fs.mkdirSync(masterLogDir, { recursive: true });
     fs.writeFileSync(path.resolve(masterLogDir, logType), "-- START OF LOG --");
@@ -70,15 +81,25 @@ String.prototype.masterLog = function(client: any, logType?: string, message?: s
     client.masterLog = [];
   }
 
-  message.normal(true);
+  if (output) message.print();
 };
 
-String.prototype.userLog = function(client: any, guild: any, content: any, logType?: string, message?: string): any {
-  if(!message) message = String(this);
+/**
+ * Appends a message to the user log contained by the Discord `Client`
+ *
+ * @param client the Discord `Client`
+ * @param guild the Discord `Guild`
+ * @param logType (optional) specify the type of the log
+ * @param output (optional) whether or not to print to the console
+ * @param message (optional) the message to log
+ */
+String.prototype.userLog = function(client: Client, guild: Guild, content: any, logType?: string, output?: boolean, message?: string): any {
+  if (!message) message = String(this);
+  if (!message.endsWith("\n")) message += "\n";
 
   if (!logType) logType = client.global_config.files.logs.all;
 
-  let logsDir = path.join(rsrc.getUserDirectoryFromGuild(guild, content.hidden.username), "logs");
+  let logsDir = path.join(rsrc.getMemerDirectoryFromGuild(guild, content.hidden.username), "logs");
   let userLog = path.join(logsDir, logType);
 
   //if the log length exceeds the threshold, update the master log
@@ -86,15 +107,13 @@ String.prototype.userLog = function(client: any, guild: any, content: any, logTy
     for (let i = 0; i < content.userLog.length; i++) {
       fs.appendFileSync(userLog, content.userLog[i]);
 
-      if (logType !== client.global_config.files.logs.all) fs.appendFileSync(path.resolve(logsDir, client.global_config.files.logs.all), client.masterLog[i]);
+      if (logType !== client.global_config.files.logs.all) fs.appendFileSync(path.resolve(logsDir, client.global_config.files.logs.all), content.userLog[i]);
     }
 
     content.userLog = [];
   }
 
-  //have to update the Enmap
-  client.updateUser(content);
+  client.updateMember(content);
 
-  //log it to the console
-  message.normal(true);
+  if (output) message.print();
 };

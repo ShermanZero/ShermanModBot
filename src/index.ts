@@ -1,19 +1,22 @@
-import './types/discordjs-extend';
-import './types/string-extend';
-import 'colors';
+import "./types/discordjs-extend";
+import "./types/string-extend";
+import "colors";
 
-import { Client } from 'discord.js';
-import * as fs from 'fs';
-import * as path from 'path';
+import { Client } from "discord.js";
+import * as fs from "fs";
+import * as path from "path";
 
-import secrets from './secrets';
+import secrets from "./secrets";
 
 let client: Client = new Client();
-startBot();
+loadEventsAndCommands();
 
 client.login(secrets.token);
 
-function startBot() {
+/**
+ * Loads the events and commands for the bot
+ */
+function loadEventsAndCommands(): void {
   let eventsPath = path.join(__dirname, "events");
   fs.readdir(eventsPath, function(err, files) {
     if (err) return String(err).error();
@@ -22,7 +25,7 @@ function startBot() {
       let event = require(path.join(__dirname, "events", file)) as Function;
       let eventName = file.split(".")[0];
 
-      `--registering event ${eventName}`.normal();
+      `--registering event ${eventName}`.print();
       client.on(eventName, event.bind(null, client));
       delete require.cache[require.resolve(path.join(__dirname, "events", file))];
     });
@@ -37,7 +40,7 @@ function startBot() {
       let command: any = require(path.join(commandsPath, file));
       let commandName = file.split(".")[0];
 
-      `--registering command ${commandName.cyan}`.normal();
+      `--registering command ${commandName.cyan}`.print();
 
       //store the command
       client.commands.set(commandName, command);

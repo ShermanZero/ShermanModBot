@@ -1,6 +1,6 @@
 export default {
   status: "dead | !help",
-  debug: true,
+  debug: false,
   verbose: true,
   prefix: "!",
 

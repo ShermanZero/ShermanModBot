@@ -1,7 +1,7 @@
-import { Message } from 'discord.js';
+import { Message } from "discord.js";
 
-import config from '../resources/global_config';
-import rsrc from '../resources/resources';
+import config from "../resources/global_config";
+import rsrc from "../resources/resources";
 
 module.exports.props = {
   requiresElevation: config.elevation_names.moderator,
@@ -17,7 +17,7 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
 
   if (!user) {
     if (args.length == 1) {
-      userContent = rsrc.getUserContentsFromName(client, message, args[0], true);
+      userContent = rsrc.getMemberContentsFromName(client, message, args[0], true);
 
       if (!userContent) {
         return message.reply("that user is not registered");

@@ -1,6 +1,6 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed } from "discord.js";
 
-import rsrc from '../resources/resources';
+import rsrc from "../resources/resources";
 
 module.exports.props = {
   description: "replies to the member with the commands for the server"

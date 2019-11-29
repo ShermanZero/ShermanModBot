@@ -1,6 +1,6 @@
-import { Message, TextChannel } from 'discord.js';
+import { Message, TextChannel } from "discord.js";
 
-import config from '../resources/global_config';
+import config from "../resources/global_config";
 
 module.exports.props = {
   requiresElevation: config.elevation_names.moderator,

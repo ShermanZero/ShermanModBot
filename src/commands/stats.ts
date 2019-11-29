@@ -1,7 +1,7 @@
-import { ColorResolvable, GuildMember, Message, MessageEmbed } from 'discord.js';
+import { ColorResolvable, GuildMember, Message, MessageEmbed } from "discord.js";
 
-import ranks from '../resources/ranks';
-import rsrc from '../resources/resources';
+import ranks from "../resources/ranks";
+import rsrc from "../resources/resources";
 
 module.exports.props = {
   description: "replies to the member with their current server stats"
@@ -15,9 +15,9 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   if (message.mentions?.members?.array.length !== 0) {
     member = message.mentions.members!.first() as GuildMember;
     username = rsrc.getUsernameFromMember(member);
-    content = rsrc.getUserContentsFromName(client, message, username);
+    content = rsrc.getMemberContentsFromName(client, message, username);
   } else if (args.length === 1) {
-    content = rsrc.getUserContentsFromNameWithGuild(client, message.guild, message, args[0], true);
+    content = rsrc.getMemberContentsFromNameWithGuild(client, message.guild, message, args[0], true);
     username = content?.hidden?.username;
   }
 

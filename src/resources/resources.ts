@@ -1,15 +1,30 @@
-import 'colors';
+import { Client, Guild, GuildMember, Message, Role, TextChannel, User } from "discord.js";
+import * as fs from "fs";
+import * as path from "path";
+import * as rimraf from "rimraf";
 
-import { Guild, GuildMember, Message, Role, TextChannel } from 'discord.js';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as rimraf from 'rimraf';
+import ArgumentsNotFulfilled from "../types/error-extend";
+import ranks from "./ranks";
+import def from "./user_config";
 
-import ranks from './ranks';
-import def from './user_config';
-
+/**
+ * Multiple resources dealing with handling members/users/guilds and more
+ *
+ * @class Resources
+ */
 export default class Resources {
-  static getUsernameFromMessage(message: Message): any {
+  /**
+   * Returns the username from a message
+   *
+   * @param {Message} message the Discord message
+   * @returns {string} username
+   */
+  static getUsernameFromMessage(message: Message): string {
+    if (!message) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
     let username: string;
     if (message.member) username = message.member.user.tag.replace("#", "_");
     else return null;
@@ -19,8 +34,23 @@ export default class Resources {
     return username;
   }
 
-  static getUsernameFromMember(member: any): string {
-    let username = member.user ? member.user.tag : member.tag;
+  /**
+   * Gets the username from a member of a guild, a user, or simply a username not parsed
+   *
+   * @param {GuildMember | User} member either a `GuildMember` or a `User`
+   * @returns {string} username
+   */
+  static getUsernameFromMember(member: GuildMember | User | string): string {
+    if (!member) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
+    let username: string;
+    if (member instanceof GuildMember) username = member.user.tag;
+    else if (member instanceof User) username = member.tag;
+    else username = member;
+
     username = username
       .replace("#", "_")
       .replace(/[^\w\s]/gi, "")
@@ -29,16 +59,62 @@ export default class Resources {
     return username;
   }
 
-  static getUserDirectoryFromGuild(guild: Guild, username: string): string {
+  /**
+   * Returns a member's directory
+   *
+   * @param {Guild} guild a Discord `Guild`
+   * @param {string} username the member's username
+   * @returns {string} the directory
+   */
+  static getMemerDirectoryFromGuild(guild: Guild, username: string): string {
+    if (!guild || !username) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
     return path.join(this.getGuildDirectoryFromGuild(guild), username);
   }
 
-  static getUserContentsFromName(client: any, message: Message, username: string, search: boolean = false): any {
-    return Resources.getUserContentsFromNameWithGuild(client, message.guild as Guild, message, username, search);
+  /**
+   * Retrieves a member's contents from their username
+   *
+   * @param {*} client the Discord client
+   * @param {Message} message the `Message`
+   * @param {string} username the username
+   * @param {boolean} [search=false] whether or not to do a recursive search for the user given the incomplete username
+   */
+  static getMemberContentsFromName(client: Client, message: Message, username: string, search: boolean = false): any {
+    if (!client || !message || !username) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
+    return Resources.getMemberContentsFromNameWithGuild(client, message.guild as Guild, message, username, search);
   }
 
-  static getUserContentsFromNameWithGuild(client: any, guild: Guild, message: Message, username: string, search: boolean = false) {
-    if (!guild) guild = message.guild as Guild;
+  /**
+   * Retrieves a member's contents from their username and specified guild
+   *
+   * @param {Client} client the Discord client
+   * @param {Guild} guild the Discord `Guild`
+   * @param {Message} message the Discord `Message`
+   * @param {string} username the username
+   * @param {boolean} [search=false] whether or not to do a recursive search for the user given the incomplete username
+   */
+  static getMemberContentsFromNameWithGuild(client: Client, guild: Guild, message: Message, username: string, search: boolean = false): any {
+    if (!client) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
+    if (!guild) {
+      if (!message) {
+        new ArgumentsNotFulfilled(...arguments);
+        return;
+      }
+
+      guild = message.guild as Guild;
+    }
     username = username.trim().toLowerCase();
 
     let jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
@@ -48,7 +124,7 @@ export default class Resources {
 
       let possibleMatches: string[] = [];
 
-      let users = this.getGuildUsersFromGuild(client, guild);
+      let users = this.getGuildMembersFromGuild(client, guild);
 
       const keys = Object.keys(users);
 
@@ -98,20 +174,64 @@ export default class Resources {
     return content;
   }
 
+  /**
+   * Returns a guild's name from a `Guild`
+   *
+   * @param {Guild} guild the Discord `Guild`
+   * @returns {string} the name of the `Guild`
+   */
   static getGuildNameFromGuild(guild: Guild): string {
+    if (!guild) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
     let guildName = guild.name.replace(/[\W\s]/gi, "_");
     return `${guildName}-(${guild.id})`;
   }
 
+  /**
+   * Returns a guild's directory from a `Guild`
+   *
+   * @param {Guild} guild the Discord `Guild`
+   * @returns {string} the directory of the `Guild`
+   */
   static getGuildDirectoryFromGuild(guild: Guild): string {
+    if (!guild) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
     return path.join(__dirname, "..", "guilds", this.getGuildNameFromGuild(guild));
   }
 
+  /**
+   * Returns a guild's directory from the name of a `Guild`
+   *
+   * @param {string} guildname the name of a Discord `Guild`
+   * @returns {string} the directory of the `Guild`
+   */
   static getGuildDirectoryFromName(guildname: string): string {
+    if (!guildname) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
     return path.join(__dirname, "..", "guilds", guildname);
   }
 
-  static getGuildUsersFromGuild(client: any, guild: any): any {
+  /**
+   * Returns all the members of a guild currently registered with the client
+   *
+   * @param {Client} client the Discord `Client`
+   * @param {Guild} guild the Discord `Guild`
+   */
+  static getGuildMembersFromGuild(client: Client, guild: Guild): any {
+    if (!client || !guild) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
     let entries = Object.entries(client.usersInSession);
 
     for (const [guildname, users] of entries) if (guildname == this.getGuildNameFromGuild(guild)) return users;
@@ -119,35 +239,53 @@ export default class Resources {
     return null;
   }
 
-  //creates the user directory
-  static createUserDirectory(client: any, guild: Guild, member: GuildMember): any {
+  /**
+   * Creates a member's directory
+   *
+   * @param {Client} client the Discord `Client`
+   * @param {Guild} guild the Discord `Guild`
+   * @param {GuildMember} member the Discord `GuildMember`
+   */
+  static createMemberDirectory(client: Client, guild: Guild, member: GuildMember): any {
+    if (!client || !guild || !member) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
     let content: any = def;
 
     content.hidden.username = this.getUsernameFromMember(member);
     content.hidden.guildname = this.getGuildNameFromGuild(guild);
 
+    `Attempting to create new member directory for [${content.hidden.username}] in guild [${content.hidden.guildname}]`.inverse.print(true);
+
     let date = member.joinedAt;
     let joinedAt = `${date!.getMonth() + 1}/${date!.getDate()}/${date!.getFullYear()}`;
     content.misc.joined = joinedAt;
 
-    let dir = this.getUserDirectoryFromGuild(guild, content.hidden.username);
+    let dir = this.getMemerDirectoryFromGuild(guild, content.hidden.username);
 
     fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(`${dir}/${content.hidden.username}.json`, JSON.stringify(content, null, "\t"));
+    fs.writeFileSync(`${dir}/${content.hidden.username}.json`, JSON.stringify(def, null, "\t"));
     fs.mkdirSync(`${dir}/logs`, { recursive: true });
 
-    let rolesUserHas = member.roles;
+    let rolesUserHas = member.roles.keyArray();
     let rankRolesUserHas: Role[] = [];
 
     //if the user already has pre-existing roles
-    if (rolesUserHas.array.length != 0) {
+    if (rolesUserHas.length != 0) {
+      `Member already has pre-existing roles: [${rolesUserHas.join(", ").cyan}]`.print(true);
+
       let entries = Object.entries(ranks._info);
 
       for (let i = 0; i < entries.length; i++) {
         let rank = entries[i][0].toLowerCase();
+        `  --Checking if member has role [${rank.yellow}]`.print(true);
+
         let role = member.roles.find(role => role.name.toLowerCase() === rank);
 
         if (role) {
+          `    --${`Assigning ${rank.cyan} to member`.inverse}`.print(true);
           rankRolesUserHas.push(role);
 
           content.rank.name = rank;
@@ -167,16 +305,28 @@ export default class Resources {
 
     rankRolesUserHas.splice(-1, 1);
     rankRolesUserHas.forEach(async role => {
+      `  --Removing previous role [${role.name.yellow}]`.print(true);
       await member.roles.remove(role);
     });
 
-    client.registerUser(content);
+    client.registerMember(content);
 
     return content;
   }
 
-  static destroyUserDirectory(guild: Guild, username: string): boolean {
-    let source = this.getUserDirectoryFromGuild(guild, username);
+  /**
+   * Destroys a member's directory
+   *
+   * @param {Guild} guild the Discord `Guild`
+   * @param {string} username the member's username
+   */
+  static destroyMemberDirectory(guild: Guild, username: string): boolean {
+    if (!guild || !username) {
+      new ArgumentsNotFulfilled(...arguments);
+      return false;
+    }
+
+    let source = this.getMemerDirectoryFromGuild(guild, username);
     rimraf(source, err => {
       if (err) {
         err.error();
@@ -187,7 +337,19 @@ export default class Resources {
     return true;
   }
 
-  static writeUserContentToFile(client: any, username: string, content: any) {
+  /**
+   * Writes the member's content to their file
+   *
+   * @param {Client} client the Discord `Client`
+   * @param {string} username the member's username
+   * @param {*} content the member's content
+   */
+  static writeMemberContentToFile(client: Client, username: string, content: any): any {
+    if (!client || !username || !content) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
+
     Object.defineProperty(content, "hidden", {
       enumerable: true
     });
@@ -205,11 +367,36 @@ export default class Resources {
     fs.writeFileSync(`${dir}/${username}.json`, JSON.stringify(content, null, "\t"));
   }
 
+  /**
+   * Returns the amount of XP required to level up
+   *
+   * @param {number} xp the current xp
+   * @param {number} level the current level
+   */
   static getXPToLevelUp(xp: number, level: number): number {
+    if (!xp || !level) {
+      new ArgumentsNotFulfilled(...arguments);
+      return -1;
+    }
+
     return xp + Math.round((4 * Math.pow(level, 3)) / 5);
   }
 
-  static async askQuestion(member: GuildMember, channel: TextChannel, question: string, deleteMessage: boolean = false, allowOtherMembers: boolean = true, options = { max: 1, time: 60 * 1000, errors: ["time"] }) {
+  /**
+   * Asks a question and awaits a response
+   *
+   * @param {GuildMember} member the Discord `GuildMember`
+   * @param {TextChannel} channel the Discord `TextChannel`
+   * @param {string} question the question to ask
+   * @param {boolean} [deleteMessage=true] (optional) whether or not to delete the message `default=true`
+   * @param {boolean} [allowOtherMembers=false] (optional) whether or not to allow other members to respond `default=false`
+   * @param [options={ max: 1, time: 60 * 1000, errors: ["time"] }] (optional) the options to pass `default={max: 1, time: 60000, errors: ["time"]}`
+   */
+  static async askQuestion(member: GuildMember, channel: TextChannel, question: string, deleteMessage: boolean = true, allowOtherMembers: boolean = false, options = { max: 1, time: 60 * 1000, errors: ["time"] }): Promise<string> {
+    if (!member || !channel || !question) {
+      new ArgumentsNotFulfilled(...arguments);
+      return null;
+    }
     let value: any;
 
     let questionMessage: Message;

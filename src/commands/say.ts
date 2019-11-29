@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Message } from "discord.js";
 
 module.exports.props = {
   description: "makes the bot say your message",

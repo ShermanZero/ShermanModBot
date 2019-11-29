@@ -1,18 +1,16 @@
-import 'colors';
+import { Client, Message } from "discord.js";
+import * as fs from "fs";
+import * as path from "path";
 
-import { Message } from 'discord.js';
-import * as fs from 'fs';
-import * as path from 'path';
-
-import config from '../resources/global_config';
-import rsrc from '../resources/resources';
+import config from "../resources/global_config";
+import rsrc from "../resources/resources";
 
 module.exports.props = {
   requiresElevation: config.elevation_names.botowner,
   description: "shuts the bot down cleanly"
 };
 
-module.exports.run = async (client: any, message: Message, userTriggered: boolean = true) => {
+module.exports.run = async (client: Client, message: Message, userTriggered: boolean = true) => {
   if (client.alreadyShutdown) {
     "Already executed clean shutdown... restarting now".mention;
     return true;
@@ -25,7 +23,7 @@ module.exports.run = async (client: any, message: Message, userTriggered: boolea
   for (const [, users] of entries) {
     let allUsers = Object.entries(users as any);
 
-    for (const [username, userContent] of allUsers) rsrc.writeUserContentToFile(client, username, userContent);
+    for (const [username, userContent] of allUsers) rsrc.writeMemberContentToFile(client, username, userContent);
   }
 
   //check if the command was user-triggered

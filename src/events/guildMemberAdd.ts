@@ -1,6 +1,6 @@
-import { GuildMember, TextChannel } from 'discord.js';
+import { GuildMember, TextChannel } from "discord.js";
 
-import rsrc from '../resources/resources';
+import rsrc from "../resources/resources";
 
 module.exports = async (client: any, member: GuildMember) => {
   const guild = member.guild;
@@ -21,5 +21,5 @@ module.exports = async (client: any, member: GuildMember) => {
 
   await (defaultChannel as TextChannel)!.send(`Welcome ${member.user} to **${guild.name}**!  You are member **#${guild.memberCount}!  Check out the ${serverRules} and ${serverInfo} regarding the different channels.  **Please change your nickname to match your Twitch account name, and link your Twitch and Discord together.**  Be sure to assign yourself some roles over in ${autoRoles}, based on what you want to see!  Get to know everyone, have a great time, and thanks for joining!`);
 
-  rsrc.createUserDirectory(client, member.guild, member);
+  rsrc.createMemberDirectory(client, member.guild, member);
 };

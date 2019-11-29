@@ -1,12 +1,10 @@
-import 'colors';
+import { Client, Message, Role, TextChannel } from "discord.js";
+import * as fs from "fs";
+import * as path from "path";
 
-import { Client, Message, Role, TextChannel } from 'discord.js';
-import * as fs from 'fs';
-import * as path from 'path';
-
-import blacklist from '../resources/blacklist';
-import ranks from '../resources/ranks';
-import rsrc from '../resources/resources';
+import blacklist from "../resources/blacklist";
+import ranks from "../resources/ranks";
+import rsrc from "../resources/resources";
 
 module.exports = async (client: Client, message: Message) => {
   //ignore all bots
@@ -21,11 +19,11 @@ module.exports = async (client: Client, message: Message) => {
     await message.reply("that is not allowed here, you have been warned.");
 
     let username = rsrc.getUsernameFromMessage(message);
-    let content = rsrc.getUserContentsFromName(client, message, username);
+    let content = rsrc.getMemberContentsFromName(client, message, username);
 
     if (content) {
       content.misc.warnings++;
-      client.updateUser(content);
+      client.updateMember(content);
     }
   }
 
@@ -67,54 +65,63 @@ module.exports = async (client: Client, message: Message) => {
   cmd.run(client, message, args);
 };
 
-//registers the message
+/**
+ * Registers a message that has been posted in a guild
+ *
+ * @param client the Discord client
+ * @param message the Discord message
+ */
 function registerMessage(client: Client, message: Message) {
   let username = rsrc.getUsernameFromMessage(message);
 
   if (!message.guild) return;
 
   let guildName = rsrc.getGuildNameFromGuild(message.guild);
-  let userDir = rsrc.getUserDirectoryFromGuild(message.guild, username);
+  let userDir = rsrc.getMemerDirectoryFromGuild(message.guild, username);
 
   let content: any;
 
   //if the user has not been registered
-  if (!fs.existsSync(userDir)) rsrc.createUserDirectory(client, message.guild, message.member!);
+  if (!fs.existsSync(userDir)) rsrc.createMemberDirectory(client, message.guild, message.member!);
 
   //user NOT stored in local client session
-  if (!client.hasUser(message.guild, username)) {
-    content = rsrc.getUserContentsFromName(client, message, username);
-    client.registerUser(content);
+  if (!client.hasMember(message.guild, username)) {
+    content = rsrc.getMemberContentsFromName(client, message, username);
+    client.registerMember(content);
     //user stored in local client session
   } else {
-    content = client.getUserContent(message.guild, username);
+    content = client.getMemberContent(message.guild, username);
   }
 
-  if (content === null || typeof content === "undefined") {
+  if (!content) {
     `Could not retrieve contents for [${username}]`.error();
     return false;
   }
 
-  if (content.misc.first_message === null || typeof content.misc.first_message === "undefined") {
+  if (!content.misc.first_message) {
     content.misc.first_message = message.content;
-    client.updateUser(content);
+    client.updateMember(content);
   }
 
-  let logMessage = `[${getTimestamp(message)}] (#${(message.channel as TextChannel).name}): ${message.content}\n`;
+  let timestamp = getTimestamp(message);
+  let channelName = (message.channel as TextChannel).name;
+  let userLogMessage = `[${timestamp.yellow}] (#${channelName.red}): ${message.content}`;
+  let masterLogMessage = `/${guildName.magenta}/>  ${username.magenta} ${userLogMessage}`;
 
-  //push the message to the master log branch
-  client.masterLog.push(`/${guildName}/>  ${username} ${logMessage}`);
-  //if the log length exceeds the threshold, update the master log
-  `/${guildName}/>  ${username} ${logMessage}`.masterLog(client, client.global_config.files.logs.message);
+  client.masterLog.push(masterLogMessage.stripColors + "\n");
+  masterLogMessage.masterLog(client, client.global_config.files.logs.message, true);
 
-  //push the user's message directly to the user's log
-  content.userLog.push(logMessage);
-  //if the log length exceeds the threshold, update the user log
-  logMessage.userLog(client, message.guild, content, client.global_config.files.logs.message);
+  content.userLog.push(userLogMessage.stripColors + "\n");
+  userLogMessage.userLog(client, message.guild, content, client.global_config.files.logs.message);
 
   return true;
 }
 
+/**
+ * Returns a comprehensive timestamp for a message
+ *
+ * @param message the Discord message
+ */
 function getTimestamp(message: Message) {
   let timestamp = message.createdAt;
   let date = (timestamp.getMonth() + 1 + "/" + timestamp.getDate()).replace(/.*(\d{2}\/\d{2}).*/, "$1");
@@ -123,12 +130,17 @@ function getTimestamp(message: Message) {
   return date + "  " + time;
 }
 
-//awards the user experience for posting a message
-async function awardExperience(client, message) {
+/**
+ * Awards the member experience for posting a message
+ *
+ * @param client the Discord client
+ * @param message the Discord message
+ */
+async function awardExperience(client: Client, message: Message) {
   let username = rsrc.getUsernameFromMessage(message);
 
   //get the content from the session instead of from the file
-  let content = client.getUserContent(message.guild, username);
+  let content = client.getMemberContent(message.guild, username);
 
   if (!content) {
     return `Could not retrieve contents from [${username}]`.error();
@@ -147,25 +159,32 @@ async function awardExperience(client, message) {
       let oldRole = message.guild.roles.find((role: Role) => role.name.toLowerCase() === lastRank.toLowerCase());
       let newRole = message.guild.roles.find((role: Role) => role.name.toLowerCase() === rank.toLowerCase());
 
-      if (oldRole) await message.member.removeRole(oldRole);
+      if (oldRole) await message.member.roles.remove(oldRole);
 
-      await message.member.addRole(newRole);
+      await message.member.roles.add(newRole);
     }
 
     content.rank.levelup = rsrc.getXPToLevelUp(content.rank.xp, content.rank.level);
     levelUp(client, message, content);
   }
 
-  client.updateUser(content);
+  client.updateMember(content);
 
   //only write XP changes to the file every 10 messages
   if (content.rank.xp % client.global_config.preferences.xp_threshold === 0) {
-    let jsonFile = path.join(rsrc.getUserDirectoryFromGuild(message.guild, username), username + ".json");
+    let jsonFile = path.join(rsrc.getMemerDirectoryFromGuild(message.guild, username), username + ".json");
     let newJson = JSON.stringify(content, null, "\t");
     fs.writeFileSync(jsonFile, newJson);
   }
 }
 
+/**
+ * Level's up a member
+ *
+ * @param client the Discord client
+ * @param message the Discord message
+ * @param content the member's content
+ */
 function levelUp(client: Client, message: Message, content: any) {
   let stats = client.getCommand("stats");
   let embed = stats.getEmbed(client, message.member, content);

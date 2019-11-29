@@ -1,12 +1,10 @@
-import 'colors';
+import { Guild, Message } from "discord.js";
+import * as fs from "fs";
+import * as path from "path";
+import * as rimraf from "rimraf";
 
-import { Guild, Message } from 'discord.js';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as rimraf from 'rimraf';
-
-import config from '../resources/global_config';
-import rsrc from '../resources/resources';
+import config from "../resources/global_config";
+import rsrc from "../resources/resources";
 
 module.exports.props = {
   requiresElevation: config.elevation_names.botowner,
@@ -36,12 +34,12 @@ module.exports.run = async (client: any, message: Message, args: string[]) => {
   let content = client.getUserContent(message.guild, oldUsername);
   content.hidden.username = newUsername;
 
-  let source = rsrc.getUserDirectoryFromGuild(message.guild as Guild, oldUsername);
-  let destination = rsrc.getUserDirectoryFromGuild(message.guild as Guild, newUsername);
+  let source = rsrc.getMemerDirectoryFromGuild(message.guild as Guild, oldUsername);
+  let destination = rsrc.getMemerDirectoryFromGuild(message.guild as Guild, newUsername);
 
   fs.writeFileSync(path.join(destination, newUsername + ".json"), JSON.stringify(content, null, "\t"));
   rimraf(source, (err: string) => {
-    if (err) err.normal(true);
+    if (err) err.print(true);
   });
 
   client.usersInSession.delete(oldUser);

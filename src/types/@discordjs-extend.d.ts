@@ -1,4 +1,4 @@
-import * as Discord from 'discord.js';
+import * as Discord from "discord.js";
 
 declare module "discord.js" {
   interface Client {
@@ -10,15 +10,17 @@ declare module "discord.js" {
     commands: Map<string, any>;
     aliases: Map<string, string>;
     masterLog: Array<string>;
+    ready: boolean;
+    alreadyShutdown: boolean;
 
     getGuild(guildname: string): string;
-    updateUser(content: any): boolean;
-    registerUser(content: any): boolean;
-    hideUserInfo(content: any): any;
-    hasUser(guild: Discord.Guild, username: string, search?: boolean): string;
-    getUserContent(guild: Discord.Guild, username: string): any;
-    removeUser(guild: Discord.Guild, username: string): boolean;
-    deleteUser(guild: Discord.Guild, username: string): boolean;
+    updateMember(content: any): boolean;
+    registerMember(content: any): boolean;
+    hideMemberInfo(content: any): any;
+    hasMember(guild: Discord.Guild, username: string, search?: boolean): string;
+    getMemberContent(guild: Discord.Guild, username: string): any;
+    removeMember(guild: Discord.Guild, username: string): boolean;
+    deleteMember(guild: Discord.Guild, username: string): boolean;
     getCommand(commandName: string): any;
   }
 }

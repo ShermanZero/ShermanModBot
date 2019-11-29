@@ -1,15 +1,25 @@
-import { Client, Message } from 'discord.js';
+import { Client, Message } from "discord.js";
+import { CommandType, ElevationTypes } from "../types/@commands";
 
-module.exports.props = {
-  description: "makes the bot say your message",
-  usage: "<message>"
-};
+class Say implements CommandType {
+  props: {
+    requiresElevation?: ElevationTypes.everyone;
+    description: "makes the bot say your message";
+    usage?: "<message>";
+  };
 
-module.exports.run = async (client: Client, message: Message, args: string[]): Promise<any> => {
-  const sayMessage = args.join(" ");
+  async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {
+    const sayMessage = args.join(" ");
 
-  await message.delete();
-  await message.channel.send(sayMessage);
+    await message.delete();
+    await message.channel.send(sayMessage);
 
-  return true;
-};
+    return true;
+  }
+
+  getEmbed?(...args: any[]): import("discord.js").MessageEmbed {
+    throw new Error("Method not implemented.");
+  }
+}
+
+module.exports = Say;

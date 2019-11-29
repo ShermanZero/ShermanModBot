@@ -1,9 +1,9 @@
-export interface TwitchConfig {
-  readonly debug: false;
-  readonly verbose: true;
-  readonly prefix: "!";
+class TwitchConfig {
+  static readonly debug: false;
+  static readonly verbose: true;
+  static readonly prefix: "!";
 
-  readonly elevation_names: {
+  static readonly elevation_names: {
     [key: string]: string;
     readonly broadcaster: "broadcaster";
     readonly moderator: "moderator";
@@ -11,7 +11,7 @@ export interface TwitchConfig {
     readonly everyone: "everyone";
   };
 
-  readonly files: {
+  static readonly files: {
     [key: string]: any;
     readonly logs: {
       [key: string]: string;

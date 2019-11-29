@@ -4,8 +4,8 @@ import * as path from "path";
 
 import blacklist from "../../shared/resources/blacklist";
 import rsrc from "../discord-resources";
-import { MemberConfig } from "../configs/member_config";
-import { RankConfig } from "../configs/ranks_config";
+import { MemberConfigType } from "../types/@member_config";
+import { GuildConfigType } from "../types/@guild_config";
 
 module.exports = async (client: Client, message: Message): Promise<boolean> => {
   //ignore all bots
@@ -34,11 +34,11 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
   awardExperience(client, message);
 
   //ignore messages not starting with the prefix
-  if (message.content.indexOf(DiscordConfig.prefix) !== 0) return false;
+  if (message.content.indexOf(client.discordConfig.prefix) !== 0) return false;
 
   //standard argument/command name definition
   const args: any = message.content
-    .slice(DiscordConfig.prefix.length)
+    .slice(client.discordConfig.prefix.length)
     .trim()
     .split(/ +/g);
 
@@ -55,7 +55,7 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
   let guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
 
   let guildConfigFile = path.resolve(guildDir, "guild_config.json");
-  let guildConfig: any;
+  let guildConfig: GuildConfigType;
   if (fs.existsSync(guildConfigFile)) guildConfig = require(guildConfigFile);
 
   if (command != "config") {
@@ -88,7 +88,7 @@ function registerMessage(client: Client, message: Message): boolean {
   let guildName = rsrc.getGuildNameFromGuild(message.guild);
   let memberDir = rsrc.getMemberDirectoryFromGuild(message.guild, username);
 
-  let memberConfig: MemberConfig;
+  let memberConfig: MemberConfigType;
 
   //if the member has not been registered
   if (!fs.existsSync(memberDir)) rsrc.createMemberDirectory(client, message.guild, message.member!);
@@ -118,10 +118,10 @@ function registerMessage(client: Client, message: Message): boolean {
   let masterLogMessage = `/${guildName.magenta}/>  ${username.magenta} ${memberLogMessage}`;
 
   client.masterLog.push(masterLogMessage.stripColors + "\n");
-  masterLogMessage.masterLog(client, DiscordConfig.logs.message, true);
+  masterLogMessage.masterLog(client, client.discordConfig.logs.message, true);
 
   memberConfig.memberLog.push(memberLogMessage.stripColors + "\n");
-  memberLogMessage.memberLog(client, message.guild, memberConfig, DiscordConfig.logs.message);
+  memberLogMessage.memberLog(client, message.guild, memberConfig, client.discordConfig.logs.message);
 
   return true;
 }
@@ -147,8 +147,6 @@ function getTimestamp(message: Message) {
  */
 async function awardExperience(client: Client, message: Message): Promise<any> {
   let username = rsrc.getUsernameFromMessage(message);
-  let rankConfig: RankConfig = {} as any;
-
   //get the config from the session instead of from the file
   let memberConfig = client.getMemberConfig(message.guild, username);
 
@@ -162,7 +160,7 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
   if (memberConfig.rank.xp >= memberConfig.rank.levelup) {
     memberConfig.rank.level += 1;
 
-    let rank = rankConfig.levels[memberConfig.rank.level];
+    let rank = Ranks.levels[memberConfig.rank.level];
     if (rank) {
       let lastRank = memberConfig.rank.name;
 
@@ -182,7 +180,7 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
   client.updateMember(memberConfig);
 
   //only write XP changes to the file every 10 messages
-  if (memberConfig.rank.xp % DiscordConfig.preferences.xp_threshold === 0) {
+  if (memberConfig.rank.xp % client.discordConfig.preferences.xp_threshold === 0) {
     let jsonFile = path.join(rsrc.getMemberDirectoryFromGuild(message.guild, username), username + ".json");
     let newJson = JSON.stringify(memberConfig, null, "\t");
     fs.writeFileSync(jsonFile, newJson);
@@ -196,7 +194,7 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
  * @param message the Discord message
  * @param config the member's config
  */
-function levelUp(client: Client, message: Message, config: MemberConfig) {
+function levelUp(client: Client, message: Message, config: MemberConfigType) {
   let stats = client.getCommand("stats");
   let embed = stats.getEmbed(client, message.member, config);
 

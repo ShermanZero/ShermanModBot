@@ -2,9 +2,9 @@ import { Client, Guild, GuildMember, Message, Role, TextChannel, User } from "di
 import * as fs from "fs";
 import * as path from "path";
 import * as rimraf from "rimraf";
-
-import { MemberConfig } from "./configs/member_config";
-import { RankConfig } from "./configs/ranks_config";
+import DiscordConfig from "./configs/discord_config";
+import { MemberConfigType } from "./types/@member_config";
+import MemberConfig from "./configs/member_config";
 
 /**
  * Multiple resources dealing with handling members/users/guilds and more
@@ -82,7 +82,7 @@ export default class DiscordResources {
    * @param {string} username the username
    * @param {boolean} [search=false] whether or not to do a recursive search for the member given the incomplete username
    */
-  static getMemberConfigFromName(client: Client, message: Message, username: string, search: boolean = false): MemberConfig {
+  static getMemberConfigFromName(client: Client, message: Message, username: string, search: boolean = false): MemberConfigType {
     if (!client || !message || !username) {
       new ArgumentsNotFulfilled(...arguments);
       return null;
@@ -100,7 +100,7 @@ export default class DiscordResources {
    * @param {string} username the username
    * @param {boolean} [search=false] whether or not to do a recursive search for the member given the incomplete username
    */
-  static getMemberConfigFromNameWithGuild(client: Client, guild: Guild, message: Message, username: string, search: boolean = false): MemberConfig {
+  static getMemberConfigFromNameWithGuild(client: Client, guild: Guild, message: Message, username: string, search: boolean = false): MemberConfigType {
     if (!client) {
       new ArgumentsNotFulfilled(...arguments);
       return null;
@@ -165,7 +165,7 @@ export default class DiscordResources {
     if (!fs.existsSync(jsonFile)) return null;
 
     let json = fs.readFileSync(jsonFile);
-    let config = JSON.parse(json.toString()) as MemberConfig;
+    let config = JSON.parse(json.toString()) as MemberConfigType;
 
     return config;
   }
@@ -248,7 +248,7 @@ export default class DiscordResources {
       return null;
     }
 
-    let memberConfig: MemberConfig = {} as any;
+    let memberConfig = new MemberConfig();
     memberConfig.hidden.username = this.getUsernameFromMember(member);
     memberConfig.hidden.guildname = this.getGuildNameFromGuild(guild);
 
@@ -269,11 +269,9 @@ export default class DiscordResources {
 
     //if the member already has pre-existing roles
     if (rolesMemberHas.length != 0) {
-      let rankConfig: RankConfig = {} as any;
-
       `Member already has pre-existing roles: [${rolesMemberHas.join(", ").cyan}]`.print(true);
 
-      let entries = Object.entries(rankConfig.info);
+      let entries = Object.entries(Ranks.info);
 
       for (let i = 0; i < entries.length; i++) {
         let rank = entries[i][0].toLowerCase();
@@ -286,10 +284,10 @@ export default class DiscordResources {
           rankRolesUserHas.push(role);
 
           memberConfig.rank.name = rank;
-          memberConfig.rank.xp = rankConfig.info[rank];
+          memberConfig.rank.xp = Ranks.info[rank];
 
-          for (let level in rankConfig.levels) {
-            if (rankConfig.levels[level].toLowerCase() === rank) {
+          for (let level in Ranks.levels) {
+            if (Ranks.levels[level].toLowerCase() === rank) {
               memberConfig.rank.level = parseInt(level);
               memberConfig.rank.levelup = this.getXPToLevelUp(memberConfig.rank.xp, memberConfig.rank.level);
 
@@ -341,9 +339,9 @@ export default class DiscordResources {
    *
    * @param {Client} client the Discord `Client`
    * @param {string} username the member's username
-   * @param {MemberConfig} config the member's config
+   * @param {MemberConfigType} config the member's config
    */
-  static writeMemberConfigToFile(client: Client, username: string, config: MemberConfig): any {
+  static writeMemberConfigToFile(client: Client, username: string, config: MemberConfigType): any {
     if (!client || !username || !config) {
       new ArgumentsNotFulfilled(...arguments);
       return null;
@@ -358,7 +356,7 @@ export default class DiscordResources {
     if (!fs.existsSync(dir)) return `Attempted to write [${username}'s] log, but no directory exists at [${dir}]`.error();
 
     if (config.memberLog && config.memberLog.length != 0) {
-      for (let i = 0; i < config.memberLog.length; i++) fs.appendFileSync(`${dir}/logs/${DiscordConfig.logs.all}`, config.memberLog[i]);
+      for (let i = 0; i < config.memberLog.length; i++) fs.appendFileSync(`${dir}/logs/${new DiscordConfig().logs.all}`, config.memberLog[i]);
 
       config.memberLog = [];
     }
@@ -391,7 +389,14 @@ export default class DiscordResources {
    * @param {boolean} [allowOtherMembers=false] (optional) whether or not to allow other members to respond `default=false`
    * @param [options={ max: 1, time: 60 * 1000, errors: ["time"] }] (optional) the options to pass `default={max: 1, time: 60000, errors: ["time"]}`
    */
-  static async askQuestion(member: GuildMember, channel: TextChannel, question: string, deleteMessage: boolean = true, allowOtherMembers: boolean = false, options = { max: 1, time: 60 * 1000, errors: ["time"] }): Promise<string> {
+  static async askQuestion(
+    member: GuildMember,
+    channel: TextChannel,
+    question: string,
+    deleteMessage: boolean = true,
+    allowOtherMembers: boolean = false,
+    options = { max: 1, time: 60 * 1000, errors: ["time"] }
+  ): Promise<string> {
     if (!member || !channel || !question) {
       new ArgumentsNotFulfilled(...arguments);
       return null;

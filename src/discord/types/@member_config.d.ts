@@ -1,7 +1,5 @@
-import { MemberConfigType } from "../types/@member_config";
-
-export default class MemberConfig implements MemberConfigType {
-  memberLog: string[];
+export interface MemberConfigType {
+  memberLog: Array<string>;
 
   hidden: {
     [key: string]: string;
@@ -23,5 +21,7 @@ export default class MemberConfig implements MemberConfigType {
     warnings: number;
   };
 
-  race: { wins: number };
+  race: {
+    wins: number;
+  };
 }

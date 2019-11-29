@@ -1,6 +1,4 @@
-import { GuildConfigType } from "../types/@guild_config";
-
-export default class GuildConfig implements GuildConfigType {
+export interface GuildConfigType {
   setup: boolean;
 
   roles: {

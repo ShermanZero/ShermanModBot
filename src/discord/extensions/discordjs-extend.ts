@@ -2,12 +2,14 @@ import * as Discord from "discord.js";
 
 import rsrc from "../discord-resources";
 import { Guild } from "discord.js";
-import { MemberConfig } from "../configs/member_config";
-import { GuildConfig } from "../configs/guild_config";
+import { MemberConfigType } from "../types/@member_config";
+import { GuildConfigType } from "../types/@guild_config";
+import DiscordConfig from "../configs/discord_config";
 
 Discord.Client.prototype.defaultGuild = null;
-Discord.Client.prototype.members_in_session = new Map<string, MemberConfig>();
-Discord.Client.prototype.guild_configs = new Map<string, GuildConfig>();
+Discord.Client.prototype.discordConfig = new DiscordConfig();
+Discord.Client.prototype.members_in_session = new Map<string, MemberConfigType>();
+Discord.Client.prototype.guild_configs = new Map<string, GuildConfigType>();
 Discord.Client.prototype.commands = new Map<string, Function>();
 Discord.Client.prototype.aliases = new Map<string, string>();
 Discord.Client.prototype.masterLog = new Array<string>();
@@ -37,7 +39,7 @@ Discord.Client.prototype.getGuildConfig = function(guild: Guild): any {
  *
  * @param config the member's config
  */
-Discord.Client.prototype.updateMember = function(config: MemberConfig): boolean {
+Discord.Client.prototype.updateMember = function(config: MemberConfigType): boolean {
   if (!config) {
     `Attempted to update with ${config}, but failed`.error();
     return false;
@@ -64,7 +66,7 @@ Discord.Client.prototype.updateMember = function(config: MemberConfig): boolean 
  *
  * @param config the member's config
  */
-Discord.Client.prototype.registerMember = function(config: MemberConfig): boolean {
+Discord.Client.prototype.registerMember = function(config: MemberConfigType): boolean {
   if (!config) return false;
 
   let success = Discord.Client.prototype.updateMember(config);
@@ -82,7 +84,7 @@ Discord.Client.prototype.registerMember = function(config: MemberConfig): boolea
  *
  * @param config the member's config
  */
-Discord.Client.prototype.hideMemberInfo = function(config: MemberConfig): any {
+Discord.Client.prototype.hideMemberInfo = function(config: MemberConfigType): any {
   Object.defineProperty(config, "hidden", {
     enumerable: false
   });

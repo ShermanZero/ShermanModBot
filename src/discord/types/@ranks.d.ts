@@ -1,5 +1,5 @@
-export interface RankConfig {
-  readonly levels: {
+declare class Ranks {
+  static levels: {
     [key: string]: string;
     readonly "0": "unranked";
     readonly "5": "bronze";
@@ -10,8 +10,7 @@ export interface RankConfig {
     readonly "30": "masters";
     readonly "35": "grandmaster";
   };
-
-  readonly urls: {
+  static urls: {
     [key: string]: string;
     readonly bronze: "https://i.ibb.co/Bt7v30V/01-bronze.png";
     readonly silver: "https://i.ibb.co/k49yxwb/02-silver.png";
@@ -21,8 +20,7 @@ export interface RankConfig {
     readonly masters: "https://i.ibb.co/zfHh6Fh/06-masters.png";
     readonly grandmaster: "https://i.ibb.co/8g04NTS/07-grandmaster.png";
   };
-
-  readonly info: {
+  static info: {
     [key: string]: number;
     readonly unranked: 0;
     readonly bronze: 180;

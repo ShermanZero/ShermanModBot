@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { BuildOptions } from "../../..";
-import { MemberConfig } from "../../../discord/configs/member_config";
+import { MemberConfig } from "../../../discord/types/@member_config";
 import rsrc from "../../../discord/discord-resources";
 
 String.prototype.hideID = function(username?: string): string {

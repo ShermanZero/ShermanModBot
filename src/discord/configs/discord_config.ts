@@ -1,39 +1,41 @@
-class DiscordConfig {
-  static readonly status: "dead | !help";
-  static readonly prefix: "!";
-  static readonly verbose: true;
+import { DiscordConfigType } from "../types/@discord_config";
 
-  static readonly elevation_names: {
+export default class DiscordConfig implements DiscordConfigType {
+  status: "dead | !help";
+  prefix: "!";
+  verbose: true;
+
+  elevation_names: {
     [key: string]: string;
-    readonly botowner: "botowner";
-    readonly owner: "owner";
-    readonly moderator: "mod";
+    botowner: "botowner";
+    owner: "owner";
+    moderator: "mod";
   };
 
-  static readonly channel_names: {
+  channel_names: {
     [key: string]: string;
-    readonly default: "default";
-    readonly mod_logs: "mod_logs";
+    default: "default";
+    mod_logs: "mod_logs";
   };
 
-  static readonly preferences: {
+  preferences: {
     [key: string]: number;
-    readonly xp_threshold: 10;
-    readonly log_threshold_member: 10;
-    readonly log_threshold_master: 50;
+    xp_threshold: 10;
+    log_threshold_member: 10;
+    log_threshold_master: 50;
   };
 
-  static readonly logs: {
+  logs: {
     [key: string]: string;
-    readonly all: "all.txt";
-    readonly message: "messages.txt";
-    readonly warning: "warnings.txt";
-    readonly command: "commands.txt";
-    readonly twitch: "twitch.txt";
+    all: "all.txt";
+    message: "messages.txt";
+    warning: "warnings.txt";
+    command: "commands.txt";
+    twitch: "twitch.txt";
   };
 
-  static readonly files: {
+  files: {
     [key: string]: string;
-    readonly removed: ".removed";
+    removed: ".removed";
   };
 }

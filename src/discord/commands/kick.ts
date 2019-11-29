@@ -1,23 +1,32 @@
 import { Client, Message } from "discord.js";
+import { CommandType, ElevationTypes } from "../types/@commands";
 
-module.exports.props = {
-  requiresElevation: DiscordConfig.elevation_names.moderator,
-  description: "kicks a member from the server",
-  usage: "<member> <?reason>"
-};
+class Kick implements CommandType {
+  props: {
+    requiresElevation?: ElevationTypes.moderator;
+    description: "kicks a member from the server";
+    usage?: "<member> <?reason>";
+  };
 
-module.exports.run = async (client: Client, message: Message, ...reason: string[]): Promise<boolean> => {
-  if (message.mentions?.members?.size === 0) {
-    await message.reply("please mention a member to kick");
-    return false;
+  async run(client: Client, message: Message, ...args: any[]) {
+    if (message.mentions?.members?.size === 0) {
+      await message.reply("please mention a member to kick");
+      return false;
+    }
+
+    const kickMember = message.mentions.members.first();
+
+    await kickMember!.kick(args.join(" "));
+
+    let modChannel = client.getGuildConfig(message.guild);
+    await modChannel.send(`${kickMember} was kicked by ${message.author.tag} for reason: ${args.join(" ")}`);
+
+    return true;
   }
 
-  const kickMember = message.mentions.members.first();
+  getEmbed?(...args: any[]): import("discord.js").MessageEmbed {
+    throw new Error("Method not implemented.");
+  }
+}
 
-  await kickMember!.kick(reason.join(" "));
-
-  let modChannel = client.getGuildConfig(message.guild);
-  await modChannel.send(`${kickMember} was kicked by ${message.author.tag} for reason: ${reason.join(" ")}`);
-
-  return true;
-};
+module.exports = Kick;

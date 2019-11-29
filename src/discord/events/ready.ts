@@ -14,18 +14,20 @@ module.exports = async (client: Client): Promise<boolean> => {
   exit.init(client);
 
   let commandArray: string[] = [...client.commands.keys()].sort();
-  `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green}, ${"[@moderator]".yellow}, ${"[@owner]".red}, ${"[@botowner]".cyan}`.print();
+  `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green}, ${"[@moderator]".yellow}, ${"[@owner]".red}, ${
+    "[@botowner]".cyan
+  }`.print();
 
   for (let i = 0; i < commandArray.length; i++) {
     let commandName = commandArray[i];
     let command = client.getCommand(commandName);
 
     if (command.props.requiresElevation) {
-      if (command.props.requiresElevation === DiscordConfig.elevation_names.moderator) {
+      if (command.props.requiresElevation === client.discordConfig.elevation_names.moderator) {
         commandName = commandName.yellow;
-      } else if (command.props.requiresElevation === DiscordConfig.elevation_names.owner) {
+      } else if (command.props.requiresElevation === client.discordConfig.elevation_names.owner) {
         commandName = commandName.red;
-      } else if (command.props.requiresElevation === DiscordConfig.elevation_names.botowner) {
+      } else if (command.props.requiresElevation === client.discordConfig.elevation_names.botowner) {
         commandName = commandName.cyan;
       }
     } else {
@@ -44,7 +46,7 @@ module.exports = async (client: Client): Promise<boolean> => {
 
     if (!fs.existsSync(guildDir)) {
       fs.mkdirSync(guildDir, { recursive: true });
-      fs.mkdirSync(path.join(guildDir, DiscordConfig.files.removed), {
+      fs.mkdirSync(path.join(guildDir, client.discordConfig.files.removed), {
         recursive: true
       });
     }
@@ -75,7 +77,8 @@ module.exports = async (client: Client): Promise<boolean> => {
     `Found all existing members of [${guildName.magenta}] (currently ${Object.keys(client.getGuild(guildName)).length.toString().green})`.print();
   });
 
-  let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`.inverse;
+  let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`
+    .inverse;
   let footer = "=====================================================================================".red;
 
   "...".print();
@@ -84,7 +87,7 @@ module.exports = async (client: Client): Promise<boolean> => {
   let twitch = new TwitchIntegration();
   await twitch.start(client);
 
-  client.user.setActivity(DiscordConfig.status);
+  client.user.setActivity(client.discordConfig.status);
   client.user.setStatus(BuildOptions.development ? "invisible" : "online");
 
   client.ready = true;

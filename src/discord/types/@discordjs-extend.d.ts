@@ -1,9 +1,12 @@
 import { Guild } from "discord.js";
-import { MemberConfig } from "../configs/member_config";
+import { DiscordConfigType } from "./@discord_config";
+import { MemberConfigType } from "./@member_config";
+import { CommandType } from "./@commands";
 
 declare module "discord.js" {
   interface Client {
     defaultGuild: Guild;
+    discordConfig: DiscordConfigType;
     members_in_session: Map<string, any>;
     guild_configs: Map<string, any>;
     commands: Map<string, any>;
@@ -14,14 +17,14 @@ declare module "discord.js" {
 
     getGuild(guildname: string): string;
     getGuildConfig(guild: Guild): any;
-    updateMember(config: MemberConfig): boolean;
-    registerMember(config: MemberConfig): boolean;
-    hideMemberInfo(config: MemberConfig): any;
+    updateMember(config: MemberConfigType): boolean;
+    registerMember(config: MemberConfigType): boolean;
+    hideMemberInfo(config: MemberConfigType): any;
     hasMember(guild: Guild, username: string, search?: boolean): string;
-    getMemberConfig(guild: Guild, username: string): MemberConfig;
+    getMemberConfig(guild: Guild, username: string): MemberConfigType;
     removeMember(guild: Guild, username: string): boolean;
     deleteMember(guild: Guild, username: string): boolean;
-    getCommand(commandName: string): any;
+    getCommand(commandName: string): CommandType;
   }
 }
 

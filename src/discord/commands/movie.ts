@@ -49,7 +49,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   }
 
   let embed = new MessageEmbed();
-  embed.setTitle("🎬  🎬  🎬   **MOVIE ALERT**   🎬  🎬  🎬");
+  embed.setTitle(`🎬    🎬    **${mediaName.toUpperCase()}**    🎬    🎬`);
   embed.addField("STREAMING", mediaName, true);
   embed.addField("AT", mediaTime, true);
 
@@ -58,9 +58,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
 
   (await hangout.send(embed)).pin();
 
-  embed.setDescription(
-    `\`\`\`React with ${reactToJoinEmoji} to join!\nReact with ${reactToNotifyEmoji} to be notified in the future!\nReact with ${reactToRemoveEmoji} to unsubscribe from notifications\`\`\``.toUpperCase()
-  );
+  embed.setDescription(`\`\`\`React with ${reactToJoinEmoji} to join!\nReact with ${reactToNotifyEmoji} to be notified in the future!\nReact with ${reactToRemoveEmoji} to unsubscribe from notifications\`\`\``.toUpperCase());
 
   await message.channel.send(embed).then(async message => {
     await message.react(reactToJoinEmoji);
@@ -84,9 +82,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
 
       if (passNotify) {
         member.roles.add(mediaNotifyRole);
-        message.channel.send(
-          `Awesome!  ${member} you will be notified the next time a movie event is created!  (Make sure you have Server DMs enabled in your privacy settings)`
-        );
+        message.channel.send(`Awesome!  ${member} you will be notified the next time a movie event is created!  (Make sure you have Server DMs enabled in your privacy settings)`);
       }
 
       if (passRemove) {
@@ -108,10 +104,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   if (message.channel.id === "642167914518282250") return true;
 
   for (let i = 0; i < guildMembers.length; i++)
-    if (guildMembers[i].roles.has(mediaNotifyRole.id))
-      await guildMembers[i]
-        .send(`Hey!  A movie alert for **${mediaName}** was just posted in **${message.guild.name}**, in the **${message.channel.toString()}** channel!`)
-        .catch(reason => {});
+    if (guildMembers[i].roles.has(mediaNotifyRole.id)) await guildMembers[i].send(`Hey!  A movie alert for **${mediaName}** was just posted in **${message.guild.name}**, in the **${message.channel.toString()}** channel!`).catch(reason => {});
 
   return true;
 };

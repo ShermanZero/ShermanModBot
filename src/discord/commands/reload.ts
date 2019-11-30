@@ -8,7 +8,7 @@ const props: CommandType["properties"] = {
   usage: "<command>"
 };
 
-const run: CommandType["function"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
   if (!args || args.length < 1) {
     await message.reply("you must provide a command name to reload");
     return false;

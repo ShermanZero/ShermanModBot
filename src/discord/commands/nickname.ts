@@ -8,7 +8,7 @@ const props: CommandType["properties"] = {
   aliases: ["nick"]
 };
 
-const run: CommandType["function"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
   if (message.mentions?.members?.size === 0) {
     await message.reply("please mention a member to change their nickname");
     return false;

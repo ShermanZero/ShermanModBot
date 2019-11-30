@@ -11,7 +11,7 @@ const props: CommandType["properties"] = {
   description: "restarts the bot cleanly"
 };
 
-const run: CommandType["function"] = async (client: Client, message: Message, memberTriggered: boolean): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, memberTriggered: boolean): Promise<boolean> => {
   if (client.alreadyShutdown) {
     "Already executed clean shutdown... restarting now".mention();
     return true;

@@ -6,7 +6,7 @@ const props: CommandType["properties"] = {
   description: "shuts the bot down cleanly"
 };
 
-const run: CommandType["function"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
   let exitCode = 1;
   if (args.length == 1 && args[0].toLowerCase().includes("force")) exitCode = 2;
 

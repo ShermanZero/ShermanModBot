@@ -7,7 +7,7 @@ const props: CommandType["properties"] = {
   usage: "<member> <?reason>"
 };
 
-const run: CommandType["function"] = async (client: Client, message: Message, ...args: any[]) => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]) => {
   if (message.mentions?.members?.size === 0) {
     await message.reply("please mention a member to kick");
     return false;

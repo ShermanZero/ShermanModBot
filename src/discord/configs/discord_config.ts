@@ -1,4 +1,4 @@
-import { DiscordConfigType } from '../@interfaces/@discord_config';
+import { DiscordConfigType } from "../@interfaces/@discord_config";
 
 export default class DiscordConfig implements DiscordConfigType {
   status: "dead | !help";

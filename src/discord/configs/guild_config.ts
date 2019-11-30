@@ -1,15 +1,17 @@
 import { GuildConfigType } from "../@interfaces/@guild_config";
 
 export default class GuildConfig implements GuildConfigType {
-  setup: false;
+  setup: boolean;
 
-  roles = {
-    owner: null as string,
-    moderator: null as string
+  roles: {
+    [key: string]: string;
+    owner: string;
+    moderator: string;
   };
 
-  channels = {
-    default: null as string,
-    mod_logs: null as string
+  channels: {
+    [key: string]: string;
+    default: string;
+    mod_logs: string;
   };
 }

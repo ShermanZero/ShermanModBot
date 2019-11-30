@@ -1,25 +1,31 @@
 import { MemberConfigType } from "../@interfaces/@member_config";
 
 export default class MemberConfig implements MemberConfigType {
-  memberLog: [];
+  memberLog: Array<string> | null;
 
-  hidden = {
-    username: null as any,
-    guildname: null as any
+  hidden: {
+    [key: string]: string | null;
+    username: string | null;
+    guildname: string | null;
   };
 
-  rank = {
-    name: "unranked",
-    level: 0,
-    xp: 0,
-    levelup: 1
+  rank: {
+    [key: string]: string | number | null;
+    name: string | null;
+    level: number | null;
+    xp: number | null;
+    levelup: number | null;
   };
 
-  misc = {
-    joined: null as any,
-    first_message: null as any,
-    warnings: 0
+  misc: {
+    [key: string]: string | number;
+    joined: string | null;
+    first_message: string | null;
+    warnings: number | null;
   };
 
-  race: { wins: 0 };
+  race: {
+    [key: string]: number | null;
+    wins: number | null;
+  };
 }

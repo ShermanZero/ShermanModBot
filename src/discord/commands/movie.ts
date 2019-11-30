@@ -11,7 +11,7 @@ const props: CommandType["properties"] = {
   aliases: ["media"]
 };
 
-const run: CommandType["function"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
   await message.delete();
 
   let mediaRole = message.guild.roles.find(role => role.name === "movie");

@@ -8,7 +8,7 @@ const props: CommandType["properties"] = {
   aliases: ["eval"]
 };
 
-const run: CommandType["function"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
   if (args.length === 0) {
     await message.reply("you must specify javascript code to run");
     return false;

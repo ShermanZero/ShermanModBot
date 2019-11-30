@@ -1,4 +1,4 @@
-import { Client } from 'discord.js';
+import { Client } from "discord.js";
 
 /**
  * Protects the bot against some of the standard exit commands

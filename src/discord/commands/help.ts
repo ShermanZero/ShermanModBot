@@ -1,9 +1,10 @@
 import { Client, Message, MessageEmbed } from "discord.js";
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
 import { DiscordSecrets } from "../secrets/discord-secrets";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.everyone,
+  elevation: GuildElevationTypes.everyone,
   description: "replies to the member with the commands for the server",
   usage: "<?command>"
 };

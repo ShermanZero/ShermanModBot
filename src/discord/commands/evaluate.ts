@@ -1,8 +1,9 @@
 import { Client, Message } from "discord.js";
-import { ElevationTypes, CommandType } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.administrator,
+  elevation: GuildElevationTypes.administrator,
   description: "runs a line of javascript",
   usage: "<javascript>",
   aliases: ["eval"]

@@ -3,10 +3,11 @@ import * as fs from "fs";
 import * as path from "path";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.moderator,
+  elevation: GuildElevationTypes.moderator,
   description: "displays the last number of messages a member has posted",
   usage: "<?amount> <member>"
 };

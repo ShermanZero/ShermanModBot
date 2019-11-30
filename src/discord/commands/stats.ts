@@ -1,12 +1,15 @@
 import { Client, ColorResolvable, GuildMember, Message, MessageEmbed } from "discord.js";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
 import MemberConfig from "../configs/member_config";
 import { MemberConfigType } from "../@interfaces/@member_config";
+import { Ranks } from "../@interfaces/@ranks";
+import { ArgumentsNotFulfilled } from "../../shared/extensions/error/error-extend";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.everyone,
+  elevation: GuildElevationTypes.everyone,
   description: "replies with your current server stats",
   usage: "<?@user | username>"
 };
@@ -39,6 +42,8 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 
 const custom: CommandType["custom"] = {
   embed: (client: Client, member: GuildMember, config: MemberConfigType): MessageEmbed => {
+    new ArgumentsNotFulfilled(client, member, config);
+
     let name = "**" + config.hidden.username.substring(0, config.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
     let rankColor = member.guild.roles.find(role => role.name === config.rank.name)?.color;
 
@@ -63,7 +68,7 @@ const custom: CommandType["custom"] = {
     if (config.misc.warnings !== null) miscStats += `**warnings:**  *${config.misc.warnings}*\n`.toUpperCase();
     if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats, true);
 
-    if (member.roles.get(client.getGuildConfig(member.guild).roles.mod)) {
+    if (member.roles.get(client.getGuildConfig(member.guild)?.roles?.mod)) {
       embed.setFooter("BE RESPECTFUL TO ALL - ESPECIALLY MODERATORS", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");
       embed.setDescription("`SERVER MOD`");
     }
@@ -99,4 +104,4 @@ function calculatePosition(client: Client, config: MemberConfig): string {
 
 module.exports.run = run;
 module.exports.properties = properties;
-module.exports.embed = custom;
+module.exports.custom = custom;

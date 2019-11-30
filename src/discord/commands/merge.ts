@@ -4,10 +4,11 @@ import * as path from "path";
 import * as rimraf from "rimraf";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.botowner,
+  elevation: GuildElevationTypes.botowner,
   description: "merges a member's data into a new member",
   usage: "<old username> <new username>"
 };

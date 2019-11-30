@@ -3,11 +3,12 @@ import * as fs from "fs";
 import * as path from "path";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
 import { MemberConfigType } from "../@interfaces/@member_config";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.botowner,
+  elevation: GuildElevationTypes.botowner,
   description: "restarts the bot cleanly"
 };
 

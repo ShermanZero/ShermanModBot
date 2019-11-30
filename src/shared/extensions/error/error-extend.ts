@@ -3,12 +3,12 @@
  *
  * @class ArgumentsNotFulfillled
  */
-class ArgumentsNotFulfilled extends Error {
+export class ArgumentsNotFulfilled extends Error {
   /**
    *Creates an instance of ArgumentsNotFulfillled.
    * @param {...string[]} args the arguments to pass in, recommended usage of `...arguments`
    */
-  constructor(...args: string[]) {
+  constructor(...args: any[]) {
     super("ArgumentsNotFulfilled");
 
     let message = "!! ".red;
@@ -29,12 +29,14 @@ class ArgumentsNotFulfilled extends Error {
     argumentCheck = argumentCheck.replace(/(FAIL)/g, "FAIL".red);
     message += `${argumentCheck} [${argsNotProvidedCount.toString().red}] argument(s) were not provided `;
 
-    let methodName = Error.prototype.stack.split("Function.")[1];
-    let errorLocation = methodName.substring(methodName.indexOf(":") + 1, methodName.indexOf(")"));
+    let errorLocation = "unknown";
+    let functionName = this.stack ? (this.stack.includes("Function.") ? this.stack.split("Function.")[1] : "unknown") : null;
+    if (functionName && functionName != "unknown") {
+      errorLocation = functionName.substring(functionName.indexOf(":") + 1, functionName.indexOf(")"));
+      functionName = functionName.substring(0, functionName.indexOf("(")).trim();
+    }
 
-    methodName = methodName.substring(0, methodName.indexOf("(")).trim();
-
-    message += `(${methodName.yellow}:${errorLocation.red}) ${"!!".red}`;
+    message += `(${functionName.yellow}:${errorLocation.red}) ${"!!".red}`;
     message.print(true);
   }
 }

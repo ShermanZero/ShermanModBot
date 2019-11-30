@@ -5,6 +5,8 @@ import * as rimraf from "rimraf";
 import DiscordConfig from "./configs/discord_config";
 import { MemberConfigType } from "./@interfaces/@member_config";
 import MemberConfig from "./configs/member_config";
+import { Ranks } from "./@interfaces/@ranks";
+import { ArgumentsNotFulfilled } from "../shared/extensions/error/error-extend";
 
 /**
  * Multiple resources dealing with handling members/users/guilds and more
@@ -288,7 +290,7 @@ export default class DiscordResources {
           memberConfig.rank.xp = Ranks.info[rank];
 
           for (let level in Ranks.levels) {
-            if (Ranks.levels[level].toLowerCase() === rank) {
+            if ((Ranks.levels[level as string] as string).toLowerCase() === rank) {
               memberConfig.rank.level = parseInt(level);
               memberConfig.rank.levelup = this.getXPToLevelUp(memberConfig.rank.xp, memberConfig.rank.level);
 

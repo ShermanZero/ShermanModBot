@@ -1,8 +1,9 @@
 import { Client, Message } from "discord.js";
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.everyone,
+  elevation: GuildElevationTypes.everyone,
   description: "makes the bot say your message",
   usage: "<message>"
 };

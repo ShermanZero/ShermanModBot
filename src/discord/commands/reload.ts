@@ -1,9 +1,10 @@
 import { Client, Message } from "discord.js";
 import * as path from "path";
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.botowner,
+  elevation: GuildElevationTypes.botowner,
   description: "reloads a command",
   usage: "<command>"
 };

@@ -1,9 +1,10 @@
 import { Client, GuildMember, Message, TextChannel } from "discord.js";
 
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.moderator,
+  elevation: GuildElevationTypes.moderator,
   description: "bans a member from the server",
   usage: "<@member> <?reason>",
   aliases: null

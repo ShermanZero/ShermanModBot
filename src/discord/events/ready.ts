@@ -3,45 +3,45 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { BuildOptions } from "../..";
-import boot from "../../shared/resources/boot";
+import bootLogo, { bootFooter } from "../../shared/resources/boot";
 import TwitchIntegration from "../../twitch/twitchIntegration";
 import rsrc from "../discord-resources";
 import exitHandler from "../handlers/exitHandler";
-import { ElevationTypes } from "../@interfaces/@commands";
-import { GuildConfigType, guildConfigFileName } from "../@interfaces/@guild_config";
+import { GuildConfigType, guildConfigFileName, GuildElevationTypes } from "../@interfaces/@guild_config";
 
 module.exports = async (client: Client): Promise<boolean> => {
   client.user.setActivity(client.discordConfig.status);
 
-  boot.red.print();
-
-  exitHandler.init(client);
+  bootLogo.red.print();
 
   if (BuildOptions.development) {
-    let pad = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    `${pad.cyan} ${"DEV BUILD".green} ${pad.cyan}`.print();
+    let pad = "".padEnd(bootFooter.length / 2 - 5, "~");
+    `${pad.cyan} ${"DEV BUILD".red} ${pad.cyan}`.print();
 
     client.user.setStatus("invisible");
   } else {
+    bootFooter.red.print();
     client.user.setStatus("online");
   }
 
+  exitHandler.init(client);
+
   let commandArray: string[] = [...client.commands.keys()].sort();
 
-  `Loaded ${commandArray.length.toString().magenta} command(s) [${("@" + ElevationTypes.everyone).toLowerCase().green}] [${
-    ("@" + ElevationTypes.moderator).toLowerCase().yellow
-  }] [${("@" + ElevationTypes.administrator).toLowerCase().red}] [${("@" + ElevationTypes.botowner).toLowerCase().cyan}]`.print();
+  `Loaded ${commandArray.length.toString().magenta} command(s) [${("@" + GuildElevationTypes.everyone).toLowerCase().green}] [${
+    ("@" + GuildElevationTypes.moderator).toLowerCase().yellow
+  }] [${("@" + GuildElevationTypes.administrator).toLowerCase().red}] [${("@" + GuildElevationTypes.botowner).toLowerCase().cyan}]`.print();
 
   for (let i = 0; i < commandArray.length; i++) {
     let commandName = commandArray[i];
 
     let commandProps = client.getCommandProperties(commandName);
 
-    if (commandProps.elevation === ElevationTypes.moderator) {
+    if (commandProps.elevation === GuildElevationTypes.moderator) {
       commandName = commandName.yellow;
-    } else if (commandProps.elevation === ElevationTypes.administrator) {
+    } else if (commandProps.elevation === GuildElevationTypes.administrator) {
       commandName = commandName.red;
-    } else if (commandProps.elevation === ElevationTypes.botowner) {
+    } else if (commandProps.elevation === GuildElevationTypes.botowner) {
       commandName = commandName.cyan;
     } else {
       commandName = commandName.green;
@@ -63,16 +63,13 @@ module.exports = async (client: Client): Promise<boolean> => {
     }
     let guildname = rsrc.getGuildNameFromGuild(guild);
 
-    //set the guild data to to the guild name
-    client.guildsInSession.set(guildname, null);
-
     let guildConfigFile = path.resolve(guildDir, guildConfigFileName);
     if (fs.existsSync(guildConfigFile)) {
       let guildConfig = (await import(guildConfigFile)) as GuildConfigType;
       client.registerGuild(guildname, guildConfig);
+    } else {
+      client.registerGuild(guildname, null);
     }
-
-    `*Registered [${guildname.magenta}] to session --- looking for existing members:`.print();
 
     fs.readdirSync(guildDir).forEach(dir => {
       let username = dir;
@@ -90,15 +87,17 @@ module.exports = async (client: Client): Promise<boolean> => {
       }
     });
 
-    `Found all existing members of [${guildname.magenta}] (currently ${Object.keys(client.getGuildMembers(guildname)).length.toString().green})`.print();
+    let membersInSession = client.getGuildMembers(guildname);
+    let memberCount = membersInSession ? membersInSession.size : 0;
+
+    `Found all existing members of [${guildname.magenta}] (currently ${memberCount.toString().green})`.print();
   });
 
   let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`
     .inverse;
-  let footer = "=====================================================================================".red;
 
   "...".print();
-  `${readyMessage}\n${footer}`.print();
+  `${readyMessage}\n${bootFooter.red}`.print();
 
   let twitch = new TwitchIntegration();
   await twitch.start(client);

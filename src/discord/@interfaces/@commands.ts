@@ -1,4 +1,5 @@
 import { Client, Message } from "discord.js";
+import { GuildElevationTypes } from "./@guild_config";
 
 export interface CommandType {
   run: (client: Client, message: Message, ...args: any[]) => Promise<boolean>;
@@ -7,16 +8,9 @@ export interface CommandType {
     nameOfFunction?: (client: Client, ...args: any[]) => any;
   };
   properties: {
-    elevation: ElevationTypes;
+    elevation: GuildElevationTypes;
     description: string;
     usage?: string;
     aliases?: string[];
   };
-}
-
-export enum ElevationTypes {
-  botowner = "BOTOWNER",
-  administrator = "ADMINISTRATOR",
-  moderator = "MODERATOR",
-  everyone = "EVERYONE"
 }

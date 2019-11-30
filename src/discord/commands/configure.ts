@@ -4,11 +4,11 @@ import * as path from "path";
 
 import rsrc from "../discord-resources";
 import GuildConfig from "../configs/guild_config";
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
-import { GuildConfigType, guildConfigFileName } from "../@interfaces/@guild_config";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildConfigType, guildConfigFileName, GuildChannelTypes, GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.administrator,
+  elevation: GuildElevationTypes.administrator,
   description: "sets up the discord bot for the server",
   aliases: ["config"]
 };
@@ -29,29 +29,21 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
   let configFile = path.resolve(guildDir, guildConfigFileName);
   if (!fs.existsSync(configFile)) await message.reply("you don't appear to have a configuration set up for your guild, let's create one");
 
-  let guildConfig: GuildConfig = new GuildConfig();
-  await getRole(guildConfig, client.discordConfig.elevation_names.owner, message).then((result): any => {
+  let guildConfig: GuildConfigType = new GuildConfig();
+  await getRole(guildConfig, GuildElevationTypes.administrator, message).then((result): any => {
     if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
   });
-  await getRole(guildConfig, client.discordConfig.elevation_names.moderator, message).then((result): any => {
+  await getRole(guildConfig, GuildElevationTypes.moderator, message).then((result): any => {
     if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
   });
 
-  await getChannel(guildConfig, client.discordConfig.channel_names.default, "default/welcome", "welcome new members of the guild as they arrive", message);
-  await getChannel(guildConfig, client.discordConfig.channel_names.mod_logs, "mod logs", "log any moderation action taken by mods and me", message);
+  await getChannel(guildConfig, GuildChannelTypes.default, "default/welcome", "welcome new members of the guild as they arrive", message);
+  await getChannel(guildConfig, GuildChannelTypes.mod_logs, "mod logs", "log any moderation action taken by mods and me", message);
 
   guildConfig.setup = true;
-  client.guildsInSession.set(rsrc.getGuildNameFromGuild(message.guild), guildConfig);
+  client.setGuildConfig(rsrc.getGuildNameFromGuild(message.guild), guildConfig);
 
-  //create the config file
-  fs.writeFile(configFile, JSON.stringify(guildConfig, null, "\t"), error => {
-    if (error) {
-      message.reply("there was a problem creating your config file, you will need to rerun the setup");
-    } else {
-      message.reply("your configuration has been stored!  You can rerun this setup at any time");
-    }
-  });
-
+  await message.reply("your configuration has been saved!  You can adjust it at any time by rerunning this command");
   return true;
 };
 

@@ -7,6 +7,7 @@ import rsrc from "../discord-resources";
 import { MemberConfigType } from "../@interfaces/@member_config";
 import { GuildConfigType, guildConfigFileName } from "../@interfaces/@guild_config";
 import { DiscordSecrets } from "../secrets/discord-secrets";
+import { Ranks } from "../@interfaces/@ranks";
 
 module.exports = async (client: Client, message: Message): Promise<boolean> => {
   //ignore all bots
@@ -54,13 +55,18 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
   //if the command doesn't exist
   if (!commandFunction || !commandProperties) return false;
 
-  let guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
+  let guildConfig: GuildConfigType = client.getGuildConfig(message.guild);
+  if (!guildConfig) {
+    let guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
+    let guildConfigFile = path.resolve(guildDir, guildConfigFileName);
 
-  let guildConfigFile = path.resolve(guildDir, guildConfigFileName);
-  let guildConfig: GuildConfigType;
-  if (fs.existsSync(guildConfigFile)) guildConfig = require(guildConfigFile);
+    if (fs.existsSync(guildConfigFile)) {
+      guildConfig = (await import(guildConfigFile)) as GuildConfigType;
+      client.setGuildConfig(rsrc.getGuildNameFromGuild(message.guild), guildConfig);
+    }
+  }
 
-  if (command != "config") {
+  if (command !== "config") {
     if (!guildConfig?.setup) {
       await message.reply("your guild owner has to configure me before I can execute commands :(");
       return false;

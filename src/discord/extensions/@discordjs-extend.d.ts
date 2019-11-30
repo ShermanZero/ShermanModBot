@@ -15,11 +15,11 @@ declare module "discord.js" {
      */
     discordConfig: DiscordConfigType;
     /**
-     * A map of all members in the session
+     * A map of all members in the session, where `key: guildname` and `value: Map<membername, MemberConfigType>`
      */
     membersInSession: Map<string, Map<string, MemberConfigType>>;
     /**
-     * A map of all the guild configurations
+     * A map of all the guild configurations, where `key: guildname` and `value: GuildConfigType`
      */
     guildsInSession: Map<string, GuildConfigType>;
     /**
@@ -48,7 +48,7 @@ declare module "discord.js" {
      *
      * @param guildConfig the guild config object
      */
-    registerGuild(guildname: string, guildConfig: GuildConfigType): boolean;
+    registerGuild(guildname: string, guildConfig: GuildConfigType): GuildConfigType;
     /**
      * Returns the cached guild from the name
      *
@@ -61,19 +61,25 @@ declare module "discord.js" {
      * @param guild the Discord `Guild`
      */
     getGuildConfig(guild: Guild): GuildConfigType;
-
+    /**
+     * Sets the guild config of a guild
+     *
+     * @param guildName the guild's name
+     * @param guildConfig the guild's `GuildConfig`
+     */
+    setGuildConfig(guildName: string, guildConfig: GuildConfigType): boolean;
     /**
      * Updates the stored member data
      *
      * @param config the member's config
      */
-    updateMember(config: MemberConfigType): boolean;
+    updateMember(config: MemberConfigType): MemberConfigType;
     /**
      * Registers the member and stores them in the `Client`
      *
      * @param config the member's config
      */
-    registerMember(config: MemberConfigType): boolean;
+    registerMember(config: MemberConfigType): MemberConfigType;
     /**
      * Hides a member's info (tag)
      *

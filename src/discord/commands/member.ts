@@ -2,10 +2,11 @@ import { Client, Message } from "discord.js";
 
 import rsrc from "../discord-resources";
 import { MemberConfigType } from "../@interfaces/@member_config";
-import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: ElevationTypes.moderator,
+  elevation: GuildElevationTypes.moderator,
   description: "displays a member's data",
   usage: "<@member | username>"
 };

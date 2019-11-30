@@ -97,17 +97,17 @@ module.exports = async (client: Client): Promise<boolean> => {
     "...".print();
     `${readyMessage}\n${bootFooter.red}`.print();
 
-    startTwitch();
+    startTwitch(client);
   });
-
-  let startTwitch = async () => {
-    let twitch = new TwitchIntegration();
-    await twitch.start(client);
-
-    if (!BuildOptions.development) client.user.setStatus("online");
-
-    client.ready = true;
-  };
 
   return true;
 };
+
+async function startTwitch(client: Client) {
+  let twitch = new TwitchIntegration();
+  await twitch.start(client);
+
+  if (!BuildOptions.development) client.user.setStatus("online");
+
+  client.ready = true;
+}

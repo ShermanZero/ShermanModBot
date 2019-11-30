@@ -1,6 +1,4 @@
 export interface MemberConfigType {
-  memberLog: Array<string>;
-
   hidden: {
     [key: string]: string;
     username: string | null;
@@ -26,4 +24,6 @@ export interface MemberConfigType {
     [key: string]: number;
     wins: number;
   };
+
+  memberLog: Array<string>;
 }

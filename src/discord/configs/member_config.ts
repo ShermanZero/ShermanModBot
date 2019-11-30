@@ -1,8 +1,6 @@
 import { MemberConfigType } from "../@interfaces/@member_config";
 
 export default class MemberConfig implements MemberConfigType {
-  memberLog = new Array<string>();
-
   hidden = {
     username: null as string,
     guildname: null as string
@@ -24,4 +22,6 @@ export default class MemberConfig implements MemberConfigType {
   race = {
     wins: 0
   };
+
+  memberLog = new Array<string>();
 }

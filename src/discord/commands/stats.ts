@@ -64,7 +64,7 @@ const custom: CommandType["custom"] = {
 
     let miscStats = "";
     if (config.misc.joined !== null) miscStats += `**joined:**  *${config.misc.joined}*\n`.toUpperCase();
-    if (config.misc.first_message !== null) miscStats += `**first message:**  "*${config.misc.first_message}*"\n`;
+    if (config.misc.first_message !== null) miscStats += `**first message:**`.toUpperCase() + `"*${config.misc.first_message}*"\n`;
     if (config.misc.warnings !== null) miscStats += `**warnings:**  *${config.misc.warnings}*\n`.toUpperCase();
     if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats, true);
 

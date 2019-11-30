@@ -17,6 +17,12 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   }
 
   const banMember = message.mentions.members.first() as GuildMember;
+
+  if (!banMember.bannable) {
+    await message.reply("I can't ban this member");
+    return false;
+  }
+
   await banMember.ban({ reason: args.join(" ") });
 
   let modChannel = client.getGuildConfig(message.guild).channels.mod_logs;

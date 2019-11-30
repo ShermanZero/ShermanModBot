@@ -48,13 +48,20 @@ declare module "discord.js" {
      *
      * @param guildConfig the guild config object
      */
-    registerGuild(guildname: string, guildConfig: GuildConfigType): GuildConfigType;
+    registerGuild(guildName: string, guildConfig: GuildConfigType): GuildConfigType;
     /**
      * Returns the cached guild from the name
      *
      * @param guildName the guild's name
      */
-    getGuildMembers(guildname: string): Map<string, MemberConfigType>;
+    getGuildMembers(guildName: string): Map<string, MemberConfigType>;
+    /**
+     *
+     *
+     * @param guildName the name of the guild
+     * @param guildMembers the members of the guild as a `Map<string, MemberConfigType>`
+     */
+    setGuildMembers(guildName: string, guildMembers: Map<string, MemberConfigType>): Map<string, Map<string, MemberConfigType>>;
     /**
      * Returns the guild config from the guild
      *
@@ -71,15 +78,15 @@ declare module "discord.js" {
     /**
      * Updates the stored member data
      *
-     * @param config the member's config
+     * @param memberConfig the member's config
      */
-    updateMember(config: MemberConfigType): MemberConfigType;
+    updateMember(memberConfig: MemberConfigType): MemberConfigType;
     /**
      * Registers the member and stores them in the `Client`
      *
-     * @param config the member's config
+     * @param memberConfig the member's config
      */
-    registerMember(config: MemberConfigType): MemberConfigType;
+    registerMember(memberConfig: MemberConfigType): MemberConfigType;
     /**
      * Returns if the client has a member stored in the cache
      *

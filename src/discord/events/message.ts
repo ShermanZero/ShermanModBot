@@ -131,6 +131,7 @@ function registerMessage(client: Client, message: Message): boolean {
   memberConfig.memberLog.push(memberLogMessage.stripColors + "\n");
   memberLogMessage.memberLog(client, message.guild, memberConfig, client.discordConfig.logs.message);
 
+  client.updateMember(memberConfig);
   return true;
 }
 

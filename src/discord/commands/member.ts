@@ -42,7 +42,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   }
 
   await message.delete();
-  await message.channel.send(`Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(memberConfig, null, "\t")}\n\`\`\``);
+  await message.channel.send(`Here is the data for [**${username.hideID()}**]\n\`\`\`json\n${JSON.stringify(memberConfig, null, "\t")}\n\`\`\``);
 
   return true;
 };

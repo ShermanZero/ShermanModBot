@@ -11,6 +11,8 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   let exitCode = 1;
   if (args.length == 1 && args[0].toLowerCase().includes("force")) exitCode = 2;
 
+  await message.delete();
+
   process.exit(exitCode);
 };
 

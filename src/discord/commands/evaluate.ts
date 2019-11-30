@@ -3,7 +3,7 @@ import { CommandType } from "../@interfaces/@commands";
 import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
-  elevation: GuildElevationTypes.administrator,
+  elevation: GuildElevationTypes.botowner,
   description: "runs a line of javascript",
   usage: "<javascript>",
   aliases: ["eval"]

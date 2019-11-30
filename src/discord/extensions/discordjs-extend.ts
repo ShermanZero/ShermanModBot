@@ -39,6 +39,10 @@ Discord.Client.prototype.getGuildMembers = function(guildName: string): Map<stri
   return membersOfGuild;
 };
 
+Discord.Client.prototype.setGuildMembers = function(guildName: string, guildMembers: Map<string, MemberConfigType>): Map<string, Map<string, MemberConfigType>> {
+  return this.membersInSession.set(guildName, guildMembers);
+};
+
 Discord.Client.prototype.getGuildConfig = function(guild: Guild): GuildConfigType {
   if (!this.guildsInSession) this.guildsInSession = new Map<string, GuildConfigType>();
 

@@ -83,6 +83,8 @@ export default class TwitchIntegration {
    * Loads the commands that the Twitch bot will listen to
    */
   loadCommands(client: Client): void {
+    "...".print();
+
     this.commands = new Map<string, any>();
     this.aliases = new Map<string, string>();
 
@@ -117,7 +119,7 @@ export default class TwitchIntegration {
     this.aliases = aliases;
 
     let commandArray: string[] = [...this.commands.keys()].sort();
-    `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green}, ${"[@subscribers]".yellow}, ${"[@moderator]".red}, ${
+    `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green} ${"[@subscribers]".yellow} ${"[@moderator]".red} ${
       "[@broadcaster]".cyan
     }`.print();
 

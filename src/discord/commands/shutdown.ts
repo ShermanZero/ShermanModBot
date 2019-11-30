@@ -1,10 +1,10 @@
 import { Client, Message } from "discord.js";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Shutdown implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.botowner;
-    description: "shuts the bot down cleanly";
+  props = {
+    requiresElevation: ElevationTypes.botowner,
+    description: "shuts the bot down cleanly"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

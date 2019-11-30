@@ -2,14 +2,14 @@ import { Client, GuildMember, Message, MessageEmbed, MessageReaction, TextChanne
 import fetch from "node-fetch";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Movie implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.moderator;
-    description: "creates a movie invite";
-    usage?: "<?done>";
-    aliases?: ["media"];
+  props = {
+    requiresElevation: ElevationTypes.moderator,
+    description: "creates a movie invite",
+    usage: "<?done>",
+    aliases: ["media"]
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

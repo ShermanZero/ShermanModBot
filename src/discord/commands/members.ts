@@ -1,12 +1,12 @@
 import { Client, Message } from "discord.js";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Members implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.moderator;
-    description: "displays all members registered in the server";
+  props = {
+    requiresElevation: ElevationTypes.moderator,
+    description: "displays all members registered in the server"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

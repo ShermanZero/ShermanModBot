@@ -1,14 +1,15 @@
+import { DiscordConfigType } from "../@interfaces/@discord_config";
+import { MemberConfigType } from "../@interfaces/@member_config";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildConfigType } from "../@interfaces/@guild_config";
 import { Guild } from "discord.js";
-import { DiscordConfigType } from "./@discord_config";
-import { MemberConfigType } from "./@member_config";
-import { CommandType } from "./@commands";
 
 declare module "discord.js" {
   interface Client {
     defaultGuild: Guild;
     discordConfig: DiscordConfigType;
     members_in_session: Map<string, any>;
-    guild_configs: Map<string, any>;
+    guild_configs: Map<string, GuildConfigType>;
     commands: Map<string, any>;
     aliases: Map<string, string>;
     masterLog: Array<string>;
@@ -16,7 +17,7 @@ declare module "discord.js" {
     alreadyShutdown: boolean;
 
     getGuild(guildname: string): string;
-    getGuildConfig(guild: Guild): any;
+    getGuildConfig(guild: Guild): GuildConfigType;
     updateMember(config: MemberConfigType): boolean;
     registerMember(config: MemberConfigType): boolean;
     hideMemberInfo(config: MemberConfigType): any;
@@ -24,7 +25,7 @@ declare module "discord.js" {
     getMemberConfig(guild: Guild, username: string): MemberConfigType;
     removeMember(guild: Guild, username: string): boolean;
     deleteMember(guild: Guild, username: string): boolean;
-    getCommand(commandName: string): CommandType;
+    getCommand(commandName: string): any;
   }
 }
 

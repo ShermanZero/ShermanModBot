@@ -1,11 +1,11 @@
 import { Client, Message } from "discord.js";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Say implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.everyone;
-    description: "makes the bot say your message";
-    usage?: "<message>";
+  props = {
+    requiresElevation: ElevationTypes.everyone,
+    description: "makes the bot say your message",
+    usage: "<message>"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

@@ -1,14 +1,14 @@
 import { Client, Message } from "discord.js";
 
 import rsrc from "../discord-resources";
-import { MemberConfigType } from "../types/@member_config";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { MemberConfigType } from "../@interfaces/@member_config";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Member implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.moderator;
-    description: "displays a member's data";
-    usage?: "<@member | username>";
+  props = {
+    requiresElevation: ElevationTypes.moderator,
+    description: "displays a member's data",
+    usage: "<@member | username>"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

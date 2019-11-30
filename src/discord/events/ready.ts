@@ -6,20 +6,25 @@ import { BuildOptions } from "../..";
 import boot from "../../shared/resources/boot";
 import rsrc from "../discord-resources";
 import TwitchIntegration from "../../twitch/twitchIntegration";
-import exit from "../handlers/exitHandler";
+import exitHandler from "../handlers/exitHandler";
+import { DiscordSecrets } from "../secrets/discord-secrets";
 
 module.exports = async (client: Client): Promise<boolean> => {
   boot.red.print();
 
-  exit.init(client);
+  exitHandler.init(client);
+
+  if (BuildOptions.development) {
+    let pad = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    `${pad.cyan} ${"DEV BUILD".green} ${pad.cyan}`.print();
+  }
 
   let commandArray: string[] = [...client.commands.keys()].sort();
-  `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green}, ${"[@moderator]".yellow}, ${"[@owner]".red}, ${
-    "[@botowner]".cyan
-  }`.print();
+  `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green} ${"[@moderator]".yellow} ${"[@owner]".red} ${"[@botowner]".cyan}`.print();
 
   for (let i = 0; i < commandArray.length; i++) {
     let commandName = commandArray[i];
+
     let command = client.getCommand(commandName);
 
     if (command.props.requiresElevation) {
@@ -53,7 +58,7 @@ module.exports = async (client: Client): Promise<boolean> => {
     let guildName = rsrc.getGuildNameFromGuild(guild);
 
     //set the guild data to to the guild name
-    client.members_in_session.set(guildName, {});
+    client.members_in_session.set(guildName, null);
     client.guild_configs.set(guildName, null);
 
     let guildConfig = path.resolve(guildDir, "guild_config.json");

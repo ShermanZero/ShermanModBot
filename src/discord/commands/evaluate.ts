@@ -1,12 +1,12 @@
 import { Client, Message } from "discord.js";
-import { ElevationTypes, CommandType } from "../types/@commands";
+import { ElevationTypes, CommandType } from "../@interfaces/@commands";
 
 class Evaluate implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.administrator;
-    description: "runs a line of javascript";
-    usage?: "<javascript>";
-    aliases?: ["eval"];
+  props = {
+    requiresElevation: ElevationTypes.administrator,
+    description: "runs a line of javascript",
+    usage: "<javascript>",
+    aliases: ["eval"]
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

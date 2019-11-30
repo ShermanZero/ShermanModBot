@@ -1,11 +1,11 @@
 import { Client, Message, TextChannel } from "discord.js";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Purge implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.moderator;
-    description: "removes a maximum of 100 messages from a channel";
-    usage?: "<?amount> <?member>";
+  props = {
+    requiresElevation: ElevationTypes.moderator,
+    description: "removes a maximum of 100 messages from a channel",
+    usage: "<?amount> <?member>"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

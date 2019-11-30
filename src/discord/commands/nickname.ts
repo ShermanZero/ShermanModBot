@@ -1,12 +1,12 @@
 import { Client, Message } from "discord.js";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Nickname implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.moderator;
-    description: "changes the nickname of a user";
-    usage?: "<@member | username> <nickname>";
-    aliases?: ["nick"];
+  props = {
+    requiresElevation: ElevationTypes.moderator,
+    description: "changes the nickname of a user",
+    usage: "<@member | username> <nickname>",
+    aliases: ["nick"]
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

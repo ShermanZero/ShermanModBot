@@ -2,15 +2,16 @@ import * as Discord from "discord.js";
 
 import rsrc from "../discord-resources";
 import { Guild } from "discord.js";
-import { MemberConfigType } from "../types/@member_config";
-import { GuildConfigType } from "../types/@guild_config";
+import { MemberConfigType } from "../@interfaces/@member_config";
+import { GuildConfigType } from "../@interfaces/@guild_config";
 import DiscordConfig from "../configs/discord_config";
+import { CommandType } from "../@interfaces/@commands";
 
 Discord.Client.prototype.defaultGuild = null;
 Discord.Client.prototype.discordConfig = new DiscordConfig();
-Discord.Client.prototype.members_in_session = new Map<string, MemberConfigType>();
+Discord.Client.prototype.members_in_session = new Map<string, any>();
 Discord.Client.prototype.guild_configs = new Map<string, GuildConfigType>();
-Discord.Client.prototype.commands = new Map<string, Function>();
+Discord.Client.prototype.commands = new Map<string, CommandType>();
 Discord.Client.prototype.aliases = new Map<string, string>();
 Discord.Client.prototype.masterLog = new Array<string>();
 Discord.Client.prototype.ready = false;
@@ -21,7 +22,7 @@ Discord.Client.prototype.alreadyShutdown = false;
  *
  * @param guildName the guild's name
  */
-Discord.Client.prototype.getGuild = function(guildName: string): string {
+Discord.Client.prototype.getGuild = function(guildName: string): any {
   return Discord.Client.prototype.members_in_session.get(guildName);
 };
 
@@ -55,7 +56,7 @@ Discord.Client.prototype.updateMember = function(config: MemberConfigType): bool
 
   let guild = Discord.Client.prototype.members_in_session.get(guildName);
 
-  guild[username] = config;
+  guild.set(username, config);
   config = Discord.Client.prototype.hideMemberInfo(config);
 
   return config !== null;
@@ -178,9 +179,17 @@ Discord.Client.prototype.deleteMember = function(guild: Guild, username: string)
  * @param commandName the command's name
  */
 Discord.Client.prototype.getCommand = function(commandName: string): any {
+  `Attempting to retrieve command [${commandName.cyan}]`.print();
   let command = Discord.Client.prototype.commands.get(commandName);
 
-  if (!command) command = Discord.Client.prototype.commands.get(Discord.Client.prototype.aliases.get(commandName));
+  if (!command) {
+    `  Command not immediately found, trying aliases`.warning();
+    let alias: string = Discord.Client.prototype.aliases.get(commandName);
+    if (alias) command = Discord.Client.prototype.commands.get(alias);
+    else `  Command not found`.warning();
+  }
+
+  if (command) `Successfully located command: ${command}`.success();
 
   return command;
 };

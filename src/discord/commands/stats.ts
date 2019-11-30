@@ -1,15 +1,15 @@
 import { Client, ColorResolvable, GuildMember, Message, MessageEmbed } from "discord.js";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 import MemberConfig from "../configs/member_config";
-import { MemberConfigType } from "../types/@member_config";
+import { MemberConfigType } from "../@interfaces/@member_config";
 
 class Stats implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.everyone;
-    description: "replies with your current server stats";
-    usage?: "<?@user | username>";
+  props = {
+    requiresElevation: ElevationTypes.everyone,
+    description: "replies with your current server stats",
+    usage: "<?@user | username>"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {
@@ -38,7 +38,7 @@ class Stats implements CommandType {
     return true;
   }
 
-  getEmbed?(client: Client, member: GuildMember, config: MemberConfigType): MessageEmbed {
+  getEmbed(client: Client, member: GuildMember, config: MemberConfigType): MessageEmbed {
     let name = "**" + config.hidden.username.substring(0, config.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
     let rankColor = member.guild.roles.find(role => role.name === config.rank.name)?.color;
 

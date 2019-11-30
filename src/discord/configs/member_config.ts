@@ -1,4 +1,4 @@
-import { MemberConfigType } from "../types/@member_config";
+import { MemberConfigType } from "../@interfaces/@member_config";
 
 export default class MemberConfig implements MemberConfigType {
   memberLog: string[];

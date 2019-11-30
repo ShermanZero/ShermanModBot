@@ -3,13 +3,13 @@ import * as fs from "fs";
 import * as path from "path";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Log implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.moderator;
-    description: "displays the last number of messages a member has posted";
-    usage?: "<?amount> <member>";
+  props = {
+    requiresElevation: ElevationTypes.moderator,
+    description: "displays the last number of messages a member has posted",
+    usage: "<?amount> <member>"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

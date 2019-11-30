@@ -3,9 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import TwitchClient from "twitch";
 import ChatClient from "twitch-chat-client";
-import { TwitchSecrets } from "../twitch_secrets";
-
-let twitchSecrets: TwitchSecrets = {} as any;
+import { TwitchSecrets } from "./secrets/twitch-secrets";
 
 /**
  * The class for integrating the bot with Twitch
@@ -22,8 +20,8 @@ export default class TwitchIntegration {
    * @param {Client} client the Discord `Client`
    */
   async start(client: Client) {
-    const clientID = twitchSecrets.client_id;
-    const accessToken = twitchSecrets.access_token;
+    const clientID = TwitchSecrets.client_id;
+    const accessToken = TwitchSecrets.access_token;
 
     `...\n${"Beginning Twitch integration".inverse}`.print();
     "  *Attempting to authorize to Twitch...".print();

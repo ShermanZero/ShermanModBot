@@ -3,13 +3,13 @@ import * as fs from "fs";
 import * as path from "path";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../types/@commands";
-import { MemberConfigType } from "../types/@member_config";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { MemberConfigType } from "../@interfaces/@member_config";
 
 class Restart implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.botowner;
-    description: "restarts the bot cleanly";
+  props = {
+    requiresElevation: ElevationTypes.botowner,
+    description: "restarts the bot cleanly"
   };
 
   async run(client: Client, message: Message, memberTriggered: boolean): Promise<boolean> {

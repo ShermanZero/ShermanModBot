@@ -1,11 +1,11 @@
-import { Client, Message } from "discord.js";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { Client, Message, TextChannel } from "discord.js";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Kick implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.moderator;
-    description: "kicks a member from the server";
-    usage?: "<member> <?reason>";
+  props = {
+    requiresElevation: ElevationTypes.moderator,
+    description: "kicks a member from the server",
+    usage: "<member> <?reason>"
   };
 
   async run(client: Client, message: Message, ...args: any[]) {
@@ -18,8 +18,8 @@ class Kick implements CommandType {
 
     await kickMember!.kick(args.join(" "));
 
-    let modChannel = client.getGuildConfig(message.guild);
-    await modChannel.send(`${kickMember} was kicked by ${message.author.tag} for reason: ${args.join(" ")}`);
+    let modChannel = client.getGuildConfig(message.guild).channels.mod_logs;
+    await (message.guild.channels.get(modChannel) as TextChannel)?.send(`${kickMember} was kicked by ${message.author.tag} for reason: ${args.join(" ")}`);
 
     return true;
   }

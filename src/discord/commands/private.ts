@@ -1,12 +1,12 @@
 import { Client, Message, Role, TextChannel } from "discord.js";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Private implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.moderator;
-    description: "grants a member access to the private-hangout channel";
-    usage?: "<@member>";
-    aliases?: ["priv"];
+  props = {
+    requiresElevation: ElevationTypes.moderator,
+    description: "grants a member access to the private-hangout channel",
+    usage: "<@member>",
+    aliases: ["priv"]
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

@@ -1,11 +1,11 @@
 import { Client, GuildMember, Message, TextChannel } from "discord.js";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { ElevationTypes, CommandType } from "../@interfaces/@commands";
 
 class Ban implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.moderator;
-    description: "bans a member from the server";
-    usage?: "<member> <?reason>";
+  props = {
+    requiresElevation: ElevationTypes.moderator,
+    description: "bans a member from the server",
+    usage: "<member> <?reason>"
   };
 
   async run(client: Client, message: Message, ...args: any[]) {
@@ -18,7 +18,7 @@ class Ban implements CommandType {
     await banMember.ban({ reason: args.join(" ") });
 
     let modChannel = client.getGuildConfig(message.guild).channels.mod_logs;
-    await (modChannel as TextChannel).send(`${banMember.user.username} was banned by ${message.author.tag} for reason: ${args.join(" ")}`);
+    await (message.guild.channels.get(modChannel) as TextChannel)?.send(`${banMember} was banned by ${message.author.tag} for reason: ${args.join(" ")}`);
 
     return true;
   }

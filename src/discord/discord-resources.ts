@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as rimraf from "rimraf";
 import DiscordConfig from "./configs/discord_config";
-import { MemberConfigType } from "./types/@member_config";
+import { MemberConfigType } from "./@interfaces/@member_config";
 import MemberConfig from "./configs/member_config";
 
 /**

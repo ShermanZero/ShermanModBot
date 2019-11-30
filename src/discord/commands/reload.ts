@@ -1,12 +1,12 @@
 import { Client, Message } from "discord.js";
 import * as path from "path";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Reload implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.botowner;
-    description: "reloads a command";
-    usage?: "<command>";
+  props = {
+    requiresElevation: ElevationTypes.botowner,
+    description: "reloads a command",
+    usage: "<command>"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

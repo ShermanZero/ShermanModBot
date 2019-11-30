@@ -1,11 +1,12 @@
 import { Client, Message, MessageEmbed } from "discord.js";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+import { DiscordSecrets } from "../secrets/discord-secrets";
 
 class Help implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.everyone;
-    description: "replies to the member with the commands for the server";
-    usage?: "<?command>";
+  props = {
+    requiresElevation: ElevationTypes.everyone,
+    description: "replies to the member with the commands for the server",
+    usage: "<?command>"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

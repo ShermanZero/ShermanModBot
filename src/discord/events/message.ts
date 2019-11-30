@@ -4,8 +4,9 @@ import * as path from "path";
 
 import blacklist from "../../shared/resources/blacklist";
 import rsrc from "../discord-resources";
-import { MemberConfigType } from "../types/@member_config";
-import { GuildConfigType } from "../types/@guild_config";
+import { MemberConfigType } from "../@interfaces/@member_config";
+import { GuildConfigType } from "../@interfaces/@guild_config";
+import { DiscordSecrets } from "../secrets/discord-secrets";
 
 module.exports = async (client: Client, message: Message): Promise<boolean> => {
   //ignore all bots

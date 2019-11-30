@@ -5,6 +5,7 @@ import "colors";
 import { Client } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
+import { DiscordSecrets } from "./discord/secrets/discord-secrets";
 
 let client: Client = new Client();
 loadEventsAndCommands();
@@ -38,7 +39,7 @@ function loadEventsAndCommands(): void {
 
     files.forEach(function(file) {
       if (!file.endsWith(".js")) return;
-      let event = require(path.join(eventsPath, file)) as Function;
+      let event = require(path.join(eventsPath, file));
       let eventName = file.split(".")[0];
 
       `--registering event ${eventName}`.print();
@@ -54,19 +55,20 @@ function loadEventsAndCommands(): void {
       return;
     }
 
-    files.forEach(function(file) {
+    files.forEach(async function(file) {
       if (!file.endsWith(".js")) return;
 
-      let command: any = require(path.join(commandsPath, file)) as Function;
+      let command = await import(path.join(commandsPath, file));
       let commandName = file.split(".")[0];
 
       `--registering command ${commandName.cyan}`.print();
+      `  ${command}`.highlight(true);
 
       //store the command
       client.commands.set(commandName, command);
 
       //store the aliases as well
-      command.aliases?.forEach((alias: string) => {
+      command.props?.aliases?.forEach((alias: string) => {
         client.aliases.set(alias, commandName);
       });
 

@@ -4,13 +4,13 @@ import * as path from "path";
 
 import rsrc from "../discord-resources";
 import GuildConfig from "../configs/guild_config";
-import { CommandType } from "../types/@commands";
-import { GuildConfigType } from "../types/@guild_config";
+import { CommandType } from "../@interfaces/@commands";
+import { GuildConfigType } from "../@interfaces/@guild_config";
 
 class Configure implements CommandType {
-  props: {
-    description: "sets up the discord bot for the server";
-    aliases?: ["config"];
+  props = {
+    description: "sets up the discord bot for the server",
+    aliases: ["config"]
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

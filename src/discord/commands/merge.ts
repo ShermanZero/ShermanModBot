@@ -4,13 +4,13 @@ import * as path from "path";
 import * as rimraf from "rimraf";
 
 import rsrc from "../discord-resources";
-import { CommandType, ElevationTypes } from "../types/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
 class Merge implements CommandType {
-  props: {
-    requiresElevation?: ElevationTypes.botowner;
-    description: "merges a member's data into a new member";
-    usage?: "<old username> <new username>";
+  props = {
+    requiresElevation: ElevationTypes.botowner,
+    description: "merges a member's data into a new member",
+    usage: "<old username> <new username>"
   };
 
   async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {

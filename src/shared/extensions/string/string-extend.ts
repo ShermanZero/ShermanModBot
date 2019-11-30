@@ -4,7 +4,7 @@ import * as path from "path";
 
 import { BuildOptions } from "../../..";
 import rsrc from "../../../discord/discord-resources";
-import { MemberConfigType } from "../../../discord/types/@member_config";
+import { MemberConfigType } from "../../../discord/@interfaces/@member_config";
 
 String.prototype.hideID = function(username?: string): string {
   if (!username) username = String(this);

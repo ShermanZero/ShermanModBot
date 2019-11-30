@@ -20,23 +20,23 @@ export default class ExitHandler {
     process.on("exit" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
 
     //catches ctrl-c event
-    process.on("SIGINT" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
+    //    process.on("SIGINT" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
 
     //catches kill pid
-    process.on("SIGUSR1" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
-    process.on("SIGUSR2" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
+    //    process.on("SIGUSR1" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
+    //    process.on("SIGUSR2" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
 
     //catches uncaught exceptions
     process.on("uncaughtException" as any, (e: Error) => {
-      "Uncaught exception:".error(true);
-      e.stack.red.dim.error(true);
+      "Uncaught exception (not fatal)".error(true);
+      e.stack.red.dim.print(true);
       return false;
     });
 
     //catch unhandled promise rejections
     process.on("unhandledRejection" as any, (e: Error) => {
-      "Unhandled rejection:".error(true);
-      e.stack.dim.dim.error(true);
+      "Unhandled rejection (not fatal)".error(true);
+      e.stack.red.dim.print(true);
       return false;
     });
 

@@ -1,13 +1,13 @@
-import { Client, Guild, Message } from "discord.js";
-import * as fs from "fs";
-import * as path from "path";
+import { Client, Guild, Message } from 'discord.js';
+import * as fs from 'fs';
+import * as path from 'path';
 
-import { BuildOptions } from "../..";
-import boot from "../../shared/resources/boot";
-import rsrc from "../discord-resources";
-import TwitchIntegration from "../../twitch/twitchIntegration";
-import exitHandler from "../handlers/exitHandler";
-import { DiscordSecrets } from "../secrets/discord-secrets";
+import { BuildOptions } from '../..';
+import boot from '../../shared/resources/boot';
+import TwitchIntegration from '../../twitch/twitchIntegration';
+import rsrc from '../discord-resources';
+import exitHandler from '../handlers/exitHandler';
+import { DiscordSecrets } from '../secrets/discord-secrets';
 
 module.exports = async (client: Client): Promise<boolean> => {
   boot.red.print();
@@ -20,21 +20,19 @@ module.exports = async (client: Client): Promise<boolean> => {
   }
 
   let commandArray: string[] = [...client.commands.keys()].sort();
-  `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green} ${"[@moderator]".yellow} ${"[@owner]".red} ${"[@botowner]".cyan}`.print();
+  `Loaded ${commandArray.length.toString().magenta} command(s) [${"@everyone".green}] [${"@moderator".yellow}] [${"@owner".red}] [${"@botowner".cyan}]`.print();
 
   for (let i = 0; i < commandArray.length; i++) {
     let commandName = commandArray[i];
 
     let command = client.getCommand(commandName);
 
-    if (command.props.requiresElevation) {
-      if (command.props.requiresElevation === client.discordConfig.elevation_names.moderator) {
-        commandName = commandName.yellow;
-      } else if (command.props.requiresElevation === client.discordConfig.elevation_names.owner) {
-        commandName = commandName.red;
-      } else if (command.props.requiresElevation === client.discordConfig.elevation_names.botowner) {
-        commandName = commandName.cyan;
-      }
+    if (command.props.requiresElevation === client.discordConfig.elevation_names.moderator) {
+      commandName = commandName.yellow;
+    } else if (command.props.requiresElevation === client.discordConfig.elevation_names.owner) {
+      commandName = commandName.red;
+    } else if (command.props.requiresElevation === client.discordConfig.elevation_names.botowner) {
+      commandName = commandName.cyan;
     } else {
       commandName = commandName.green;
     }

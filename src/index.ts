@@ -5,7 +5,9 @@ import "colors";
 import { Client } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
+
 import { DiscordSecrets } from "./discord/secrets/discord-secrets";
+import { CommandType } from "./discord/@interfaces/@commands";
 
 let client: Client = new Client();
 loadEventsAndCommands();
@@ -58,18 +60,18 @@ function loadEventsAndCommands(): void {
     files.forEach(async function(file) {
       if (!file.endsWith(".js")) return;
 
-      let command = await import(path.join(commandsPath, file));
+      let command = (await import(path.join(commandsPath, file))) as CommandType;
       let commandName = file.split(".")[0];
 
       `--registering command ${commandName.cyan}`.print();
       `  ${command}`.highlight(true);
 
       //store the command
-      client.commands.set(commandName, command);
+      client.addCommand(commandName, command);
 
       //store the aliases as well
-      command.props?.aliases?.forEach((alias: string) => {
-        client.aliases.set(alias, commandName);
+      command["properties"].aliases?.forEach((alias: string) => {
+        client.addAlias(commandName, alias);
       });
 
       "--completed".success();

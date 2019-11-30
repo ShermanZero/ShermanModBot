@@ -1,15 +1,13 @@
 import { Client, Message } from "discord.js";
-import { MessageEmbed } from "discord.js";
+
 export interface CommandType {
-  props: {
-    requiresElevation?: ElevationTypes;
+  function: (client: Client, message: Message, ...args: any[]) => Promise<boolean>;
+  properties: {
+    elevation: boolean;
     description: string;
     usage?: string;
     aliases?: string[];
   };
-
-  run(client: Client, message: Message, ...args: any[]): Promise<boolean>;
-  getEmbed?(...args: any[]): MessageEmbed;
 }
 
 export enum ElevationTypes {

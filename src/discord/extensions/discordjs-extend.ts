@@ -5,6 +5,7 @@ import { Guild } from "discord.js";
 import { MemberConfigType } from "../@interfaces/@member_config";
 import { GuildConfigType } from "../@interfaces/@guild_config";
 import DiscordConfig from "../configs/discord_config";
+
 import { CommandType } from "../@interfaces/@commands";
 
 Discord.Client.prototype.defaultGuild = null;
@@ -17,29 +18,14 @@ Discord.Client.prototype.masterLog = new Array<string>();
 Discord.Client.prototype.ready = false;
 Discord.Client.prototype.alreadyShutdown = false;
 
-/**
- * Returns the gulid from the guild's name
- *
- * @param guildName the guild's name
- */
 Discord.Client.prototype.getGuild = function(guildName: string): any {
   return Discord.Client.prototype.members_in_session.get(guildName);
 };
 
-/**
- * Returns the guild config from the guild
- *
- * @param guild the Discord `Guild`
- */
 Discord.Client.prototype.getGuildConfig = function(guild: Guild): any {
   return Discord.Client.prototype.guild_configs.get(rsrc.getGuildNameFromGuild(guild));
 };
 
-/**
- * Updates the stored member data
- *
- * @param config the member's config
- */
 Discord.Client.prototype.updateMember = function(config: MemberConfigType): boolean {
   if (!config) {
     `Attempted to update with ${config}, but failed`.error();
@@ -62,11 +48,6 @@ Discord.Client.prototype.updateMember = function(config: MemberConfigType): bool
   return config !== null;
 };
 
-/**
- * Registers the member and stores them in the `Client`
- *
- * @param config the member's config
- */
 Discord.Client.prototype.registerMember = function(config: MemberConfigType): boolean {
   if (!config) return false;
 
@@ -80,11 +61,6 @@ Discord.Client.prototype.registerMember = function(config: MemberConfigType): bo
   return true;
 };
 
-/**
- * Hides a member's info (tag)
- *
- * @param config the member's config
- */
 Discord.Client.prototype.hideMemberInfo = function(config: MemberConfigType): any {
   Object.defineProperty(config, "hidden", {
     enumerable: false
@@ -93,13 +69,6 @@ Discord.Client.prototype.hideMemberInfo = function(config: MemberConfigType): an
   return config;
 };
 
-/**
- * Returns if the client has a member stored in the cache
- *
- * @param guild the Discord `Guild`
- * @param username the member's username
- * @param search (optional) whether or not to recursively search given an incomplete username
- */
 Discord.Client.prototype.hasMember = function(guild: Guild, username: string, search?: boolean): string {
   let memberGuild = Discord.Client.prototype.members_in_session.get(rsrc.getGuildNameFromGuild(guild));
   if (memberGuild === null || typeof memberGuild === "undefined") return null;
@@ -122,12 +91,6 @@ Discord.Client.prototype.hasMember = function(guild: Guild, username: string, se
   return String(member);
 };
 
-/**
- * Gets a stored member's config
- *
- * @param guild the Discord `Guild`
- * @param username the member's username
- */
 Discord.Client.prototype.getMemberConfig = function(guild: Guild, username: string): any {
   let guildName = rsrc.getGuildNameFromGuild(guild);
   let memberGuild = Discord.Client.prototype.members_in_session.get(guildName);
@@ -145,12 +108,6 @@ Discord.Client.prototype.getMemberConfig = function(guild: Guild, username: stri
   return memberGuild[username];
 };
 
-/**
- * Removes the member from the stored cache
- *
- * @param guild the Discord `Guild`
- * @param username the member's username
- */
 Discord.Client.prototype.removeMember = function(guild: Guild, username: string): boolean {
   let memberGuild = Discord.Client.prototype.members_in_session.get(rsrc.getGuildNameFromGuild(guild));
   if (memberGuild === null || typeof memberGuild === "undefined") return false;
@@ -160,12 +117,6 @@ Discord.Client.prototype.removeMember = function(guild: Guild, username: string)
   return true;
 };
 
-/**
- * Deletes a member completely from the server
- *
- * @param guild the Discord `Guild`
- * @param username the member's username
- */
 Discord.Client.prototype.deleteMember = function(guild: Guild, username: string): boolean {
   let passRemove: boolean = Discord.Client.prototype.removeMember(guild, username);
   let passDestroy: boolean = rsrc.destroyMemberDirectory(guild, username);
@@ -173,12 +124,17 @@ Discord.Client.prototype.deleteMember = function(guild: Guild, username: string)
   return passRemove && passDestroy;
 };
 
-/**
- * Returns a command stored in the cache
- *
- * @param commandName the command's name
- */
-Discord.Client.prototype.getCommand = function(commandName: string): any {
+Discord.Client.prototype.addCommand = function(commandName: string, command: CommandType): boolean {
+  Discord.Client.prototype.commands.set(commandName, command);
+  return true;
+};
+
+Discord.Client.prototype.addAlias = function(commandName: string, commandAlias: string): boolean {
+  Discord.Client.prototype.aliases.set(commandAlias, commandName);
+  return true;
+};
+
+Discord.Client.prototype.getCommand = function(commandName: string): CommandType {
   `Attempting to retrieve command [${commandName.cyan}]`.print();
   let command = Discord.Client.prototype.commands.get(commandName);
 
@@ -192,4 +148,18 @@ Discord.Client.prototype.getCommand = function(commandName: string): any {
   if (command) `Successfully located command: ${command}`.success();
 
   return command;
+};
+
+Discord.Client.prototype.getCommandFunction = function(commandName: string): CommandType["function"] {
+  let command = Discord.Client.prototype.getCommand(commandName);
+
+  if (command) return command["function"];
+  return null;
+};
+
+Discord.Client.prototype.getCommandProperties = function(commandName: string): CommandType["properties"] {
+  let command = Discord.Client.prototype.getCommand(commandName);
+
+  if (command) return command["properties"];
+  return null;
 };

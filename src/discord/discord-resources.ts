@@ -112,8 +112,9 @@ export default class DiscordResources {
         return null;
       }
 
-      guild = message.guild as Guild;
+      guild = message.guild;
     }
+
     username = username.trim().toLowerCase();
 
     let jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
@@ -228,7 +229,7 @@ export default class DiscordResources {
       return null;
     }
 
-    let entries = Object.entries(client.members_in_session);
+    let entries = Object.entries(client.membersInSession);
 
     for (const [guildname, users] of entries) if (guildname == this.getGuildNameFromGuild(guild)) return users;
 

@@ -5,7 +5,7 @@ import rsrc from "../discord-resources";
 module.exports = async (client: any, member: GuildMember): Promise<boolean> => {
   const guild = member.guild;
 
-  let guildConfig = client.guild_configsp[rsrc.getGuildNameFromGuild(member.guild)];
+  let guildConfig = client.guild_configs[rsrc.getGuildNameFromGuild(member.guild)];
 
   const defaultChannel = guild.channels.get(guildConfig.channels.default);
   if (!(defaultChannel as TextChannel)) return false;

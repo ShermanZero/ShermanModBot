@@ -1,9 +1,9 @@
 import { DiscordConfigType } from "../@interfaces/@discord_config";
 
 export default class DiscordConfig implements DiscordConfigType {
-  status: "dead | !help";
-  prefix: "!";
-  verbose: true;
+  status = "dead | !help";
+  prefix = "!";
+  verbose = true;
 
   elevation_names = {
     botowner: "botowner",

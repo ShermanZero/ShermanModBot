@@ -2,7 +2,7 @@ import { Client, Message } from "discord.js";
 import * as path from "path";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.botowner,
   description: "reloads a command",
   usage: "<command>"
@@ -26,8 +26,8 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 
   //delete and reload the command from the client.commands Enmap
   client.commands.delete(commandName);
-  const props = require(path.join(__dirname, commandName + ".js"));
-  client.commands.set(commandName, props);
+  const properties = require(path.join(__dirname, commandName + ".js"));
+  client.commands.set(commandName, properties);
 
   await message.reply(`the command "${commandName}" has been reloaded`);
 
@@ -35,4 +35,4 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 };
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

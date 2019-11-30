@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 import rsrc from "../discord-resources";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.moderator,
   description: "creates a movie invite",
   usage: "<?done>",
@@ -116,4 +116,4 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 };
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

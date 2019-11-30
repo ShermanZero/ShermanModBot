@@ -8,6 +8,7 @@ import * as path from "path";
 
 import { DiscordSecrets } from "./discord/secrets/discord-secrets";
 import { CommandType } from "./discord/@interfaces/@commands";
+import DiscordConfig from "./discord/configs/discord_config";
 
 let client: Client = new Client();
 loadEventsAndCommands();
@@ -44,7 +45,7 @@ function loadEventsAndCommands(): void {
       let event = await import(path.join(eventsPath, file));
       let eventName = file.split(".")[0];
 
-      `--registering event ${eventName}`.print();
+      `--registering ${"@event".red} ${eventName.cyan}`.print();
       client.on(eventName, event.bind(null, client));
       delete require.cache[require.resolve(path.join(eventsPath, file))];
     });
@@ -57,13 +58,18 @@ function loadEventsAndCommands(): void {
       return;
     }
 
+    let prefix = new DiscordConfig().prefix;
     files.forEach(async function(file) {
       if (!file.endsWith(".js")) return;
 
-      let command = (await import(path.join(commandsPath, file))) as CommandType;
       let commandName = file.split(".")[0];
+      let command = (await import(path.join(commandsPath, file))) as CommandType;
 
-      `--registering command ${commandName.cyan}`.print();
+      `--registering ${(prefix + "command").yellow} ${commandName.cyan}`.print();
+      console.log("  properties".green, JSON.stringify(command["properties"]));
+      console.log("  run".cyan, command["run"]);
+      console.log("  custom".yellow, command["custom"]);
+
       client.addCommand(commandName, command);
       "--completed".success();
     });

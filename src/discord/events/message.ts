@@ -5,7 +5,7 @@ import * as path from "path";
 import blacklist from "../../shared/resources/blacklist";
 import rsrc from "../discord-resources";
 import { MemberConfigType } from "../@interfaces/@member_config";
-import { GuildConfigType } from "../@interfaces/@guild_config";
+import { GuildConfigType, guildConfigFileName } from "../@interfaces/@guild_config";
 import { DiscordSecrets } from "../secrets/discord-secrets";
 
 module.exports = async (client: Client, message: Message): Promise<boolean> => {
@@ -56,7 +56,7 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
 
   let guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
 
-  let guildConfigFile = path.resolve(guildDir, "guild_config.json");
+  let guildConfigFile = path.resolve(guildDir, guildConfigFileName);
   let guildConfig: GuildConfigType;
   if (fs.existsSync(guildConfigFile)) guildConfig = require(guildConfigFile);
 

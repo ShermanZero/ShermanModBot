@@ -1,7 +1,7 @@
 import { Client, Message, TextChannel } from "discord.js";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.moderator,
   description: "removes a maximum of 100 messages from a channel",
   usage: "<?amount> <?member>"
@@ -36,4 +36,4 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 };
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

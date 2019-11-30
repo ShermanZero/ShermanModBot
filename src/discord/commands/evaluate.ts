@@ -1,7 +1,7 @@
 import { Client, Message } from "discord.js";
 import { ElevationTypes, CommandType } from "../@interfaces/@commands";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.administrator,
   description: "runs a line of javascript",
   usage: "<javascript>",
@@ -34,4 +34,4 @@ function clean(text: any): string {
 }
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

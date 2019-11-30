@@ -6,7 +6,7 @@ import * as rimraf from "rimraf";
 import rsrc from "../discord-resources";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.botowner,
   description: "merges a member's data into a new member",
   usage: "<old username> <new username>"
@@ -52,7 +52,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
     if (err) err.stack.error();
   });
 
-  client.members_in_session.delete(oldMember);
+  client.membersInSession.delete(oldMember);
   `*Removed [${oldMember}] from session`.warning(true);
 
   if (message) await message.delete();
@@ -61,4 +61,4 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 };
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

@@ -7,9 +7,9 @@ import { Guild } from "discord.js";
 declare module "discord.js" {
   interface Client {
     /**
-     * The default guild
+     * The master guild
      */
-    defaultGuild: Guild;
+    masterGuild: string;
     /**
      * The DiscordConfig file
      */
@@ -17,11 +17,11 @@ declare module "discord.js" {
     /**
      * A map of all members in the session
      */
-    members_in_session: Map<string, any>;
+    membersInSession: Map<string, Map<string, MemberConfigType>>;
     /**
      * A map of all the guild configurations
      */
-    guild_configs: Map<string, GuildConfigType>;
+    guildsInSession: Map<string, GuildConfigType>;
     /**
      * A map of all the global commands
      */
@@ -44,17 +44,24 @@ declare module "discord.js" {
     alreadyShutdown: boolean;
 
     /**
-     * Returns the gulid from the guild's name
+     * Registers a guild with the stored cache
+     *
+     * @param guildConfig the guild config object
+     */
+    registerGuild(guildname: string, guildConfig: GuildConfigType): boolean;
+    /**
+     * Returns the cached guild from the name
      *
      * @param guildName the guild's name
      */
-    getGuild(guildname: string): string;
+    getGuildMembers(guildname: string): Map<string, MemberConfigType>;
     /**
      * Returns the guild config from the guild
      *
      * @param guild the Discord `Guild`
      */
     getGuildConfig(guild: Guild): GuildConfigType;
+
     /**
      * Updates the stored member data
      *
@@ -72,7 +79,7 @@ declare module "discord.js" {
      *
      * @param config the member's config
      */
-    hideMemberInfo(config: MemberConfigType): any;
+    hideMemberInfo(config: MemberConfigType): MemberConfigType;
     /**
      * Returns if the client has a member stored in the cache
      *

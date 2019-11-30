@@ -5,9 +5,9 @@ import * as path from "path";
 import rsrc from "../discord-resources";
 import GuildConfig from "../configs/guild_config";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
-import { GuildConfigType } from "../@interfaces/@guild_config";
+import { GuildConfigType, guildConfigFileName } from "../@interfaces/@guild_config";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.administrator,
   description: "sets up the discord bot for the server",
   aliases: ["config"]
@@ -26,7 +26,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
     return false;
   }
 
-  let configFile = path.resolve(guildDir, "guild_config.json");
+  let configFile = path.resolve(guildDir, guildConfigFileName);
   if (!fs.existsSync(configFile)) await message.reply("you don't appear to have a configuration set up for your guild, let's create one");
 
   let guildConfig: GuildConfig = new GuildConfig();
@@ -41,7 +41,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
   await getChannel(guildConfig, client.discordConfig.channel_names.mod_logs, "mod logs", "log any moderation action taken by mods and me", message);
 
   guildConfig.setup = true;
-  client.guild_configs.set(rsrc.getGuildNameFromGuild(message.guild), guildConfig);
+  client.guildsInSession.set(rsrc.getGuildNameFromGuild(message.guild), guildConfig);
 
   //create the config file
   fs.writeFile(configFile, JSON.stringify(guildConfig, null, "\t"), error => {
@@ -115,4 +115,4 @@ async function getRole(guildConfig: GuildConfigType, nameOfRole: string, message
 }
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

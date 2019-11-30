@@ -4,6 +4,7 @@ import * as path from "path";
 import TwitchClient from "twitch";
 import ChatClient from "twitch-chat-client";
 import { TwitchSecrets } from "./secrets/twitch-secrets";
+import { MemberConfigType } from "../discord/@interfaces/@member_config";
 
 /**
  * The class for integrating the bot with Twitch
@@ -46,14 +47,15 @@ export default class TwitchIntegration {
     chatClient.onPrivmsg((channel: string, username: string, message: string) => {
       if (message.indexOf(TwitchConfig.prefix) !== 0) return;
 
-      let guildUsername: string = client.hasMember(client.defaultGuild, username, true);
-      let MemberConfig;
+      let masterGuild = client.guilds.get(client.masterGuild);
+      let guildUsername: string = client.hasMember(masterGuild, username, true);
+      let MemberConfig: MemberConfigType;
 
       if (guildUsername) {
-        MemberConfig = client.getMemberConfig(client.defaultGuild, guildUsername);
+        MemberConfig = client.getMemberConfig(masterGuild, guildUsername);
 
         let logMessage = `Member ${String(MemberConfig.hidden.username).magenta} just posted "${message.magenta}" in Twitch chat`;
-        logMessage.memberLog(client, client.defaultGuild, MemberConfig, "INSERT TWITCH LOG THINGY HERE");
+        logMessage.memberLog(client, client.masterGuild, MemberConfig, "INSERT TWITCH LOG THINGY HERE");
         logMessage.print(true);
       }
 

@@ -1,7 +1,8 @@
-import { GuildConfigType } from "../@interfaces/@guild_config";
+import { GuildConfigType, MemberName } from "../@interfaces/@guild_config";
 
 export default class GuildConfig implements GuildConfigType {
   setup: boolean;
+  members: Array<MemberName>;
 
   roles: {
     [key: string]: string;

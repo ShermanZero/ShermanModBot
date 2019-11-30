@@ -1,7 +1,7 @@
 import { Client, Message } from "discord.js";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.botowner,
   description: "shuts the bot down cleanly"
 };
@@ -14,4 +14,4 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 };
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

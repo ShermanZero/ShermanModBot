@@ -7,8 +7,8 @@ import boot from "../../shared/resources/boot";
 import TwitchIntegration from "../../twitch/twitchIntegration";
 import rsrc from "../discord-resources";
 import exitHandler from "../handlers/exitHandler";
-import { DiscordSecrets } from "../secrets/discord-secrets";
 import { ElevationTypes } from "../@interfaces/@commands";
+import { GuildConfigType, guildConfigFileName } from "../@interfaces/@guild_config";
 
 module.exports = async (client: Client): Promise<boolean> => {
   client.user.setActivity(client.discordConfig.status);
@@ -27,7 +27,10 @@ module.exports = async (client: Client): Promise<boolean> => {
   }
 
   let commandArray: string[] = [...client.commands.keys()].sort();
-  `Loaded ${commandArray.length.toString().magenta} command(s) [${"@everyone".green}] [${"@moderator".yellow}] [${"@owner".red}] [${"@botowner".cyan}]`.print();
+
+  `Loaded ${commandArray.length.toString().magenta} command(s) [${("@" + ElevationTypes.everyone).toLowerCase().green}] [${
+    ("@" + ElevationTypes.moderator).toLowerCase().yellow
+  }] [${("@" + ElevationTypes.administrator).toLowerCase().red}] [${("@" + ElevationTypes.botowner).toLowerCase().cyan}]`.print();
 
   for (let i = 0; i < commandArray.length; i++) {
     let commandName = commandArray[i];
@@ -49,9 +52,7 @@ module.exports = async (client: Client): Promise<boolean> => {
 
   "...".print();
 
-  client.guilds.forEach((guild: Guild) => {
-    if (guild.id === DiscordSecrets.guild_id) client.defaultGuild = guild;
-
+  client.guilds.forEach(async (guild: Guild) => {
     let guildDir = rsrc.getGuildDirectoryFromGuild(guild);
 
     if (!fs.existsSync(guildDir)) {
@@ -60,31 +61,36 @@ module.exports = async (client: Client): Promise<boolean> => {
         recursive: true
       });
     }
-    let guildName = rsrc.getGuildNameFromGuild(guild);
+    let guildname = rsrc.getGuildNameFromGuild(guild);
 
     //set the guild data to to the guild name
-    client.members_in_session.set(guildName, null);
-    client.guild_configs.set(guildName, null);
+    client.guildsInSession.set(guildname, null);
 
-    let guildConfig = path.resolve(guildDir, "guild_config.json");
-    if (fs.existsSync(guildConfig)) client.guild_configs.set(guildName, require(guildConfig));
+    let guildConfigFile = path.resolve(guildDir, guildConfigFileName);
+    if (fs.existsSync(guildConfigFile)) {
+      let guildConfig = (await import(guildConfigFile)) as GuildConfigType;
+      client.registerGuild(guildname, guildConfig);
+    }
 
-    `*Registered [${guildName.magenta}] to session --- looking for existing members:`.print();
+    `*Registered [${guildname.magenta}] to session --- looking for existing members:`.print();
 
     fs.readdirSync(guildDir).forEach(dir => {
       let username = dir;
 
-      //if the client does not have the member registered
+      //ignore the removed directory
+      if (username === ".removed") return;
+
+      //if the client does not have the member registered in the cache (but their directory exists)
       if (!client.hasMember(guild, username)) {
-        const response = rsrc.getMemberConfigFromNameWithGuild(client, guild, (null as unknown) as Message, username);
-        if (!response) return;
+        const memberConfig = rsrc.getMemberConfigFromNameWithGuild(client, guild, (null as unknown) as Message, username);
+        if (!memberConfig) return;
 
         process.stdout.write("  ");
-        client.registerMember(response);
+        client.registerMember(memberConfig);
       }
     });
 
-    `Found all existing members of [${guildName.magenta}] (currently ${Object.keys(client.getGuild(guildName)).length.toString().green})`.print();
+    `Found all existing members of [${guildname.magenta}] (currently ${Object.keys(client.getGuildMembers(guildname)).length.toString().green})`.print();
   });
 
   let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`

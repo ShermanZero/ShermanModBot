@@ -2,7 +2,7 @@ import { Client, Message, MessageEmbed } from "discord.js";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 import { DiscordSecrets } from "../secrets/discord-secrets";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.everyone,
   description: "replies to the member with the commands for the server",
   usage: "<?command>"
@@ -18,20 +18,20 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
   let guildConfig = client.getGuildConfig(message.guild);
 
   client.commands.forEach((value: any, key: string) => {
-    if (!value.props || !message.member) return;
+    if (!value.properties || !message.member) return;
 
-    let elevatedPermissions = value.props.requiresElevation && message.member.roles.get(guildConfig.roles[value.props.requiresElevation]) !== null;
-    let noPermissions = !value.props.requiresElevation || value.props.requiresElevation === "";
+    let elevatedPermissions = value.properties.requiresElevation && message.member.roles.get(guildConfig.roles[value.properties.requiresElevation]) !== null;
+    let noPermissions = !value.properties.requiresElevation || value.properties.requiresElevation === "";
 
     if (message.member.user.id === DiscordSecrets.botowner) elevatedPermissions = true;
 
     if (elevatedPermissions || noPermissions) {
       let header = "**!" + key + "**";
 
-      let desc = value.props.description;
-      if (value.props.usage) header += `\n\t*!${key} ${value.props.usage}*`;
+      let desc = value.properties.description;
+      if (value.properties.usage) header += `\n\t*!${key} ${value.properties.usage}*`;
 
-      if (elevatedPermissions && !noPermissions) desc += `  \`\`\`css\n[${value.props.requiresElevation}]\`\`\``;
+      if (elevatedPermissions && !noPermissions) desc += `  \`\`\`css\n[${value.properties.requiresElevation}]\`\`\``;
 
       embed.addField(header, desc, true);
     }
@@ -43,4 +43,4 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 };
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

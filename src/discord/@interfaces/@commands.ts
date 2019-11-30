@@ -2,7 +2,7 @@ import { Client, Message } from "discord.js";
 
 export interface CommandType {
   run: (client: Client, message: Message, ...args: any[]) => Promise<boolean>;
-  custom: {
+  custom?: {
     [index: string]: any;
     nameOfFunction?: (client: Client, ...args: any[]) => any;
   };

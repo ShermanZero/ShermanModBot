@@ -1,7 +1,7 @@
 import { Client, Message, Role, TextChannel } from "discord.js";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.moderator,
   description: "grants a member access to the private-hangout channel",
   usage: "<@member>",
@@ -42,4 +42,4 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 };
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

@@ -6,7 +6,7 @@ import rsrc from "../discord-resources";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 import { MemberConfigType } from "../@interfaces/@member_config";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.botowner,
   description: "restarts the bot cleanly"
 };
@@ -20,7 +20,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, memberT
   client.alreadyShutdown = true;
   "Attempting to restart cleanly...".mention();
 
-  let entries = Object.entries(client.members_in_session);
+  let entries = Object.entries(client.membersInSession);
   for (const [, members] of entries) {
     let allMembers = Object.entries(members);
 
@@ -46,4 +46,4 @@ const run: CommandType["run"] = async (client: Client, message: Message, memberT
 };
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

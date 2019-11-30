@@ -5,7 +5,7 @@ import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 import MemberConfig from "../configs/member_config";
 import { MemberConfigType } from "../@interfaces/@member_config";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.everyone,
   description: "replies with your current server stats",
   usage: "<?@user | username>"
@@ -31,13 +31,13 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
     return false;
   }
 
-  await message.channel.send(embed.embed(client, member, memberConfig));
+  await message.channel.send(custom.embed(client, member, memberConfig));
   await message.delete();
 
   return true;
 };
 
-const embed: CommandType["custom"] = {
+const custom: CommandType["custom"] = {
   embed: (client: Client, member: GuildMember, config: MemberConfigType): MessageEmbed => {
     let name = "**" + config.hidden.username.substring(0, config.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
     let rankColor = member.guild.roles.find(role => role.name === config.rank.name)?.color;
@@ -88,7 +88,7 @@ function getFormattedNumber(number: number) {
  * @param {*} config the member's config
  */
 function calculatePosition(client: Client, config: MemberConfig): string {
-  let guild = client.getGuild(config.hidden.guildname);
+  let guild = client.getGuildMembers(config.hidden.guildname);
   let membersHigher = 0;
 
   let entries = Object.entries(guild);
@@ -98,5 +98,5 @@ function calculatePosition(client: Client, config: MemberConfig): string {
 }
 
 module.exports.run = run;
-module.exports.props = props;
-module.exports.embed = embed;
+module.exports.properties = properties;
+module.exports.embed = custom;

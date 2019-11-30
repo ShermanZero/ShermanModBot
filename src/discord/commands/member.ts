@@ -4,7 +4,7 @@ import rsrc from "../discord-resources";
 import { MemberConfigType } from "../@interfaces/@member_config";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
-const props: CommandType["properties"] = {
+const properties: CommandType["properties"] = {
   elevation: ElevationTypes.moderator,
   description: "displays a member's data",
   usage: "<@member | username>"
@@ -49,4 +49,4 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
 };
 
 module.exports.run = run;
-module.exports.props = props;
+module.exports.properties = properties;

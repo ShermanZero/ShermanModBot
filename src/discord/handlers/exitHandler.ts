@@ -28,15 +28,15 @@ export default class ExitHandler {
 
     //catches uncaught exceptions
     process.on("uncaughtException" as any, (e: Error) => {
-      "Uncaught exception (not fatal)".error(true);
-      e.stack.red.dim.print(true);
+      "Uncaught exception (not fatal)".error();
+      e.stack.red.dim.print();
       return false;
     });
 
     //catch unhandled promise rejections
     process.on("unhandledRejection" as any, (e: Error) => {
-      "Unhandled rejection (not fatal)".error(true);
-      e.stack.red.dim.print(true);
+      "Unhandled rejection (not fatal)".error();
+      e.stack.red.dim.print();
       return false;
     });
 

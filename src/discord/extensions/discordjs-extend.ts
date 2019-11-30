@@ -126,6 +126,11 @@ Discord.Client.prototype.deleteMember = function(guild: Guild, username: string)
 
 Discord.Client.prototype.addCommand = function(commandName: string, command: CommandType): boolean {
   Discord.Client.prototype.commands.set(commandName, command);
+
+  command["properties"].aliases?.forEach((alias: string) => {
+    Discord.Client.prototype.addAlias(commandName, alias);
+  });
+
   return true;
 };
 
@@ -150,10 +155,17 @@ Discord.Client.prototype.getCommand = function(commandName: string): CommandType
   return command;
 };
 
-Discord.Client.prototype.getCommandFunction = function(commandName: string): CommandType["function"] {
+Discord.Client.prototype.getCommandRun = function(commandName: string): CommandType["run"] {
   let command = Discord.Client.prototype.getCommand(commandName);
 
-  if (command) return command["function"];
+  if (command) return command["run"];
+  return null;
+};
+
+Discord.Client.prototype.getCommandCustom = function(commandName: string, customFunction: string): CommandType["custom"]["nameOfFunction"] {
+  let command = Discord.Client.prototype.getCommand(commandName);
+
+  if (command) return command["custom"][customFunction];
   return null;
 };
 

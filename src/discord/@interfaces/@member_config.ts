@@ -3,8 +3,8 @@ export interface MemberConfigType {
 
   hidden: {
     [key: string]: string;
-    username: string;
-    guildname: string;
+    username: string | null;
+    guildname: string | null;
   };
 
   rank: {
@@ -16,12 +16,14 @@ export interface MemberConfigType {
   };
 
   misc: {
-    joined: string;
-    first_message: string;
+    [key: string]: string | number;
+    joined: string | null;
+    first_message: string | null;
     warnings: number;
   };
 
   race: {
+    [key: string]: number;
     wins: number;
   };
 }

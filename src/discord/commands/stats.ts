@@ -5,40 +5,40 @@ import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 import MemberConfig from "../configs/member_config";
 import { MemberConfigType } from "../@interfaces/@member_config";
 
-class Stats implements CommandType {
-  props = {
-    requiresElevation: ElevationTypes.everyone,
-    description: "replies with your current server stats",
-    usage: "<?@user | username>"
-  };
+const props: CommandType["properties"] = {
+  elevation: ElevationTypes.everyone,
+  description: "replies with your current server stats",
+  usage: "<?@user | username>"
+};
 
-  async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {
-    let username: string = rsrc.getUsernameFromMessage(message);
-    let memberConfig = client.getMemberConfig(message.guild, username);
-    let member: GuildMember = message.member as GuildMember;
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+  let username: string = rsrc.getUsernameFromMessage(message);
+  let memberConfig = client.getMemberConfig(message.guild, username);
+  let member: GuildMember = message.member as GuildMember;
 
-    if (message.mentions?.members?.size !== 0) {
-      member = message.mentions.members.first();
-      username = rsrc.getUsernameFromMember(member);
-      memberConfig = rsrc.getMemberConfigFromName(client, message, username);
-    } else if (args.length === 1) {
-      memberConfig = rsrc.getMemberConfigFromNameWithGuild(client, message.guild, message, args[0], true);
-      username = memberConfig?.hidden?.username;
-    }
-
-    if (!memberConfig) {
-      await message.delete();
-      await message.reply(`they do not yet have any stats :( they need to post a message in the server to be registered by me`);
-      return false;
-    }
-
-    await message.channel.send(this.getEmbed(client, member, memberConfig));
-    await message.delete();
-
-    return true;
+  if (message.mentions?.members?.size !== 0) {
+    member = message.mentions.members.first();
+    username = rsrc.getUsernameFromMember(member);
+    memberConfig = rsrc.getMemberConfigFromName(client, message, username);
+  } else if (args.length === 1) {
+    memberConfig = rsrc.getMemberConfigFromNameWithGuild(client, message.guild, message, args[0], true);
+    username = memberConfig?.hidden?.username;
   }
 
-  getEmbed(client: Client, member: GuildMember, config: MemberConfigType): MessageEmbed {
+  if (!memberConfig) {
+    await message.delete();
+    await message.reply(`they do not yet have any stats :( they need to post a message in the server to be registered by me`);
+    return false;
+  }
+
+  await message.channel.send(embed.embed(client, member, memberConfig));
+  await message.delete();
+
+  return true;
+};
+
+const embed: CommandType["custom"] = {
+  embed: (client: Client, member: GuildMember, config: MemberConfigType): MessageEmbed => {
     let name = "**" + config.hidden.username.substring(0, config.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
     let rankColor = member.guild.roles.find(role => role.name === config.rank.name)?.color;
 
@@ -70,7 +70,7 @@ class Stats implements CommandType {
 
     return embed;
   }
-}
+};
 
 /**
  * Returns a comma-separated number
@@ -97,4 +97,6 @@ function calculatePosition(client: Client, config: MemberConfig): string {
   return "*RANK #" + (membersHigher + 1) + "*";
 }
 
-module.exports = Stats;
+module.exports.run = run;
+module.exports.props = props;
+module.exports.embed = embed;

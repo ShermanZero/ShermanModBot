@@ -39,9 +39,9 @@ function loadEventsAndCommands(): void {
       return;
     }
 
-    files.forEach(function(file) {
+    files.forEach(async function(file) {
       if (!file.endsWith(".js")) return;
-      let event = require(path.join(eventsPath, file));
+      let event = await import(path.join(eventsPath, file));
       let eventName = file.split(".")[0];
 
       `--registering event ${eventName}`.print();
@@ -64,16 +64,7 @@ function loadEventsAndCommands(): void {
       let commandName = file.split(".")[0];
 
       `--registering command ${commandName.cyan}`.print();
-      `  ${command}`.highlight(true);
-
-      //store the command
       client.addCommand(commandName, command);
-
-      //store the aliases as well
-      command["properties"].aliases?.forEach((alias: string) => {
-        client.addAlias(commandName, alias);
-      });
-
       "--completed".success();
     });
   });

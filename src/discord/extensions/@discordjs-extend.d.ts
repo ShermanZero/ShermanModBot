@@ -103,7 +103,7 @@ declare module "discord.js" {
      */
     deleteMember(guild: Guild, username: string): boolean;
     /**
-     * Adds a command to the cache
+     * Adds a command to the cache, and automatically loads its aliases
      *
      * @param commandName the command's name
      * @param command the command as a `CommandType` object
@@ -127,7 +127,14 @@ declare module "discord.js" {
      *
      * @param commandName the command's name
      */
-    getCommandFunction(commandName: string): CommandType["function"];
+    getCommandRun(commandName: string): CommandType["run"];
+    /**
+     * Returns a command's custom function
+     *
+     * @param commandName the command's name
+     * @param customFunction the command's custom function
+     */
+    getCommandCustom(commandName: string, customFunction: string): CommandType["custom"]["nameOfFunction"];
     /**
      * Returns a command's properties
      *

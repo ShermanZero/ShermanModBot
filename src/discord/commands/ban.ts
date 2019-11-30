@@ -1,6 +1,13 @@
 import { Client, GuildMember, Message, TextChannel } from "discord.js";
 
-import { CommandType } from "../@interfaces/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
+
+const props: CommandType["properties"] = {
+  elevation: ElevationTypes.moderator,
+  description: "",
+  usage: "",
+  aliases: null
+};
 
 const run: CommandType["function"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
   if (message.mentions?.members?.size === 0) {
@@ -15,13 +22,6 @@ const run: CommandType["function"] = async (client: Client, message: Message, ..
   await (message.guild.channels.get(modChannel) as TextChannel)?.send(`${banMember} was banned by ${message.author.tag} for reason: ${args.join(" ")}`);
 
   return true;
-};
-
-const props: CommandType["properties"] = {
-  elevation: true,
-  description: "",
-  usage: "",
-  aliases: null
 };
 
 module.exports.run = run;

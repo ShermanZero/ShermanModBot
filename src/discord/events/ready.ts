@@ -1,15 +1,18 @@
-import { Client, Guild, Message } from 'discord.js';
-import * as fs from 'fs';
-import * as path from 'path';
+import { Client, Guild, Message } from "discord.js";
+import * as fs from "fs";
+import * as path from "path";
 
-import { BuildOptions } from '../..';
-import boot from '../../shared/resources/boot';
-import TwitchIntegration from '../../twitch/twitchIntegration';
-import rsrc from '../discord-resources';
-import exitHandler from '../handlers/exitHandler';
-import { DiscordSecrets } from '../secrets/discord-secrets';
+import { BuildOptions } from "../..";
+import boot from "../../shared/resources/boot";
+import TwitchIntegration from "../../twitch/twitchIntegration";
+import rsrc from "../discord-resources";
+import exitHandler from "../handlers/exitHandler";
+import { DiscordSecrets } from "../secrets/discord-secrets";
+import { ElevationTypes } from "../@interfaces/@commands";
 
 module.exports = async (client: Client): Promise<boolean> => {
+  client.user.setActivity(client.discordConfig.status);
+
   boot.red.print();
 
   exitHandler.init(client);
@@ -17,6 +20,10 @@ module.exports = async (client: Client): Promise<boolean> => {
   if (BuildOptions.development) {
     let pad = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     `${pad.cyan} ${"DEV BUILD".green} ${pad.cyan}`.print();
+
+    client.user.setStatus("invisible");
+  } else {
+    client.user.setStatus("online");
   }
 
   let commandArray: string[] = [...client.commands.keys()].sort();
@@ -25,19 +32,19 @@ module.exports = async (client: Client): Promise<boolean> => {
   for (let i = 0; i < commandArray.length; i++) {
     let commandName = commandArray[i];
 
-    let command = client.getCommand(commandName);
+    let commandProps = client.getCommandProperties(commandName);
 
-    if (command.props.requiresElevation === client.discordConfig.elevation_names.moderator) {
+    if (commandProps.elevation === ElevationTypes.moderator) {
       commandName = commandName.yellow;
-    } else if (command.props.requiresElevation === client.discordConfig.elevation_names.owner) {
+    } else if (commandProps.elevation === ElevationTypes.administrator) {
       commandName = commandName.red;
-    } else if (command.props.requiresElevation === client.discordConfig.elevation_names.botowner) {
+    } else if (commandProps.elevation === ElevationTypes.botowner) {
       commandName = commandName.cyan;
     } else {
       commandName = commandName.green;
     }
 
-    `${("[" + commandName + "]").padEnd(30, ".")} ${command.props.description}`.print();
+    `${("[" + commandName + "]").padEnd(30, ".")} ${commandProps.description}`.print();
   }
 
   "...".print();
@@ -89,9 +96,6 @@ module.exports = async (client: Client): Promise<boolean> => {
 
   let twitch = new TwitchIntegration();
   await twitch.start(client);
-
-  client.user.setActivity(client.discordConfig.status);
-  client.user.setStatus(BuildOptions.development ? "invisible" : "online");
 
   client.ready = true;
 

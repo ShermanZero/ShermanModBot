@@ -1,31 +1,26 @@
 import { Client, Message } from "discord.js";
 import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 
-class Nickname implements CommandType {
-  props = {
-    requiresElevation: ElevationTypes.moderator,
-    description: "changes the nickname of a user",
-    usage: "<@member | username> <nickname>",
-    aliases: ["nick"]
-  };
+const props: CommandType["properties"] = {
+  elevation: ElevationTypes.moderator,
+  description: "changes the nickname of a user",
+  usage: "<@member | username> <nickname>",
+  aliases: ["nick"]
+};
 
-  async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {
-    if (message.mentions?.members?.size === 0) {
-      await message.reply("please mention a member to change their nickname");
-      return false;
-    }
-
-    const nickMember = message.mentions.members.first();
-    nickMember!.setNickname(args[1]);
-
-    await message.reply(`${nickMember}'s nickname has been changed!`);
-
-    return true;
+const run: CommandType["function"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+  if (message.mentions?.members?.size === 0) {
+    await message.reply("please mention a member to change their nickname");
+    return false;
   }
 
-  getEmbed?(...args: any[]): import("discord.js").MessageEmbed {
-    throw new Error("Method not implemented.");
-  }
-}
+  const nickMember = message.mentions.members.first();
+  nickMember!.setNickname(args[1]);
 
-module.exports = Nickname;
+  await message.reply(`${nickMember}'s nickname has been changed!`);
+
+  return true;
+};
+
+module.exports.run = run;
+module.exports.props = props;

@@ -4,57 +4,56 @@ import * as path from "path";
 
 import rsrc from "../discord-resources";
 import GuildConfig from "../configs/guild_config";
-import { CommandType } from "../@interfaces/@commands";
+import { CommandType, ElevationTypes } from "../@interfaces/@commands";
 import { GuildConfigType } from "../@interfaces/@guild_config";
 
-class Configure implements CommandType {
-  props = {
-    description: "sets up the discord bot for the server",
-    aliases: ["config"]
-  };
+const props: CommandType["properties"] = {
+  elevation: ElevationTypes.administrator,
+  description: "sets up the discord bot for the server",
+  aliases: ["config"]
+};
 
-  async run(client: Client, message: Message, ...args: any[]): Promise<boolean> {
-    if (!message.member.hasPermission("ADMINISTRATOR")) return false;
+const run: CommandType["function"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+  if (!message.member.hasPermission("ADMINISTRATOR")) return false;
 
-    let guildDir: string;
+  let guildDir: string;
 
-    if (message.guild) guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
-    else guildDir = null as any;
+  if (message.guild) guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
+  else guildDir = null as any;
 
-    if (!guildDir) {
-      await message.reply("you are not messaging me from a guild!");
-      return false;
-    }
-
-    let configFile = path.resolve(guildDir, "guild_config.json");
-    if (!fs.existsSync(configFile)) await message.reply("you don't appear to have a configuration set up for your guild, let's create one");
-
-    let guildConfig: GuildConfig = new GuildConfig();
-    await getRole(guildConfig, client.discordConfig.elevation_names.owner, message).then((result): any => {
-      if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
-    });
-    await getRole(guildConfig, client.discordConfig.elevation_names.moderator, message).then((result): any => {
-      if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
-    });
-
-    await getChannel(guildConfig, client.discordConfig.channel_names.default, "default/welcome", "welcome new members of the guild as they arrive", message);
-    await getChannel(guildConfig, client.discordConfig.channel_names.mod_logs, "mod logs", "log any moderation action taken by mods and me", message);
-
-    guildConfig.setup = true;
-    client.guild_configs.set(rsrc.getGuildNameFromGuild(message.guild), guildConfig);
-
-    //create the config file
-    fs.writeFile(configFile, JSON.stringify(guildConfig, null, "\t"), error => {
-      if (error) {
-        message.reply("there was a problem creating your config file, you will need to rerun the setup");
-      } else {
-        message.reply("your configuration has been stored!  You can rerun this setup at any time");
-      }
-    });
-
-    return true;
+  if (!guildDir) {
+    await message.reply("you are not messaging me from a guild!");
+    return false;
   }
-}
+
+  let configFile = path.resolve(guildDir, "guild_config.json");
+  if (!fs.existsSync(configFile)) await message.reply("you don't appear to have a configuration set up for your guild, let's create one");
+
+  let guildConfig: GuildConfig = new GuildConfig();
+  await getRole(guildConfig, client.discordConfig.elevation_names.owner, message).then((result): any => {
+    if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
+  });
+  await getRole(guildConfig, client.discordConfig.elevation_names.moderator, message).then((result): any => {
+    if (!result) return message.channel.send("You will need to rerun the setup before commands become available");
+  });
+
+  await getChannel(guildConfig, client.discordConfig.channel_names.default, "default/welcome", "welcome new members of the guild as they arrive", message);
+  await getChannel(guildConfig, client.discordConfig.channel_names.mod_logs, "mod logs", "log any moderation action taken by mods and me", message);
+
+  guildConfig.setup = true;
+  client.guild_configs.set(rsrc.getGuildNameFromGuild(message.guild), guildConfig);
+
+  //create the config file
+  fs.writeFile(configFile, JSON.stringify(guildConfig, null, "\t"), error => {
+    if (error) {
+      message.reply("there was a problem creating your config file, you will need to rerun the setup");
+    } else {
+      message.reply("your configuration has been stored!  You can rerun this setup at any time");
+    }
+  });
+
+  return true;
+};
 
 async function getChannel(guildConfig: GuildConfigType, nameOfChannel: string, alias: string, purpose: string, message: Message) {
   let channel: TextChannel;
@@ -115,4 +114,5 @@ async function getRole(guildConfig: GuildConfigType, nameOfRole: string, message
   return true;
 }
 
-module.exports = Configure;
+module.exports.run = run;
+module.exports.props = props;

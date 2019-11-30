@@ -1,4 +1,4 @@
-import { Client, Message, Role, TextChannel } from "discord.js";
+import { Client, Message, Role, TextChannel, MessageEmbed } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -48,10 +48,11 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
   if (!command) return false;
 
   //grab the command data from the client.commands Enmap
-  const cmd = client.getCommand(command);
+  const commandFunction = client.getCommandRun(command);
+  const commandProperties = client.getCommandProperties(command);
 
   //if the command doesn't exist
-  if (!cmd) return false;
+  if (!commandFunction || !commandProperties) return false;
 
   let guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
 
@@ -64,13 +65,13 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
       await message.reply("your guild owner has to configure me before I can execute commands :(");
       return false;
     }
-    if (cmd.props.requiresElevation && message.member.user.id !== DiscordSecrets.botowner) {
-      if (!message.member?.roles.get(guildConfig.roles[cmd.props.requiresElevation])) return false;
+    if (commandProperties.elevation && message.member.user.id !== DiscordSecrets.botowner) {
+      if (!message.member?.roles.get(guildConfig.roles[commandProperties.elevation])) return false;
     }
   }
 
   //run the command
-  cmd.run(client, message, args);
+  commandFunction(client, message, args);
 
   return true;
 };
@@ -196,8 +197,8 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
  * @param config the member's config
  */
 function levelUp(client: Client, message: Message, config: MemberConfigType) {
-  let stats = client.getCommand("stats");
-  let embed = stats.getEmbed(client, message.member, config);
+  let embedCommand = client.getCommandCustom("stats", "embed");
+  let embed = embedCommand(client, message.member, config) as MessageEmbed;
 
   message.channel.send(`Congratulations ${message.author}!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!`);
   message.channel.send(embed);

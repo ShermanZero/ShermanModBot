@@ -77,7 +77,6 @@ Discord.Client.prototype.updateMember = function(memberConfig: MemberConfigType)
 
   let guildMembers = this.getGuildMembers(guildname);
   guildMembers.set(username, memberConfig);
-  memberConfig = this.hideMemberInfo(memberConfig);
 
   return memberConfig;
 };
@@ -91,14 +90,6 @@ Discord.Client.prototype.registerMember = function(memberConfig: MemberConfigTyp
     `Was not able to register ${memberConfig} to the guild`.error();
     return null;
   }
-
-  return memberConfig;
-};
-
-Discord.Client.prototype.hideMemberInfo = function(memberConfig: MemberConfigType): MemberConfigType {
-  Object.defineProperty(memberConfig, "hidden", {
-    enumerable: false
-  });
 
   return memberConfig;
 };

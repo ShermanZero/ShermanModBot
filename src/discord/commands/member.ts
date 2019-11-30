@@ -11,7 +11,7 @@ const properties: CommandType["properties"] = {
   usage: "<@member | username>"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
   const member = message.mentions.members.first();
 
   let username: string;
@@ -40,8 +40,6 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
     await message.reply("that member is not registered");
     return false;
   }
-
-  memberConfig = client.hideMemberInfo(memberConfig);
 
   await message.delete();
   await message.channel.send(`Here is the data for [${username.hideID()}]\n\`\`\`json\n${JSON.stringify(memberConfig, null, "\t")}\n\`\`\``);

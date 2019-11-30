@@ -13,7 +13,7 @@ const properties: CommandType["properties"] = {
   aliases: ["config"]
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return false;
 
   let guildDir: string;

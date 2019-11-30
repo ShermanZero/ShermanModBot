@@ -81,12 +81,6 @@ declare module "discord.js" {
      */
     registerMember(config: MemberConfigType): MemberConfigType;
     /**
-     * Hides a member's info (tag)
-     *
-     * @param config the member's config
-     */
-    hideMemberInfo(config: MemberConfigType): MemberConfigType;
-    /**
      * Returns if the client has a member stored in the cache
      *
      * @param guild the Discord `Guild`

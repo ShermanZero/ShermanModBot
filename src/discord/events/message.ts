@@ -39,12 +39,12 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
   if (message.content.indexOf(client.discordConfig.prefix) !== 0) return false;
 
   //standard argument/command name definition
-  const args: any = message.content
+  let args: string[] = message.content
     .slice(client.discordConfig.prefix.length)
     .trim()
     .split(/ +/g);
 
-  let command: any;
+  let command: string;
   if (args) command = args.shift().toLowerCase();
   if (!command) return false;
 
@@ -76,8 +76,10 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
     }
   }
 
-  //run the command
-  commandFunction(client, message, args);
+  let parsedArgs = args.length > 0 ? args.join(" ") : null;
+
+  if (parsedArgs) commandFunction(client, message, parsedArgs);
+  else commandFunction(client, message);
 
   return true;
 };

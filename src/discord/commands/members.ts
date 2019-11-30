@@ -9,9 +9,9 @@ const properties: CommandType["properties"] = {
   description: "displays all members registered in the server"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
-  let guildMembers = rsrc.getGuildMembersFromGuild(client, message.guild);
-  let allMembers = Object.keys(guildMembers);
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
+  let guildMembers = client.getGuildMembers(rsrc.getGuildNameFromGuild(message.guild));
+  let allMembers = Array.from<string>(guildMembers.keys());
 
   message.reply(`here are the current registered members of the server:\n[**${allMembers.join("**, **")}**]`);
 

@@ -38,7 +38,7 @@ export default class TwitchIntegration {
     await chatClient.waitForRegistration();
 
     "  *Got registration, attempting to join....".print();
-    await chatClient.join("ShermanZero");
+    await chatClient.join("ShermanModBot");
     "    *Joined chat!".success();
 
     this.loadCommands(client);
@@ -49,13 +49,13 @@ export default class TwitchIntegration {
 
       let masterGuild = client.guilds.get(client.masterGuild);
       let guildUsername: string = client.hasMember(masterGuild, username, true);
-      let MemberConfig: MemberConfigType;
+      let memberConfig: MemberConfigType;
 
       if (guildUsername) {
-        MemberConfig = client.getMemberConfig(masterGuild, guildUsername);
+        memberConfig = client.getMemberConfig(masterGuild, guildUsername);
 
-        let logMessage = `Member ${String(MemberConfig.hidden.username).magenta} just posted "${message.magenta}" in Twitch chat`;
-        logMessage.memberLog(client, client.masterGuild, MemberConfig, "INSERT TWITCH LOG THINGY HERE");
+        let logMessage = `Member ${String(memberConfig.hidden.username).magenta} just posted "${message.magenta}" in Twitch chat`;
+        logMessage.memberLog(client, client.masterGuild, memberConfig, "INSERT TWITCH LOG THINGY HERE");
         logMessage.print(true);
       }
 

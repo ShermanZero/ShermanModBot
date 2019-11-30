@@ -10,7 +10,7 @@ const properties: CommandType["properties"] = {
   aliases: null
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
   if (message.mentions?.members?.size === 0) {
     await message.reply("please mention a member to kick");
     return false;

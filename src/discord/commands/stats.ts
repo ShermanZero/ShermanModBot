@@ -14,7 +14,7 @@ const properties: CommandType["properties"] = {
   usage: "<?@user | username>"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
   let username: string = rsrc.getUsernameFromMessage(message);
   let memberConfig = client.getMemberConfig(message.guild, username);
   let member: GuildMember = message.member as GuildMember;
@@ -68,7 +68,7 @@ const custom: CommandType["custom"] = {
     if (config.misc.warnings !== null) miscStats += `**warnings:**  *${config.misc.warnings}*\n`.toUpperCase();
     if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats, true);
 
-    if (member.roles.get(client.getGuildConfig(member.guild)?.roles?.mod)) {
+    if (member.roles.get(client.getGuildConfig(member.guild)?.roles?.moderator)) {
       embed.setFooter("BE RESPECTFUL TO ALL - ESPECIALLY MODERATORS", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");
       embed.setDescription("`SERVER MOD`");
     }

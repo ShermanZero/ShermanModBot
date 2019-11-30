@@ -124,9 +124,9 @@ export default class DiscordResources {
       if (!search) return null;
 
       let possibleMatches: string[] = [];
-      let users = this.getGuildMembersFromGuild(client, guild);
+      let guildMembers = client.getGuildMembers(this.getGuildNameFromGuild(guild));
 
-      const keys = Object.keys(users);
+      const keys = Array.from<string>(guildMembers.keys());
       for (const guildUserUsername of keys) {
         if (guildUserUsername.includes(username)) possibleMatches.push(guildUserUsername);
       }
@@ -217,25 +217,6 @@ export default class DiscordResources {
     }
 
     return path.join(__dirname, "..", "discord", "guilds", guildname);
-  }
-
-  /**
-   * Returns all the members of a guild currently registered with the client
-   *
-   * @param {Client} client the Discord `Client`
-   * @param {Guild} guild the Discord `Guild`
-   */
-  static getGuildMembersFromGuild(client: Client, guild: Guild): any {
-    if (!client || !guild) {
-      new ArgumentsNotFulfilled(...arguments);
-      return null;
-    }
-
-    let entries = Object.entries(client.membersInSession);
-
-    for (const [guildname, users] of entries) if (guildname == this.getGuildNameFromGuild(guild)) return users;
-
-    return null;
   }
 
   /**

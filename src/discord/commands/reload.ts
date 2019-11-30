@@ -9,7 +9,7 @@ const properties: CommandType["properties"] = {
   usage: "<command>"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any[]): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
   if (!args || args.length < 1) {
     await message.reply("you must provide a command name to reload");
     return false;
@@ -30,6 +30,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, ...args
   const properties = require(path.join(__dirname, commandName + ".js"));
   client.commands.set(commandName, properties);
 
+  await message.delete();
   await message.reply(`the command "${commandName}" has been reloaded`);
 
   return true;

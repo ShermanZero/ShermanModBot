@@ -30,7 +30,7 @@ export default class DiscordResources {
     if (message.member) username = message.member.user.tag.replace("#", "_");
     else return null;
 
-    username = username.replace(/[^\w\s]/gi, "").toLowerCase();
+    if (username) username = username.replace(/[^\w\s]/gi, "").toLowerCase();
 
     return username;
   }
@@ -52,10 +52,11 @@ export default class DiscordResources {
     else if (member instanceof User) username = member.tag;
     else username = member;
 
-    username = username
-      .replace("#", "_")
-      .replace(/[^\w\s]/gi, "")
-      .toLowerCase();
+    if (username)
+      username = username
+        .replace("#", "_")
+        .replace(/[^\w\s]/gi, "")
+        .toLowerCase();
 
     return username;
   }
@@ -373,14 +374,7 @@ export default class DiscordResources {
    * @param {boolean} [allowOtherMembers=false] (optional) whether or not to allow other members to respond `default=false`
    * @param [options={ max: 1, time: 60 * 1000, errors: ["time"] }] (optional) the options to pass `default={max: 1, time: 60000, errors: ["time"]}`
    */
-  static async askQuestion(
-    member: GuildMember,
-    channel: TextChannel,
-    question: string,
-    deleteMessage: boolean = true,
-    allowOtherMembers: boolean = false,
-    options = { max: 1, time: 60 * 1000, errors: ["time"] }
-  ): Promise<string> {
+  static async askQuestion(member: GuildMember, channel: TextChannel, question: string, deleteMessage: boolean = true, allowOtherMembers: boolean = false, options = { max: 1, time: 60 * 1000, errors: ["time"] }): Promise<string> {
     if (!member || !channel || !question) {
       new ArgumentsNotFulfilled(...arguments);
       return null;

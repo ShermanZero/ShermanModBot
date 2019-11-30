@@ -8,5 +8,5 @@ declare interface String {
   highlight(verbose?: boolean, message?: string): string;
   log(message?: string, verbose?: boolean): string;
   masterLog(client: any, logType?: string, output?: boolean, message?: string): string;
-  memberLog(client: any, guild: any, config: any, logType?: string, output?: boolean, message?: string): string;
+  memberLog(client: any, guild: any, memberConfig: any, logType?: string, output?: boolean, message?: string): string;
 }

@@ -5,6 +5,7 @@ import TwitchClient from "twitch";
 import ChatClient from "twitch-chat-client";
 import { TwitchSecrets } from "./secrets/twitch-secrets";
 import { MemberConfigType } from "../discord/@interfaces/@member_config";
+import { TwitchConfig } from "./configs/twitch_config";
 
 /**
  * The class for integrating the bot with Twitch
@@ -37,8 +38,8 @@ export default class TwitchIntegration {
     "  *Connected to chat client, awaiting registration...".print();
     await chatClient.waitForRegistration();
 
-    "  *Got registration, attempting to join....".print();
-    await chatClient.join("ShermanModBot");
+    "  *Got registration, attempting to join shermanzero...".print();
+    await chatClient.join("shermanzero");
     "    *Joined chat!".success();
 
     this.loadCommands(client);
@@ -53,9 +54,10 @@ export default class TwitchIntegration {
 
       if (guildUsername) {
         memberConfig = client.getMemberConfig(masterGuild, guildUsername);
+        let memberUsername = memberConfig.hidden.username.magenta;
 
-        let logMessage = `Member ${String(memberConfig.hidden.username).magenta} just posted "${message.magenta}" in Twitch chat`;
-        logMessage.memberLog(client, client.masterGuild, memberConfig, "INSERT TWITCH LOG THINGY HERE");
+        let logMessage = `${"Twitch".red}: ${memberUsername} just posted [${message.cyan}]`;
+        logMessage.memberLog(client, masterGuild, memberConfig, client.discordConfig.logs.twitch);
         logMessage.print(true);
       }
 
@@ -119,20 +121,18 @@ export default class TwitchIntegration {
     this.aliases = aliases;
 
     let commandArray: string[] = [...this.commands.keys()].sort();
-    `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green} ${"[@subscribers]".yellow} ${"[@moderator]".red} ${
-      "[@broadcaster]".cyan
-    }`.print();
+    `Loaded ${commandArray.length.toString().magenta} command(s) ${"[@everyone]".green} ${"[@subscribers]".yellow} ${"[@moderator]".red} ${"[@broadcaster]".cyan}`.print();
 
     for (let i = 0; i < commandArray.length; i++) {
       let commandName = commandArray[i];
       let command = this.commands.get(commandName);
 
       if (command.props.requiresElevation) {
-        if (command.props.requiresElevation === TwitchConfig.elevation_names.moderator) {
+        if (command.props.requiresElevation === TwitchConfig.elevation_names.subscriber) {
           commandName = commandName.yellow;
-        } else if (command.props.requiresElevation === TwitchConfig.elevation_names.owner) {
+        } else if (command.props.requiresElevation === TwitchConfig.elevation_names.moderator) {
           commandName = commandName.red;
-        } else if (command.props.requiresElevation === TwitchConfig.elevation_names.botowner) {
+        } else if (command.props.requiresElevation === TwitchConfig.elevation_names.broadcaster) {
           commandName = commandName.cyan;
         }
       } else {

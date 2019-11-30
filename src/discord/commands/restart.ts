@@ -21,11 +21,14 @@ const run: CommandType["run"] = async (client: Client, message: Message, memberT
   client.alreadyShutdown = true;
   "Attempting to restart cleanly...".mention();
 
-  let entries = Object.entries(client.membersInSession);
-  for (const [, members] of entries) {
-    let allMembers = Object.entries(members);
+  const guildNames = Array.from<string>(client.membersInSession.keys());
+  for (let i = 0; i < guildNames.length; i++) {
+    let guildName = guildNames[i];
 
-    for (const [username, memberConfig] of allMembers) rsrc.writeMemberConfigToFile(client, username, memberConfig as MemberConfigType);
+    const guildMembers = client.getGuildMembers(guildName);
+    guildMembers.forEach((memberConfig: MemberConfigType, username: string) => {
+      rsrc.writeMemberConfigToFile(client, username, memberConfig as MemberConfigType);
+    });
   }
 
   //check if the command was member-triggered
@@ -34,8 +37,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, memberT
   "Successfully wrote member data to files!".mention();
 
   //append all last log data to the master log
-  for (let i = 0; i < client.masterLog.length; i++)
-    fs.appendFileSync(path.join(__dirname, "..", "discord", "logs", client.discordConfig.logs.all), client.masterLog[i]);
+  for (let i = 0; i < client.masterLog.length; i++) fs.appendFileSync(path.join(__dirname, "..", "discord", "logs", client.discordConfig.logs.all), client.masterLog[i]);
 
   "Successfully stored pending member logs!".mention();
 

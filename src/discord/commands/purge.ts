@@ -9,7 +9,7 @@ const properties: CommandType["properties"] = {
   aliases: ["clear"]
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
   const member = message.mentions?.members?.first();
 
   //parse amount

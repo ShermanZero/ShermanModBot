@@ -11,7 +11,7 @@ import { Ranks } from "../@interfaces/@ranks";
 
 module.exports = async (client: Client, message: Message): Promise<boolean> => {
   //ignore all bots
-  if (message.author.bot) return false;
+  if (message.author.bot || !client.ready) return false;
 
   //register the member
   if (!registerMessage(client, message)) {
@@ -76,9 +76,7 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
     }
   }
 
-  let parsedArgs = args.length > 0 ? args.join(" ") : null;
-
-  if (parsedArgs) commandFunction(client, message, parsedArgs);
+  if (args) commandFunction(client, message, args);
   else commandFunction(client, message);
 
   return true;

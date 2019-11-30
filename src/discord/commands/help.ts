@@ -9,7 +9,7 @@ const properties: CommandType["properties"] = {
   usage: "<?command>"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
   const embed = new MessageEmbed();
 
   embed.setTitle(`${message.guild.name} Commands`);

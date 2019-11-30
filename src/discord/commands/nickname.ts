@@ -9,14 +9,14 @@ const properties: CommandType["properties"] = {
   aliases: ["nick"]
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
   if (message.mentions?.members?.size === 0) {
     await message.reply("please mention a member to change their nickname");
     return false;
   }
 
   const nickMember = message.mentions.members.first();
-  await nickMember.setNickname(args.join(" "));
+  await nickMember.setNickname((args as string[]).slice(1).join(" "));
   await message.reply(`${nickMember}'s nickname has been changed!`);
 
   return true;

@@ -21,7 +21,6 @@ module.exports = async (client: Client): Promise<boolean> => {
     client.user.setStatus("invisible");
   } else {
     bootFooter.red.print();
-    client.user.setStatus("online");
   }
 
   exitHandler.init(client);
@@ -91,18 +90,24 @@ module.exports = async (client: Client): Promise<boolean> => {
     let memberCount = membersInSession ? membersInSession.size : 0;
 
     `Found all existing members of [${guildname.magenta}] (currently ${memberCount.toString().green})`.print();
+
+    let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`
+      .inverse;
+
+    "...".print();
+    `${readyMessage}\n${bootFooter.red}`.print();
+
+    startTwitch();
   });
 
-  let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`
-    .inverse;
+  let startTwitch = async () => {
+    let twitch = new TwitchIntegration();
+    await twitch.start(client);
 
-  "...".print();
-  `${readyMessage}\n${bootFooter.red}`.print();
+    if (!BuildOptions.development) client.user.setStatus("online");
 
-  let twitch = new TwitchIntegration();
-  await twitch.start(client);
-
-  client.ready = true;
+    client.ready = true;
+  };
 
   return true;
 };

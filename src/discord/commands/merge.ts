@@ -13,7 +13,7 @@ const properties: CommandType["properties"] = {
   usage: "<old username> <new username>"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
   if (args.length != 2) await message.reply("you need to specify two members, use !members to get the current members");
 
   //the member to copy from

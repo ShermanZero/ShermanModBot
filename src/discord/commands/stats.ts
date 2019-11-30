@@ -14,7 +14,7 @@ const properties: CommandType["properties"] = {
   usage: "<?@user | username>"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, ...args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
   let username: string = rsrc.getUsernameFromMessage(message);
   let memberConfig = client.getMemberConfig(message.guild, username);
   let member: GuildMember = message.member as GuildMember;

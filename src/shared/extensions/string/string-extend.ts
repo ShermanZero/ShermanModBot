@@ -64,22 +64,21 @@ String.prototype.log = function(message?: string, verbose?: boolean): string {
  * @param output (optional) whether or not to print to the console
  * @param message (optional) the message to log
  */
-String.prototype.masterLog = function(client: Client, logType?: string, output?: boolean, message?: string): string {
+String.prototype.masterLog = function(client: Client, guild: Guild, logType?: string, output?: boolean, message?: string): string {
   if (!message) message = String(this);
   if (!message.endsWith("\n")) message += "\n";
 
   if (!logType) logType = client.discordConfig.logs.all;
 
-  let masterLogDir = path.join(__dirname, "..", "..", "..", "discord", "guilds", "logs");
-  if (!fs.existsSync(masterLogDir)) {
-    fs.mkdirSync(masterLogDir, { recursive: true });
-    fs.writeFileSync(path.resolve(masterLogDir, logType), "-- START OF LOG --");
-  }
+  let guildName = rsrc.getGuildNameFromGuild(guild);
+
+  let masterLogDir = path.join(__dirname, "..", "..", "..", "discord", "guilds", guildName, "logs");
+  if (!fs.existsSync(masterLogDir)) fs.mkdirSync(masterLogDir, { recursive: true });
 
   //if the log length exceeds the threshold, update the master log
   if (client.masterLog.length >= client.discordConfig.preferences.log_threshold_master) {
     for (let i = 0; i < client.masterLog.length; i++) {
-      fs.appendFileSync(masterLogDir, client.masterLog[i]);
+      fs.appendFileSync(path.join(masterLogDir, logType), client.masterLog[i]);
 
       if (logType !== client.discordConfig.logs.all) fs.appendFileSync(path.resolve(masterLogDir, client.discordConfig.logs.all), client.masterLog[i]);
     }

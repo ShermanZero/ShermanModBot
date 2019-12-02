@@ -10,8 +10,8 @@ import { DiscordSecrets } from "../secrets/discord-secrets";
 import { Ranks } from "../@interfaces/@ranks";
 
 module.exports = async (client: Client, message: Message): Promise<boolean> => {
-  //ignore all bots and wait until this program is fully ready
-  if (message.author.bot || !client.ready) return false;
+  //ignore all bots, the server itself (for welcome messages), and wait until this program is fully ready
+  if (message.author.bot || message.author.id === "471444438216867840" || !client.ready) return false;
 
   //if the guild hasn't been set-up
   let guildConfig = client.getGuildConfig(message.guild);
@@ -143,7 +143,7 @@ async function registerMessage(client: Client, message: Message): Promise<boolea
   let masterLogMessage = `/${guildName.magenta}/>  ${username.magenta} ${memberLogMessage}`;
 
   client.masterLog.push(masterLogMessage.stripColors + "\n");
-  masterLogMessage.masterLog(client, client.discordConfig.logs.message, true);
+  masterLogMessage.masterLog(client, message.guild, client.discordConfig.logs.message, true);
 
   memberConfig.memberLog.push(memberLogMessage.stripColors + "\n");
   memberLogMessage.memberLog(client, message.guild, memberConfig, client.discordConfig.logs.message);
@@ -186,6 +186,9 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
   if (memberConfig.rank.xp >= memberConfig.rank.levelup) {
     memberConfig.rank.level += 1;
 
+    let newLevelUp = memberConfig.rank.level + 5;
+    memberConfig.rank.levelup = newLevelUp;
+
     let rank = Ranks.levels[memberConfig.rank.level];
     if (rank) {
       let lastRank = memberConfig.rank.name;
@@ -199,8 +202,11 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
       await message.member.roles.add(newRole);
     }
 
-    memberConfig.rank.levelup = rsrc.getXPToLevelUp(memberConfig.rank.xp, memberConfig.rank.level);
-    levelUp(client, message, memberConfig);
+    const xpToLevelUp = rsrc.getXPToLevelUp(memberConfig.rank.xp, memberConfig.rank.level);
+    if (xpToLevelUp !== -1) {
+      memberConfig.rank.levelup = xpToLevelUp;
+      levelUp(client, message, memberConfig);
+    }
   }
 
   client.updateMember(memberConfig);
@@ -218,11 +224,11 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
  *
  * @param client the Discord client
  * @param message the Discord message
- * @param config the member's config
+ * @param memberConfig the member's config
  */
-function levelUp(client: Client, message: Message, config: MemberConfigType) {
+function levelUp(client: Client, message: Message, memberConfig: MemberConfigType) {
   let embedCommand = client.getCommandCustom("stats", "embed");
-  let embed = embedCommand(client, message.member, config) as MessageEmbed;
+  let embed = embedCommand(client, message.guild, memberConfig) as MessageEmbed;
 
   message.channel.send(`Congratulations ${message.author}!  You just leveled up!  Keep chatting to earn more XP and unlock roles and special perks!`);
   message.channel.send(embed);

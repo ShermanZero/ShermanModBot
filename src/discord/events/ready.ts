@@ -79,8 +79,8 @@ module.exports = async (client: Client): Promise<boolean> => {
       fs.readdirSync(guildDir).forEach(async dir => {
         let username = dir;
 
-        //ignore the removed directory
-        if (username === ".removed") return;
+        //ignore the removed directory and logs directory
+        if (username === ".removed" || username === "logs") return;
 
         //if the client does not have the member registered in the cache (but their directory exists)
         if (!client.hasMember(guild, username)) {

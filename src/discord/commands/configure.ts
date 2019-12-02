@@ -13,7 +13,7 @@ const properties: CommandType["properties"] = {
   aliases: ["config"]
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: string[]): Promise<boolean> => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return false;
 
   client.setUpGuild(message.guild);
@@ -100,7 +100,7 @@ async function getChannel(guildConfig: GuildConfigType, nameOfChannel: string, m
   if (!options.custom) {
     if (!options.question) options.question = `Do you have a ${options.alias} channel?  This will be used ${options.purpose}.  If you do, and want to enable this feature, simply mention the name of the channel (using #), otherwise, enter 'none'`;
   } else {
-    options.question = "Please mention your custom channel you'd like to add (using #)";
+    options.question = "Please mention your custom channel you'd like to add (using #) or type 'none' to finish";
   }
 
   const response = (await rsrc.askQuestion(message.member, message.channel as TextChannel, options.question)) as string;
@@ -113,8 +113,10 @@ async function getChannel(guildConfig: GuildConfigType, nameOfChannel: string, m
   if (channelByID) channel = channelByID as TextChannel;
 
   if (channel) {
+    nameOfChannel = nameOfChannel ? nameOfChannel : options.alias ? options.alias : channel.name;
+
     guildConfig.channels[nameOfChannel] = channel.id;
-    await message.channel.send(`\`\`\`${channel} has been set as the ${options.alias ? options.alias : nameOfChannel ? nameOfChannel : channel.name} channel!\`\`\``);
+    await message.channel.send(`\`\`\`${channel} has been set as the ${nameOfChannel} channel!\`\`\``);
   } else {
     return false;
   }

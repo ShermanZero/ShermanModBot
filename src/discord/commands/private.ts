@@ -10,7 +10,7 @@ const properties: CommandType["properties"] = {
   aliases: ["priv"]
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: string[]): Promise<boolean> => {
   if (!message.guild) return false;
 
   let privateRole: Role = message.guild.roles.get("645418484398030918");

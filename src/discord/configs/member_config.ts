@@ -9,6 +9,7 @@ export default class MemberConfig implements MemberConfigType {
 
   rank = {
     name: Ranks.levels["0"],
+    rankup: 5,
     level: 0,
     xp: 0,
     levelup: 1

@@ -5,11 +5,11 @@ import { GuildElevationTypes } from "../@interfaces/@guild_config";
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.moderator,
   description: "removes a maximum of 100 messages from a channel",
-  usage: "<?amount> <?member>",
+  usage: "<?amount> <?@member>",
   aliases: ["clear"]
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: string[]): Promise<boolean> => {
   const member = message.mentions?.members?.first();
 
   let amount: number = parseInt(args[0]) ? parseInt(args[0]) : parseInt(args[1]);

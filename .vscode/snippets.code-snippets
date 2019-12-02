@@ -19,20 +19,13 @@
   "props": {
     "scope": "javascript,typescript",
     "prefix": "props",
-    "body": [
-      "const properties: CommandType[\"properties\"] = {",
-      "elevation: GuildElevationTypes.${1|everyone,moderator,administrator,botowner|},",
-      "description: \"${2}\",",
-      "usage: \"${3}\",",
-      "aliases: [\"${4}\"]",
-      "}\n\n"
-    ]
+    "body": ["const properties: CommandType[\"properties\"] = {", "elevation: GuildElevationTypes.${1|everyone,moderator,administrator,botowner|},", "description: \"${2}\",", "usage: \"${3}\",", "aliases: [\"${4}\"]", "}\n\n"]
   },
 
   "run": {
     "scope": "javascript,typescript",
     "prefix": "run",
-    "body": ["const run: CommandType[\"run\"] = async(client: Client, message: Message, ...args: any): Promise<boolean> => {\n", "${0}", "}\n\n"]
+    "body": ["const run: CommandType[\"run\"] = async(client: Client, message: Message, args: string[]): Promise<boolean> => {\n", "${0}", "}\n\n"]
   },
 
   "exports": {
@@ -51,7 +44,7 @@
       "usage: \"${3}\",",
       "aliases: [\"${4}\"]",
       "}\n",
-      "const run: CommandType[\"run\"] = async(client: Client, message: Message, ...args: any): Promise<boolean> => {\n",
+      "const run: CommandType[\"run\"] = async(client: Client, message: Message, args: string[]): Promise<boolean> => {\n",
       "${0}",
       "}\n",
       "const custom: { }\n",

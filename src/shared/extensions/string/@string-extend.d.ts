@@ -7,6 +7,6 @@ declare interface String {
   mention(verbose?: boolean, message?: string): string;
   highlight(verbose?: boolean, message?: string): string;
   log(message?: string, verbose?: boolean): string;
-  masterLog(client: any, logType?: string, output?: boolean, message?: string): string;
+  masterLog(client: any, guild: any, logType?: string, output?: boolean, message?: string): string;
   memberLog(client: any, guild: any, memberConfig: any, logType?: string, output?: boolean, message?: string): string;
 }

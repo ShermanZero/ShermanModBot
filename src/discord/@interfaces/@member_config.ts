@@ -8,6 +8,7 @@ export interface MemberConfigType {
   rank: {
     [key: string]: string | number;
     name: string;
+    rankup: number;
     level: number;
     xp: number;
     levelup: number;

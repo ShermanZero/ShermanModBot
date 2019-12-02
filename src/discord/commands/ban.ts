@@ -10,7 +10,7 @@ const properties: CommandType["properties"] = {
   aliases: null
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: string[]): Promise<boolean> => {
   if (message.mentions?.members?.size === 0) {
     await message.reply("please mention a member to kick");
     return false;
@@ -26,7 +26,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   await banMember.ban({ reason: args.join(" ") });
 
   let modChannel = client.getGuildConfig(message.guild).channels.mod_logs;
-  await (message.guild.channels.get(modChannel) as TextChannel)?.send(`${banMember} was banned by ${message.author.tag} for reason: ${args.join(" ")}`);
+  await (message.guild.channels.get(modChannel) as TextChannel)?.send(`${banMember} was banned by ${message.author} for reason: ${args?.slice(1)?.join(" ")}`);
 
   return true;
 };

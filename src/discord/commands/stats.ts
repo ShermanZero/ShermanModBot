@@ -7,6 +7,7 @@ import { MemberConfigType } from "../@interfaces/@member_config";
 import { Ranks } from "../@interfaces/@ranks";
 import { ArgumentsNotFulfilled } from "../../shared/extensions/error/error-extend";
 import { GuildElevationTypes } from "../@interfaces/@guild_config";
+import { Guild } from "discord.js";
 
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.everyone,
@@ -14,7 +15,7 @@ const properties: CommandType["properties"] = {
   usage: "<?@user | username>"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: string[]): Promise<boolean> => {
   let username: string = rsrc.getUsernameFromMessage(message);
   let memberConfig = client.getMemberConfig(message.guild, username);
   let member: GuildMember = message.member as GuildMember;
@@ -34,18 +35,18 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
     return false;
   }
 
-  await message.channel.send(custom.embed(client, member, memberConfig));
+  await message.channel.send(custom.embed(client, member.guild, memberConfig));
   await message.delete();
 
   return true;
 };
 
 const custom: CommandType["custom"] = {
-  embed: (client: Client, member: GuildMember, memberConfig: MemberConfigType): MessageEmbed => {
-    new ArgumentsNotFulfilled(client, member, memberConfig);
+  embed: (client: Client, guild: Guild, memberConfig: MemberConfigType): MessageEmbed => {
+    new ArgumentsNotFulfilled(client, guild, memberConfig);
 
     let name = "**" + memberConfig.hidden.username.substring(0, memberConfig.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
-    let rankColor = member.guild.roles.find(role => role.name === memberConfig.rank.name)?.color;
+    let rankColor = guild.roles.find(role => role.name === memberConfig.rank.name)?.color;
 
     const embed = new MessageEmbed();
     embed.setTitle(name + " | " + calculatePosition(client, memberConfig));
@@ -54,6 +55,7 @@ const custom: CommandType["custom"] = {
 
     let levelStats = "";
     if (memberConfig.rank.name !== null) levelStats += `**rank:**  *${memberConfig.rank.name}*\n`.toUpperCase();
+    if (memberConfig.rank.rankup !== null) levelStats += `**next rank:**  *${memberConfig.rank.rankup}*\n`.toUpperCase();
     if (memberConfig.rank.level !== null) levelStats += `**level:**  *${memberConfig.rank.level}*\n`.toUpperCase();
     if (memberConfig.rank.xp !== null) levelStats += `**xp:**  *${getFormattedNumber(memberConfig.rank.xp)} / ${getFormattedNumber(memberConfig.rank.levelup)}*\n`.toUpperCase();
     if (levelStats !== "") embed.addField("**LEVEL STATS**", levelStats, true);
@@ -70,11 +72,9 @@ const custom: CommandType["custom"] = {
 
     let description = "";
     let separator = " | ";
-    const guildConfig = client.getGuildConfig(member.guild);
+    const guildConfig = client.getGuildConfig(guild);
     Object.keys(guildConfig.role_names).forEach(roleName => {
-      if (member.roles.find(role => role.name === guildConfig.role_names[roleName])) {
-        description += roleName + separator;
-      }
+      if (memberConfig.permissions[roleName]) description += roleName + separator;
     });
 
     if (description.length >= separator.length) description = description.substring(0, description.length - separator.length);
@@ -110,7 +110,7 @@ function calculatePosition(client: Client, config: MemberConfig): string {
     if (memberConfig.hidden.username !== config.hidden.username && memberConfig.rank.xp > config.rank.xp) membersHigher++;
   });
 
-  return "*RANK #" + (membersHigher + 1) + "*";
+  return "*POSITION #" + (membersHigher + 1) + "*";
 }
 
 module.exports.run = run;

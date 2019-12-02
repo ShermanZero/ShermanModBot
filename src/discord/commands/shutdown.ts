@@ -8,7 +8,7 @@ const properties: CommandType["properties"] = {
   usage: "<?force>"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: string[]): Promise<boolean> => {
   const force = args.length > 0 ? args[0].toLowerCase().includes("force") : false;
 
   if (message) await message.delete();

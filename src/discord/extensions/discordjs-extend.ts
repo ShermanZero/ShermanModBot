@@ -21,11 +21,21 @@ Discord.Client.prototype.masterLog = new Array<string>();
 Discord.Client.prototype.writeAllData = async function(): Promise<boolean> {
   "Attempting to store all user data...".highlight();
   this.membersInSession.forEach((guild: Map<string, MemberConfigType>, guildName: string) => {
+    const guildLogDir = path.join(rsrc.getGuildDirectoryFromName(guildName), "logs");
+    const logType = this.discordConfig.logs.all;
+
+    if (fs.existsSync(guildLogDir)) fs.mkdirSync(guildLogDir, { recursive: true });
+
+    this.masterLog.forEach((log: string) => {
+      fs.appendFileSync(path.join(guildLogDir, logType), log);
+    });
+
     const guildMembers = this.getGuildMembers(guildName);
     guildMembers.forEach((memberConfig: MemberConfigType, username: string) => {
       rsrc.writeMemberConfigToFile(this, username, memberConfig as MemberConfigType);
     });
   });
+
   "Successfully stored!".green.print();
 
   return true;

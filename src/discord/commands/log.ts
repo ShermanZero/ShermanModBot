@@ -9,10 +9,10 @@ import { GuildElevationTypes } from "../@interfaces/@guild_config";
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.moderator,
   description: "displays the last number of messages a member has posted",
-  usage: "<?amount> <member>"
+  usage: "<?amount> <member | username>"
 };
 
-const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
+const run: CommandType["run"] = async (client: Client, message: Message, args: string[]): Promise<boolean> => {
   const member = message.mentions.members.first();
 
   let username: string;

@@ -11,14 +11,13 @@ import { GuildConfigType, guildConfigFileName, GuildElevationTypes } from "../@i
 
 module.exports = async (client: Client): Promise<boolean> => {
   client.user.setActivity(client.discordConfig.status);
+  client.user.setStatus("invisible");
 
   bootLogo.red.print();
 
   if (BuildOptions.development) {
     let pad = "".padEnd(bootFooter.length / 2 - 5, "~");
     `${pad.cyan} ${"DEV BUILD".red} ${pad.cyan}`.print();
-
-    client.user.setStatus("invisible");
   } else {
     bootFooter.red.print();
   }
@@ -55,7 +54,7 @@ module.exports = async (client: Client): Promise<boolean> => {
     let guildDir = rsrc.getGuildDirectoryFromGuild(guild);
     let guildName: string, guildConfig: GuildConfigType;
 
-    const guildPromise = new Promise(async resolve => {
+    const guildPromise = new Promise<boolean>(async resolve => {
       if (!fs.existsSync(guildDir)) {
         fs.mkdirSync(guildDir, { recursive: true });
         fs.mkdirSync(path.join(guildDir, client.discordConfig.files.removed), {
@@ -72,11 +71,11 @@ module.exports = async (client: Client): Promise<boolean> => {
         client.registerGuild(guildName, null);
       }
 
-      resolve();
+      resolve(true);
     });
     await guildPromise;
 
-    const memberPromise = new Promise(resolve => {
+    const memberPromise = new Promise<boolean>(resolve => {
       fs.readdirSync(guildDir).forEach(async dir => {
         let username = dir;
 
@@ -91,9 +90,9 @@ module.exports = async (client: Client): Promise<boolean> => {
           process.stdout.write("  ");
           client.registerMember(memberConfig);
         }
-
-        resolve();
       });
+
+      resolve(true);
     });
     await memberPromise;
 

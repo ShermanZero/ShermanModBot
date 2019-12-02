@@ -229,13 +229,11 @@ export default class DiscordResources {
     memberConfig.hidden.guildname = this.getGuildNameFromGuild(guild);
 
     const allRoles = Object.keys(guildConfig.role_names);
-    allRoles.forEach(rolename => {
-      if (member.roles.find(role => role.name === rolename)) (memberConfig.permissions as { [key: string]: boolean })[rolename] = true;
+    allRoles.forEach(roleName => {
+      if (member.roles.find(role => role.name === guildConfig.role_names[roleName])) {
+        (memberConfig.permissions as { [key: string]: boolean })[roleName] = true;
+      }
     });
-
-    if (member.roles.find(role => role.name === guildConfig.role_names.moderator)) {
-      (memberConfig.permissions as any)[guildConfig.roles.moderator] = true;
-    }
 
     `Attempting to create new member directory for [${memberConfig.hidden.username}] in guild [${memberConfig.hidden.guildname}]`.inverse.print(true);
 

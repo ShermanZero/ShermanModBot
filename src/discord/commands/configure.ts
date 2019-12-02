@@ -29,17 +29,27 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
 
   let configFile = path.resolve(guildDir, guildConfigFileName);
   if (!fs.existsSync(configFile)) await message.reply("you don't appear to have a configuration set up for your guild, let's create one");
-  let successful: boolean;
+  let requiredSuccessful: boolean = true;
 
   let guildConfig: GuildConfigType = new GuildConfig();
-  successful = await getRole(guildConfig, GuildElevationTypes.guildowner, message, "Who is the owner of this guild?  Please mention them");
-  successful = await getRole(guildConfig, GuildElevationTypes.administrator, message);
-  successful = await getRole(guildConfig, GuildElevationTypes.moderator, message);
+  requiredSuccessful = requiredSuccessful && (await getRole(guildConfig, GuildElevationTypes.guildowner, message, "Who is the owner of this guild?  Please mention them"));
+  requiredSuccessful = requiredSuccessful && (await getRole(guildConfig, GuildElevationTypes.administrator, message));
+  requiredSuccessful = requiredSuccessful && (await getRole(guildConfig, GuildElevationTypes.moderator, message));
 
-  successful = await getChannel(guildConfig, GuildChannelTypes.default, "default/welcome", "welcome new members of the guild as they arrive", message);
-  successful = await getChannel(guildConfig, GuildChannelTypes.mod_logs, "mod logs", "log any moderation action taken by mods and me", message);
+  let optionalSuccessful: boolean = true;
+  optionalSuccessful = optionalSuccessful && (await getChannel(guildConfig, GuildChannelTypes.mod_logs, message, { alias: "mod logs", purpose: "to log any moderation action taken by mods and me" }));
+  optionalSuccessful = optionalSuccessful && (await getChannel(guildConfig, GuildChannelTypes.default, message, { alias: "default/welcome", purpose: "to welcome new members of the guild as they arrive" }));
+  if (optionalSuccessful) {
+    optionalSuccessful = optionalSuccessful && (await getChannel(guildConfig, GuildChannelTypes.server_rules, message, { alias: "server rules", purpose: "as part of the welcome message" }));
+    optionalSuccessful = optionalSuccessful && (await getChannel(guildConfig, GuildChannelTypes.server_info, message, { alias: "server info", purpose: "as part of the welcome message" }));
+  }
 
-  if (!successful) {
+  await message.channel.send("Are there any more channels you would like to add right now?  These can be used in later customization of commands/events.  Simply enter 'none' if you do not wish to add any right now.");
+  do {
+    optionalSuccessful = await getChannel(guildConfig, null, message, { custom: true });
+  } while (optionalSuccessful);
+
+  if (!requiredSuccessful) {
     client.removeGuildFromSetup(message.guild);
     return false;
   }
@@ -84,19 +94,18 @@ async function getRole(guildConfig: GuildConfigType, nameOfRole: string, message
   return true;
 }
 
-async function getChannel(guildConfig: GuildConfigType, nameOfChannel: string, alias: string, purpose: string, message: Message, question?: string): Promise<boolean> {
+async function getChannel(guildConfig: GuildConfigType, nameOfChannel: string, message: Message, options: { custom?: boolean; alias?: string; purpose?: string; question?: string }): Promise<boolean> {
   let channel: TextChannel;
 
-  if (!question) question = `Do you have a ${alias} channel?  This will be used to ${purpose}.  If you do, and want to enable this feature, simply mention the name of the channel (using #), otherwise, enter 'none'`;
-
-  const response = (await rsrc.askQuestion(message.member, message.channel as TextChannel, question)) as string;
-
-  if (response === "none") {
-    return true;
+  if (!options.custom) {
+    if (!options.question) options.question = `Do you have a ${options.alias} channel?  This will be used ${options.purpose}.  If you do, and want to enable this feature, simply mention the name of the channel (using #), otherwise, enter 'none'`;
+  } else {
+    options.question = "Please mention your custom channel you'd like to add (using #)";
   }
 
-  if (!response) {
-    message.reply("Your config has been partially generated, but you can rerun at any time");
+  const response = (await rsrc.askQuestion(message.member, message.channel as TextChannel, options.question)) as string;
+
+  if (response === "none") {
     return false;
   }
 
@@ -105,7 +114,7 @@ async function getChannel(guildConfig: GuildConfigType, nameOfChannel: string, a
 
   if (channel) {
     guildConfig.channels[nameOfChannel] = channel.id;
-    await message.channel.send(`\`\`\`${channel} has been set as the ${alias} channel!\`\`\``);
+    await message.channel.send(`\`\`\`${channel} has been set as the ${options.alias ? options.alias : nameOfChannel ? nameOfChannel : channel.name} channel!\`\`\``);
   } else {
     return false;
   }

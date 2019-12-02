@@ -68,9 +68,19 @@ const custom: CommandType["custom"] = {
     if (memberConfig.misc.warnings !== null) miscStats += `**warnings:**  *${memberConfig.misc.warnings}*\n`.toUpperCase();
     if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats, true);
 
-    if (member.roles.get(client.getGuildConfig(member.guild)?.roles?.moderator)) {
-      embed.setFooter("BE RESPECTFUL TO ALL - ESPECIALLY MODERATORS", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");
-      embed.setDescription("`  SERVER MOD  `");
+    let description = "";
+    let separator = " | ";
+    const guildConfig = client.getGuildConfig(member.guild);
+    Object.keys(guildConfig.role_names).forEach(roleName => {
+      if (member.roles.find(role => role.name === guildConfig.role_names[roleName])) {
+        description += roleName + separator;
+      }
+    });
+
+    if (description.length >= separator.length) description = description.substring(0, description.length - separator.length);
+    if (description.length > 0) {
+      embed.setFooter("RESPECT THE BADGE!  RESPECT IT!", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");
+      embed.setDescription(`\`   SERVER ${description.toUpperCase()}   \``);
     }
 
     return embed;

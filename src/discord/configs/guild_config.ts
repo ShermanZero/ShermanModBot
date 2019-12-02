@@ -12,7 +12,9 @@ export default class GuildConfig implements GuildConfigType {
 
   channels = {
     default: null as string,
-    mod_logs: null as string
+    mod_logs: null as string,
+    server_rules: null as string,
+    server_info: null as string
   };
 
   role_names = {

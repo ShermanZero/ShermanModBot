@@ -1,4 +1,5 @@
 import { MemberConfigType } from "../@interfaces/@member_config";
+import { Ranks } from "../@interfaces/@ranks";
 
 export default class MemberConfig implements MemberConfigType {
   hidden = {
@@ -7,7 +8,7 @@ export default class MemberConfig implements MemberConfigType {
   };
 
   rank = {
-    name: "uranked",
+    name: Ranks.levels["0"],
     level: 0,
     xp: 0,
     levelup: 1

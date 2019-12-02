@@ -15,7 +15,9 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
 
   //if the guild hasn't been set-up
   let guildConfig = client.getGuildConfig(message.guild);
-  if ((!guildConfig || !guildConfig.setup) && !message.content.trim().startsWith("!config") && !client.guildBeingSetup(message.guild)) {
+  if (client.guildBeingSetup(message.guild)) return false;
+
+  if ((!guildConfig || !guildConfig.setup) && !message.content.trim().startsWith("!config")) {
     if (message.member.hasPermission("ADMINISTRATOR")) {
       const answer = (await rsrc.askQuestion(message.member, message.channel as TextChannel, "the configuration for the guild needs to be setup, luckily you can do that!  Do you want me to automatically run the config?", {
         yesOrNo: true,
@@ -87,10 +89,8 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
     }
   }
 
-  if (command !== "config") {
-    if (commandProperties.elevation && message.member.user.id !== DiscordSecrets.botowner) {
-      if (commandProperties.elevation !== GuildElevationTypes.everyone) if (!message.member?.roles.get(guildConfig.roles[commandProperties.elevation])) return false;
-    }
+  if (command !== "config" && commandProperties.elevation && message.member.user.id !== DiscordSecrets.botowner) {
+    if (commandProperties.elevation !== GuildElevationTypes.everyone && !message.member?.roles.get(guildConfig.role_names[commandProperties.elevation])) return false;
   }
 
   if (args) commandFunction(client, message, args);

@@ -5,7 +5,7 @@ import * as path from "path";
 import blacklist from "../../shared/resources/blacklist";
 import rsrc from "../discord-resources";
 import { MemberConfigType } from "../@interfaces/@member_config";
-import { GuildConfigType, guildConfigFileName } from "../@interfaces/@guild_config";
+import { GuildConfigType, guildConfigFileName, GuildElevationTypes } from "../@interfaces/@guild_config";
 import { DiscordSecrets } from "../secrets/discord-secrets";
 import { Ranks } from "../@interfaces/@ranks";
 
@@ -14,7 +14,7 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
   if (message.author.bot || !client.ready) return false;
 
   //register the member
-  if (!registerMessage(client, message)) {
+  if (!(await registerMessage(client, message))) {
     `Could not register message sent by [${rsrc.getUsernameFromMessage(message)}]`.error();
     return false;
   }
@@ -25,7 +25,7 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
     await message.reply("that is not allowed here, you have been warned.");
 
     let username = rsrc.getUsernameFromMessage(message);
-    let memberConfig = rsrc.getMemberConfigFromName(client, message, username);
+    let memberConfig = await rsrc.getMemberConfigFromName(client, message, username);
 
     if (memberConfig) {
       memberConfig.misc.warnings++;
@@ -72,7 +72,7 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
       return false;
     }
     if (commandProperties.elevation && message.member.user.id !== DiscordSecrets.botowner) {
-      if (!message.member?.roles.get(guildConfig.roles[commandProperties.elevation])) return false;
+      if (commandProperties.elevation !== GuildElevationTypes.everyone) if (!message.member?.roles.get(guildConfig.roles[commandProperties.elevation])) return false;
     }
   }
 
@@ -88,7 +88,7 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
  * @param client the Discord client
  * @param message the Discord message
  */
-function registerMessage(client: Client, message: Message): boolean {
+async function registerMessage(client: Client, message: Message): Promise<boolean> {
   let username = rsrc.getUsernameFromMessage(message);
 
   if (!message.guild) return false;
@@ -103,7 +103,7 @@ function registerMessage(client: Client, message: Message): boolean {
 
   //member NOT stored in local client session
   if (!client.hasMember(message.guild, username)) {
-    memberConfig = rsrc.getMemberConfigFromName(client, message, username);
+    memberConfig = await rsrc.getMemberConfigFromName(client, message, username);
     client.registerMember(memberConfig);
     //member stored in local client session
   } else {

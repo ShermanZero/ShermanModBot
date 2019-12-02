@@ -22,9 +22,9 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   if (message.mentions?.members?.size !== 0) {
     member = message.mentions.members.first();
     username = rsrc.getUsernameFromMember(member);
-    memberConfig = rsrc.getMemberConfigFromName(client, message, username);
+    memberConfig = await rsrc.getMemberConfigFromName(client, message, username);
   } else if (args.length === 1) {
-    memberConfig = rsrc.getMemberConfigFromNameWithGuild(client, message.guild, message, args[0], true);
+    memberConfig = await rsrc.getMemberConfigFromNameWithGuild(client, message.guild, message, args[0], true);
     username = memberConfig?.hidden?.username;
   }
 
@@ -96,8 +96,9 @@ function calculatePosition(client: Client, config: MemberConfig): string {
   let guild = client.getGuildMembers(config.hidden.guildname);
   let membersHigher = 0;
 
-  let entries = Object.entries(guild);
-  for (let [username, memberConfig] of entries) if (username != config.hidden.username && (memberConfig as any).rank.xp > config.rank.xp) membersHigher++;
+  guild.forEach((memberConfig: MemberConfigType, username: string) => {
+    if (memberConfig.hidden.username !== config.hidden.username && memberConfig.rank.xp > config.rank.xp) membersHigher++;
+  });
 
   return "*RANK #" + (membersHigher + 1) + "*";
 }

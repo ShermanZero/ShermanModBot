@@ -33,7 +33,7 @@
     "dev--v": "tsc -p . && node ./build/index.js --dev --verbose && npm run stop",
     "copy": "npm run copy-files",
     "copy-files": "copyfiles -u 1 src/shared/resources/**.txt build/",
-    "stop": "pkill -KILL node"
+    "stop": "killall node"
   },
   "repository": {
     "type": "git",

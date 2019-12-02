@@ -27,9 +27,9 @@ module.exports = async (client: Client): Promise<boolean> => {
 
   let commandArray: string[] = [...client.commands.keys()].sort();
 
-  `Loaded ${commandArray.length.toString().magenta} command(s) [${("@" + GuildElevationTypes.everyone).toLowerCase().green}] [${
-    ("@" + GuildElevationTypes.moderator).toLowerCase().yellow
-  }] [${("@" + GuildElevationTypes.administrator).toLowerCase().red}] [${("@" + GuildElevationTypes.botowner).toLowerCase().cyan}]`.print();
+  `Loaded ${commandArray.length.toString().magenta} command(s) [${("@" + GuildElevationTypes.everyone).toLowerCase().green}] [${("@" + GuildElevationTypes.moderator).toLowerCase().yellow}] [${
+    ("@" + GuildElevationTypes.administrator).toLowerCase().red
+  }] [${("@" + GuildElevationTypes.botowner).toLowerCase().cyan}]`.print();
 
   for (let i = 0; i < commandArray.length; i++) {
     let commandName = commandArray[i];
@@ -70,7 +70,7 @@ module.exports = async (client: Client): Promise<boolean> => {
       client.registerGuild(guildname, null);
     }
 
-    fs.readdirSync(guildDir).forEach(dir => {
+    fs.readdirSync(guildDir).forEach(async dir => {
       let username = dir;
 
       //ignore the removed directory
@@ -78,7 +78,7 @@ module.exports = async (client: Client): Promise<boolean> => {
 
       //if the client does not have the member registered in the cache (but their directory exists)
       if (!client.hasMember(guild, username)) {
-        const memberConfig = rsrc.getMemberConfigFromNameWithGuild(client, guild, (null as unknown) as Message, username);
+        const memberConfig = await rsrc.getMemberConfigFromNameWithGuild(client, guild, (null as unknown) as Message, username);
         if (!memberConfig) return;
 
         process.stdout.write("  ");
@@ -91,8 +91,7 @@ module.exports = async (client: Client): Promise<boolean> => {
 
     `Found all existing members of [${guildname.magenta}] (currently ${memberCount.toString().green})`.print();
 
-    let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`
-      .inverse;
+    let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`.inverse;
 
     "...".print();
     `${readyMessage}\n${bootFooter.red}`.print();

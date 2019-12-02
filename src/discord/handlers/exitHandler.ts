@@ -20,7 +20,7 @@ export default class ExitHandler {
     process.on("exit" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
 
     //catches ctrl-c event
-    //    process.on("SIGINT" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
+    process.on("SIGINT" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));
 
     //catches kill pid
     //    process.on("SIGUSR1" as any, ExitHandler.exitHandler.bind(null, client, { clean: true }));

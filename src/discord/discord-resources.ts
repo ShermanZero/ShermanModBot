@@ -85,13 +85,13 @@ export default class DiscordResources {
    * @param {string} username the username
    * @param {boolean} [search=false] whether or not to do a recursive search for the member given the incomplete username
    */
-  static getMemberConfigFromName(client: Client, message: Message, username: string, search: boolean = false): MemberConfigType {
+  static async getMemberConfigFromName(client: Client, message: Message, username: string, search: boolean = false): Promise<MemberConfigType> {
     if (!client || !message || !username) {
       new ArgumentsNotFulfilled(...arguments);
       return null;
     }
 
-    return DiscordResources.getMemberConfigFromNameWithGuild(client, message.guild as Guild, message, username, search);
+    return await DiscordResources.getMemberConfigFromNameWithGuild(client, message.guild as Guild, message, username, search);
   }
 
   /**
@@ -103,7 +103,7 @@ export default class DiscordResources {
    * @param {string} username the username
    * @param {boolean} [search=false] whether or not to do a recursive search for the member given the incomplete username
    */
-  static getMemberConfigFromNameWithGuild(client: Client, guild: Guild, message: Message, username: string, search: boolean = false): MemberConfigType {
+  static async getMemberConfigFromNameWithGuild(client: Client, guild: Guild, message: Message, username: string, search: boolean = false): Promise<MemberConfigType> {
     if (!client) {
       new ArgumentsNotFulfilled(...arguments);
       return null;
@@ -118,10 +118,12 @@ export default class DiscordResources {
       guild = message.guild;
     }
 
-    username = username.trim().toLowerCase();
+    if (username) username = username.trim().toLowerCase();
+    else username = null;
 
-    let jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
-    if (!fs.existsSync(jsonFile)) {
+    let jsonFile: string;
+    if (username) jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
+    if (!username || !fs.existsSync(jsonFile)) {
       if (!search) return null;
 
       let possibleMatches: string[] = [];
@@ -133,39 +135,21 @@ export default class DiscordResources {
       }
 
       if (possibleMatches.length > 1) {
-        let listOfUsers = "";
-        for (let i = 0; i < possibleMatches.length; i++) listOfUsers += `${i + 1})\t**${possibleMatches[i]}**\n`;
+        let listOfUsers = "```";
+        for (let i = 0; i < possibleMatches.length; i++) listOfUsers += `${i + 1})\t${possibleMatches[i]}\n`;
+        listOfUsers += "```";
 
-        message.reply(`there are multiple members which contain "${username}", please select the correct one:\n${listOfUsers}`).then(() => {
-          message.channel
-            .awaitMessages((response: Message) => response.author === message.author, {
-              max: 1,
-              time: 1000 * 60,
-              errors: ["time"]
-            })
-            .then(collected => {
-              let answer = parseInt(collected.first().content);
-              if (answer < 1 || answer > possibleMatches.length) {
-                message.reply("you did not enter a valid number, no member has been selected");
-                return;
-              }
+        const response = await this.askQuestion(message.member, message.channel as TextChannel, `there are multiple members which contain "${username}", please select the correct one:\n${listOfUsers}`, true, false);
 
-              username = possibleMatches[answer - 1];
-              jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
-            })
-            .catch(() => {
-              message.reply("you did not respond in time, no member has been selected");
-              return null;
-            });
-        });
+        username = possibleMatches[parseInt(response) - 1];
       } else if (possibleMatches.length == 1) {
         username = possibleMatches[0];
-        jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
       } else {
         return null;
       }
     }
 
+    jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
     if (!fs.existsSync(jsonFile)) return null;
 
     let json = fs.readFileSync(jsonFile);
@@ -379,29 +363,31 @@ export default class DiscordResources {
       new ArgumentsNotFulfilled(...arguments);
       return null;
     }
-    let value: any;
 
-    let questionMessage: Message;
-    await channel.send(question).then(message => {
-      questionMessage = message;
-    });
+    let value: string;
+
+    const questionMessages: Array<Message> = ((await channel.send(question, { split: true })) as unknown) as Array<Message>;
 
     const filter = (response: Message): boolean => {
-      return response.member === member;
+      return response.member.id === member.id;
     };
 
     await channel
       .awaitMessages(allowOtherMembers ? filter : () => true, options)
       .then(async collected => {
         value = collected.first()?.content;
-        value = (value as string).replace(/[<>@&#]/g, "");
+        value = value.replace(/[<>@&#]/g, "");
 
-        if (deleteMessage) await questionMessage.delete();
+        if (deleteMessage) {
+          questionMessages.forEach(async (message: Message) => {
+            await message.delete();
+          });
+        }
 
         await collected.first()?.delete();
       })
-      .catch(collected => {
-        channel.send("No answer was given in time");
+      .catch(error => {
+        console.log(error);
       });
 
     return value;

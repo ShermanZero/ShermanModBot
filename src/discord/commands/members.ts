@@ -13,7 +13,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   let guildMembers = client.getGuildMembers(rsrc.getGuildNameFromGuild(message.guild));
   let allMembers = Array.from<string>(guildMembers.keys());
 
-  message.reply(`here are the current registered members of the server:\n[**${allMembers.join("**, **")}**]`);
+  message.reply(`here are the current registered members of the server:\n[**${allMembers.join("**, **")}**]`, { split: true });
 
   return true;
 };

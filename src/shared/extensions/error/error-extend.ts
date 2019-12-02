@@ -24,6 +24,8 @@ export class ArgumentsNotFulfilled extends Error {
       argumentCheck += `${arg ? "PASS" : "FAIL"} | `;
     }
 
+    if (argsNotProvidedCount === 0) return;
+
     argumentCheck = (argumentCheck.slice(0, argumentCheck.length - 3) + "]").padEnd(35, ".");
     argumentCheck = argumentCheck.replace(/(PASS)/g, "PASS".green);
     argumentCheck = argumentCheck.replace(/(FAIL)/g, "FAIL".red);

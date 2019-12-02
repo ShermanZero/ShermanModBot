@@ -21,15 +21,12 @@ const run: CommandType["run"] = async (client: Client, message: Message, memberT
   client.alreadyShutdown = true;
   "Attempting to restart cleanly...".mention();
 
-  const guildNames = Array.from<string>(client.membersInSession.keys());
-  for (let i = 0; i < guildNames.length; i++) {
-    let guildName = guildNames[i];
-
+  client.membersInSession.forEach((guild: Map<string, MemberConfigType>, guildName: string) => {
     const guildMembers = client.getGuildMembers(guildName);
     guildMembers.forEach((memberConfig: MemberConfigType, username: string) => {
       rsrc.writeMemberConfigToFile(client, username, memberConfig as MemberConfigType);
     });
-  }
+  });
 
   //check if the command was member-triggered
   if (memberTriggered) await message.delete();

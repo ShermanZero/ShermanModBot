@@ -15,12 +15,18 @@ const properties: CommandType["properties"] = {
 const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
   const member = message.mentions.members.first();
 
-  if (!member) {
-    await message.reply("you need to specify a member");
-    return false;
+  let username: string;
+  if (member) username = rsrc.getUsernameFromMember(member);
+  if (!username) {
+    const memberConfig = await rsrc.getMemberConfigFromNameWithGuild(client, message.guild, message, args[0], true);
+
+    if (memberConfig) username = memberConfig.hidden.username;
+    else {
+      await message.reply("you need to specify a user");
+      return false;
+    }
   }
 
-  let username = rsrc.getUsernameFromMember(member);
   let file = path.join(rsrc.getMemberDirectoryFromGuild(message.guild, username), "logs", client.discordConfig.logs.all);
   //parse amount
   let amount = !!parseInt(args[1]) ? parseInt(args[1]) : parseInt(args[2]);
@@ -52,8 +58,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
       logs = logs.slice(-amount);
       let result = amount == 1 ? logs[0] : logs.join("\n");
 
-      message.channel.send(`Here are the last ${amount} message(s) [${username.hideID()}] sent:\n${result}`, { split: true });
-
+      await message.channel.send(`Here are the last ${amount} message(s) [${username.hideID()}] sent:\n\`\`\`json\n${result}\`\`\``, { split: { prepend: "```json\n", append: "```" } });
       return true;
     }
   );

@@ -19,7 +19,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
 
   if (!member) {
     if (args.length == 1) {
-      memberConfig = rsrc.getMemberConfigFromName(client, message, args[0], true);
+      memberConfig = await rsrc.getMemberConfigFromName(client, message, args[0], true);
 
       if (!memberConfig) {
         await message.reply("that member is not registered");
@@ -41,8 +41,10 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
     return false;
   }
 
+  let data = JSON.stringify(memberConfig, null, "\t");
+
   await message.delete();
-  await message.channel.send(`Here is the data for [**${username.hideID()}**]\n\`\`\`json\n${JSON.stringify(memberConfig, null, "\t")}\n\`\`\``);
+  await message.channel.send(`Here is the data for [**${username.hideID()}**]\n\`\`\`json\n${data}\n\`\`\``, { split: { prepend: "```json\n", append: "```" } });
 
   return true;
 };

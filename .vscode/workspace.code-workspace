@@ -1,0 +1,30 @@
+{
+	"folders": [
+		{
+			"path": "Z:\\ShermanModBot"
+		}
+	],
+	"settings": {
+		"references.preferredLocation": "view",
+		"workbench.tips.enabled": false,
+		"workbench.view.alwaysShowHeaderActions": true,
+		"workbench.editor.enablePreview": false,
+		"workbench.editor.enablePreviewFromQuickOpen": false,
+		"workbench.editor.tabSizing": "shrink",
+		"search.showLineNumbers": true,
+		"debug.internalConsoleOptions": "neverOpen",
+		"debug.openDebug": "neverOpen",
+		"terminal.integrated.cursorBlinking": true,
+		"terminal.integrated.rightClickBehavior": "copyPaste",
+		"git.showPushSuccessNotification": true,
+		"npm-intellisense.packageSubfoldersIntellisense": true,
+		"npm-intellisense.scanDevDependencies": true,
+		"explorer.confirmDelete": false,
+		"typescript.tsserver.log": "normal",
+		"typescript.implementationsCodeLens.enabled": true,
+		"typescript.locale": "en",
+		"typescript.surveys.enabled": false,
+		"path-intellisense.autoSlashAfterDirectory": true,
+		"typescript.tsdk": "node_modules/typescript/lib"
+	}
+}

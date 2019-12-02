@@ -4,7 +4,14 @@ export interface GuildConfigType {
 
   roles: {
     [key: string]: string;
-    owner: string;
+    guildowner: string;
+    administrator: string;
+    moderator: string;
+  };
+
+  role_names: {
+    [key: string]: string;
+    guildowner: string;
     administrator: string;
     moderator: string;
   };
@@ -18,6 +25,7 @@ export interface GuildConfigType {
 
 export enum GuildElevationTypes {
   botowner = "botowner",
+  guildowner = "guild owner",
   administrator = "administrator",
   moderator = "moderator",
   everyone = "everyone"

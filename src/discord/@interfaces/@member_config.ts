@@ -25,5 +25,9 @@ export interface MemberConfigType {
     wins: number;
   };
 
+  permissions: {
+    [key: string]: boolean;
+  };
+
   memberLog: Array<string>;
 }

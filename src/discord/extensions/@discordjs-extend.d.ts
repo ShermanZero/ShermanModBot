@@ -11,6 +11,10 @@ declare module "discord.js" {
      */
     masterGuild: string;
     /**
+     * An array of all the guilds which are currently being setup
+     */
+    guildSetups: Array<string>;
+    /**
      * The DiscordConfig file
      */
     discordConfig: DiscordConfigType;
@@ -41,8 +45,29 @@ declare module "discord.js" {
     /**
      * Whether or not we have already attempted to shut down
      */
-    alreadyShutdown: boolean;
-
+    shutdown: boolean;
+    /**
+     * Writes all the data stored in the client to their respective files
+     */
+    writeAllData(): Promise<boolean>;
+    /**
+     * Marks the guild as being setup
+     *
+     * @param guild the guild to setup
+     */
+    setUpGuild(guild: Guild): void;
+    /**
+     * Removes a guild from the guild setup
+     *
+     * @param guid the guild to remove from setup
+     */
+    removeGuildFromSetup(guild: Guild | string): boolean;
+    /**
+     * Checks if the guild is being setup or not
+     *
+     * @param guid the guild to check
+     */
+    guildBeingSetup(guid: Guild): boolean;
     /**
      * Registers a guild with the stored cache
      *

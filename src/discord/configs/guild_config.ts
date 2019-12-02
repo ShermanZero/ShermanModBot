@@ -5,7 +5,7 @@ export default class GuildConfig implements GuildConfigType {
   members: Array<string> = [];
 
   roles = {
-    owner: null as string,
+    guildowner: null as string,
     administrator: null as string,
     moderator: null as string
   };
@@ -13,5 +13,11 @@ export default class GuildConfig implements GuildConfigType {
   channels = {
     default: null as string,
     mod_logs: null as string
+  };
+
+  role_names = {
+    guildowner: null as string,
+    administrator: null as string,
+    moderator: null as string
   };
 }

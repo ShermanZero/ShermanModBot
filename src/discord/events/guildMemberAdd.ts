@@ -1,6 +1,6 @@
 import { GuildMember, TextChannel } from "discord.js";
 
-import rsrc from "../discord-resources";
+import rsrc from "../resources";
 
 module.exports = async (client: any, member: GuildMember): Promise<boolean> => {
   const guild = member.guild;

@@ -1,6 +1,7 @@
 import { Client, Message, Role, TextChannel } from "discord.js";
 import { CommandType } from "../@interfaces/@commands";
 import { GuildElevationTypes } from "../@interfaces/@guild_config";
+import rsrc from "../resources";
 
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.moderator,
@@ -32,12 +33,17 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   await privateHangoutChannel.send(`${roleMember}, welcome to the private channel!  All the messages will be deleted after you have left.`);
   await privateHangoutChannel.awaitMessages((response: Message) => response.content.endsWith("EOD"), {
     max: 1,
-    time: 600000,
+    time: 60 * 15 * 1000,
     errors: ["time"]
   });
 
-  await privateHangoutChannel.send("The private discussion has concluded, use !purge to clear the channel.");
   await roleMember?.roles.remove(privateRole);
+  const clearChannel: boolean = (await rsrc.askQuestion(message.member, privateHangoutChannel, "The private discussion has concluded, automatically clear channel?", { yesOrNo: true })) as boolean;
+
+  if (clearChannel) {
+    const purge = client.getCommand("purge");
+    await purge.run(client, message);
+  }
 
   return true;
 };

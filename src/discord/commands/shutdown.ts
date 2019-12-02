@@ -4,16 +4,19 @@ import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.botowner,
-  description: "shuts the bot down cleanly"
+  description: "shuts the bot down cleanly",
+  usage: "<?force>"
 };
 
 const run: CommandType["run"] = async (client: Client, message: Message, args: any): Promise<boolean> => {
-  let exitCode = 1;
-  if (args.length == 1 && args[0].toLowerCase().includes("force")) exitCode = 2;
+  const force = args.length > 0 ? args[0].toLowerCase().includes("force") : false;
 
-  await message.delete();
+  if (message) await message.delete();
 
-  process.exit(exitCode);
+  if (!force) await client.writeAllData();
+
+  client.shutdown = true;
+  process.exit(force ? 2 : 1);
 };
 
 module.exports.run = run;

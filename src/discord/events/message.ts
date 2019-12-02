@@ -3,15 +3,37 @@ import * as fs from "fs";
 import * as path from "path";
 
 import blacklist from "../../shared/resources/blacklist";
-import rsrc from "../discord-resources";
+import rsrc from "../resources";
 import { MemberConfigType } from "../@interfaces/@member_config";
 import { GuildConfigType, guildConfigFileName, GuildElevationTypes } from "../@interfaces/@guild_config";
 import { DiscordSecrets } from "../secrets/discord-secrets";
 import { Ranks } from "../@interfaces/@ranks";
 
 module.exports = async (client: Client, message: Message): Promise<boolean> => {
-  //ignore all bots
+  //ignore all bots and wait until this program is fully ready
   if (message.author.bot || !client.ready) return false;
+
+  //if the guild hasn't been set-up
+  let guildConfig = client.getGuildConfig(message.guild);
+  if ((!guildConfig || !guildConfig.setup) && !message.content.trim().startsWith("!config") && !client.guildBeingSetup(message.guild)) {
+    if (message.member.hasPermission("ADMINISTRATOR")) {
+      const answer = (await rsrc.askQuestion(message.member, message.channel as TextChannel, "the configuration for the guild needs to be setup, luckily you can do that!  Do you want me to automatically run the config?", {
+        yesOrNo: true,
+        replyTo: message
+      })) as boolean;
+
+      if (answer) {
+        const config = client.getCommand("config");
+        config.run(client, message);
+      } else {
+        message.channel.send("Okay, when you're ready to run the configuration, type !config");
+        return false;
+      }
+    } else {
+      await message.reply("a member with administrator privileges has to configure me before I can execute commands :( go bug them!");
+      return false;
+    }
+  }
 
   //register the member
   if (!(await registerMessage(client, message))) {
@@ -48,14 +70,13 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
   if (args) command = args.shift().toLowerCase();
   if (!command) return false;
 
-  //grab the command data from the client.commands Enmap
+  //grab the command data from the client.commands map
   const commandFunction = client.getCommandRun(command);
   const commandProperties = client.getCommandProperties(command);
 
   //if the command doesn't exist
   if (!commandFunction || !commandProperties) return false;
 
-  let guildConfig: GuildConfigType = client.getGuildConfig(message.guild);
   if (!guildConfig) {
     let guildDir = rsrc.getGuildDirectoryFromGuild(message.guild);
     let guildConfigFile = path.resolve(guildDir, guildConfigFileName);
@@ -67,10 +88,6 @@ module.exports = async (client: Client, message: Message): Promise<boolean> => {
   }
 
   if (command !== "config") {
-    if (!guildConfig?.setup) {
-      await message.reply("your guild owner has to configure me before I can execute commands :(");
-      return false;
-    }
     if (commandProperties.elevation && message.member.user.id !== DiscordSecrets.botowner) {
       if (commandProperties.elevation !== GuildElevationTypes.everyone) if (!message.member?.roles.get(guildConfig.roles[commandProperties.elevation])) return false;
     }

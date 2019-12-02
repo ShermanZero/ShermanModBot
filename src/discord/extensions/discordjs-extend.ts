@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 
-import rsrc from "../discord-resources";
+import rsrc from "../resources";
 import { Guild } from "discord.js";
 import { MemberConfigType } from "../@interfaces/@member_config";
 import { GuildConfigType, guildConfigFileName } from "../@interfaces/@guild_config";
@@ -14,8 +14,38 @@ import * as fs from "fs";
 import * as path from "path";
 
 Discord.Client.prototype.masterGuild = DiscordSecrets.guild_id;
+Discord.Client.prototype.guildSetups = new Array<string>();
 Discord.Client.prototype.discordConfig = new DiscordConfig();
 Discord.Client.prototype.masterLog = new Array<string>();
+
+Discord.Client.prototype.writeAllData = async function(): Promise<boolean> {
+  "Attempting to store all user data...".highlight();
+  this.membersInSession.forEach((guild: Map<string, MemberConfigType>, guildName: string) => {
+    const guildMembers = this.getGuildMembers(guildName);
+    guildMembers.forEach((memberConfig: MemberConfigType, username: string) => {
+      rsrc.writeMemberConfigToFile(this, username, memberConfig as MemberConfigType);
+    });
+  });
+  "Successfully stored!".green.print();
+
+  return true;
+};
+
+Discord.Client.prototype.setUpGuild = function(guild: Guild): void {
+  const guildName = rsrc.getGuildNameFromGuild(guild);
+  this.guildSetups.push(guildName);
+};
+
+Discord.Client.prototype.removeGuildFromSetup = function(guild: Guild | string): boolean {
+  if (typeof guild !== "string") guild = rsrc.getGuildNameFromGuild(guild);
+
+  return delete this.guildSetups[this.guildSetups.indexOf(guild)];
+};
+
+Discord.Client.prototype.guildBeingSetup = function(guild: Guild): boolean {
+  const guildName = rsrc.getGuildNameFromGuild(guild);
+  return this.guildSetups.indexOf(guildName) !== -1;
+};
 
 Discord.Client.prototype.registerGuild = function(guildName: string, guildConfig: GuildConfigType): GuildConfigType {
   if (!this.guildsInSession) this.guildsInSession = new Map<string, GuildConfigType>();
@@ -60,6 +90,8 @@ Discord.Client.prototype.setGuildConfig = function(guildName: string, guildConfi
 
   let configFile = path.join(rsrc.getGuildDirectoryFromName(guildName), guildConfigFileName);
   fs.writeFileSync(configFile, JSON.stringify(guildConfig, null, "\t"));
+
+  this.removeGuildFromSetup(guildName);
 
   return true;
 };

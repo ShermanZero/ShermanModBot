@@ -1,6 +1,6 @@
 import { Client, ColorResolvable, GuildMember, Message, MessageEmbed } from "discord.js";
 
-import rsrc from "../discord-resources";
+import rsrc from "../resources";
 import { CommandType } from "../@interfaces/@commands";
 import MemberConfig from "../configs/member_config";
 import { MemberConfigType } from "../@interfaces/@member_config";
@@ -41,36 +41,36 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
 };
 
 const custom: CommandType["custom"] = {
-  embed: (client: Client, member: GuildMember, config: MemberConfigType): MessageEmbed => {
-    new ArgumentsNotFulfilled(client, member, config);
+  embed: (client: Client, member: GuildMember, memberConfig: MemberConfigType): MessageEmbed => {
+    new ArgumentsNotFulfilled(client, member, memberConfig);
 
-    let name = "**" + config.hidden.username.substring(0, config.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
-    let rankColor = member.guild.roles.find(role => role.name === config.rank.name)?.color;
+    let name = "**" + memberConfig.hidden.username.substring(0, memberConfig.hidden.username.lastIndexOf("_")).toUpperCase() + "**";
+    let rankColor = member.guild.roles.find(role => role.name === memberConfig.rank.name)?.color;
 
     const embed = new MessageEmbed();
-    embed.setTitle(name + " | " + calculatePosition(client, config));
+    embed.setTitle(name + " | " + calculatePosition(client, memberConfig));
     embed.setColor(rankColor as ColorResolvable);
-    embed.setThumbnail(Ranks.urls[config.rank.name]);
+    embed.setThumbnail(Ranks.urls[memberConfig.rank.name]);
 
     let levelStats = "";
-    if (config.rank.name !== null) levelStats += `**rank:**  *${config.rank.name}*\n`.toUpperCase();
-    if (config.rank.level !== null) levelStats += `**level:**  *${config.rank.level}*\n`.toUpperCase();
-    if (config.rank.xp !== null) levelStats += `**xp:**  *${getFormattedNumber(config.rank.xp)} / ${getFormattedNumber(config.rank.levelup)}*\n`.toUpperCase();
+    if (memberConfig.rank.name !== null) levelStats += `**rank:**  *${memberConfig.rank.name}*\n`.toUpperCase();
+    if (memberConfig.rank.level !== null) levelStats += `**level:**  *${memberConfig.rank.level}*\n`.toUpperCase();
+    if (memberConfig.rank.xp !== null) levelStats += `**xp:**  *${getFormattedNumber(memberConfig.rank.xp)} / ${getFormattedNumber(memberConfig.rank.levelup)}*\n`.toUpperCase();
     if (levelStats !== "") embed.addField("**LEVEL STATS**", levelStats, true);
 
     let raceStats = "";
-    if (config.race.wins !== null) raceStats += `**wins:**  *${config.race.wins}*\n`.toUpperCase();
+    if (memberConfig.race.wins !== null) raceStats += `**wins:**  *${memberConfig.race.wins}*\n`.toUpperCase();
     if (raceStats !== "") embed.addField("**MARBLE RACE STATS**", raceStats, true);
 
     let miscStats = "";
-    if (config.misc.joined !== null) miscStats += `**joined:**  *${config.misc.joined}*\n`.toUpperCase();
-    if (config.misc.first_message !== null) miscStats += `**first message:**`.toUpperCase() + `"*${config.misc.first_message}*"\n`;
-    if (config.misc.warnings !== null) miscStats += `**warnings:**  *${config.misc.warnings}*\n`.toUpperCase();
+    if (memberConfig.misc.joined !== null) miscStats += `**joined:**  *${memberConfig.misc.joined}*\n`.toUpperCase();
+    if (memberConfig.misc.first_message !== null) miscStats += `**first message:**`.toUpperCase() + `"*${memberConfig.misc.first_message}*"\n`;
+    if (memberConfig.misc.warnings !== null) miscStats += `**warnings:**  *${memberConfig.misc.warnings}*\n`.toUpperCase();
     if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats, true);
 
     if (member.roles.get(client.getGuildConfig(member.guild)?.roles?.moderator)) {
       embed.setFooter("BE RESPECTFUL TO ALL - ESPECIALLY MODERATORS", "https://i.ibb.co/MC5389q/crossed-swords-2694.png");
-      embed.setDescription("`SERVER MOD`");
+      embed.setDescription("`  SERVER MOD  `");
     }
 
     return embed;

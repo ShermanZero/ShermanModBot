@@ -5,7 +5,7 @@ import * as path from "path";
 import { BuildOptions } from "../..";
 import bootLogo, { bootFooter } from "../../shared/resources/boot";
 import TwitchIntegration from "../../twitch/twitchIntegration";
-import rsrc from "../discord-resources";
+import rsrc from "../resources";
 import exitHandler from "../handlers/exitHandler";
 import { GuildConfigType, guildConfigFileName, GuildElevationTypes } from "../@interfaces/@guild_config";
 
@@ -53,43 +53,54 @@ module.exports = async (client: Client): Promise<boolean> => {
 
   client.guilds.forEach(async (guild: Guild) => {
     let guildDir = rsrc.getGuildDirectoryFromGuild(guild);
+    let guildName: string, guildConfig: GuildConfigType;
 
-    if (!fs.existsSync(guildDir)) {
-      fs.mkdirSync(guildDir, { recursive: true });
-      fs.mkdirSync(path.join(guildDir, client.discordConfig.files.removed), {
-        recursive: true
-      });
-    }
-    let guildname = rsrc.getGuildNameFromGuild(guild);
-
-    let guildConfigFile = path.resolve(guildDir, guildConfigFileName);
-    if (fs.existsSync(guildConfigFile)) {
-      let guildConfig = (await import(guildConfigFile)) as GuildConfigType;
-      client.registerGuild(guildname, guildConfig);
-    } else {
-      client.registerGuild(guildname, null);
-    }
-
-    fs.readdirSync(guildDir).forEach(async dir => {
-      let username = dir;
-
-      //ignore the removed directory
-      if (username === ".removed") return;
-
-      //if the client does not have the member registered in the cache (but their directory exists)
-      if (!client.hasMember(guild, username)) {
-        const memberConfig = await rsrc.getMemberConfigFromNameWithGuild(client, guild, (null as unknown) as Message, username);
-        if (!memberConfig) return;
-
-        process.stdout.write("  ");
-        client.registerMember(memberConfig);
+    const guildPromise = new Promise(async resolve => {
+      if (!fs.existsSync(guildDir)) {
+        fs.mkdirSync(guildDir, { recursive: true });
+        fs.mkdirSync(path.join(guildDir, client.discordConfig.files.removed), {
+          recursive: true
+        });
       }
-    });
+      guildName = rsrc.getGuildNameFromGuild(guild);
 
-    let membersInSession = client.getGuildMembers(guildname);
+      let guildConfigFile = path.resolve(guildDir, guildConfigFileName);
+      if (fs.existsSync(guildConfigFile)) {
+        guildConfig = (await import(guildConfigFile)) as GuildConfigType;
+        client.registerGuild(guildName, guildConfig);
+      } else {
+        client.registerGuild(guildName, null);
+      }
+
+      resolve();
+    });
+    await guildPromise;
+
+    const memberPromise = new Promise(resolve => {
+      fs.readdirSync(guildDir).forEach(async dir => {
+        let username = dir;
+
+        //ignore the removed directory
+        if (username === ".removed") return;
+
+        //if the client does not have the member registered in the cache (but their directory exists)
+        if (!client.hasMember(guild, username)) {
+          const memberConfig = await rsrc.getMemberConfigFromNameWithGuild(client, guild, (null as unknown) as Message, username);
+          if (!memberConfig) return;
+
+          process.stdout.write("  ");
+          client.registerMember(memberConfig);
+        }
+
+        resolve();
+      });
+    });
+    await memberPromise;
+
+    let membersInSession = client.getGuildMembers(guildName);
     let memberCount = membersInSession ? membersInSession.size : 0;
 
-    `Found all existing members of [${guildname.magenta}] (currently ${memberCount.toString().green})`.print();
+    `Found all existing members of [${guildName.magenta}] (currently ${memberCount.toString().green})`.print();
 
     let readyMessage = `Ready to serve in ${client.channels.size} channel(s) on ${client.guilds.size} guild(s), for a total of ${client.users.size} users`.inverse;
 

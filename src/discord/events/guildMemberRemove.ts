@@ -2,7 +2,7 @@ import { GuildMember } from "discord.js";
 import * as ncp from "ncp";
 import * as path from "path";
 
-import rsrc from "../discord-resources";
+import rsrc from "../resources";
 
 module.exports = async (client: any, member: GuildMember): Promise<boolean> => {
   let username = rsrc.getUsernameFromMember(member);

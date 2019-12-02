@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as rimraf from "rimraf";
 
-import rsrc from "../discord-resources";
+import rsrc from "../resources";
 import { CommandType } from "../@interfaces/@commands";
 import { GuildElevationTypes } from "../@interfaces/@guild_config";
 

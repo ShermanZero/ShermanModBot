@@ -1,6 +1,6 @@
 import { Client, Message } from "discord.js";
 
-import rsrc from "../discord-resources";
+import rsrc from "../resources";
 import { CommandType } from "../@interfaces/@commands";
 import { GuildElevationTypes } from "../@interfaces/@guild_config";
 

@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { BuildOptions } from "../../..";
-import rsrc from "../../../discord/discord-resources";
+import rsrc from "../../../discord/resources";
 import { MemberConfigType } from "../../../discord/@interfaces/@member_config";
 
 String.prototype.hideID = function(username?: string): string {
@@ -38,13 +38,13 @@ String.prototype.success = function(verbose?: boolean, message?: string): string
 
 String.prototype.mention = function(verbose?: boolean, message?: string): string {
   if (!message) message = String(this);
-  String.prototype.log(message.cyan, verbose);
+  String.prototype.log(message.magenta, verbose);
   return message;
 };
 
 String.prototype.highlight = function(verbose?: boolean, message?: string): string {
   if (!message) message = String(this);
-  String.prototype.log(message.magenta, verbose);
+  String.prototype.log(message.cyan, verbose);
   return message;
 };
 
@@ -70,7 +70,7 @@ String.prototype.masterLog = function(client: Client, logType?: string, output?:
 
   if (!logType) logType = client.discordConfig.logs.all;
 
-  let masterLogDir = path.join(__dirname, "..", "discord", "logs");
+  let masterLogDir = path.join(__dirname, "..", "..", "..", "discord", "guilds", "logs");
   if (!fs.existsSync(masterLogDir)) {
     fs.mkdirSync(masterLogDir, { recursive: true });
     fs.writeFileSync(path.resolve(masterLogDir, logType), "-- START OF LOG --");

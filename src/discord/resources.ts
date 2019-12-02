@@ -7,6 +7,8 @@ import { MemberConfigType } from "./@interfaces/@member_config";
 import MemberConfig from "./configs/member_config";
 import { Ranks } from "./@interfaces/@ranks";
 import { ArgumentsNotFulfilled } from "../shared/extensions/error/error-extend";
+import { GuildConfigType } from "./@interfaces/@guild_config";
+import { MessageReaction } from "discord.js";
 
 /**
  * Multiple resources dealing with handling members/users/guilds and more
@@ -139,7 +141,10 @@ export default class DiscordResources {
         for (let i = 0; i < possibleMatches.length; i++) listOfUsers += `${i + 1})\t${possibleMatches[i]}\n`;
         listOfUsers += "```";
 
-        const response = await this.askQuestion(message.member, message.channel as TextChannel, `there are multiple members which contain "${username}", please select the correct one:\n${listOfUsers}`, true, false);
+        const response = (await this.askQuestion(message.member, message.channel as TextChannel, `there are multiple members which contain "${username}", please select the correct one:\n${listOfUsers}`, {
+          deleteMessages: true,
+          allowOtherMembers: false
+        })) as string;
 
         username = possibleMatches[parseInt(response) - 1];
       } else if (possibleMatches.length == 1) {
@@ -217,9 +222,20 @@ export default class DiscordResources {
       return null;
     }
 
+    const guildConfig: GuildConfigType = client.getGuildConfig(guild);
+
     let memberConfig = new MemberConfig();
     memberConfig.hidden.username = this.getUsernameFromMember(member);
     memberConfig.hidden.guildname = this.getGuildNameFromGuild(guild);
+
+    const allRoles = Object.keys(guildConfig.role_names);
+    allRoles.forEach(rolename => {
+      if (member.roles.find(role => role.name === rolename)) (memberConfig.permissions as { [key: string]: boolean })[rolename] = true;
+    });
+
+    if (member.roles.find(role => role.name === guildConfig.role_names.moderator)) {
+      (memberConfig.permissions as any)[guildConfig.roles.moderator] = true;
+    }
 
     `Attempting to create new member directory for [${memberConfig.hidden.username}] in guild [${memberConfig.hidden.guildname}]`.inverse.print(true);
 
@@ -354,41 +370,94 @@ export default class DiscordResources {
    * @param {GuildMember} member the Discord `GuildMember`
    * @param {TextChannel} channel the Discord `TextChannel`
    * @param {string} question the question to ask
-   * @param {boolean} [deleteMessage=true] (optional) whether or not to delete the message `default=true`
-   * @param {boolean} [allowOtherMembers=false] (optional) whether or not to allow other members to respond `default=false`
-   * @param [options={ max: 1, time: 60 * 1000, errors: ["time"] }] (optional) the options to pass `default={max: 1, time: 60000, errors: ["time"]}`
+   * @param options (optional) `replyTo: null, deleteMessage: true, allowOtherMembers: false, yesOrNo: false, timeOutTime: 60`
    */
-  static async askQuestion(member: GuildMember, channel: TextChannel, question: string, deleteMessage: boolean = true, allowOtherMembers: boolean = false, options = { max: 1, time: 60 * 1000, errors: ["time"] }): Promise<string> {
+  static async askQuestion(member: GuildMember, channel: TextChannel, question: string, options?: { replyTo?: Message; deleteMessages?: boolean; allowOtherMembers?: boolean; yesOrNo?: boolean; timeOutTime?: number }): Promise<string | boolean> {
     if (!member || !channel || !question) {
       new ArgumentsNotFulfilled(...arguments);
       return null;
     }
 
-    let value: string;
+    if (!options) {
+      options = {};
 
-    const questionMessages: Array<Message> = ((await channel.send(question, { split: true })) as unknown) as Array<Message>;
+      options.replyTo = null;
+      options.deleteMessages = true;
+      options.allowOtherMembers = false;
+      options.yesOrNo = false;
+      options.timeOutTime = 60;
+    }
 
-    const filter = (response: Message): boolean => {
-      return response.member.id === member.id;
-    };
+    let filter, collected, value: string | boolean;
 
-    await channel
-      .awaitMessages(allowOtherMembers ? filter : () => true, options)
-      .then(async collected => {
+    let questionMessages: Array<Message>;
+    if (options.replyTo) {
+      questionMessages = ((await options.replyTo.reply(question, { split: true })) as unknown) as Array<Message>;
+    } else {
+      questionMessages = ((await channel.send(question, { split: true })) as unknown) as Array<Message>;
+    }
+
+    if (options.yesOrNo) {
+      const reactYes = "✅";
+      const reactNo = "❎";
+
+      filter = (reaction: MessageReaction): boolean => {
+        if (!options.allowOtherMembers && !reaction.users.find(user => user.id === member.user.id)) return false;
+
+        let passYes = reaction.emoji.toString() === reactYes;
+        let passNo = reaction.emoji.toString() === reactNo;
+        if (!passYes && !passNo) return false;
+
+        value = passYes || passNo;
+        return true;
+      };
+
+      const lastMessage = questionMessages.pop();
+      await lastMessage.react(reactYes);
+      await lastMessage.react(reactNo);
+
+      collected = await lastMessage.awaitReactions(filter, { max: 1, time: options.timeOutTime * 1000, errors: ["time"] }).catch(error => {
+        channel.send("You did not react to the message in time");
+      });
+
+      if (collected) {
+        const reaction = collected.first();
+
+        if (reaction.emoji.name === reactYes) {
+          return true;
+        } else if (reaction.emoji.name === reactNo) {
+          return false;
+        }
+      } else {
+        return null;
+      }
+    } else if (!options.yesOrNo) {
+      filter = (response: Message): boolean => {
+        if (response.author.bot) return false;
+        if (!options.allowOtherMembers && response.author.id !== member.user.id) return false;
+
+        return true;
+      };
+
+      collected = await channel.awaitMessages(filter, { max: 1, time: options.timeOutTime * 1000, errors: ["time"] }).catch(error => {
+        channel.send("You did not reply in time");
+      });
+
+      if (collected) {
         value = collected.first()?.content;
         value = value.replace(/[<>@&#]/g, "");
 
-        if (deleteMessage) {
-          questionMessages.forEach(async (message: Message) => {
-            await message.delete();
-          });
-        }
-
         await collected.first()?.delete();
-      })
-      .catch(error => {
-        console.log(error);
+      }
+    }
+
+    if (options.deleteMessages) {
+      questionMessages.forEach(async (message: Message) => {
+        await message.delete();
       });
+    }
+
+    if (!collected) return null;
 
     return value;
   }

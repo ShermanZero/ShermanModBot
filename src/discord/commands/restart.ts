@@ -2,47 +2,35 @@ import { Client, Message } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
 
-import rsrc from "../discord-resources";
 import { CommandType } from "../@interfaces/@commands";
-import { MemberConfigType } from "../@interfaces/@member_config";
 import { GuildElevationTypes } from "../@interfaces/@guild_config";
+import { DiscordSecrets } from "../secrets/discord-secrets";
 
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.botowner,
-  description: "restarts the bot cleanly"
+  description: "restarts the bot (but doesn't shut it down) any .js files will still need to be regenerate with a full !shutdown"
 };
 
 const run: CommandType["run"] = async (client: Client, message: Message, memberTriggered: boolean): Promise<boolean> => {
-  if (client.alreadyShutdown) {
-    "Already executed clean shutdown... restarting now".mention();
-    return true;
-  }
-
-  client.alreadyShutdown = true;
-  "Attempting to restart cleanly...".mention();
-
-  client.membersInSession.forEach((guild: Map<string, MemberConfigType>, guildName: string) => {
-    const guildMembers = client.getGuildMembers(guildName);
-    guildMembers.forEach((memberConfig: MemberConfigType, username: string) => {
-      rsrc.writeMemberConfigToFile(client, username, memberConfig as MemberConfigType);
-    });
-  });
+  await client.writeAllData();
 
   //check if the command was member-triggered
   if (memberTriggered) await message.delete();
 
-  "Successfully wrote member data to files!".mention();
-
   //append all last log data to the master log
-  for (let i = 0; i < client.masterLog.length; i++) fs.appendFileSync(path.join(__dirname, "..", "discord", "logs", client.discordConfig.logs.all), client.masterLog[i]);
-
-  "Successfully stored pending member logs!".mention();
+  for (let i = 0; i < client.masterLog.length; i++) fs.appendFileSync(path.join(__dirname, "..", "guilds", "logs", client.discordConfig.logs.all), client.masterLog[i]);
 
   "Destroying client...".magenta.mention();
   client.destroy();
 
-  "Done".highlight();
-  process.exit();
+  client.destroy();
+
+  "Done".yellow.print();
+
+  "Logging back in...".highlight();
+  client.login(DiscordSecrets.token);
+
+  return true;
 };
 
 module.exports.run = run;

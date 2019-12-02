@@ -23,5 +23,7 @@ export default class MemberConfig implements MemberConfigType {
     wins: 0
   };
 
+  permissions = {};
+
   memberLog = new Array<string>();
 }

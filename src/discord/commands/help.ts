@@ -1,6 +1,5 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 import { CommandType } from "../@interfaces/@commands";
-import { DiscordSecrets } from "../secrets/discord-secrets";
 import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
 const properties: CommandType["properties"] = {
@@ -13,29 +12,21 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   const embed = new MessageEmbed();
 
   embed.setTitle(`${message.guild.name} Commands`);
-  embed.setDescription("All the commands **you** have access to in this server");
+  embed.setDescription("All the commands in this server");
   embed.setColor(0x00ae86);
 
-  let guildConfig = client.getGuildConfig(message.guild);
+  client.commands.forEach((command: CommandType, commandName: string) => {
+    if (!command.properties || !message.member) return;
+    if (command.properties.elevation == GuildElevationTypes.botowner) return;
 
-  client.commands.forEach((value: any, key: string) => {
-    if (!value.properties || !message.member) return;
+    let header = "**!" + commandName + "**";
 
-    let elevatedPermissions = value.properties.requiresElevation && message.member.roles.get(guildConfig.roles[value.properties.requiresElevation]) !== null;
-    let noPermissions = !value.properties.requiresElevation || value.properties.requiresElevation === "";
+    let desc = command.properties.description;
+    if (command.properties.usage) header += `\n\t*!${commandName} ${command.properties.usage}*`;
 
-    if (message.member.user.id === DiscordSecrets.botowner) elevatedPermissions = true;
+    desc += `  \`\`\`css\n[${command.properties.elevation}]\`\`\``;
 
-    if (elevatedPermissions || noPermissions) {
-      let header = "**!" + key + "**";
-
-      let desc = value.properties.description;
-      if (value.properties.usage) header += `\n\t*!${key} ${value.properties.usage}*`;
-
-      if (elevatedPermissions && !noPermissions) desc += `  \`\`\`css\n[${value.properties.requiresElevation}]\`\`\``;
-
-      embed.addField(header, desc, true);
-    }
+    embed.addField(header, desc, true);
   });
 
   await message.channel.send(embed);

@@ -55,16 +55,16 @@ export default class ExitHandler {
    */
   static exitHandler(client: Client, options: any, exitCode: number): boolean {
     //if we executed the "restart" command
-    if (client.alreadyShutdown) return true;
+    if (client.shutdown) return true;
 
-    `Preparing to shutdown with exit code (${exitCode})...`.mention;
+    `\n\nPreparing to shutdown with exit code (${exitCode})...`.mention();
 
     if (exitCode == 2) {
       "Forcing shutdown without clean attempt, process will not be restarted".error();
       client.destroy();
     } else if (options.clean) {
-      "Attempting to run `restart` command...".mention;
-      client.getCommand("restart").run(client, null, false);
+      "Attempting to run `shutdown` command...".mention();
+      client.getCommand("shutdown").run(client, null, false);
     }
 
     return true;

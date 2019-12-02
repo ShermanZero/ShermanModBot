@@ -27,19 +27,31 @@ export default class TwitchIntegration {
 
     `...\n${"Beginning Twitch integration".inverse}`.print();
     "  *Attempting to authorize to Twitch...".print();
-    const twitchClient = await TwitchClient.withCredentials(clientID, accessToken);
+    const twitchClient = await TwitchClient.withCredentials(clientID, accessToken).catch(error => {
+      `There was a problem with authorizing with Twitch`.error();
+    });
+    if (!twitchClient) return;
 
     "  *Attempting to authorize chat client...".print();
-    const chatClient = await ChatClient.forTwitchClient(twitchClient);
+    const chatClient = await ChatClient.forTwitchClient(twitchClient).catch(error => {
+      `There was a problem authorizing the Twitch chat client`.error();
+    });
+    if (!chatClient) return;
 
     "    *Successful authorization to Twitch!".success();
-    await chatClient.connect();
+    await chatClient.connect().catch(error => {
+      `There was a problem connecting to the Twitch chat`.error();
+    });
 
     "  *Connected to chat client, awaiting registration...".print();
-    await chatClient.waitForRegistration();
+    await chatClient.waitForRegistration().catch(error => {
+      `There was a problem with registration to the Twitch cat`.error();
+    });
 
     "  *Got registration, attempting to join shermanzero...".print();
-    await chatClient.join("shermanzero");
+    await chatClient.join("shermanzero").catch(error => {
+      `There was a problem with joining the Twitch chat`.error();
+    });
     "    *Joined chat!".success();
 
     this.loadCommands(client);
@@ -79,6 +91,8 @@ export default class TwitchIntegration {
     chatClient.onSubGift((channel, user, subInfo) => {
       chatClient.say(channel, `Thanks to ${subInfo.gifter} for gifting a subscription to ${user}!`);
     });
+
+    chatClient.say("shermanzero", "We are loaded bois!");
   }
 
   /**

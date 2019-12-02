@@ -1,7 +1,7 @@
 import { Client, GuildMember, Message, MessageEmbed, MessageReaction, TextChannel, User } from "discord.js";
 import fetch from "node-fetch";
 
-import rsrc from "../discord-resources";
+import rsrc from "../resources";
 import { CommandType } from "../@interfaces/@commands";
 import { GuildElevationTypes } from "../@interfaces/@guild_config";
 
@@ -28,24 +28,16 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   let reactToNotifyEmoji: string = "🔔";
   let reactToRemoveEmoji: string = "🔕";
 
-  let mediaName: string;
-  let mediaTime: string;
-  let medialDetails: string;
-  await rsrc.askQuestion(message.member, message.channel as TextChannel, "What is the title of the movie that will be streamed?", true).then(response => {
-    mediaName = response;
-  });
+  let mediaDetails: string;
+  const mediaName = (await rsrc.askQuestion(message.member, message.channel as TextChannel, "What is the title of the movie that will be streamed?")) as string;
 
-  await rsrc.askQuestion(message.member, message.channel as TextChannel, "What time will the movie start?", true).then(response => {
-    mediaTime = response;
-  });
+  const mediaTime = (await rsrc.askQuestion(message.member, message.channel as TextChannel, "What time will the movie start?")) as string;
 
   const details = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=56ccfefa&t=${mediaName.split(" ").join("+")}`).then(content => content.json());
   if (!details) {
-    await rsrc.askQuestion(message.member, message.channel as TextChannel, "Add any further details, or enter 'none' to continue", true).then(response => {
-      medialDetails = response;
-    });
+    mediaDetails = (await rsrc.askQuestion(message.member, message.channel as TextChannel, "Add any further details, or enter 'none' to continue")) as string;
   } else {
-    medialDetails = details["Plot"];
+    mediaDetails = details["Plot"];
   }
 
   let embed = new MessageEmbed();
@@ -53,7 +45,7 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: a
   embed.addField("STREAMING", mediaName, true);
   embed.addField("AT", mediaTime, true);
 
-  if (medialDetails && medialDetails?.toLowerCase().trim() !== "none") embed.addField("DETAILS", medialDetails);
+  if (mediaDetails && mediaDetails?.toLowerCase().trim() !== "none") embed.addField("DETAILS", mediaDetails);
   let hangout: TextChannel = message.guild.channels.find(channel => channel.name === "movie-hangout") as TextChannel;
 
   (await hangout.send(embed)).pin();

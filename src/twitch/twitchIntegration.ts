@@ -91,8 +91,6 @@ export default class TwitchIntegration {
     chatClient.onSubGift((channel, user, subInfo) => {
       chatClient.say(channel, `Thanks to ${subInfo.gifter} for gifting a subscription to ${user}!`);
     });
-
-    chatClient.say("shermanzero", "We are loaded bois!");
   }
 
   /**

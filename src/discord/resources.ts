@@ -1,14 +1,14 @@
-import { Client, Guild, GuildMember, Message, Role, TextChannel, User } from "discord.js";
-import * as fs from "fs";
-import * as path from "path";
-import * as rimraf from "rimraf";
-import DiscordConfig from "./configs/discord_config";
-import { MemberConfigType } from "./@interfaces/@member_config";
-import MemberConfig from "./configs/member_config";
-import { Ranks } from "./@interfaces/@ranks";
-import { ArgumentsNotFulfilled } from "../shared/extensions/error/error-extend";
-import { GuildConfigType } from "./@interfaces/@guild_config";
-import { MessageReaction } from "discord.js";
+import { Client, Guild, GuildMember, Message, MessageReaction, Role, TextChannel, User } from 'discord.js';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as rimraf from 'rimraf';
+
+import { ArgumentsNotFulfilled } from '../shared/extensions/error/error-extend';
+import { GuildConfigType } from './@interfaces/@guild_config';
+import { MemberConfigType } from './@interfaces/@member_config';
+import { Ranks } from './@interfaces/@ranks';
+import DiscordConfig from './configs/discord_config';
+import MemberConfig from './configs/member_config';
 
 /**
  * Multiple resources dealing with handling members/users/guilds and more
@@ -158,6 +158,8 @@ export default class DiscordResources {
     if (!fs.existsSync(jsonFile)) return null;
 
     let json = fs.readFileSync(jsonFile);
+    if (!json) return null;
+
     let config = JSON.parse(json.toString()) as MemberConfigType;
 
     return config;

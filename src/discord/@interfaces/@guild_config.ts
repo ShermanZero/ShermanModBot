@@ -23,6 +23,12 @@ export interface GuildConfigType {
     server_rules: string;
     server_info: string;
   };
+
+  message_formats: {
+    [key: string]: string;
+    welcome: string;
+    moderation: string;
+  };
 }
 
 export enum GuildElevationTypes {

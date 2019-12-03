@@ -1,11 +1,12 @@
-import { Client, Message, Role, TextChannel } from "discord.js";
-import * as fs from "fs";
-import * as path from "path";
+import { Client, Message, MessageEmbed, Role, TextChannel } from 'discord.js';
+import * as fs from 'fs';
+import * as path from 'path';
 
-import rsrc from "../resources";
-import GuildConfig from "../configs/guild_config";
-import { CommandType } from "../@interfaces/@commands";
-import { GuildConfigType, guildConfigFileName, GuildChannelTypes, GuildElevationTypes } from "../@interfaces/@guild_config";
+import { CommandType } from '../@interfaces/@commands';
+import { Variables } from '../@interfaces/@custom_variables';
+import { GuildChannelTypes, guildConfigFileName, GuildConfigType, GuildElevationTypes } from '../@interfaces/@guild_config';
+import GuildConfig from '../configs/guild_config';
+import rsrc from '../resources';
 
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.administrator,
@@ -33,21 +34,53 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: s
 
   let guildConfig: GuildConfigType = new GuildConfig();
   requiredSuccessful = requiredSuccessful && (await getRole(guildConfig, GuildElevationTypes.guildowner, message, "Who is the owner of this guild?  Please mention them"));
-  requiredSuccessful = requiredSuccessful && (await getRole(guildConfig, GuildElevationTypes.administrator, message));
-  requiredSuccessful = requiredSuccessful && (await getRole(guildConfig, GuildElevationTypes.moderator, message));
+  if (requiredSuccessful) requiredSuccessful = requiredSuccessful && (await getRole(guildConfig, GuildElevationTypes.administrator, message));
+  if (requiredSuccessful) requiredSuccessful = requiredSuccessful && (await getRole(guildConfig, GuildElevationTypes.moderator, message));
 
   let optionalSuccessful: boolean = true;
-  optionalSuccessful = optionalSuccessful && (await getChannel(guildConfig, GuildChannelTypes.mod_logs, message, { alias: "mod logs", purpose: "to log any moderation action taken by mods and me" }));
-  optionalSuccessful = optionalSuccessful && (await getChannel(guildConfig, GuildChannelTypes.default, message, { alias: "default/welcome", purpose: "to welcome new members of the guild as they arrive" }));
+  await getChannel(guildConfig, GuildChannelTypes.mod_logs, message, {
+    alias: "mod logs",
+    purpose: "to log any moderation action taken by mods and me"
+  });
+
+  optionalSuccessful = await getChannel(guildConfig, GuildChannelTypes.default, message, {
+    alias: "default/welcome",
+    purpose: "to welcome new members of the guild as they arrive"
+  });
+
   if (optionalSuccessful) {
-    optionalSuccessful = optionalSuccessful && (await getChannel(guildConfig, GuildChannelTypes.server_rules, message, { alias: "server rules", purpose: "as part of the welcome message" }));
-    optionalSuccessful = optionalSuccessful && (await getChannel(guildConfig, GuildChannelTypes.server_info, message, { alias: "server info", purpose: "as part of the welcome message" }));
+    await getChannel(guildConfig, GuildChannelTypes.server_rules, message, {
+      alias: "server rules",
+      purpose: "as part of the welcome message"
+    });
+    await getChannel(guildConfig, GuildChannelTypes.server_info, message, {
+      alias: "server info",
+      purpose: "as part of the welcome message"
+    });
   }
 
   await message.channel.send("Are there any more channels you would like to add right now?  These can be used in later customization of commands/events.  Simply enter 'none' if you do not wish to add any right now.");
   do {
     optionalSuccessful = await getChannel(guildConfig, null, message, { custom: true });
   } while (optionalSuccessful);
+
+  await message.channel.send(
+    "We're getting close to the end of the configuration!  Next I just need to know if you would like me to post a welcome message when a new member joins your server.  I support variables too!  Take a look at what you can include:"
+  );
+
+  let embed: MessageEmbed = new MessageEmbed();
+  embed.setTitle("Supported Variables");
+
+  const variables = Variables.Default.getDefaultVariableNames();
+  variables.forEach(variable => {
+    if (variable === null) return;
+    embed.addField(`\${${variable[0]}}`, variable[1], true);
+  });
+  await message.channel.send(embed);
+
+  const response = await rsrc.askQuestion(message.member, message.channel as TextChannel, "What welcome message would you like to set?  You can also type 'none' if you don't want one", { timeOutTime: 300 });
+
+  if (response !== "none") guildConfig.message_formats.welcome = response as string;
 
   if (!requiredSuccessful) {
     client.removeGuildFromSetup(message.guild);
@@ -94,7 +127,7 @@ async function getRole(guildConfig: GuildConfigType, nameOfRole: string, message
   return true;
 }
 
-async function getChannel(guildConfig: GuildConfigType, nameOfChannel: string, message: Message, options: { custom?: boolean; alias?: string; purpose?: string; question?: string }): Promise<boolean> {
+async function getChannel(guildConfig: GuildConfigType, nameOfChannel: string, message: Message, options?: { custom?: boolean; alias?: string; purpose?: string; question?: string }): Promise<boolean> {
   let channel: TextChannel;
 
   if (!options.custom) {

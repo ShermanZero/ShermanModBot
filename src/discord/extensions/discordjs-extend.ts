@@ -123,6 +123,7 @@ Discord.Client.prototype.updateMember = function(memberConfig: MemberConfigType)
 
   let guildMembers = this.getGuildMembers(guildname);
   guildMembers.set(username, memberConfig);
+  this.setGuildMembers(guildname, guildMembers);
 
   return memberConfig;
 };
@@ -136,6 +137,8 @@ Discord.Client.prototype.registerMember = function(memberConfig: MemberConfigTyp
     `Was not able to register ${memberConfig} to the guild`.error();
     return null;
   }
+
+  rsrc.writeMemberConfigToFile(this, memberConfig.hidden.username, memberConfig);
 
   return memberConfig;
 };

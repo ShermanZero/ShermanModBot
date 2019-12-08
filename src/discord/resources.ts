@@ -1,14 +1,14 @@
-import { Client, Guild, GuildMember, Message, MessageReaction, Role, TextChannel, User } from 'discord.js';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as rimraf from 'rimraf';
+import { Client, Guild, GuildMember, Message, MessageReaction, Role, TextChannel, User } from "discord.js";
+import * as fs from "fs";
+import * as path from "path";
+import * as rimraf from "rimraf";
 
-import { ArgumentsNotFulfilled } from '../shared/extensions/error/error-extend';
-import { GuildConfigType } from './@interfaces/@guild_config';
-import { MemberConfigType } from './@interfaces/@member_config';
-import { Ranks } from './@interfaces/@ranks';
-import DiscordConfig from './configs/discord_config';
-import MemberConfig from './configs/member_config';
+import { ArgumentsNotFulfilled } from "../shared/extensions/error/error-extend";
+import { GuildConfigType } from "./@interfaces/@guild_config";
+import { MemberConfigType } from "./@interfaces/@member_config";
+import { Ranks } from "./@interfaces/@ranks";
+import DiscordConfig from "./configs/discord_config";
+import MemberConfig from "./configs/member_config";
 
 /**
  * Multiple resources dealing with handling members/users/guilds and more
@@ -269,12 +269,17 @@ export default class DiscordResources {
           rankRolesUserHas.push(role);
 
           memberConfig.rank.name = rank;
-          memberConfig.rank.xp = Ranks.info[rank];
+
+          let xpParsed = Ranks.info[rank];
+          memberConfig.rank.xp = xpParsed;
 
           for (let level in Ranks.levels) {
             if ((Ranks.levels[level as string] as string).toLowerCase() === rank) {
-              memberConfig.rank.level = parseInt(level);
-              memberConfig.rank.levelup = this.getXPToLevelUp(memberConfig.rank.xp, memberConfig.rank.level);
+              let levelParsed = parseInt(level);
+
+              memberConfig.rank.level = levelParsed;
+              memberConfig.rank.levelup = this.getXPToLevelUp(xpParsed, levelParsed);
+              memberConfig.rank.rankup = levelParsed + 5;
 
               break;
             }

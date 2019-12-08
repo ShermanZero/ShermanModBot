@@ -1,6 +1,6 @@
 # ShermanModBot
 
-The Discord bot created by ShermanZero. Want to request a new feature? Interested in development udpates? Join the server here:
+The Discord bot created by ShermanZero. Want to request a new feature? Interested in development updates? Join the server here:
 
 https://discord.gg/sJ5rz2h
 

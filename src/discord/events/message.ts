@@ -121,7 +121,9 @@ async function registerMessage(client: Client, message: Message): Promise<boolea
   //member NOT stored in local client session
   if (!client.hasMember(message.guild, username)) {
     memberConfig = await rsrc.getMemberConfigFromName(client, message, username);
-    client.registerMember(memberConfig);
+    memberConfig = client.registerMember(memberConfig);
+
+    console.log(memberConfig);
     //member stored in local client session
   } else {
     memberConfig = client.getMemberConfig(message.guild, username);

@@ -1,7 +1,7 @@
-import { DiscordConfigType } from "../@interfaces/@discord_config";
-import { MemberConfigType } from "../@interfaces/@member_config";
-import { CommandType } from "../@interfaces/@commands";
-import { GuildConfigType } from "../@interfaces/@guild_config";
+import { DiscordConfigType } from "../@utilities/@discord_config";
+import { MemberConfigType } from "../@utilities/@member_config";
+import { CommandType } from "../@utilities/@commands";
+import { GuildConfigType } from "../@utilities/@guild_config";
 import { Guild } from "discord.js";
 
 declare module "discord.js" {

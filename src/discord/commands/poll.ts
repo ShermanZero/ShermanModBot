@@ -1,8 +1,8 @@
-import { Client, Message, MessageEmbed, MessageReaction, TextChannel, User } from 'discord.js';
+import { Client, Message, MessageEmbed, MessageReaction, TextChannel, User } from "discord.js";
 
-import { CommandType } from '../@interfaces/@commands';
-import { GuildElevationTypes } from '../@interfaces/@guild_config';
-import rsrc from '../resources';
+import { CommandType } from "../@utilities/@commands";
+import { GuildElevationTypes } from "../@utilities/@guild_config";
+import rsrc from "../resources";
 
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.moderator,
@@ -12,7 +12,8 @@ const properties: CommandType["properties"] = {
 
 const run: CommandType["run"] = async (client: Client, message: Message, args: string[]): Promise<boolean> => {
   let title = await rsrc.askQuestion(message.member, message.channel as TextChannel, "what do you want the title of the poll to be?", {
-    replyTo: message
+    replyTo: message,
+    deleteMessages: true
   });
 
   if (title === null) return false;
@@ -36,11 +37,12 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: s
   const getEmbed = (): MessageEmbed => {
     let embed = new MessageEmbed();
     embed.setTitle(title);
+    embed.setDescription("REACT WITH YOUR VOTE");
 
-    let embedField: string = "";
-    for (let i = 0; i < options.length; i++) embedField += `${optionsEmojis[i]}: ${options[i]}\tVOTES: ${voteCount[i]}\n`;
+    for (let i = 0; i < options.length; i++) {
+      embed.addField(`${optionsEmojis[i]}  ${options[i]}`, "VOTES: " + voteCount[i]);
+    }
 
-    embed.addField("REACT WITH YOUR VOTE", embedField);
     return embed;
   };
 
@@ -48,10 +50,13 @@ const run: CommandType["run"] = async (client: Client, message: Message, args: s
   if (embedMessage) for (let i = 0; i < options.length; i++) embedMessage.react(optionsEmojis[i]);
 
   const filter = (reaction: MessageReaction, user: User): boolean => {
-    let index = optionsEmojis.indexOf(reaction.emoji.toString());
-    if (index === -1) return false;
+    if (user.bot) return false;
 
-    voteCount[index] += 1;
+    if (optionsEmojis.indexOf(reaction.emoji.toString()) === -1) return false;
+
+    voteCount = voteCount.fill(0);
+
+    console.log(embedMessage.reactions);
 
     embedMessage.edit(getEmbed());
     return true;

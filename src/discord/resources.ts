@@ -4,9 +4,9 @@ import * as path from "path";
 import * as rimraf from "rimraf";
 
 import { ArgumentsNotFulfilled } from "../shared/extensions/error/error-extend";
-import { GuildConfigType } from "./@interfaces/@guild_config";
-import { MemberConfigType } from "./@interfaces/@member_config";
-import { Ranks } from "./@interfaces/@ranks";
+import { GuildConfigType } from "./@utilities/@guild_config";
+import { MemberConfigType } from "./@utilities/@member_config";
+import { Ranks } from "./@utilities/@ranks";
 import DiscordConfig from "./configs/discord_config";
 import MemberConfig from "./configs/member_config";
 
@@ -29,7 +29,7 @@ export default class DiscordResources {
     }
 
     let username: string;
-    if (message.member) username = message.member.user.tag.replace("#", "_");
+    if (message.member) username = message.member.user.username + "_" + message.member.user.id;
     else return null;
 
     if (username) username = username.replace(/[^\w\s]/gi, "").toLowerCase();
@@ -50,15 +50,11 @@ export default class DiscordResources {
     }
 
     let username: string;
-    if (member instanceof GuildMember) username = member.user.tag;
-    else if (member instanceof User) username = member.tag;
+    if (member instanceof GuildMember) username = member.user.username + "_" + member.user.id;
+    else if (member instanceof User) username = member.username + "_" + member.id;
     else username = member;
 
-    if (username)
-      username = username
-        .replace("#", "_")
-        .replace(/[^\w\s]/gi, "")
-        .toLowerCase();
+    if (username) username = username.replace(/[^\w\s]/gi, "").toLowerCase();
 
     return username;
   }
@@ -93,7 +89,7 @@ export default class DiscordResources {
       return null;
     }
 
-    return await DiscordResources.getMemberConfigFromNameWithGuild(client, message.guild as Guild, message, username, search);
+    return await this.getMemberConfigFromNameWithGuild(client, message.guild as Guild, message, username, search);
   }
 
   /**
@@ -154,13 +150,19 @@ export default class DiscordResources {
       }
     }
 
-    jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
-    if (!fs.existsSync(jsonFile)) return null;
+    let config: MemberConfigType;
 
-    let json = fs.readFileSync(jsonFile);
-    if (!json) return null;
+    if (!client.hasMember(guild, username)) {
+      jsonFile = path.join(this.getGuildDirectoryFromGuild(guild), username, username + ".json");
+      if (!fs.existsSync(jsonFile)) return null;
 
-    let config = JSON.parse(json.toString()) as MemberConfigType;
+      let json = fs.readFileSync(jsonFile);
+      if (!json) return null;
+
+      config = JSON.parse(json.toString()) as MemberConfigType;
+    } else {
+      config = client.getMemberConfig(guild, username);
+    }
 
     return config;
   }
@@ -178,7 +180,7 @@ export default class DiscordResources {
     }
 
     let guildName = guild.name.replace(/[\W\s]/gi, "_");
-    return `${guildName}-(${guild.id})`;
+    return `${guildName}_(${guild.id})`;
   }
 
   /**
@@ -265,20 +267,20 @@ export default class DiscordResources {
         let role = member.roles.find(role => role.name.toLowerCase() === rank);
 
         if (role) {
-          `    --${`Assigning ${rank.cyan} to member`.inverse}`.print(true);
           rankRolesUserHas.push(role);
-
           memberConfig.rank.name = rank;
 
           let xpParsed = Ranks.info[rank];
           memberConfig.rank.xp = xpParsed;
+
+          `    --${`Assigning ${rank.cyan} to member (${xpParsed}xp)`.inverse}`.print(true);
 
           for (let level in Ranks.levels) {
             if ((Ranks.levels[level as string] as string).toLowerCase() === rank) {
               let levelParsed = parseInt(level);
 
               memberConfig.rank.level = levelParsed;
-              memberConfig.rank.levelup = this.getXPToLevelUp(xpParsed, levelParsed);
+              memberConfig.rank.levelup = this.getXPToLevelUp(levelParsed);
               memberConfig.rank.rankup = levelParsed + 5;
 
               break;
@@ -360,13 +362,66 @@ export default class DiscordResources {
    * @param {number} xp the current xp
    * @param {number} level the current level
    */
-  static getXPToLevelUp(xp: number, level: number): number {
-    if (!xp || !level) {
+  static getXPToLevelUp(level: number): number {
+    if (!level) {
       new ArgumentsNotFulfilled(...arguments);
       return -1;
     }
 
-    return xp + Math.round((4 * Math.pow(level, 3)) / 5);
+    return this.getXPOfLevel(level + 1);
+  }
+
+  /**
+   * Returns the XP required for a level
+   *
+   * @param {number} level the level
+   */
+  static getXPOfLevel(level: number): number {
+    if (!level) {
+      new ArgumentsNotFulfilled(...arguments);
+      return -1;
+    }
+
+    return this.sum(level);
+  }
+
+  /**
+   * Returns the summation of XP from {1...n}
+   *
+   * @param {number} n the n value of the summation
+   */
+  static sum(n: number): number {
+    let value = 0;
+    for (let i = 1; i <= n; i++) {
+      value += Math.round((4 * Math.pow(i, 3)) / 5);
+    }
+
+    return value;
+  }
+
+  /**
+   * Assigns a new rank to a member based on their current rank
+   *
+   * @param {Client} client the Discord client
+   * @param {GuildMember} member the GuildMember
+   */
+  static async assignNewRank(client: Client, guild: Guild, memberConfig: MemberConfig) {
+    const member = guild.members.find(guildMember => (guildMember.user.username + "_" + guildMember.user.id).toLowerCase() === memberConfig.hidden.username);
+
+    const rank = Ranks.levels[memberConfig.rank.level - (memberConfig.rank.level % 5)];
+    if (rank) {
+      let lastRank = memberConfig.rank.name;
+
+      memberConfig.rank.name = rank;
+      let oldRole = guild.roles.find((role: Role) => role.name.toLowerCase() === lastRank.toLowerCase());
+      let newRole = guild.roles.find((role: Role) => role.name.toLowerCase() === rank.toLowerCase());
+
+      if (oldRole) await member.roles.remove(oldRole);
+
+      await member.roles.add(newRole);
+    }
+
+    client.updateMember(memberConfig);
   }
 
   /**
@@ -460,6 +515,8 @@ export default class DiscordResources {
       questionMessages.forEach(async (message: Message) => {
         await message.delete();
       });
+
+      if (options.replyTo) await options.replyTo.delete();
     }
 
     if (!collected) return null;

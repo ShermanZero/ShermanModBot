@@ -1,20 +1,9 @@
-import { DiscordConfigType } from "../@interfaces/@discord_config";
+import { DiscordConfigType } from '../@utilities/@discord_config';
 
 export default class DiscordConfig implements DiscordConfigType {
   status = "dead | !help";
   prefix = "!";
   verbose = true;
-
-  elevation_names = {
-    botowner: "botowner",
-    owner: "owner",
-    moderator: "mod"
-  };
-
-  channel_names = {
-    default: "default",
-    mod_logs: "mod_logs"
-  };
 
   preferences = {
     xp_threshold: 10,

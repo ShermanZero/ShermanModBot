@@ -1,12 +1,12 @@
 import { Client, ColorResolvable, GuildMember, Message, MessageEmbed } from "discord.js";
 
 import rsrc from "../resources";
-import { CommandType } from "../@interfaces/@commands";
+import { CommandType } from "../@utilities/@commands";
 import MemberConfig from "../configs/member_config";
-import { MemberConfigType } from "../@interfaces/@member_config";
-import { Ranks } from "../@interfaces/@ranks";
+import { MemberConfigType } from "../@utilities/@member_config";
+import { Ranks } from "../@utilities/@ranks";
 import { ArgumentsNotFulfilled } from "../../shared/extensions/error/error-extend";
-import { GuildElevationTypes } from "../@interfaces/@guild_config";
+import { GuildElevationTypes } from "../@utilities/@guild_config";
 import { Guild } from "discord.js";
 
 const properties: CommandType["properties"] = {
@@ -66,7 +66,7 @@ const custom: CommandType["custom"] = {
 
     let miscStats = "";
     if (memberConfig.misc.joined !== null) miscStats += `**joined:**  *${memberConfig.misc.joined}*\n`.toUpperCase();
-    if (memberConfig.misc.first_message !== null) miscStats += `**first message:**`.toUpperCase() + `"*${memberConfig.misc.first_message}*"\n`;
+    if (memberConfig.misc.first_message !== null) miscStats += `**first message:** `.toUpperCase() + `"*${memberConfig.misc.first_message}*"\n`;
     if (memberConfig.misc.warnings !== null) miscStats += `**warnings:**  *${memberConfig.misc.warnings}*\n`.toUpperCase();
     if (miscStats !== "") embed.addField("**MISC. STATS**", miscStats, true);
 

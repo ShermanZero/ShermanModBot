@@ -7,7 +7,7 @@ import bootLogo, { bootFooter } from "../../shared/resources/boot";
 import TwitchIntegration from "../../twitch/twitchIntegration";
 import rsrc from "../resources";
 import exitHandler from "../handlers/exitHandler";
-import { GuildConfigType, guildConfigFileName, GuildElevationTypes } from "../@interfaces/@guild_config";
+import { GuildConfigType, guildConfigFileName, GuildElevationTypes } from "../@utilities/@guild_config";
 
 module.exports = async (client: Client): Promise<boolean> => {
   client.user.setActivity(client.discordConfig.status);
@@ -28,21 +28,25 @@ module.exports = async (client: Client): Promise<boolean> => {
 
   `Loaded ${commandArray.length.toString().magenta} command(s) [${("@" + GuildElevationTypes.everyone).toLowerCase().green}] [${("@" + GuildElevationTypes.moderator).toLowerCase().yellow}] [${
     ("@" + GuildElevationTypes.administrator).toLowerCase().red
-  }] [${("@" + GuildElevationTypes.botowner).toLowerCase().cyan}]`.print();
+  }] [${("@" + GuildElevationTypes.guildowner).toLowerCase().magenta}] [${("@" + GuildElevationTypes.botowner).toLowerCase().cyan}]`.print();
 
   for (let i = 0; i < commandArray.length; i++) {
     let commandName = commandArray[i];
 
     let commandProps = client.getCommandProperties(commandName);
 
-    if (commandProps.elevation === GuildElevationTypes.moderator) {
+    if (commandProps.elevation === GuildElevationTypes.everyone) {
+      commandName = commandName.green;
+    } else if (commandProps.elevation === GuildElevationTypes.moderator) {
       commandName = commandName.yellow;
     } else if (commandProps.elevation === GuildElevationTypes.administrator) {
       commandName = commandName.red;
     } else if (commandProps.elevation === GuildElevationTypes.botowner) {
       commandName = commandName.cyan;
+    } else if (commandProps.elevation === GuildElevationTypes.guildowner) {
+      commandName = commandName.magenta;
     } else {
-      commandName = commandName.green;
+      commandName = commandName.white;
     }
 
     `${("[" + commandName + "]").padEnd(30, ".")} ${commandProps.description}`.print();

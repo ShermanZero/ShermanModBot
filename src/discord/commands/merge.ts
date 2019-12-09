@@ -1,11 +1,11 @@
-import { Client, Guild, Message } from "discord.js";
-import * as fs from "fs";
-import * as path from "path";
-import * as rimraf from "rimraf";
+import { Client, Guild, Message } from 'discord.js';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as rimraf from 'rimraf';
 
-import rsrc from "../resources";
-import { CommandType } from "../@interfaces/@commands";
-import { GuildElevationTypes } from "../@interfaces/@guild_config";
+import { CommandType } from '../@utilities/@commands';
+import { GuildElevationTypes } from '../@utilities/@guild_config';
+import rsrc from '../resources';
 
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.botowner,

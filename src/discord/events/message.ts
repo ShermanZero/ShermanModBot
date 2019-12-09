@@ -1,13 +1,12 @@
-import { Client, Message, Role, TextChannel, MessageEmbed } from "discord.js";
+import { Client, Message, MessageEmbed, TextChannel } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
 
 import blacklist from "../../shared/resources/blacklist";
+import { guildConfigFileName, GuildConfigType, GuildElevationTypes } from "../@utilities/@guild_config";
+import { MemberConfigType } from "../@utilities/@member_config";
 import rsrc from "../resources";
-import { MemberConfigType } from "../@interfaces/@member_config";
-import { GuildConfigType, guildConfigFileName, GuildElevationTypes } from "../@interfaces/@guild_config";
 import { DiscordSecrets } from "../secrets/discord-secrets";
-import { Ranks } from "../@interfaces/@ranks";
 
 module.exports = async (client: Client, message: Message): Promise<boolean> => {
   //ignore all bots, the server itself (for welcome messages), and wait until this program is fully ready
@@ -123,7 +122,6 @@ async function registerMessage(client: Client, message: Message): Promise<boolea
     memberConfig = await rsrc.getMemberConfigFromName(client, message, username);
     memberConfig = client.registerMember(memberConfig);
 
-    console.log(memberConfig);
     //member stored in local client session
   } else {
     memberConfig = client.getMemberConfig(message.guild, username);
@@ -183,7 +181,8 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
     return;
   }
 
-  memberConfig.rank.xp += 1;
+  let xpGiven = Math.floor(Math.random() * Math.floor(10)) + 1;
+  memberConfig.rank.xp += xpGiven;
 
   if (memberConfig.rank.xp >= memberConfig.rank.levelup) {
     memberConfig.rank.level += 1;
@@ -191,20 +190,9 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
     let newLevelUp = memberConfig.rank.level + 5;
     memberConfig.rank.levelup = newLevelUp;
 
-    let rank = Ranks.levels[memberConfig.rank.level];
-    if (rank) {
-      let lastRank = memberConfig.rank.name;
+    rsrc.assignNewRank(client, message.guild, memberConfig);
 
-      memberConfig.rank.name = rank;
-      let oldRole = message.guild.roles.find((role: Role) => role.name.toLowerCase() === lastRank.toLowerCase());
-      let newRole = message.guild.roles.find((role: Role) => role.name.toLowerCase() === rank.toLowerCase());
-
-      if (oldRole) await message.member.roles.remove(oldRole);
-
-      await message.member.roles.add(newRole);
-    }
-
-    const xpToLevelUp = rsrc.getXPToLevelUp(memberConfig.rank.xp, memberConfig.rank.level);
+    const xpToLevelUp = rsrc.getXPToLevelUp(memberConfig.rank.level);
     if (xpToLevelUp !== -1) {
       memberConfig.rank.levelup = xpToLevelUp;
       levelUp(client, message, memberConfig);
@@ -213,7 +201,7 @@ async function awardExperience(client: Client, message: Message): Promise<any> {
 
   client.updateMember(memberConfig);
 
-  //only write XP changes to the file every 10 messages
+  //only write XP changes to the file every `xp_threshold` messages
   if (memberConfig.rank.xp % client.discordConfig.preferences.xp_threshold === 0) {
     let jsonFile = path.join(rsrc.getMemberDirectoryFromGuild(message.guild, username), username + ".json");
     let newJson = JSON.stringify(memberConfig, null, "\t");

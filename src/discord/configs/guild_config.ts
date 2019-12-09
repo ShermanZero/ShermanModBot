@@ -1,4 +1,4 @@
-import { GuildConfigType } from '../@interfaces/@guild_config';
+import { GuildConfigType } from '../@utilities/@guild_config';
 
 export default class GuildConfig implements GuildConfigType {
   setup: boolean = false;

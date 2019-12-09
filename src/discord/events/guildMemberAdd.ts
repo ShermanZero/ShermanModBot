@@ -1,6 +1,6 @@
 import { Client, Guild, GuildMember, TextChannel } from 'discord.js';
 
-import { Variables } from '../@interfaces/@custom_variables';
+import { Variables } from '../@utilities/@custom_variables';
 import rsrc from '../resources';
 
 module.exports = async (client: Client, member: GuildMember): Promise<boolean> => {

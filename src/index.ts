@@ -7,7 +7,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { DiscordSecrets } from "./discord/secrets/discord-secrets";
-import { CommandType } from "./discord/@interfaces/@commands";
+import { CommandType } from "./discord/@utilities/@commands";
 import DiscordConfig from "./discord/configs/discord_config";
 
 let client: Client = new Client();

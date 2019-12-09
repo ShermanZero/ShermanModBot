@@ -2,11 +2,11 @@ import * as Discord from "discord.js";
 
 import rsrc from "../resources";
 import { Guild } from "discord.js";
-import { MemberConfigType } from "../@interfaces/@member_config";
-import { GuildConfigType, guildConfigFileName } from "../@interfaces/@guild_config";
+import { MemberConfigType } from "../@utilities/@member_config";
+import { GuildConfigType, guildConfigFileName } from "../@utilities/@guild_config";
 import DiscordConfig from "../configs/discord_config";
 
-import { CommandType } from "../@interfaces/@commands";
+import { CommandType } from "../@utilities/@commands";
 import { DiscordSecrets } from "../secrets/discord-secrets";
 import { ArgumentsNotFulfilled } from "../../shared/extensions/error/error-extend";
 import GuildConfig from "../configs/guild_config";
@@ -61,7 +61,7 @@ Discord.Client.prototype.registerGuild = function(guildName: string, guildConfig
   if (!this.guildsInSession) this.guildsInSession = new Map<string, GuildConfigType>();
   if (!guildConfig) guildConfig = new GuildConfig();
 
-  this.guildsInSession.set(guildName, guildConfig);
+  this.guildsInSession = this.guildsInSession.set(guildName, guildConfig);
   `*Registered [${guildName.magenta}] to session`.print();
 
   return guildConfig;
@@ -73,14 +73,14 @@ Discord.Client.prototype.getGuildMembers = function(guildName: string): Map<stri
   let membersOfGuild = this.membersInSession.get(guildName);
   if (!membersOfGuild) {
     membersOfGuild = new Map<string, MemberConfigType>();
-    this.membersInSession.set(guildName, membersOfGuild);
+    this.membersInSession = this.membersInSession.set(guildName, membersOfGuild);
   }
 
   return membersOfGuild;
 };
 
 Discord.Client.prototype.setGuildMembers = function(guildName: string, guildMembers: Map<string, MemberConfigType>): Map<string, Map<string, MemberConfigType>> {
-  return this.membersInSession.set(guildName, guildMembers);
+  return (this.membersInSession = this.membersInSession.set(guildName, guildMembers));
 };
 
 Discord.Client.prototype.getGuildConfig = function(guild: Guild): GuildConfigType {
@@ -96,7 +96,7 @@ Discord.Client.prototype.getGuildConfig = function(guild: Guild): GuildConfigTyp
 Discord.Client.prototype.setGuildConfig = function(guildName: string, guildConfig: GuildConfigType): boolean {
   if (!this.guildsInSession) this.guildsInSession = new Map<string, GuildConfigType>();
 
-  this.guildsInSession.set(guildName, guildConfig);
+  this.guildsInSession = this.guildsInSession.set(guildName, guildConfig);
 
   let configFile = path.join(rsrc.getGuildDirectoryFromName(guildName), guildConfigFileName);
   fs.writeFileSync(configFile, JSON.stringify(guildConfig, null, "\t"));
@@ -122,7 +122,7 @@ Discord.Client.prototype.updateMember = function(memberConfig: MemberConfigType)
   }
 
   let guildMembers = this.getGuildMembers(guildname);
-  guildMembers.set(username, memberConfig);
+  guildMembers = guildMembers.set(username, memberConfig);
   this.setGuildMembers(guildname, guildMembers);
 
   return memberConfig;
@@ -200,7 +200,7 @@ Discord.Client.prototype.deleteMember = function(guild: Guild, username: string)
 
 Discord.Client.prototype.addCommand = function(commandName: string, command: CommandType): boolean {
   if (!this.commands) this.commands = new Map<string, CommandType>();
-  this.commands.set(commandName, command);
+  this.commands = this.commands.set(commandName, command);
 
   command["properties"].aliases?.forEach((alias: string) => {
     this.addAlias(commandName, alias);
@@ -211,7 +211,7 @@ Discord.Client.prototype.addCommand = function(commandName: string, command: Com
 
 Discord.Client.prototype.addAlias = function(commandName: string, commandAlias: string): boolean {
   if (!this.aliases) this.aliases = new Map<string, string>();
-  this.aliases.set(commandAlias, commandName);
+  this.aliases = this.aliases.set(commandAlias, commandName);
 
   return true;
 };

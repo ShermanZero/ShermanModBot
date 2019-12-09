@@ -2,8 +2,8 @@ import { Client, Message } from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
 
-import { CommandType } from "../@interfaces/@commands";
-import { GuildElevationTypes } from "../@interfaces/@guild_config";
+import { CommandType } from "../@utilities/@commands";
+import { GuildElevationTypes } from "../@utilities/@guild_config";
 import { DiscordSecrets } from "../secrets/discord-secrets";
 
 const properties: CommandType["properties"] = {

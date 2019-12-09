@@ -1,10 +1,10 @@
-import { Client, Guild } from "discord.js";
-import * as fs from "fs";
-import * as path from "path";
+import { Client, Guild } from 'discord.js';
+import * as fs from 'fs';
+import * as path from 'path';
 
-import { BuildOptions } from "../../..";
-import rsrc from "../../../discord/resources";
-import { MemberConfigType } from "../../../discord/@interfaces/@member_config";
+import { BuildOptions } from '../../..';
+import { MemberConfigType } from '../../../discord/@utilities/@member_config';
+import rsrc from '../../../discord/resources';
 
 String.prototype.hideID = function(username?: string): string {
   if (!username) username = String(this);

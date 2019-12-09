@@ -1,5 +1,5 @@
-import { MemberConfigType } from "../@interfaces/@member_config";
-import { Ranks } from "../@interfaces/@ranks";
+import { MemberConfigType } from "../@utilities/@member_config";
+import { Ranks } from "../@utilities/@ranks";
 
 export default class MemberConfig implements MemberConfigType {
   hidden = {

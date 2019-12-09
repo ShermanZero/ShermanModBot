@@ -4,7 +4,7 @@ import * as path from "path";
 import TwitchClient from "twitch";
 import ChatClient from "twitch-chat-client";
 import { TwitchSecrets } from "./secrets/twitch-secrets";
-import { MemberConfigType } from "../discord/@interfaces/@member_config";
+import { MemberConfigType } from "../discord/@utilities/@member_config";
 import { TwitchConfig } from "./configs/twitch_config";
 
 /**

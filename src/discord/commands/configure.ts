@@ -2,9 +2,9 @@ import { Client, Message, MessageEmbed, Role, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { CommandType } from '../@interfaces/@commands';
-import { Variables } from '../@interfaces/@custom_variables';
-import { GuildChannelTypes, guildConfigFileName, GuildConfigType, GuildElevationTypes } from '../@interfaces/@guild_config';
+import { CommandType } from '../@utilities/@commands';
+import { Variables } from '../@utilities/@custom_variables';
+import { GuildChannelTypes, guildConfigFileName, GuildConfigType, GuildElevationTypes } from '../@utilities/@guild_config';
 import GuildConfig from '../configs/guild_config';
 import rsrc from '../resources';
 

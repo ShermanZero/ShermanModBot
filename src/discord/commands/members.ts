@@ -1,8 +1,8 @@
-import { Client, Message } from "discord.js";
+import { Client, Message } from 'discord.js';
 
-import rsrc from "../resources";
-import { CommandType } from "../@interfaces/@commands";
-import { GuildElevationTypes } from "../@interfaces/@guild_config";
+import { CommandType } from '../@utilities/@commands';
+import { GuildElevationTypes } from '../@utilities/@guild_config';
+import rsrc from '../resources';
 
 const properties: CommandType["properties"] = {
   elevation: GuildElevationTypes.moderator,

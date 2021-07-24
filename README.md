@@ -1,8 +1,8 @@
 # ShermanModBot
 
-The Discord bot created and run by G0rd0nRamsay and ShermanZero. Want to request a new feature? Interested in development udpates? Join our server here:
+The Discord bot created and run by ShermanZero. Want to request a new feature? Interested in development udpates? Join our server here:
 
-https://discord.gg/JMjtxmt
+~~https://discord.gg/JMjtxmt~~
 
 ### Change Log
 
